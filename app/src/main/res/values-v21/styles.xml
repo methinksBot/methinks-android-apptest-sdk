@@ -1,0 +1,375 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="SdkAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <!-- Default Activity theme. -->
+    <style name="HomeActivityTheme" parent="SdkAppTheme">
+        <item name="android:statusBarColor">@color/charcoal_grey_two</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+    <!-- WalkThrough Activity theme. -->
+    <style name="WalkThroughActivityTheme" parent="SdkAppTheme">
+        <item name="android:statusBarColor">@color/white</item>
+    </style>
+
+    <!-- Splash Activity theme. -->
+    <style name="SplashActivityTheme" parent="SdkAppTheme">
+        <item name="android:statusBarColor">@color/cornflower</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+
+    <style name="AccountAccessTheme" parent="SdkAppTheme">
+        <item name="android:statusBarColor">@color/twilight</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+    <style name="AccountAccessActivityTheme" parent="SdkAppTheme">
+        <item name="android:statusBarColor">@color/dark_grey_blue_three</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+    <style name="VideoChatTheme" parent="SdkAppTheme">
+        <item name="android:statusBarColor">@android:color/black</item>
+    </style>
+    <style name="VideoInterviewTheme" parent="SdkAppTheme">
+        <item name="android:statusBarColor">@android:color/black</item>
+    </style>
+    <style name="VideoChatResultTheme" parent="SdkAppTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/charcoal_grey_two</item>
+    </style>
+
+    <style name="MainBannerTheme" parent="SdkAppTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/charcoal_grey_two</item>
+    </style>
+
+    <!-- Profile Form theme -->
+    <style name="ProfileFormTheme" parent="SdkAppTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/twilight</item>
+    </style>
+
+    <!-- Project Detail theme -->
+    <style name="InterviewRequestOverviewDetailTheme" parent="SdkAppTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/dusk_two</item>
+    </style>
+
+    <!-- Schedule Section Theme -->
+    <style name="ScheduleSectionTheme" parent="SdkAppTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/dusk_two</item>
+    </style>
+
+    <!-- Interview Request Detail theme -->
+    <style name="InterviewRequestDetailTheme" parent="SdkAppTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/dusk_two</item>
+    </style>
+
+    <!-- Chat theme -->
+    <style name="ChatTheme" parent="SdkAppTheme">
+        <item name="android:statusBarColor">@color/dark_grey_blue_three</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+    <!-- Question Activity theme -->
+    <style name="SdkQuestionActivityTheme" parent="SdkAppTheme">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/twilight</item>
+    </style>
+
+    <!-- Menu theme -->
+    <style name="AllMenuActivityTheme" parent="SdkAppTheme">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/dark_grey_blue_three</item>
+    </style>
+
+    <!-- MyProjectActivity theme -->
+    <style name="MyProjectActivityTheme" parent="SdkAppTheme">
+        <item name="android:statusBarColor">@color/twilight</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+    <!-- CommentWriteActivity theme -->
+    <style name="CommentWriteActivityTheme" parent="SdkAppTheme">
+        <item name="android:statusBarColor">@color/twilight</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+    <!-- ForumPostListActivity theme -->
+    <style name="ForumListActivityTheme" parent="SdkAppTheme">
+        <item name="android:statusBarColor">@color/dark_grey_blue_three</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+    <!-- ForumPostWriteActivity theme -->
+    <style name="ForumPostWriteActivityTheme" parent="SdkAppTheme">
+        <item name="android:statusBarColor">@color/dark_grey_blue_three</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+    <!-- VideoChatReadyActivity theme -->
+    <style name="VideoChatReadyActivityTheme" parent="SdkAppTheme">
+        <item name="android:statusBarColor">@color/charcoal_grey_two</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+    <!-- ForumPostDetailActivity theme -->
+    <style name="ForumPostDetailActivityTheme" parent="SdkAppTheme">
+        <item name="android:statusBarColor">@color/dark_grey_blue_three</item>
+        <item name="android:windowTranslucentStatus">false</item>
+    </style>
+
+    <!-- Basic WebView theme -->
+    <style name="BasicWebViewTheme" parent="SdkAppTheme">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/dark_grey_blue_three</item>
+    </style>
+
+    <!-- Send Application theme -->
+    <style name="ApplicationSubmitTheme" parent="SdkAppTheme">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/dark_grey_blue_three</item>
+    </style>
+
+    <!-- Forgot password theme -->
+    <style name="ForgotPasswordActivityTheme" parent="SdkAppTheme">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/twilight</item>
+    </style>
+
+    <!-- Invitation Activity theme. -->
+    <style name="InvitationActivityTheme" parent="SdkAppTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/faded_blue</item>
+    </style>
+
+    <!-- Gig Request Detail theme -->
+    <style name="GigDetailTheme" parent="SdkAppTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/dusk_two</item>
+    </style>
+
+    <!-- Project Detail theme -->
+    <style name="ProjectDetailTheme" parent="SdkAppTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/dusk_two</item>
+    </style>
+
+    <!-- earning history theme -->
+    <style name="EarningHistoryTheme" parent="SdkAppTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/twilight</item>
+        <item name="toolbarNavigationButtonStyle">@style/Toolbar.Button.Navigation.Tinted</item>
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+    </style>
+
+    <!-- new earning history theme -->
+    <style name="NewEarningHistoryTheme" parent="SdkAppTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="toolbarNavigationButtonStyle">@style/Toolbar.Button.Navigation.Tinted</item>
+    </style>
+
+    <style name="Toolbar.Button.Navigation.Tinted" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="tint">@color/white</item>
+    </style>
+
+    <!-- ExpansionImage Dialog theme -->
+    <style name="ExpansionImageDialogTheme" parent="SdkAppTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <!-- ExpansionImage Dialog theme -->
+    <style name="BlackStatusBarTheme" parent="SdkAppTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/black</item>
+    </style>
+
+    <!-- rate activity theme -->
+    <style name="RateTheme" parent="SdkAppTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/dusk_two</item>
+    </style>
+    <!-- rate activity theme -->
+    <style name="RateFeedbackTheme" parent="SdkAppTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:statusBarColor">@color/dark_grey_blue_three</item>
+    </style>
+
+    <!-- Question Dialog theme
+    <style name="QuestionDialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+        <item name="windowFixedHeightMinor">100%</item>
+        <item name="android:windowAnimationStyle">@style/QuestionDialogAnimation</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>-->
+
+    <!--<style name="ImagePickerTheme" parent="ef_BaseTheme">
+        <item name="colorPrimary">@color/twilight</item>
+        <item name="colorPrimaryDark">@color/twilight</item>
+        <item name="colorAccent">@color/ef_colorAccent</item>
+    </style>-->
+
+    <!-- Basic Dialog there -->
+    <style name="BasicPopupDialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+        <item name="windowFixedHeightMinor">100%</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!-- Basic Dialog there -->
+    <style name="PlaybackPopupDialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+        <item name="windowFixedHeightMinor">100%</item>
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+    <!--<style name="QuestionDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/anim_dialog_slide_up_top</item>
+        <item name="android:windowExitAnimation">@anim/anim_dialog_slide_out_bottom</item>
+    </style>-->
+
+    <style name="MyProjectTabItemTextStyle" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/twilight</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+
+
+
+    <!-- Widget Style  -->
+    <!-- push/location settings theme. -->
+    <style name="PushAndLocationSettingsButton" parent="Widget.AppCompat.Button">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+    </style>
+
+
+    <!-- padding 0dp button style -->
+    <style name="RemovedPaddingButton" parent="Widget.AppCompat.Button">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+    </style>
+
+    <!-- padding 0dp button style -->
+
+    <!-- seekbar style -->
+    <style name="SeekbarStyle">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">@android:drawable/progress_horizontal</item>
+        <item name="android:minHeight">0dip</item>
+        <item name="android:maxHeight">4dip</item>
+        <item name="android:focusable">true</item>
+        <item name="android:colorControlHighlight">@android:color/transparent</item>
+    </style>
+
+    <style name="DateAndTimePickerTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/light_grey_blue_two</item>
+    </style>
+
+    <style name="VideoPlayTheme" parent="Theme.AppCompat.NoActionBar">
+
+        <item name="colorPrimary">@color/charcoal_grey</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="colorAccent">@android:color/transparent</item>
+
+    </style>
+
+
+    <style name="NotoTheme">
+        <item name="fw">@string/font_weight_regular</item>
+    </style>
+
+    <!--bottomsheetdialogtheme-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+    </style>
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/sdk_white_full_rounded_background</item>
+    </style>
+
+    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/bottomSheetStyleWrapper</item>
+    </style>
+
+    <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.Transparent" parent="android:Theme">
+<!--        <item name="android:windowNoTitle">true</item>-->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+<!--        <item name="android:windowIsTranslucent">true</item>-->
+<!--        <item name="android:windowBackground">@android:color/transparent</item>-->
+<!--        <item name="android:windowContentOverlay">@null</item>-->
+<!--        <item name="android:windowIsFloating">true</item>-->
+<!--        <item name="android:backgroundDimEnabled">false</item>-->
+    </style>
+
+    <style name="NoTitleBarTheme" parent="Theme.AppCompat">
+        <!--        <item name="android:windowNoTitle">true</item>-->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!--        <item name="android:windowIsTranslucent">true</item>-->
+        <!--        <item name="android:windowBackground">@android:color/transparent</item>-->
+        <!--        <item name="android:windowContentOverlay">@null</item>-->
+        <!--        <item name="android:windowIsFloating">true</item>-->
+        <!--        <item name="android:backgroundDimEnabled">false</item>-->
+    </style>
+
+
+</resources>

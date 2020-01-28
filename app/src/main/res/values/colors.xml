@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="dusk">#415871</color>
+    <color name="dusk_two_70">#b24b4761</color>
+    <color name="dusk_two_10">#194b4761</color>
+    <color name="black">#000000</color>
+
+    <!-- account access -->
+    <color name="carolina_blue">#86a0ff</color>
+    <color name="grey_purple">#757090</color>
+
+    <color name="ice_blue">#ebeff4</color>
+    <color name="charcoal_grey">#40474e</color>
+    <color name="image_expansion_icon_background">#8040474e</color>
+
+    <color name="white">#ffffff</color>
+    <color name="white_four">#f8f8f8</color>
+
+    <color name="slate_grey_two">#595f65</color>
+
+    <!-- status bar / action bar -->
+    <color name="charcoal_grey_two">#3d3952</color>
+    <color name="dusk_two">#4b4761</color>
+    <color name="dusk_three">#3f4f73</color>
+    <color name="butterscotch">#ffb74d</color>
+
+    <!-- swipe layout dots -->
+    <color name="cornflower">#6586ff</color>
+    <color name="cornflower_blue">#4c79e6</color>
+    <color name="coral">#f16963</color>
+
+    <!-- video chat -->
+    <color name="videointerview_chat_background">#66000000</color>
+    <color name="videointerview_active_background">#66000000</color>
+    <color name="videointerview_off_background">#cc000000</color>
+    <color name="videointerview_hangoff_background">#ff3455</color>
+    <color name="black_50">#7f000000</color>
+    <color name="charcoal_grey_54">#8940474e</color>
+    <color name="charcoal_grey_70">#b340474e</color>
+    <color name="white_87">#ddffffff</color>
+
+    <color name="black_two">#333333</color>
+    <color name="black_12">#1e000000</color>
+    <color name="black_14">#23000000</color>
+
+    <!-- login -->
+
+    <!-- account access -->
+
+    <!-- invitation code -->
+    <color name="faded_blue">#6f81cc</color>
+    <color name="white_25">#3fffffff</color>
+
+    <!-- home -->
+    <color name="charcoal_grey_56">#8e40474e</color>
+    <color name="charcoal_grey_87">#de40474e</color>
+    <color name="blue_grey">#7f8fa4</color>
+    <color name="reddish_pink">#ff3455</color>
+    <color name="black_24">#3d000000</color>
+    <color name="black_20">#33000000</color>
+    <color name="black_30">#4d000000</color>
+    <color name="dark_grey_blue_three">#333a58</color>
+    <color name="light_grey_blue_two_24">#3d9ba9de</color>
+    <color name="pale_grey_four">#f9fafc</color>
+    <color name="pale_grey_five">#f1f4f9</color>
+    <color name="pale_grey_seven">#f8f8fa</color>
+    <color name="charcoal_grey_two_54">#8a313541</color>
+    <color name="watermelon">#ff4764</color>
+
+
+    <!-- home cell-->
+    <color name="periwinkle_blue">#8c9eff</color>
+    <color name="white_70">#b2ffffff</color>
+    <color name="silver">#bdc5ce</color>
+    <color name="pale_purple">#c1afe2</color>
+
+    <!-- build profile -->
+    <color name="reddish_grey">#9b7c7a</color>
+    <color name="charcoal_grey_80">#cc40474e</color>
+    <color name="white_30">#4cffffff</color>
+    <color name="white_40">#66ffffff</color>
+    <color name="white_54">#8affffff</color>
+
+    <!-- sign up -->
+    <color name="pale_grey_three">#eff3f4</color>
+
+
+    <color name="black_10">#19000000</color>
+
+
+    <!-- profile form -->
+    <color name="pale_grey_two">#dfe6ee</color>
+    <color name="apple_green">#7ed321</color>
+
+    <color name="metallic_blue">#54688f</color>
+    <color name="stormy_blue">#5386a1</color>
+
+    <!-- interview request detail -->
+    <color name="light_grey_blue_two">#9ba9de</color>
+    <color name="very_light_blue">#ecf0ff</color>
+    <color name="charcoal_grey_34">#5740474e</color>
+    <color name="white_three">#fcfcfc</color>
+
+    <!-- gig -->
+
+    <!-- question -->
+    <color name="lavender">#afbdf2</color>
+    <color name="twilight">#505c8b</color>
+    <color name="very_light_blue_10">#19ecf0ff</color>
+
+    <!-- basic popup -->
+    <color name="black_54">#8a000000</color>
+
+    <!-- message -->
+    <color name="blush">#ec8682</color>
+
+    <!-- rate -->
+    <color name="light_grey_blue_two_50">#809ba9de</color>
+    <color name="bluey_grey">#a0acb8</color>
+
+
+    <!-- common -->
+    <color name="lightBlueGrey">#C5CAE9</color>
+
+    <!-- check in -->
+    <color name="slate_grey">#5c6773</color>
+
+    <!-- forum -->
+    <color name="faded_blue_two">#706fbf</color>
+    <color name="pale_grey_two_50">#80dfe6ee</color>
+    <color name="pale_grey_six">#f4f7fa</color>
+
+    <color name="white_34">#57ffffff</color>
+    <color name="white_five">#fafafa</color>
+
+    <color name="soft_blue">#73aaed</color>
+
+    <color name="pale_lime">#b8e986</color>
+    <color name="very_light_blue_two">#ddeafb</color>
+
+    <color name="cornflower_blue_two">#4d77dd</color>
+    <color name="french_blue">#3e63bc</color>
+
+    <color name="charcoal_grey_50">#8040474e</color>
+    <color name="charcoal_grey_two_two">#313541</color>
+    <color name="transparent">#00000000</color>
+
+</resources>

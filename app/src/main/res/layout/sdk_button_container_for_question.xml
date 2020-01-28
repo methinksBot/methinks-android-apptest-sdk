@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/question_action_button_container"
+    android:orientation="vertical"
+    android:background = "@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/actionBarSize">
+
+    <View
+        android:background="@color/very_light_blue"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp" />
+
+    <LinearLayout
+        android:weightSum="0.9"
+        android:orientation="horizontal"
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent">
+        <LinearLayout
+            android:gravity="start"
+            android:layout_weight="0.3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <Button
+                android:id = "@+id/prev_button"
+                android:visibility = "visible"
+                android:text="@string/common_text_prev"
+                android:textSize="14dp"
+                android:textColor="@color/cornflower"
+                android:letterSpacing="0.04"
+                android:gravity="center"
+                android:layout_gravity="start"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:layout_weight="0.3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/skip_button"
+                android:visibility="visible"
+                android:text="@string/common_text_skip_uppercap"
+                android:textSize="14dp"
+                android:textColor="@color/charcoal_grey_87"
+                android:letterSpacing="0.04"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="end"
+            android:layout_weight="0.3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/submit_button"
+                android:text="@string/common_text_submit"
+                android:textSize="14dp"
+                android:textColor="@color/cornflower"
+                android:letterSpacing="0.04"
+                android:gravity="center"
+                android:layout_gravity="end"
+                android:background="@android:color/transparent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

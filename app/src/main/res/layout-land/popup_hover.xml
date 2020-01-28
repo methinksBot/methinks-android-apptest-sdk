@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="bottom"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+        android:id="@+id/popup_hover_bug_report"
+        android:background="@drawable/popup_default_rounded_background"
+        android:textColor="#007AFF"
+        app:fw="@string/font_weight_medium"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:text="@string/patcher_bug_report"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_weight="0.1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+        android:id="@+id/popup_hover_suggestion"
+        android:background="@drawable/popup_default_rounded_background"
+        android:textColor="#007AFF"
+        app:fw="@string/font_weight_medium"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:text="@string/patcher_suggestion"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_weight="0.1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+        android:id="@+id/popup_hover_cancel"
+        android:background="@drawable/popup_default_rounded_background"
+        android:textColor="#007AFF"
+        android:textSize="20dp"
+        app:fw="@string/font_weight_medium"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:text="@string/patcher_cancel"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_weight="0.1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+</LinearLayout>

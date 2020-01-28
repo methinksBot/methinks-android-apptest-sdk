@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/logo_image"
+                android:layout_gravity="center"
+                android:layout_marginBottom="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+                android:textColor="@android:color/black"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:text="@string/patcher_mobile_test_platform" />
+
+            <io.methinks.mtkpatchersdk.question.custom.widget.MethinksEditText
+                android:id="@+id/testUserCode"
+                android:gravity="center"
+                android:inputType="textNoSuggestions|textVisiblePassword"
+                android:lines="1"
+                android:maxLines="1"
+                android:textColor="@android:color/black"
+                android:imeOptions="actionDone"
+                android:layout_gravity="center"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+                android:layout_gravity="center"
+                android:id="@+id/textView_explain"
+                android:textColor="@android:color/black"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:lines="2"
+                android:maxLines="2"
+                android:text="@string/patcher_msg_enter_user_code" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- sign up -->
+    <dimen name="sign_up_layout_left_margin">72dp</dimen>
+    <dimen name="sign_up_layout_right_margin">16dp</dimen>
+    <dimen name="sign_up_next_button_size">48dp</dimen>
+
+
+    <dimen name="sliding_menu_home">336dp</dimen>
+    <dimen name="sliding_menu_video_chat">64dp</dimen>
+
+    <!-- profile -->
+    <dimen name="my_profile_image_size">100dp</dimen>
+    <dimen name="my_profile_background_size">104dp</dimen>
+    <dimen name="about_me_edit_text_side_padding">24dp</dimen>
+    <dimen name="about_me_edit_text_top_bottom_padding">15dp</dimen>
+    <dimen name="referral_image_background_size">44dp</dimen>
+    <dimen name="referral_image_carolina_blue_size">40dp</dimen>
+    <dimen name="referral_image_size">24dp</dimen>
+    <dimen name="referral_small_image_size">14dp</dimen>
+    <dimen name="referral_small_image_background_size">18dp</dimen>
+
+    <!-- profile form -->
+    <dimen name="profile_image_size">90dp</dimen>
+    <dimen name="profile_image_change_button_size">30dp</dimen>
+
+    <!-- interview request detail -->
+    <dimen name="profile_image_size_for_detail">40dp</dimen>
+    <dimen name="project_detail_padding_top">12dp</dimen>
+    <dimen name="project_detail_padding_bottom">4dp</dimen>
+    <dimen name="project_detail_padding_left">72dp</dimen>
+    <dimen name="project_detail_padding_right">16dp</dimen>
+    <dimen name="interview_request_detail_moderator_icon_size">16dp</dimen>
+
+    <!-- interview request reschedule -->
+    <dimen name="interview_request_reschedule_container_side_padding">56dp</dimen>
+    <dimen name="interview_request_reschedule_icon_size">40dp</dimen>
+
+    <!-- push and location form -->
+    <dimen name="push_and_location_form_padding_top">72dp</dimen>
+    <dimen name="push_and_location_form_padding_bottom">72dp</dimen>
+    <dimen name="push_and_location_form_icon_size">32dp</dimen>
+
+    <!-- question -->
+    <dimen name="question_attached_image_margin">72dp</dimen>
+    <dimen name="recording_play_button_size">70dp</dimen>
+    <dimen name="recording_reset_button_size">40dp</dimen>
+    <dimen name="location_circle_size">40dp</dimen>
+    <dimen name="question_multiple_choice_top_bottom_padding">16dp</dimen>
+    <dimen name="question_open_end_left_margin">72dp</dimen>
+
+    <!-- question scale -->
+
+    <!-- question abtesting -->
+    <dimen name="abtesting_left_and_right_space_width">72dp</dimen>
+
+    <!-- question information -->
+    <dimen name="information_left_and_right_space_width">30dp</dimen>
+
+    <!-- left sliding menu profile -->
+    <dimen name="sliding_menu_profile_image_size">72dp</dimen>
+
+    <!-- test -->
+
+    <!-- message -->
+    <dimen name="message_profile_image_size">40dp</dimen>
+
+    <!-- Chat -->
+    <dimen name="chat_input_button_size">32dp</dimen>
+    <dimen name="video_chat_profile_size_in_waiting_ui">100dp</dimen>
+    <dimen name="video_interview_small_container_size">90dp</dimen>
+    <dimen name="video_interview_publisher_icon_size">18dp</dimen>
+
+    <!-- basic popup -->
+    <dimen name="basic_popup_default_side_margin">24dp</dimen>
+    <dimen name="basic_popup_button_end_margin">16dp</dimen>
+    <dimen name="basic_popup_button_bottom_margin">17dp</dimen>
+    <dimen name="basic_popup_content_top_margin">17dp</dimen>
+
+    <!-- home -->
+    <dimen name="home_cell_side_body_margin">8dp</dimen>
+    <dimen name="home_cell_side_margin">8dp</dimen>
+
+    <!-- Home cell invitation -->
+    <dimen name="home_cell_invitation_circled_image_top_size">40dp</dimen>
+    <dimen name="home_cell_invitation_circled_image_bottom_size">24dp</dimen>
+
+    <!--Home cell project -->
+    <dimen name="home_cell_profile_image_size">40dp</dimen>
+
+    <!-- rate activity -->
+    <dimen name="rate_profile_image_size">50dp</dimen>
+    <dimen name="rate_detail_info_top_padding">16dp</dimen>
+    <dimen name="rate_detail_info_left_padding">16dp</dimen>
+    <dimen name="rate_detail_info_right_padding">16dp</dimen>
+    <dimen name="rate_check_mark_button_size">40dp</dimen>
+    <dimen name="rate_profile_title_star_size">20dp</dimen>
+
+    <!-- build profile -->
+
+    <!-- ring progress -->
+    <dimen name="ring_progress_size_for_main_banner">54dp</dimen>
+    <dimen name="ring_progress_size_for_build_profile">66dp</dimen>
+
+    <!-- Application Submit -->
+    <dimen name="application_submit_input_height">150dp</dimen>
+
+    <!-- announcement -->
+    <dimen name="cell_announcement_profile_size">24dp</dimen>
+
+    <!-- forum list -->
+    <dimen name="fab_more_size">56dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+</resources>

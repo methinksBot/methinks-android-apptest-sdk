@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sdk_white_full_rounded_background"
+        android:orientation="vertical"
+        android:paddingTop="18dp">
+
+        <ImageView
+            android:id="@+id/popup_methinks_top_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="44dp"
+            android:layout_marginEnd="44dp"
+            android:adjustViewBounds="true" />
+
+        <!--<ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_close" />-->
+
+        <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+            android:id="@+id/popup_methinks_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="30dp"
+            android:textColor="@color/charcoal_grey"
+            android:textSize="18dp"
+            app:fw="@string/font_weight_bold" />
+
+        <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+            android:id="@+id/popup_methinks_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="30dp"
+            android:alpha="0.7"
+            android:textColor="@color/charcoal_grey"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/popup_methinks_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="44dp"
+            android:adjustViewBounds="true" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="30dp"
+            android:alpha="0.12"
+            android:background="@color/black" />
+
+        <LinearLayout
+            android:id="@+id/popup_methinks_controller_container"
+
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+                android:id="@+id/popup_methinks_button1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/sdk_cornflower_no_rounded_button"
+                android:clickable="true"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Start"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                app:fw="@string/font_weight_medium" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>
