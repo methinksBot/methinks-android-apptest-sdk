@@ -10,15 +10,15 @@ import org.webrtc.MediaStream;
 
 import java.util.ArrayList;
 
-import io.methinks.mtkrtc.MTKConst;
-import io.methinks.mtkrtc.MTKError;
-import io.methinks.mtkrtc.MTKPerson;
-import io.methinks.mtkrtc.MTKPublisher;
-import io.methinks.mtkrtc.MTKSubscriber;
-import io.methinks.mtkrtc.MTKVideoChatClient;
-import io.methinks.mtkrtc.MTKVideoChatSession;
+import io.methinks.android.rtc.MTKConst;
+import io.methinks.android.rtc.MTKError;
+import io.methinks.android.rtc.MTKPerson;
+import io.methinks.android.rtc.MTKPublisher;
+import io.methinks.android.rtc.MTKSubscriber;
+import io.methinks.android.rtc.MTKVideoChatClient;
+import io.methinks.android.rtc.MTKVideoChatSession;
 
-import static io.methinks.mtkrtc.MTKError.ErrorCode.SessionStateFailed;
+import static io.methinks.android.rtc.MTKError.ErrorCode.SessionStateFailed;
 
 public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
     private static final String TAG = ScreenSharing.class.getSimpleName();
