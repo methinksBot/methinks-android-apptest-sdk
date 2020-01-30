@@ -17,9 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection;
 import io.methinks.android.apptest.R;
 import io.methinks.android.apptest.question.ViewControllerManager;
+import io.methinks.android.apptest.sectionedrecyclerviewadapter.StatelessSection;
 
 /**
  * Created by kgy 2019. 9. 24.

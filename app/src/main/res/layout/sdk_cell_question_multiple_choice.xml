@@ -25,7 +25,7 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content">
-        <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+        <io.methinks.android.apptest.question.custom.widget.MethinksTextView
             android:id="@+id/choice"
             android:maxLines="3"
             android:textSize="14dp"
@@ -53,7 +53,7 @@
         android:layout_marginLeft="24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <io.methinks.mtkpatchersdk.question.custom.widget.MethinksEditText
+        <io.methinks.android.apptest.question.custom.widget.MethinksEditText
             android:id="@+id/open_end_answer"
             android:textCursorDrawable="@null"
             android:hint="@string/common_text_other"

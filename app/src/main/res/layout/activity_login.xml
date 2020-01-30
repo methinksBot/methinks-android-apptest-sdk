@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+            <io.methinks.android.apptest.question.custom.widget.MethinksTextView
                 android:textColor="@android:color/black"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
                 android:layout_marginBottom="50dp"
                 android:text="@string/patcher_mobile_test_platform" />
 
-            <io.methinks.mtkpatchersdk.question.custom.widget.MethinksEditText
+            <io.methinks.android.apptest.question.custom.widget.MethinksEditText
                 android:id="@+id/testUserCode"
                 android:gravity="center"
                 android:inputType="textNoSuggestions|textVisiblePassword"
@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+            <io.methinks.android.apptest.question.custom.widget.MethinksTextView
                 android:layout_gravity="center"
                 android:id="@+id/textView_explain"
                 android:textColor="@android:color/black"

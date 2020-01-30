@@ -64,7 +64,7 @@ public class MTKRTCMainActivity extends UnityPlayerActivity /* implements Lifecy
         public void handleMessage(@NonNull Message msg) {
             switch (msg.what) {
                 case Global.MESSAGE_WHAT_SCREEN_SHOT:
-                    UnityPlayer.UnitySendMessage("methinks_sdk_integrate","DispatchNativeMessage", "request$screenshot");
+                    UnityPlayer.UnitySendMessage("methinks_sdk_manager","DispatchNativeMessage", "request$screenshot");
                     break;
                 default:
                     break;

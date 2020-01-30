@@ -9,13 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="io.methinks.android.apptest.MTKRTCMainActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:clearTaskOnLaunch="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat" />
+        <activity
+            android:name=".question.ViewControllerManager"
+            android:clearTaskOnLaunch="false"
+            android:launchMode="singleTop"
+            android:theme="@style/NoTitleBarTheme" />
+        <activity
+            android:name=".AnnouncementActivity"
+            android:theme="@style/NoTitleBarTheme" />
+        <activity
+            android:name=".ReportActivity"
+            android:theme="@style/NoTitleBarTheme" />
+        <activity
+            android:name=".PermissionActivity"
+            android:clearTaskOnLaunch="false"
+            android:launchMode="singleTop"
+            android:theme="@style/NoTitleBarTheme" />
     </application>
 
 </manifest>

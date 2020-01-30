@@ -14,9 +14,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 import io.methinks.android.apptest.R;
 import io.methinks.android.apptest.question.adapter.SdkMultipleChoiceAdapter;
+import io.methinks.android.apptest.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 
 /**
  * Created by kgy 2019. 9. 24.

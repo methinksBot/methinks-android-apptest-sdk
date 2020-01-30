@@ -60,16 +60,16 @@ public class ReportActivity extends AppCompatActivity {
         isBugReport = getIntent().getBooleanExtra("isBugReport", false);
 
 
-        TextView tvLabel = findViewById(R.id.question_content);
-        reportContent = findViewById(R.id.report_content);
-        textAnswerContainer = findViewById(R.id.text_answer_container);
-        attachedImage = findViewById(R.id.attached_image);
+        TextView tvLabel = (TextView)findViewById(R.id.question_content);
+        reportContent = (EditText)findViewById(R.id.report_content);
+        textAnswerContainer = (LinearLayout)findViewById(R.id.text_answer_container);
+        attachedImage = (ImageView)findViewById(R.id.attached_image);
         placeholder = (LinearLayout) getLayoutInflater().from(this).inflate(R.layout.sdk_open_end_answer_placeholder, null);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.topMargin = (int) convertDpToPixel(this, 19);
         placeholder.setLayoutParams(params);
         addAnswer = placeholder.findViewById(R.id.add_answer);
-        scrollView = findViewById(R.id.scroll_view);
+        scrollView = (ScrollView)findViewById(R.id.scroll_view);
 
         if(isBugReport)
             tvLabel.setText(getString(R.string.patcher_msg_bug_report_desc));

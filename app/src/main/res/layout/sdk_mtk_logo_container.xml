@@ -14,7 +14,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+        <io.methinks.android.apptest.question.custom.widget.MethinksTextView
             android:id="@+id/logo_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
 <!--        app:layout_constraintBottom_toBottomOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent">&ndash;&gt;-->
 
-<!--    <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView-->
+<!--    <io.methinks.android.apptest.question.custom.widget.MethinksTextView-->
 <!--        android:id="@+id/logo_text"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->

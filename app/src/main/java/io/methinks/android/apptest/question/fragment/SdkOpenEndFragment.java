@@ -106,7 +106,8 @@ public class SdkOpenEndFragment extends BaseFragment implements TextWatcher, Vie
         view = inflater.inflate(R.layout.sdk_fragment_open_end, container, false);
         TextView tvLabel = (TextView) view.findViewById(R.id.question_content);
         textAnswerContainer = view.findViewById(R.id.text_answer_container);
-        placeholder = (LinearLayout) getLayoutInflater().from(getActivity()).inflate(R.layout.sdk_open_end_answer_placeholder, null);
+
+        placeholder = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.sdk_open_end_answer_placeholder, null);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.topMargin = (int) convertDpToPixel(getActivity(), 19);
         placeholder.setLayoutParams(params);
@@ -166,7 +167,7 @@ public class SdkOpenEndFragment extends BaseFragment implements TextWatcher, Vie
     }
 
     private LinearLayout createAnswerForm(){
-        answerForm = (LinearLayout)getLayoutInflater().from(getActivity()).inflate(R.layout.sdk_open_end_answer_form, null);
+        answerForm = (LinearLayout)LayoutInflater.from(getActivity()).inflate(R.layout.sdk_open_end_answer_form, null);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.topMargin = (int) convertDpToPixel(getActivity(), 19);
@@ -374,7 +375,7 @@ public class SdkOpenEndFragment extends BaseFragment implements TextWatcher, Vie
     }
 
     private void createAnswerPlaceholder(){
-        placeholder = (LinearLayout)getLayoutInflater().from(getActivity()).inflate(R.layout.sdk_open_end_answer_placeholder, null);
+        placeholder = (LinearLayout)LayoutInflater.from(getActivity()).inflate(R.layout.sdk_open_end_answer_placeholder, null);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params.topMargin = (int) convertDpToPixel(getActivity(), 19);
         placeholder.setLayoutParams(params);

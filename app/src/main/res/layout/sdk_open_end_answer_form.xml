@@ -11,7 +11,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <io.methinks.mtkpatchersdk.question.custom.widget.MethinksEditText
+        <io.methinks.android.apptest.question.custom.widget.MethinksEditText
             android:id="@+id/answer_edit_text"
             android:textCursorDrawable="@null"
             android:inputType="textCapSentences|textMultiLine|textNoSuggestions"

@@ -32,16 +32,16 @@ public class AnnouncementActivity extends AppCompatActivity {
 
         JSONObject statusResult = Global.loginResult.optJSONObject("statusResult");
 
-        Toolbar toolbar = findViewById(R.id.announcement_toolbar);
-        TextView title = findViewById(R.id.announcement_project_title);
-        TextView progress = findViewById(R.id.announcement_project_progress);
-        TextView duration = findViewById(R.id.announcement_project_duration);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.announcement_toolbar);
+        TextView title = (TextView)findViewById(R.id.announcement_project_title);
+        TextView progress = (TextView)findViewById(R.id.announcement_project_progress);
+        TextView duration = (TextView)findViewById(R.id.announcement_project_duration);
 
 
-        TextView announceTitle = findViewById(R.id.announcement_announce_title);
-        TextView surveyTitle = findViewById(R.id.announcement_survey_title);
-        TextView announceCount = findViewById(R.id.announcement_announce_count);
-        TextView surveyCount = findViewById(R.id.announcement_survey_count);
+        TextView announceTitle = (TextView)findViewById(R.id.announcement_announce_title);
+        TextView surveyTitle = (TextView)findViewById(R.id.announcement_survey_title);
+        TextView announceCount = (TextView)findViewById(R.id.announcement_announce_count);
+        TextView surveyCount = (TextView)findViewById(R.id.announcement_survey_count);
 
         toolbar.setTitle(Global.loginResult.optString("campaignName"));
         String titleStr = String.format(getString(R.string.patcher_android_welcome_hi), Global.loginResult.optString("screenName"));

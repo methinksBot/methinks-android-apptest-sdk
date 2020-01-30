@@ -22,7 +22,7 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+    <io.methinks.android.apptest.question.custom.widget.MethinksTextView
         app:fw="@string/font_weight_medium"
         android:id="@+id/question_type"
         android:textSize="17dp"
@@ -72,7 +72,7 @@
 <!--            />-->
 <!--    </LinearLayout>-->
 
-<!--    <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView-->
+<!--    <io.methinks.android.apptest.question.custom.widget.MethinksTextView-->
 <!--        app:fw="@string/font_weight_medium"-->
 <!--        android:id="@+id/question_type"-->
 <!--        app:layout_constraintLeft_toRightOf="@id/back_button_container"-->

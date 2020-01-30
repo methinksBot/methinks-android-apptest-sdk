@@ -11,7 +11,7 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+        <io.methinks.android.apptest.question.custom.widget.MethinksTextView
             android:text="@string/common_msg_change_how_you_answer"
             android:textSize="16dp"
             app:fw="@string/font_weight_regular"
@@ -53,7 +53,7 @@
             android:layout_marginLeft="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+        <io.methinks.android.apptest.question.custom.widget.MethinksTextView
             android:id="@+id/replace_to_text_text_view"
             android:text="@string/common_text_text_answer"
             android:textSize="16dp"
@@ -81,7 +81,7 @@
             android:layout_marginLeft="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+        <io.methinks.android.apptest.question.custom.widget.MethinksTextView
             android:id="@+id/replace_to_voice_text_view"
             android:text="@string/common_text_voice_answer"
             android:textSize="16dp"
@@ -109,7 +109,7 @@
             android:layout_marginLeft="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView
+        <io.methinks.android.apptest.question.custom.widget.MethinksTextView
             android:id="@+id/replace_to_video_text_view"
             android:text="@string/common_text_video_answer"
             android:textSize="16dp"
@@ -136,7 +136,7 @@
 <!--        android:background="@color/white"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content">-->
-<!--        <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView-->
+<!--        <io.methinks.android.apptest.question.custom.widget.MethinksTextView-->
 <!--            app:layout_constraintTop_toTopOf="parent"-->
 <!--            app:layout_constraintLeft_toLeftOf="parent"-->
 <!--            android:text="@string/common_msg_change_how_you_answer"-->
@@ -182,7 +182,7 @@
 <!--            android:layout_marginLeft="16dp"-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content" />-->
-<!--        <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView-->
+<!--        <io.methinks.android.apptest.question.custom.widget.MethinksTextView-->
 <!--            android:id="@+id/replace_to_text_text_view"-->
 <!--            app:layout_constraintLeft_toRightOf="@id/text_icon"-->
 <!--            android:text="@string/common_text_text_answer"-->
@@ -213,7 +213,7 @@
 <!--            android:layout_marginLeft="16dp"-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content" />-->
-<!--        <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView-->
+<!--        <io.methinks.android.apptest.question.custom.widget.MethinksTextView-->
 <!--            android:id="@+id/replace_to_voice_text_view"-->
 <!--            app:layout_constraintTop_toTopOf="parent"-->
 <!--            app:layout_constraintLeft_toRightOf="@id/voice_icon"-->
@@ -245,7 +245,7 @@
 <!--            android:layout_marginLeft="16dp"-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content" />-->
-<!--        <io.methinks.mtkpatchersdk.question.custom.widget.MethinksTextView-->
+<!--        <io.methinks.android.apptest.question.custom.widget.MethinksTextView-->
 <!--            android:id="@+id/replace_to_video_text_view"-->
 <!--            app:layout_constraintTop_toTopOf="parent"-->
 <!--            app:layout_constraintLeft_toRightOf="@id/video_icon"-->

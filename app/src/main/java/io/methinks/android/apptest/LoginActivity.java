@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
             window.setStatusBarColor(Color.parseColor(Global.DEFAULT_BACKGROUND_COLOR_HEX));
         }
 
-        ImageView logoImageView = findViewById(R.id.logo_image);
+        ImageView logoImageView = (ImageView)findViewById(R.id.logo_image);
         if(Global.logoBitmap != null){
             logoImageView.setImageBitmap(Global.logoBitmap);
         }else{
@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-        EditText testUserCodeEditText = findViewById(R.id.testUserCode);
+        EditText testUserCodeEditText = (EditText)findViewById(R.id.testUserCode);
         testUserCodeEditText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#4D77DD")));
 
         testUserCodeEditText.setOnEditorActionListener((v, actionId, event) -> {
