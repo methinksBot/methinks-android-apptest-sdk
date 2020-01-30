@@ -216,6 +216,36 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         }
     }
 
+    /*************************************************************************
+     * Called from Host App.
+     * @param presetProject project info
+    /***************************************************************************/
+    public void initialize(String presetProject){
+        Log.i("Initiating SDK...");
+        LocalStore.getInstance().init(app);
+
+        try{
+            JSONObject presetProjectJSON = new JSONObject(presetProject);
+
+            if(presetProjectJSON.has("id"))
+                Global.sProjectId = presetProjectJSON.getString("id");
+
+            if(presetProjectJSON.has("debug_mode")) {
+                Global.isDebugMode = presetProjectJSON.getBoolean("debug_mode") ? true : false;
+                Global.isDebugModeFromInspector = presetProjectJSON.getBoolean("debug_mode");
+            }
+
+            if(unityActivity != null && Global.isUnity){
+                Global.applicationTracker.addManually(unityActivity, this);
+            }
+
+            Log.d("SDK initiating is done.");
+        }catch (JSONException e){
+            e.printStackTrace();
+
+        }
+    }
+
     /***************************************************************************
      * Called from Host App.
      * @param presetModule ""
