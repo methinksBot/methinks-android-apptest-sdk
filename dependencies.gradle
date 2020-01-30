@@ -1,0 +1,30 @@
+ext {
+    // Build SDK version
+    buildToolsVersion = '27.0.2'
+    compileSdkVersion = 27
+    targetSdkVersion = 27
+    minSdkVersion = 21
+
+    versionCode = 1
+    libraryVersionName = '1.0.5'
+
+    // Bintray setting info
+    repositoryName = 'methinks-apptest-sdk' // Bintray repository name
+    packageName = 'io.methinks.android.apptest' // module name ex) compile 'tech.thdev:...'
+
+    description = 'methinks SDK for apptest'
+
+    websiteUrl = 'https://www.methinks.io' // site url
+    gitHubRepoUrl = 'https://github.com/methinksBot/methinks-android-apptest-sdk' // git repo url
+
+    githubRepo = 'methinksBot/methinks-android-apptest-sdk'
+    githubReleaseNotesFile = 'CHANGELOG.md'
+
+//    // Support library Dependencies
+//    appCompat = "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+//
+//    // Testing-only dependencies
+//    junit = "junit:junit:$rootProject.ext.junitLibVersion"
+//
+//    espressoCore = "com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoLibVersion"
+}
