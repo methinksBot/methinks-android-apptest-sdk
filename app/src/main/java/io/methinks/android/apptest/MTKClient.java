@@ -230,6 +230,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             if(presetProjectJSON.has("id"))
                 Global.sProjectId = presetProjectJSON.getString("id");
 
+            presetProjectJSON.put("debug_mode", false);
             if(presetProjectJSON.has("debug_mode")) {
                 Global.isDebugMode = presetProjectJSON.getBoolean("debug_mode") ? true : false;
                 Global.isDebugModeFromInspector = presetProjectJSON.getBoolean("debug_mode");
