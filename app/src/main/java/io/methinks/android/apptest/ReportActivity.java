@@ -86,7 +86,7 @@ public class ReportActivity extends AppCompatActivity {
             attachedImage.setImageBitmap(decodedByte);
 
             this.attachedBitmap = decodedByte;
-        }else if(getIntent().hasExtra("isUnity") && getIntent().getBooleanExtra("isUnity", false)){
+        }else if(getIntent().hasExtra("isUnity") && !getIntent().getBooleanExtra("isUnity", false)){
             this.encodedImageBase64 = takeScreenShot();
             byte[] decodedString = Base64.decode(this.encodedImageBase64, Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
