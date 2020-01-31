@@ -67,7 +67,9 @@ public class PermissionActivity extends AppCompatActivity {
             Global.screenCaptureIntent = data;
             Global.screenCaptureResultCode = resultCode;
             ScreenSharing screenSharing = new ScreenSharing(PermissionActivity.this.getApplication());
-            screenSharing.start();
+            if (Build.VERSION.SDK_INT < 29) {
+                screenSharing.start();
+            }
             Global.screenSharing = screenSharing;
             checkExternalStoragePermission();
         }else if(requestCode == Global.REQUEST_OVERLAY_PERMISSION){
