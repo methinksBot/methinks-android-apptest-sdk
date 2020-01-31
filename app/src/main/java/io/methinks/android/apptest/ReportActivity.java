@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -80,6 +82,13 @@ public class ReportActivity extends AppCompatActivity {
         if(getIntent().hasExtra("encodedImage")){
             this.encodedImageBase64 = getIntent().getStringExtra("encodedImage");
             byte[] decodedString = Base64.decode(getIntent().getStringExtra("encodedImage"), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            attachedImage.setImageBitmap(decodedByte);
+
+            this.attachedBitmap = decodedByte;
+        }else if(getIntent().hasExtra("isUnity") && getIntent().getBooleanExtra("isUnity", false)){
+            this.encodedImageBase64 = takeScreenShot();
+            byte[] decodedString = Base64.decode(this.encodedImageBase64, Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             attachedImage.setImageBitmap(decodedByte);
 
@@ -157,5 +166,34 @@ public class ReportActivity extends AppCompatActivity {
         Global.isShowingReport = false;
         Global.hover.setVisible();
         super.onDestroy();
+    }
+
+    private String takeScreenShot(){
+        View view = Global.applicationTracker.getTopActivity().getWindow().getDecorView();
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache();
+        Bitmap b1 = view.getDrawingCache();
+        Rect frame = new Rect();
+        Global.applicationTracker.getTopActivity().getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+        int statusBarHeight = frame.top;
+
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        Global.applicationTracker.getTopActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+
+        int width = displaymetrics.widthPixels;
+        int height = displaymetrics.heightPixels;
+
+        Bitmap bmp = Bitmap.createBitmap(b1, 0, statusBarHeight, width, height  - statusBarHeight);
+        view.destroyDrawingCache();
+
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream .toByteArray();
+        String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+        LocalStore.getInstance().putLastCaptureImage(encoded);
+
+        return encoded;
     }
 }

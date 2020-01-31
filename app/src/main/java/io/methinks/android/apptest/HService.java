@@ -234,7 +234,8 @@ public class HService extends Service {
             }else{
                 String encoded = takeScreenShot();
                 Intent intent1 = new Intent(Global.applicationTracker.getTopActivity(), ReportActivity.class);
-                intent1.putExtra("encodedImage", encoded);
+//                intent1.putExtra("encodedImage", encoded);
+                intent1.putExtra("isUnity", Global.isUnity);
                 intent1.putExtra("isBugReport", true);
                 Global.applicationTracker.getTopActivity().startActivity(intent1);
             }
@@ -252,7 +253,8 @@ public class HService extends Service {
             }else{
                 String encoded = takeScreenShot();
                 Intent intent1 = new Intent(Global.applicationTracker.getTopActivity(), ReportActivity.class);
-                intent1.putExtra("encodedImage", encoded);
+//                intent1.putExtra("encodedImage", encoded);
+                intent1.putExtra("isUnity", Global.isUnity);
                 intent1.putExtra("isBugReport", false);
                 Global.applicationTracker.getTopActivity().startActivity(intent1);
             }
