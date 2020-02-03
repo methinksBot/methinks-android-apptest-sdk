@@ -8,6 +8,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -78,9 +79,9 @@ public class HService extends Service {
 
         builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.methinks_apptest_logo))
                 .setSmallIcon(R.drawable.methinks_apptest_logo)
-                .setContentTitle("앱 테스트")
-                .setContentText("앱 테스트가 진행중입니다.")
-                .setStyle(new NotificationCompat.BigTextStyle().bigText("미띵스 유저 테스트를 진행 중입니다..."))
+                .setContentTitle(getString(R.string.patcher_text_apptest))
+                .setContentText(getString(R.string.patcher_msg_apptest_is_running))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.patcher_msg_methinks_apptest_is_running)))
                 .setOngoing(true);
 
 
@@ -160,6 +161,13 @@ public class HService extends Service {
 
         }
         params.gravity = Gravity.START | Gravity.TOP;
+        Display display = windowManager.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+        params.x = width - (int)convertDpToPixel(this, 24);
+        params.y = height / 2;
         windowManager.addView(Global.hover, params);
         Global.hover.setVisibility(View.VISIBLE);
     }
@@ -321,4 +329,9 @@ public class HService extends Service {
         return encoded;
     }
 
+    private float convertDpToPixel(Context context, int dp){
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        return (float) dp * (metrics.densityDpi / 160f);
+    }
 }

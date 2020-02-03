@@ -34,6 +34,10 @@
                 android:layout_weight="0.5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
+            <View
+                android:background="@color/blue_grey"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent" />
             <io.methinks.android.apptest.question.custom.widget.MethinksTextView
                 android:id="@+id/report_submit"
                 android:paddingTop="12dp"
@@ -46,6 +50,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
+
+        <View
+            android:background="@color/blue_grey"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp" />
 
         <ScrollView
             android:id="@+id/scroll_view"

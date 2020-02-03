@@ -4,17 +4,25 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.database.ContentObserver;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -44,6 +52,18 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
     private Activity activity;
     private MTKRTCMainActivity unityActivity;
     private Thread timerThread;
+
+    // about screen shot detecting
+    private ScreenshotContentObserver screenShotContentObserver;
+    private static final String SORT_ORDER = MediaStore.Images.Media.DATE_ADDED + " DESC";
+    private static final String[] PROJECTION = new String[]{
+            MediaStore.Images.Media.DISPLAY_NAME, MediaStore.Images.Media.DATA,
+            MediaStore.Images.Media.DATE_ADDED, MediaStore.Images.ImageColumns._ID
+    };
+    private static final long DEFAULT_DETECT_WINDOW_SECONDS = 10;
+    private  static final String FILE_POSTFIX = "FROM_ASS";
+    private ContentResolver contentResolver;
+    private String lastPath;
 
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -75,6 +95,18 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             }
         }
         Global.app = app;
+//        setContentObserver();
+        HandlerThread handlerThread = new HandlerThread("content_observer");
+        handlerThread.start();
+        final Handler handler = new Handler(handlerThread.getLooper()) {
+
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+            }
+        };
+        screenShotContentObserver = new ScreenshotContentObserver(handler, app.getContentResolver());
+        screenShotContentObserver.register();
 
         if(activity != null){
             Global.hoverIntent = new Intent(activity, HService.class);
@@ -88,8 +120,13 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
 
         LocalBroadcastManager.getInstance(app).registerReceiver(broadcastReceiver, new IntentFilter(Global.LOCAL_BROADCAST_RECEIVE_INTENT_FILTER_ACTION));
 
+
+
         Log.d("Completed creating MTKClient instance.");
     }
+
+
+
 
     public static synchronized MTKClient getInstance(Context context) {
         if (instance == null) {
@@ -483,6 +520,10 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
     public void onAppForeground() {
         Log.d("App state: Foreground");
 
+        if(screenShotContentObserver != null){
+            screenShotContentObserver.register();
+        }
+
         if(Global.screenSharing != null && !Global.isSharedScreen){
             Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
             Global.applicationTracker.getTopActivity().startActivity(loginIntent);
@@ -510,6 +551,9 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
     @Override
     public void onAppBackground() {
         Log.d("App state: Background");
+        if(screenShotContentObserver != null){
+            screenShotContentObserver.unregister();
+        }
         if(Global.isLogined){
             JSONObject sessionJSON = LocalStore.getInstance().getSessionLog();
 
@@ -687,5 +731,111 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             return null;
         }
     }
+//
+//    private void setContentObserver(){
+//        HandlerThread handlerThread = new HandlerThread("content_observer");
+//        handlerThread.start();
+//        final Handler handler = new Handler(handlerThread.getLooper()) {
+//
+//            @Override
+//            public void handleMessage(Message msg) {
+//                super.handleMessage(msg);
+//            }
+//        };
+//
+//
+//        contentResolver = app.getContentResolver();
+//        contentResolver.registerContentObserver(
+//                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//                true,
+//                new ContentObserver(handler) {
+//                    @Override
+//                    public boolean deliverSelfNotifications() {
+//                        Log.w("deliverSelfNotifications");
+//                        return super.deliverSelfNotifications();
+//                    }
+//
+//                    @Override
+//                    public void onChange(boolean selfChange) {
+//                        super.onChange(selfChange);
+//                    }
+//
+//                    @Override
+//                    public void onChange(boolean selfChange, Uri uri) {
+//                        super.onChange(selfChange, uri);
+//                        if (uri.toString().startsWith(MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString())) {
+//                            try {
+//                                Data result = getLatestData(uri);
+//                                if(result != null && !(lastPath != null && lastPath.equals(result.path))){
+//                                    long currentTime = System.currentTimeMillis() / 1000;
+//                                    if (matchPath(result.path) && matchTime(currentTime, result.dateAdded)) {
+//                                        lastPath = result.path;
+//                                        if(Global.applicationTracker != null && Global.applicationTracker.getTopActivity() != null){
+//                                            new AlertDialog.Builder(Global.applicationTracker.getTopActivity())
+//                                                    .setMessage(app.getString(R.string.patcher_msg_illegal_screenshot))
+//                                                    .setPositiveButton(app.getString(R.string.patcher_confirm), (dialogInterface, i) -> dialogInterface.dismiss()).show();
+//                                        }
+//                                    }
+//                                }
+//                            } catch (Exception e) {
+//                            }
+//                        }
+//                    }
+//                }
+//        );
+//    }
+//
+//    private boolean matchPath(String path) {
+//        return (path.toLowerCase().contains("screenshots/") && !path.contains(FILE_POSTFIX));
+//    }
+//
+//    private boolean matchTime(long currentTime, long dateAdded) {
+//        return Math.abs(currentTime - dateAdded) <= DEFAULT_DETECT_WINDOW_SECONDS;
+//    }
+//
+//
+//    private Data getLatestData(Uri uri) throws Exception {
+//        Data data = null;
+//        Cursor cursor = null;
+//        try {
+//            cursor = contentResolver.query(uri, PROJECTION, null, null, SORT_ORDER);
+//            if (cursor != null && cursor.moveToFirst()) {
+//                long id = cursor.getLong(cursor.getColumnIndex(MediaStore.Images.ImageColumns._ID));
+//                String fileName = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME));
+//                String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+//                long dateAdded = cursor.getLong(cursor.getColumnIndex(MediaStore.Images.Media.DATE_ADDED));
+//
+//                if (fileName.contains(FILE_POSTFIX)) {
+//                    if (cursor.moveToNext()) {
+//                        id = cursor.getLong(cursor.getColumnIndex(MediaStore.Images.ImageColumns._ID));
+//                        fileName = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME));
+//                        path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+//                        dateAdded = cursor.getLong(cursor.getColumnIndex(MediaStore.Images.Media.DATE_ADDED));
+//                    } else {
+//                        return null;
+//                    }
+//                }
+//
+//                data = new Data();
+//                data.id = id;
+//                data.fileName = fileName;
+//                data.path = path;
+//                data.dateAdded = dateAdded;
+//                Log.e("[Recent File] Name : " + fileName);
+//            }
+//        } finally {
+//            if (cursor != null) {
+//                cursor.close();
+//            }
+//        }
+//        return data;
+//    }
+//
+//    class Data {
+//        long id;
+//        String fileName;
+//        String path;
+//        long dateAdded;
+//    }
 
 }

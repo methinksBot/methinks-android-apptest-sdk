@@ -66,6 +66,10 @@
     <string name="patcher_msg_use_wifi_network">❗️Please connect your device to your Wi-Fi network to continue.</string>
     <string name="patcher_msg_need_thinker_app">️Please download methinks app from App Store.</string>
     <string name="patcher_cancel">Cancel</string>
+    <string name="patcher_msg_apptest_is_running">App test is running now.</string>
+    <string name="patcher_text_apptest">App test</string>
+    <string name="patcher_msg_methinks_apptest_is_running">methinks app test is running now...</string>
+    <string name="patcher_confirm">Confirm</string>
 
 
     <!-- ################################################################## -->

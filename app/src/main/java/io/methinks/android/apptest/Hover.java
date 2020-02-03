@@ -165,7 +165,7 @@ public class Hover extends AppCompatImageView implements View.OnClickListener {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        int paddingValue = (int)convertDpToPixel(context, 10);
+        int paddingValue = (int)convertDpToPixel(context, 5);
         setPadding(paddingValue, paddingValue, paddingValue, paddingValue);
     }
 

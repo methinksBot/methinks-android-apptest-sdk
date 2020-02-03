@@ -62,4 +62,8 @@
 	<string name="patcher_msg_use_wifi_network">원활한 진행을 위해 WIFI 환경에서 진행해주세요.</string>
 	<string name="patcher_msg_need_thinker_app">진행을 위해 미띵스 앱 다운로드가 필요합니다.</string>
 	<string name="patcher_cancel">취소</string>
+	<string name="patcher_msg_apptest_is_running">앱 테스트가 진행 중입니다.</string>
+	<string name="patcher_text_apptest">앱 테스트</string>
+	<string name="patcher_msg_methinks_apptest_is_running">미띵스 유저 테스트를 진행 중입니다...</string>
+	<string name="patcher_confirm">확인</string>
 </resources>
