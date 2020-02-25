@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 
 public class HttpManager {
     private static final String TAG = HttpManager.class.getSimpleName();
@@ -68,6 +69,9 @@ public class HttpManager {
     public void getClientLogo(Callback callback){
         String url = serverURL + "/getClientLogo";
         String[]strings = new String[]{url, Global.HTTP_POST, null};
+
+        Log.d("Current URL: " + Arrays.toString(strings));
+        Log.d("RESULTS: " + url + Global.HTTP_POST);
 
         new HttpAsyncTask(callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, strings);
     }
