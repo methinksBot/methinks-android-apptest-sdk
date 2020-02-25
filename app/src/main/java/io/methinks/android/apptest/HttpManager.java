@@ -68,8 +68,8 @@ public class HttpManager {
     public void getClientLogo(Callback callback){
         String url = serverURL + "/getClientLogo";
         String[]strings = new String[]{url, Global.HTTP_POST, null};
-        Log.e("Separated Current Logs " + url + Global.HTTP_POST);
-        Log.d("Current URL String of GetClientLog: " + strings);
+        
+        Log.d("Current URL String of GetClientLog: " + strings.toString());
 
         new HttpAsyncTask(callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, strings);
     }
