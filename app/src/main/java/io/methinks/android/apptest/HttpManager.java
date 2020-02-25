@@ -15,7 +15,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
@@ -71,7 +70,8 @@ public class HttpManager {
         String url = serverURL + "/getClientLogo";
         String[]strings = new String[]{url, Global.HTTP_POST, null};
 
-        Log.d("Current URL String of GetClientLog: " + Arrays.toString(strings));
+        Log.d("Current URL: " + Arrays.toString(strings));
+        Log.d("RESULTS: " + url + Global.HTTP_POST);
 
         new HttpAsyncTask(callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, strings);
     }
