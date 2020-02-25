@@ -155,21 +155,13 @@ public class PermissionActivity extends AppCompatActivity {
     private boolean isGrantedOverlay(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                if (canDrawOverlays()) {
-                    return true;
-                } else {
-                    return false;
-                }
+                if (canDrawOverlays()) { return true; }
+                else { return false; }
             } else {
-                if (Settings.canDrawOverlays(this)) {
-                    return true;
-                } else {
-                    return false;
-                }
+                if (Settings.canDrawOverlays(this)) { return true; }
+                else { return false; }
             }
-        }else{
-            return true;
-        }
+        }else{ return true; }
     }
 
     private void checkOverlayPermission(){
@@ -181,7 +173,7 @@ public class PermissionActivity extends AppCompatActivity {
                 checkExternalStoragePermission();
             }
         }else{
-            isGrantedOverlayPermission = false;
+            //isGrantedOverlayPermission = false;
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + this.getPackageName()));
             ((Activity) this).startActivityForResult(intent, Global.REQUEST_OVERLAY_PERMISSION);
             Log.d("Request Overlay permission to user.");
