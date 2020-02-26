@@ -99,6 +99,7 @@ public class ScreenshotContentObserver extends ContentObserver {
                             Log.d("Inappropriate Hardware Screenshot was saved");
                             return;
                         }else{
+                            Log.e("CAPTURE RES ERROR: " + error + "\n" + response );
                         }
                     }
                 });
