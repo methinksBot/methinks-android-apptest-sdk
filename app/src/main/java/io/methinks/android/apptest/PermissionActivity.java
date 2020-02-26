@@ -173,9 +173,14 @@ public class PermissionActivity extends AppCompatActivity {
                 checkExternalStoragePermission();
             }
         }else{
-            //isGrantedOverlayPermission = false;
-            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + this.getPackageName()));
-            ((Activity) this).startActivityForResult(intent, Global.REQUEST_OVERLAY_PERMISSION);
+            isGrantedOverlayPermission = false;
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                Settings.canDrawOverlays(getApplicationContext());
+            } else {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + this.getPackageName()));
+                ((Activity) this).startActivityForResult(intent, Global.REQUEST_OVERLAY_PERMISSION);
+            }
             Log.d("Request Overlay permission to user.");
         }
     }
