@@ -11,6 +11,8 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Base64;
 
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 
 public class ScreenshotContentObserver extends ContentObserver {
@@ -90,7 +92,16 @@ public class ScreenshotContentObserver extends ContentObserver {
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
                 String encodedScreenshot = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
-//                new HttpManager().capture();
+                new HttpManager().capture("Inappropriate hardware capture.", "suggestion", encodedScreenshot, new HttpManager.Callback() {
+                    @Override
+                    public void done(JSONObject response, String error) {
+                        if(error == null){
+                            Log.d("Inappropriate Hardware Screenshot was saved");
+                            return;
+                        }else{
+                        }
+                    }
+                });
 
 
                 new AlertDialog.Builder(Global.applicationTracker.getTopActivity())
