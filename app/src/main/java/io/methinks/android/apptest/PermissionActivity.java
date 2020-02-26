@@ -174,15 +174,8 @@ public class PermissionActivity extends AppCompatActivity {
             }
         }else{
             isGrantedOverlayPermission = false;
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                Settings.canDrawOverlays(getApplicationContext());
-                Log.d("#### OVER M #### == > run by Setting");
-            } else {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + this.getPackageName()));
-                ((Activity) this).startActivityForResult(intent, Global.REQUEST_OVERLAY_PERMISSION);
-                Log.d("#### OVER M #### == > run by Activity");
-            }
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + this.getPackageName()));
+            ((Activity) this).startActivityForResult(intent, Global.REQUEST_OVERLAY_PERMISSION);
             Log.d("Request Overlay permission to user.");
         }
     }
