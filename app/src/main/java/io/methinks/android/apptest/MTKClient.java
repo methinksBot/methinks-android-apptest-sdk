@@ -83,10 +83,12 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         Log.d("Creating MTKClient instance...");
         if(context instanceof Application){
             this.app = (Application)context;
+            Log.w("I'm Based on Application!!!");
         }else{
             if(context instanceof Activity){
                 this.app = (Application)(context.getApplicationContext());
                 this.activity = (Activity)context;
+                Log.w("I'm Based on Activity!!!");
             }
             Global.isUnity = false;
             if(context instanceof MTKRTCMainActivity){
