@@ -665,7 +665,6 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                             }
                         }
 
-                        /*
                         // 4. check hover button.
                         if(Global.hoverIntent == null){
                             if(activity != null){
@@ -684,7 +683,6 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                                 Global.applicationTracker.addManually(unityActivity, MTKClient.this);
                             }
                         }
-                         */
 
                         Thread.sleep(10000);
                     }catch (InterruptedException e){
