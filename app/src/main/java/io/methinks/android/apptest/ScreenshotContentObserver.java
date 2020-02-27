@@ -92,10 +92,9 @@ public class ScreenshotContentObserver extends ContentObserver {
                 Bitmap bitmap = null;
                 if (Build.VERSION.SDK_INT >= 29) {
                     Log.d("Current Version is Q");
-//                    bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(mContentResolver, screenUri));
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inSampleSize = 8;
-                    bitmap = BitmapFactory.decodeFile(screenUri.toString(), options);
+                    ImageDecoder.Source source = ImageDecoder.createSource(mContentResolver, screenUri);
+                    Log.d("[ImageSource] : " + source);
+                    bitmap = ImageDecoder.decodeBitmap(source);
                     Log.d("[ImageResult]    Q: " + bitmap);
                 } else {
                     Log.d("Current Version is not NOT Q");
