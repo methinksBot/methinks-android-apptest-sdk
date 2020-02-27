@@ -84,9 +84,7 @@ public class ScreenshotContentObserver extends ContentObserver {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(mContentResolver, screenUri);
                 Bitmap copyBitmap = bitmap.copy(bitmap.getConfig(), true);
                 bitmap.recycle();
-
-
-
+                
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 copyBitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
