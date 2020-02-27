@@ -91,7 +91,7 @@ public class ScreenshotContentObserver extends ContentObserver {
                 Bitmap bitmap = null;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     Log.d("Current Version is Q");
-                    bitmap = decodeBitmap(ImageDecoder.createSource(mContentResolver, screenUri));
+                    bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(mContentResolver, screenUri));
                     Log.d("[ImageResult]    Q: " + bitmap);
                 } else {
                     Log.d("Current Version is not NOT Q");
