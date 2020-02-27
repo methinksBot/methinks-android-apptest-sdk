@@ -89,7 +89,7 @@ public class ScreenshotContentObserver extends ContentObserver {
                 Uri screenUri = Uri.parse(MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString() + "/" + result.id);
 
                 Bitmap bitmap = null;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                if (Build.VERSION.SDK_INT >= 29) {
                     Log.d("Current Version is Q");
                     bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(mContentResolver, screenUri));
                     Log.d("[ImageResult]    Q: " + bitmap);
