@@ -94,7 +94,11 @@ public class ScreenshotContentObserver extends ContentObserver {
                     Log.d("Current Version is Q");
                     ImageDecoder.Source source = ImageDecoder.createSource(mContentResolver, screenUri);
                     Log.d("[ImageSource] : " + source);
-                    bitmap = ImageDecoder.decodeBitmap(source);
+                    try {
+                        bitmap = ImageDecoder.decodeBitmap(source);
+                    } catch(Exception e) {
+                        Log.e("Reason Decode doesn't work : " + e);
+                    }
                     Log.d("[ImageResult]    Q: " + bitmap);
                 } else {
                     Log.d("Current Version is not NOT Q");
