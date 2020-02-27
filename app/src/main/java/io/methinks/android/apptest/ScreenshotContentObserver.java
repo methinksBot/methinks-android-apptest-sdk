@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.Build;
@@ -91,7 +92,10 @@ public class ScreenshotContentObserver extends ContentObserver {
                 Bitmap bitmap = null;
                 if (Build.VERSION.SDK_INT >= 29) {
                     Log.d("Current Version is Q");
-                    bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(mContentResolver, screenUri));
+//                    bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(mContentResolver, screenUri));
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inSampleSize = 8;
+                    bitmap = BitmapFactory.decodeFile(screenUri.toString(), options);
                     Log.d("[ImageResult]    Q: " + bitmap);
                 } else {
                     Log.d("Current Version is not NOT Q");
