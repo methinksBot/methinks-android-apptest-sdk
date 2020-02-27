@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
@@ -14,6 +15,8 @@ import android.util.Base64;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+
+import static android.graphics.ImageDecoder.decodeBitmap;
 
 public class ScreenshotContentObserver extends ContentObserver {
 
@@ -81,8 +84,16 @@ public class ScreenshotContentObserver extends ContentObserver {
             Log.d("[Result] Took a screenshot : " + result.fileName + " | dateAdded : " + result.dateAdded + " / " + currentTime);
             Log.d("[Stopping Point] Current Application Tracker: " + Global.applicationTracker + "\n" + Global.applicationTracker.getTopActivity());
             if(Global.applicationTracker != null && Global.applicationTracker.getTopActivity() != null){
+                Log.d("[TESTING] EXTERNAL_CONTENT_URL " + MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString() + "/" + result.id);
+
                 Uri screenUri = Uri.parse(MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString() + "/" + result.id);
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(mContentResolver, screenUri);
+
+                Bitmap bitmap;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    bitmap = decodeBitmap(ImageDecoder.createSource(mContentResolver, screenUri));
+                } else {
+                    bitmap = MediaStore.Images.Media.getBitmap(mContentResolver, screenUri);
+                }
                 Bitmap copyBitmap = bitmap.copy(bitmap.getConfig(), true);
                 bitmap.recycle();
 
