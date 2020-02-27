@@ -203,7 +203,7 @@ public class HService extends Service {
             Global.hoverPopup.setInvisible();
             Global.hoverPopup.isOpened = false;
         });
-        /*if(Global.isDebugModeFromInspector){
+        if(Global.isDebugModeFromInspector){
             Global.hoverPopup.cancel.setLongClickable(true);
             Global.hoverPopup.cancel.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -232,7 +232,7 @@ public class HService extends Service {
                     return true;
                 }
             });
-        }*/
+        }
 
         Global.hoverPopup.bugReport.setOnClickListener(view -> {
             Global.isShowingReport = false;
@@ -242,7 +242,7 @@ public class HService extends Service {
             }else{
                 String encoded = takeScreenShot();
                 Intent intent1 = new Intent(Global.applicationTracker.getTopActivity(), ReportActivity.class);
-                intent1.putExtra("encodedImage", encoded);
+                //intent1.putExtra("encodedImage", encoded);
                 intent1.putExtra("isUnity", false);
                 intent1.putExtra("isBugReport", true);
                 Global.applicationTracker.getTopActivity().startActivity(intent1);
