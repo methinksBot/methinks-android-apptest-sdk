@@ -16,6 +16,7 @@ import android.util.Base64;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 import static android.graphics.ImageDecoder.decodeBitmap;
 
@@ -92,10 +93,12 @@ public class ScreenshotContentObserver extends ContentObserver {
                 Bitmap bitmap = null;
                 if (Build.VERSION.SDK_INT >= 29) {
                     Log.d("Current Version is Q");
-                    ImageDecoder.Source source = ImageDecoder.createSource(mContentResolver, screenUri);
-                    Log.d("[ImageSource] : " + source);
-                    try {
-                        bitmap = ImageDecoder.decodeBitmap(source);
+                    /*ImageDecoder.Source source = ImageDecoder.createSource(mContentResolver, screenUri);
+                    Log.d("[ImageSource] : " + source);*/
+                    try (InputStream stream = mContentResolver.openInputStream(screenUri)) {
+                        Log.d("[ImageStream] : " + stream);
+                        bitmap = BitmapFactory.decodeStream(stream);
+
                     } catch(Exception e) {
                         Log.e("Reason Decode doesn't work : " + e);
                     }
