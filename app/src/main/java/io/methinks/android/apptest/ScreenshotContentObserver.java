@@ -1,5 +1,6 @@
 package io.methinks.android.apptest;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.database.ContentObserver;
@@ -19,6 +20,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 import static android.graphics.ImageDecoder.decodeBitmap;
+import static android.support.v4.content.PermissionChecker.checkSelfPermission;
 
 public class ScreenshotContentObserver extends ContentObserver {
 
@@ -95,6 +97,7 @@ public class ScreenshotContentObserver extends ContentObserver {
                     Log.d("Current Version is Q");
                     /*ImageDecoder.Source source = ImageDecoder.createSource(mContentResolver, screenUri);
                     Log.d("[ImageSource] : " + source);*/
+                    Log.d("[READ PERMISSION]: " + checkSelfPermission(Global.app, Manifest.permission.READ_EXTERNAL_STORAGE));
                     try (InputStream stream = mContentResolver.openInputStream(screenUri)) {
                         Log.d("[ImageStream] : " + stream);
                         bitmap = BitmapFactory.decodeStream(stream);
