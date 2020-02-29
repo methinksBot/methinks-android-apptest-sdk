@@ -1,26 +1,20 @@
 package io.methinks.android.apptest;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.view.View;
 
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-
-import static android.graphics.ImageDecoder.decodeBitmap;
-import static android.support.v4.content.PermissionChecker.checkSelfPermission;
 
 public class ScreenshotContentObserver extends ContentObserver {
 
@@ -74,6 +68,7 @@ public class ScreenshotContentObserver extends ContentObserver {
         mContentResolver.unregisterContentObserver(this);
     }
 
+
     private boolean process(Uri uri) throws Exception {
         Data result = getLatestData(uri);
         if (result == null) {
@@ -88,15 +83,19 @@ public class ScreenshotContentObserver extends ContentObserver {
             Log.d("[Result] Took a screenshot : " + result.fileName + " | dateAdded : " + result.dateAdded + " / " + currentTime);
             Log.d("[Stopping Point] Current Application Tracker: " + Global.applicationTracker + "\n" + Global.applicationTracker.getTopActivity());
             if(Global.applicationTracker != null && Global.applicationTracker.getTopActivity() != null){
-                Log.d("[TESTING] EXTERNAL_CONTENT_URL " + MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString() + "/" + result.id);
+                //Log.d("[TESTING] EXTERNAL_CONTENT_URL " + MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString() + "/" + result.id);
 
                 Uri screenUri = Uri.parse(MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString() + "/" + result.id);
 
                 Bitmap bitmap = null;
                 if (Build.VERSION.SDK_INT >= 29) {
-                    Log.d("Current Version is Q");
-                    /*ImageDecoder.Source source = ImageDecoder.createSource(mContentResolver, screenUri);
-                    Log.d("[ImageSource] : " + source);*/
+                    View view = Global.applicationTracker.getTopActivity().getWindow().getDecorView();
+                    view.setDrawingCacheEnabled(true);
+                    view.buildDrawingCache();
+                    bitmap = view.getDrawingCache();
+                    /*Log.d("Current Version is Q");
+                    *//*ImageDecoder.Source source = ImageDecoder.createSource(mContentResolver, screenUri);
+                    Log.d("[ImageSource] : " + source);*//*
                     Log.d("[READ PERMISSION]: " + checkSelfPermission(Global.app, Manifest.permission.READ_EXTERNAL_STORAGE));
                     try (InputStream stream = mContentResolver.openInputStream(screenUri)) {
                         Log.d("[ImageStream] : " + stream);
@@ -105,7 +104,8 @@ public class ScreenshotContentObserver extends ContentObserver {
                     } catch(Exception e) {
                         Log.e("Reason Decode doesn't work : " + e);
                     }
-                    Log.d("[ImageResult]    Q: " + bitmap);
+                    Log.d("[ImageResult]    Q: " + bitmap);*/
+
                 } else {
                     Log.d("Current Version is not NOT Q");
                     bitmap = MediaStore.Images.Media.getBitmap(mContentResolver, screenUri);
