@@ -78,39 +78,29 @@ public class ScreenshotContentObserver extends ContentObserver {
             return false;
         }
         long currentTime = System.currentTimeMillis() / 1000;
+
         if (matchPath(result.path) && matchTime(currentTime, result.dateAdded)) {
             lastPath = result.path;
-            Log.d("[Result] Took a screenshot : " + result.fileName + " | dateAdded : " + result.dateAdded + " / " + currentTime);
-            Log.d("[Stopping Point] Current Application Tracker: " + Global.applicationTracker + "\n" + Global.applicationTracker.getTopActivity());
             if(Global.applicationTracker != null && Global.applicationTracker.getTopActivity() != null){
-                //Log.d("[TESTING] EXTERNAL_CONTENT_URL " + MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString() + "/" + result.id);
 
                 Uri screenUri = Uri.parse(MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString() + "/" + result.id);
 
                 Bitmap bitmap = null;
                 if (Build.VERSION.SDK_INT >= 29) {
+
                     View view = Global.applicationTracker.getTopActivity().getWindow().getDecorView();
                     view.setDrawingCacheEnabled(true);
                     view.buildDrawingCache();
                     bitmap = view.getDrawingCache();
-                    /*Log.d("Current Version is Q");
-                    *//*ImageDecoder.Source source = ImageDecoder.createSource(mContentResolver, screenUri);
-                    Log.d("[ImageSource] : " + source);*//*
-                    Log.d("[READ PERMISSION]: " + checkSelfPermission(Global.app, Manifest.permission.READ_EXTERNAL_STORAGE));
-                    try (InputStream stream = mContentResolver.openInputStream(screenUri)) {
-                        Log.d("[ImageStream] : " + stream);
-                        bitmap = BitmapFactory.decodeStream(stream);
-
-                    } catch(Exception e) {
-                        Log.e("Reason Decode doesn't work : " + e);
-                    }
-                    Log.d("[ImageResult]    Q: " + bitmap);*/
 
                 } else {
+
                     Log.d("Current Version is not NOT Q");
                     bitmap = MediaStore.Images.Media.getBitmap(mContentResolver, screenUri);
                     Log.d("[ImageResult] Not Q: " + bitmap);
+
                 }
+
                 Bitmap copyBitmap = bitmap.copy(bitmap.getConfig(), true);
                 bitmap.recycle();
 

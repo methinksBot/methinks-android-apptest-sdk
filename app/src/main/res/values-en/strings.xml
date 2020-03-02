@@ -48,11 +48,11 @@
 	<string name="patcher_msg_download_new_version">Please download the new version to continue the playtest.\nDO NOT delete the current version, or you will lose all your progress!</string>
 	<string name="patcher_your_progress">Your progress:</string>
 	<string name="patcher_text_download">Download</string>
-	<string name="sdk_text_start">Start</string>
-	<string name="sdk_text_close">Close</string>
-	<string name="sdk_text_next">Next</string>
-	<string name="sdk_text_strongly_agree">Strongly\nAgree</string>
-	<string name="sdk_text_strongly_disagree">Strongly\nDisagree</string>
+	<string name="patcher_text_start">Start</string>
+	<string name="patcher_text_close">Close</string>
+	<string name="patcher_text_next">Next</string>
+	<string name="patcher_text_strongly_agree">Strongly\nAgree</string>
+	<string name="patcher_text_strongly_disagree">Strongly\nDisagree</string>
 	<string name="patcher_msg_successfully_submitted">Successfully submitted!</string>
 	<string name="patcher_msg_something_wrong">❗️Something is wrong, please try again.</string>
 	<string name="patcher_msg_suggestion_desc">Your suggestions help make a better app! Please be descriptive.</string>

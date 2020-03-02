@@ -69,6 +69,7 @@ public class HService extends Service {
             channel.setDescription("Hover");
             channel.enableLights(true);
             channel.setLightColor(Color.RED);
+            Log.d("[NOTIFICATION CHANNEL] :" + notificationManager);
             if (notificationManager != null) {
                 notificationManager.createNotificationChannel(channel);
             }
@@ -123,6 +124,7 @@ public class HService extends Service {
         Point point = new Point();
         windowManager = (WindowManager)getSystemService(WINDOW_SERVICE);
         Display display;
+        Log.d("[WindowManage] : " + windowManager);
         if (windowManager != null) {
             display = windowManager.getDefaultDisplay();
             display.getSize(point);
@@ -169,6 +171,7 @@ public class HService extends Service {
         params.x = width - (int)convertDpToPixel(this, 24);
         params.y = height / 2;
         windowManager.addView(Global.hover, params);
+        Log.d("[WindowManage2] : " + windowManager);
         Global.hover.setVisibility(View.VISIBLE);
     }
 
