@@ -48,11 +48,11 @@
 	<string name="patcher_msg_download_new_version">テスト進行のために新しいバージョンをダウンロードしてください。今持っているアプリを消せば今までの進展事項がすべて削除されることがあるので、消さずにダウンロードだけしてください。</string>
 	<string name="patcher_your_progress">プロジェクト進行度：</string>
 	<string name="patcher_text_download">ダウンロード</string>
-	<string name="patcher_text_start">開始</string>
-	<string name="patcher_text_close">閉じる</string>
-	<string name="patcher_text_next">次へ</string>
-	<string name="patcher_text_strongly_agree">強く\n同意します</string>
-	<string name="patcher_text_strongly_disagree">強く\n同意しない</string>
+	<string name="sdk_text_start">開始</string>
+	<string name="sdk_text_close">閉じる</string>
+	<string name="sdk_text_next">次へ</string>
+	<string name="sdk_text_strongly_agree">強く\n同意します</string>
+	<string name="sdk_text_strongly_disagree">強く\n同意しない</string>
 	<string name="patcher_msg_successfully_submitted">Successfully submitted!</string>
 	<string name="patcher_msg_something_wrong">❗️Something is wrong, please try again.</string>
 	<string name="patcher_msg_suggestion_desc">Your suggestions help make a better app! Please be descriptive.</string>

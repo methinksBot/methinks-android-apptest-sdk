@@ -48,11 +48,11 @@
 	<string name="patcher_msg_download_new_version">Por favor, descárguese la nueva versión para continuar con su prueba.\n ¡NO borre la versión actual o perderá todo su progreso!</string>
 	<string name="patcher_your_progress">Progreso:</string>
 	<string name="patcher_text_download">Descarga</string>
-	<string name="patcher_text_start">Comenzar</string>
-	<string name="patcher_text_close">Cerrar</string>
-	<string name="patcher_text_next">Siguiente</string>
-	<string name="patcher_text_strongly_agree">Totalmente\nde acuerdo</string>
-	<string name="patcher_text_strongly_disagree">Muy en\ndesacuerdo</string>
+	<string name="sdk_text_start">Comenzar</string>
+	<string name="sdk_text_close">Cerrar</string>
+	<string name="sdk_text_next">Siguiente</string>
+	<string name="sdk_text_strongly_agree">Totalmente\nde acuerdo</string>
+	<string name="sdk_text_strongly_disagree">Muy en\ndesacuerdo</string>
 	<string name="patcher_msg_successfully_submitted">Successfully submitted!</string>
 	<string name="patcher_msg_something_wrong">❗️Something is wrong, please try again.</string>
 	<string name="patcher_msg_suggestion_desc">Your suggestions help make a better app! Please be descriptive.</string>
