@@ -61,7 +61,7 @@ public class HService extends Service {
         super.onCreate();
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
+        Log.w("##################PREPARE####################");
         NotificationCompat.Builder builder;
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             String CHANNEL_ID = "horver_service_channel";
