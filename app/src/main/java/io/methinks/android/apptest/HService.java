@@ -281,7 +281,7 @@ public class HService extends Service {
 
     @Override
     public void onDestroy() {
-        Toast.makeText(this, "Hover service Stopped", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Hover service Stopped", Toast.LENGTH_SHORT).show();
         windowManager.removeViewImmediate(Global.hover);
         windowManager.removeViewImmediate(Global.hoverPopup.hoverPopup);
         super.onDestroy();
@@ -297,7 +297,7 @@ public class HService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        Toast.makeText(this, "Hover service Starting", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Hover service Starting", Toast.LENGTH_SHORT).show();
 
         return START_STICKY;
     }
