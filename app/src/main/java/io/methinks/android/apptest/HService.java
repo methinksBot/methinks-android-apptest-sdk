@@ -124,7 +124,7 @@ public class HService extends Service {
         Point point = new Point();
         windowManager = (WindowManager)getSystemService(WINDOW_SERVICE);
         Display display;
-        Log.d("[WindowManage] : " + windowManager);
+        Log.w("[WindowManage] : " + windowManager);
         if (windowManager != null) {
             display = windowManager.getDefaultDisplay();
             display.getSize(point);
@@ -145,6 +145,7 @@ public class HService extends Service {
 
         WindowManager.LayoutParams params;
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            Log.d("HEREIS OVER OREO");
             params = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.WRAP_CONTENT,
                     WindowManager.LayoutParams.WRAP_CONTENT,
@@ -153,6 +154,7 @@ public class HService extends Service {
                     PixelFormat.TRANSLUCENT
             );
         }else{
+            Log.d("HERE IS LOWER OREO");
             params = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.WRAP_CONTENT,
                     WindowManager.LayoutParams.WRAP_CONTENT,
@@ -171,7 +173,7 @@ public class HService extends Service {
         params.x = width - (int)convertDpToPixel(this, 24);
         params.y = height / 2;
         windowManager.addView(Global.hover, params);
-        Log.d("[WindowManage2] : " + windowManager);
+        Log.w("[WindowManage2] : " + windowManager);
         Global.hover.setVisibility(View.VISIBLE);
     }
 
