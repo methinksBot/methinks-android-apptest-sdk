@@ -28,6 +28,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 
@@ -280,6 +281,7 @@ public class HService extends Service {
 
     @Override
     public void onDestroy() {
+        Toast.makeText(this, "Hover service Stopped", Toast.LENGTH_SHORT).show();
         windowManager.removeViewImmediate(Global.hover);
         windowManager.removeViewImmediate(Global.hoverPopup.hoverPopup);
         super.onDestroy();
@@ -295,6 +297,7 @@ public class HService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+        Toast.makeText(this, "Hover service Starting", Toast.LENGTH_SHORT).show();
 
         return START_STICKY;
     }
