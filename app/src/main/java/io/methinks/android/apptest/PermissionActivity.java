@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import java.util.Objects;
 
@@ -67,9 +68,9 @@ public class PermissionActivity extends AppCompatActivity {
             Global.screenCaptureIntent = data;
             Global.screenCaptureResultCode = resultCode;
             ScreenSharing screenSharing = new ScreenSharing(PermissionActivity.this.getApplication());
-            if (Build.VERSION.SDK_INT < 29) {
+            //if (Build.VERSION.SDK_INT < 29) {
                 screenSharing.start();
-            }
+            //}
             Global.screenSharing = screenSharing;
             checkExternalStoragePermission();
         }else if(requestCode == Global.REQUEST_OVERLAY_PERMISSION){
@@ -213,6 +214,7 @@ public class PermissionActivity extends AppCompatActivity {
         boolean enableShowTouches = Settings.System.getInt(getContentResolver(), "show_touches", 1) != 0;
         if(!enableShowTouches){
             startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS), Global.REQUEST_SHOW_TOUCHES);
+            Toast.makeText(this, "Turn on show touches before starting app test!", Toast.LENGTH_SHORT).show();
             Log.d("Request SHOW TOUCHES permission to user.");
         }else{
             if(!isGrantedCapturePermission){
