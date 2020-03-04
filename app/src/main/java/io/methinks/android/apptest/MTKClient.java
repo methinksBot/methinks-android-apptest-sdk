@@ -83,12 +83,10 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         Log.d("Creating MTKClient instance...");
         if(context instanceof Application){
             this.app = (Application)context;
-            Log.w("Based on Application!!!");
         }else{
             if(context instanceof Activity){
                 this.app = (Application)(context.getApplicationContext());
                 this.activity = (Activity)context;
-                Log.w("Based on Activity!!!");
             }
             Global.isUnity = false;
             if(context instanceof MTKRTCMainActivity){
@@ -111,11 +109,11 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         screenShotContentObserver.register();
 
         //Log.d("CHECK CURRENT ACTIVITY: " + activity);
-        if(activity != null){
+        /*if(activity != null){
             Global.hoverIntent = new Intent(activity, HService.class);
             activity.startService(Global.hoverIntent);
             Log.e("hoverintent created! ");
-        }
+        }*/
 
         LocalStore.getInstance().init(context);
 
@@ -536,6 +534,12 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         if(LocalStore.getInstance().getSessionLog() != null) {
             Log.w("left session log send to server : " + LocalStore.getInstance().getSessionLog());
             new HttpManager().log(LocalStore.getInstance().getSessionLog(), null);
+        }
+
+        if(activity != null){
+            Global.hoverIntent = new Intent(activity, HService.class);
+            activity.startService(Global.hoverIntent);
+            Log.e("hoverintent created! ");
         }
 
         Global.sessionStartTime = new Date().getTime() / 1000;

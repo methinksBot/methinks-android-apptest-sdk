@@ -169,9 +169,9 @@ public class PermissionActivity extends AppCompatActivity {
         if(isGrantedOverlay()){
             isGrantedOverlayPermission = true;
             if(Global.isScreenStreamAllowed){
-                if (Build.VERSION.SDK_INT >= 29 && ContextCompat.checkSelfPermission(this, Manifest.permission.FOREGROUND_SERVICE) != PackageManager.PERMISSION_GRANTED) {
+                /*if (Build.VERSION.SDK_INT >= 29 && ContextCompat.checkSelfPermission(this, Manifest.permission.FOREGROUND_SERVICE) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(this,  new String[]{Manifest.permission.FOREGROUND_SERVICE}, 1);
-                }
+                }*/
                 checkShowTouches();
             }else{
                 checkExternalStoragePermission();
