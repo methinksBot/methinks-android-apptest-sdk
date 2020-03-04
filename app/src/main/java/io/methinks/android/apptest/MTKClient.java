@@ -83,10 +83,12 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         Log.d("Creating MTKClient instance...");
         if(context instanceof Application){
             this.app = (Application)context;
+            Log.w("Based on Application!!!");
         }else{
             if(context instanceof Activity){
                 this.app = (Application)(context.getApplicationContext());
                 this.activity = (Activity)context;
+                Log.w("Based on Activity!!!");
             }
             Global.isUnity = false;
             if(context instanceof MTKRTCMainActivity){
@@ -109,16 +111,17 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         screenShotContentObserver.register();
 
         //Log.d("CHECK CURRENT ACTIVITY: " + activity);
-        if(activity != null){
-            Global.hoverIntent = new Intent(activity, HService.class);
-            activity.startService(Global.hoverIntent);
-            Log.e("Hoverintent created! and Started Service ");
-        }
 
         LocalStore.getInstance().init(context);
 
         Global.applicationTracker = ApplicationTracker.getInstance(app);
         Global.applicationTracker.init(this);
+
+        if(activity != null){
+            Global.hoverIntent = new Intent(activity, HService.class);
+            activity.startService(Global.hoverIntent);
+            Log.e("Main hoverintent created! ");
+        }
 
         LocalBroadcastManager.getInstance(app).registerReceiver(broadcastReceiver, new IntentFilter(Global.LOCAL_BROADCAST_RECEIVE_INTENT_FILTER_ACTION));
 

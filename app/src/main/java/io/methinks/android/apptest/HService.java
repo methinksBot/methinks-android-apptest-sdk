@@ -112,7 +112,7 @@ public class HService extends Service {
             bgwparams = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.MATCH_PARENT,
                     WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.TYPE_PHONE,//항상 최 상위. 터치 이벤트 받을 수 있음.
+                    WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,//항상 최 상위. 터치 이벤트 받을 수 있음.
                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE| WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL| WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
                     PixelFormat.TRANSLUCENT);                           //투명
         }
@@ -130,9 +130,6 @@ public class HService extends Service {
             display.getSize(point);
         }
 //        initTouchPointer();
-        if (Build.VERSION.SDK_INT >= 29) {
-
-        }
         initHover();
         initHoverPopup();
     }
@@ -147,25 +144,28 @@ public class HService extends Service {
         });
 
         WindowManager.LayoutParams params;
-        int layoutFlag;
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             Log.w("SDK VERSION for initHover == over Oreo");
-            layoutFlag = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+            params = new WindowManager.LayoutParams(
+                    WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
+                    PixelFormat.TRANSLUCENT
+            );
         }else{
             Log.w("SDK VERSION for initHover == under Oreo");
-            layoutFlag = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+            params = new WindowManager.LayoutParams(
+                    WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.WRAP_CONTENT,
+                    WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
+                    PixelFormat.TRANSLUCENT
+            );
+
         }
-        params = new WindowManager.LayoutParams(
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                layoutFlag,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
-                PixelFormat.TRANSLUCENT
-        );
         params.gravity = Gravity.START | Gravity.TOP;
-        Log.w("hover button is attached!!!1");
         Display display = windowManager.getDefaultDisplay();
-        Log.w("hover button is attached!!!2");
         Point size = new Point();
         display.getSize(size);
         int width = size.x;
@@ -174,7 +174,6 @@ public class HService extends Service {
         params.y = height / 2;
         windowManager.addView(Global.hover, params);
         Global.hover.setVisibility(View.VISIBLE);
-        Log.w("hover button is attached!!!3");
     }
 
     private void initHoverPopup(){
@@ -182,24 +181,26 @@ public class HService extends Service {
         Global.hoverPopup = new HoverPopup(this);
 
         WindowManager.LayoutParams params;
-        int layoutFlag;
-
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             Log.w("SDK VERSION for initHoverPopup == over Oreo");
-            layoutFlag = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+            params = new WindowManager.LayoutParams(
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
+                    PixelFormat.TRANSLUCENT
+            );
         }else{
             Log.w("SDK VERSION for initHoverPopup == under Oreo");
-            layoutFlag = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+            params = new WindowManager.LayoutParams(
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.MATCH_PARENT,
+                    WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
+                    PixelFormat.TRANSLUCENT
+            );
+
         }
-
-        params = new WindowManager.LayoutParams(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT,
-                layoutFlag,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
-                PixelFormat.TRANSLUCENT
-        );
-
         params.gravity = Gravity.START| Gravity.TOP;
         windowManager.addView(Global.hoverPopup.hoverPopup, params);
         Global.hoverPopup.hoverPopup.setVisibility(View.GONE);
