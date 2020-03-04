@@ -117,11 +117,11 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         Global.applicationTracker = ApplicationTracker.getInstance(app);
         Global.applicationTracker.init(this);
 
-        if(activity != null){
+        /*if(activity != null){
             Global.hoverIntent = new Intent(activity, HService.class);
             activity.startService(Global.hoverIntent);
             Log.e("Main hoverintent created! ");
-        }
+        }*/
 
         LocalBroadcastManager.getInstance(app).registerReceiver(broadcastReceiver, new IntentFilter(Global.LOCAL_BROADCAST_RECEIVE_INTENT_FILTER_ACTION));
 
@@ -532,6 +532,12 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         if(Global.screenSharing != null && !Global.isSharedScreen){
             Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
             Global.applicationTracker.getTopActivity().startActivity(loginIntent);
+        }
+
+        if(activity != null){
+            Global.hoverIntent = new Intent(activity, HService.class);
+            activity.startService(Global.hoverIntent);
+            Log.e("Main hoverintent created! ");
         }
 
         if(LocalStore.getInstance().getSessionLog() != null) {
