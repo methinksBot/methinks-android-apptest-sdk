@@ -112,7 +112,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         if(activity != null){
             Global.hoverIntent = new Intent(activity, HService.class);
             activity.startService(Global.hoverIntent);
-            Log.e("hoverintent created! ");
+            Log.e("Hoverintent created! and Started Service ");
         }
 
         LocalStore.getInstance().init(context);
