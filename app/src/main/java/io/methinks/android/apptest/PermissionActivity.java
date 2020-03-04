@@ -137,6 +137,10 @@ public class PermissionActivity extends AppCompatActivity {
             }
         } else if(requestCode == Global.REQUEST_FOREGROUND_SERVICE) {
             Log.d("[RequestResult] : Foreground_service succeed");
+
+            Global.hoverIntent = new Intent(this, HService.class);
+            this.startService(Global.hoverIntent);
+            Log.e("hoverintent created! ");
         }
     }
 

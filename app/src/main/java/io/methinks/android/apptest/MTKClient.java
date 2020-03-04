@@ -536,12 +536,6 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             new HttpManager().log(LocalStore.getInstance().getSessionLog(), null);
         }
 
-        if(activity != null){
-            Global.hoverIntent = new Intent(activity, HService.class);
-            activity.startService(Global.hoverIntent);
-            Log.e("hoverintent created! ");
-        }
-
         Global.sessionStartTime = new Date().getTime() / 1000;
         startTimer();
 
