@@ -55,7 +55,7 @@ public class PermissionActivity extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT >= 29 && ContextCompat.checkSelfPermission(this, Manifest.permission.FOREGROUND_SERVICE) != PackageManager.PERMISSION_GRANTED) {
             Log.e("No FOREGROUND_SERVICE Permission.");
-            ActivityCompat.requestPermissions(this,  new String[]{Manifest.permission.FOREGROUND_SERVICE}, 1);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.FOREGROUND_SERVICE}, Global.REQUEST_FOREGROUND_SERVICE);
         }
 
         checkOverlayPermission();
@@ -135,6 +135,8 @@ public class PermissionActivity extends AppCompatActivity {
                     finish();
                 }
             }
+        } else if(requestCode == Global.REQUEST_FOREGROUND_SERVICE) {
+            Log.d("[RequestResult] : Foreground_service succeed");
         }
     }
 

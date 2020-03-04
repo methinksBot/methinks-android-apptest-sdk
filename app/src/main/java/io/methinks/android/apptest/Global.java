@@ -24,6 +24,7 @@ public class Global {
     public static final int REQUEST_OVERLAY_PERMISSION = 3333;
     public static final int REQUEST_EXTERNAL_STORAGE_PERMISSION = 4444;
     public static final int REQUEST_SHOW_TOUCHES = 5555;
+    public static final int REQUEST_FOREGROUND_SERVICE = 6666;
 
     public static final int MESSAGE_WHAT_SCREEN_SHOT = 625;
     public static final int MESSAGE_WHAT_TEST_TEMP_ACTIVITY = 626;
