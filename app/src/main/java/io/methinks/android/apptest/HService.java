@@ -147,28 +147,25 @@ public class HService extends Service {
         });
 
         WindowManager.LayoutParams params;
+        int layoutFlag;
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             Log.w("SDK VERSION for initHover == over Oreo");
-            params = new WindowManager.LayoutParams(
-                    WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
-                    PixelFormat.TRANSLUCENT
-            );
+            layoutFlag = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
         }else{
             Log.w("SDK VERSION for initHover == under Oreo");
-            params = new WindowManager.LayoutParams(
-                    WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.TYPE_PHONE,
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
-                    PixelFormat.TRANSLUCENT
-            );
-
+            layoutFlag = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
         }
+        params = new WindowManager.LayoutParams(
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.WRAP_CONTENT,
+                layoutFlag,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
+                PixelFormat.TRANSLUCENT
+        );
         params.gravity = Gravity.START | Gravity.TOP;
+        Log.w("hover button is attached!!!1");
         Display display = windowManager.getDefaultDisplay();
+        Log.w("hover button is attached!!!2");
         Point size = new Point();
         display.getSize(size);
         int width = size.x;
@@ -177,6 +174,7 @@ public class HService extends Service {
         params.y = height / 2;
         windowManager.addView(Global.hover, params);
         Global.hover.setVisibility(View.VISIBLE);
+        Log.w("hover button is attached!!!3");
     }
 
     private void initHoverPopup(){
@@ -184,26 +182,24 @@ public class HService extends Service {
         Global.hoverPopup = new HoverPopup(this);
 
         WindowManager.LayoutParams params;
+        int layoutFlag;
+
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             Log.w("SDK VERSION for initHoverPopup == over Oreo");
-            params = new WindowManager.LayoutParams(
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
-                    PixelFormat.TRANSLUCENT
-            );
+            layoutFlag = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
         }else{
             Log.w("SDK VERSION for initHoverPopup == under Oreo");
-            params = new WindowManager.LayoutParams(
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.TYPE_PHONE,
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
-                    PixelFormat.TRANSLUCENT
-            );
-
+            layoutFlag = WindowManager.LayoutParams.TYPE_PHONE;
         }
+
+        params = new WindowManager.LayoutParams(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT,
+                layoutFlag,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
+                PixelFormat.TRANSLUCENT
+        );
+
         params.gravity = Gravity.START| Gravity.TOP;
         windowManager.addView(Global.hoverPopup.hoverPopup, params);
         Global.hoverPopup.hoverPopup.setVisibility(View.GONE);
