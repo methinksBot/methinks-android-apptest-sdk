@@ -534,6 +534,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             Global.applicationTracker.getTopActivity().startActivity(loginIntent);
         }
 
+        /** Permission 클래스를 통해 */
         if(activity != null){
             Global.hoverIntent = new Intent(activity, HService.class);
             activity.startService(Global.hoverIntent);

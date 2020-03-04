@@ -1,5 +1,6 @@
 package io.methinks.android.apptest;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
@@ -8,6 +9,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,7 +21,9 @@ import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresPermission;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Base64;
 import android.util.DisplayMetrics;
@@ -129,6 +133,7 @@ public class HService extends Service {
             display = windowManager.getDefaultDisplay();
             display.getSize(point);
         }
+
 //        initTouchPointer();
         initHover();
         initHoverPopup();
@@ -143,37 +148,41 @@ public class HService extends Service {
             Global.hoverPopup.setVisible();
         });
 
-        WindowManager.LayoutParams params;
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            Log.w("SDK VERSION for initHover == over Oreo");
-            params = new WindowManager.LayoutParams(
-                    WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
-                    PixelFormat.TRANSLUCENT
-            );
-        }else{
-            Log.w("SDK VERSION for initHover == under Oreo");
-            params = new WindowManager.LayoutParams(
-                    WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
-                    PixelFormat.TRANSLUCENT
-            );
+        try {
+            WindowManager.LayoutParams params;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                Log.w("SDK VERSION for initHover == over Oreo");
+                params = new WindowManager.LayoutParams(
+                        WindowManager.LayoutParams.WRAP_CONTENT,
+                        WindowManager.LayoutParams.WRAP_CONTENT,
+                        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
+                        PixelFormat.TRANSLUCENT
+                );
+            } else {
+                Log.w("SDK VERSION for initHover == under Oreo");
+                params = new WindowManager.LayoutParams(
+                        WindowManager.LayoutParams.WRAP_CONTENT,
+                        WindowManager.LayoutParams.WRAP_CONTENT,
+                        WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
+                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
+                        PixelFormat.TRANSLUCENT
+                );
 
+            }
+            params.gravity = Gravity.START | Gravity.TOP;
+            Display display = windowManager.getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            int width = size.x;
+            int height = size.y;
+            params.x = width - (int) convertDpToPixel(this, 24);
+            params.y = height / 2;
+            windowManager.addView(Global.hover, params);
+            Global.hover.setVisibility(View.VISIBLE);
+        } catch (Exception e) {
+            Log.e("No Overlay Permission");
         }
-        params.gravity = Gravity.START | Gravity.TOP;
-        Display display = windowManager.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-        params.x = width - (int)convertDpToPixel(this, 24);
-        params.y = height / 2;
-        windowManager.addView(Global.hover, params);
-        Global.hover.setVisibility(View.VISIBLE);
     }
 
     private void initHoverPopup(){
