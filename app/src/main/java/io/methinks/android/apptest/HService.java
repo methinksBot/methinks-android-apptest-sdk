@@ -86,7 +86,6 @@ public class HService extends Service {
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.patcher_msg_methinks_apptest_is_running)))
                 .setOngoing(true);
 
-
         startForeground(1, builder.build());
         prepareDraw();
     }
@@ -125,12 +124,15 @@ public class HService extends Service {
         Point point = new Point();
         windowManager = (WindowManager)getSystemService(WINDOW_SERVICE);
         Display display;
-        Log.w("[WindowManage] : " + windowManager);
+
         if (windowManager != null) {
             display = windowManager.getDefaultDisplay();
             display.getSize(point);
         }
 //        initTouchPointer();
+        if (Build.VERSION.SDK_INT >= 29) {
+
+        }
         initHover();
         initHoverPopup();
     }
@@ -146,7 +148,6 @@ public class HService extends Service {
 
         WindowManager.LayoutParams params;
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            Log.d("HEREIS OVER OREO");
             params = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.WRAP_CONTENT,
                     WindowManager.LayoutParams.WRAP_CONTENT,
@@ -155,7 +156,6 @@ public class HService extends Service {
                     PixelFormat.TRANSLUCENT
             );
         }else{
-            Log.d("HERE IS LOWER OREO");
             params = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.WRAP_CONTENT,
                     WindowManager.LayoutParams.WRAP_CONTENT,
@@ -174,7 +174,6 @@ public class HService extends Service {
         params.x = width - (int)convertDpToPixel(this, 24);
         params.y = height / 2;
         windowManager.addView(Global.hover, params);
-        Log.w("[WindowManage2] : " + windowManager);
         Global.hover.setVisibility(View.VISIBLE);
     }
 
