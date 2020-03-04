@@ -109,11 +109,11 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         screenShotContentObserver.register();
 
         //Log.d("CHECK CURRENT ACTIVITY: " + activity);
-        /*if(activity != null){
+        if(activity != null){
             Global.hoverIntent = new Intent(activity, HService.class);
             activity.startService(Global.hoverIntent);
             Log.e("hoverintent created! ");
-        }*/
+        }
 
         LocalStore.getInstance().init(context);
 

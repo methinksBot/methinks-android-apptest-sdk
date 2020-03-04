@@ -144,7 +144,7 @@ public class Global {
         if(Global.hoverIntent == null){
             if(Global.applicationTracker != null){
                 Global.hoverIntent = new Intent(Global.applicationTracker.getFirstActivity(), HService.class);
-                Log.e("###hoverintent created!###");
+                Log.e("hoverintent created!");
             }
         }
 
