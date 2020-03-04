@@ -136,7 +136,7 @@ public class PermissionActivity extends AppCompatActivity {
                 }
             }
         } else if(requestCode == Global.REQUEST_FOREGROUND_SERVICE) {
-            Log.d("[RequestResult] : Foreground_service succeed");
+            Log.d("[RequestResult] : Foreground_service succeed : " + ContextCompat.checkSelfPermission(this, Manifest.permission.FOREGROUND_SERVICE));
 
             Global.hoverIntent = new Intent(this, HService.class);
             this.startService(Global.hoverIntent);
