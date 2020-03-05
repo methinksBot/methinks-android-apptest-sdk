@@ -162,12 +162,9 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         if(Global.sTestUserCode == null){   // 로그인 필요. 로그인 화면 보여줌
             /*Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), LoginActivity.class);
             Global.applicationTracker.getTopActivity().startActivity(loginIntent);*/
-            if(Global.screenSharing != null && !Global.isSharedScreen){
-                Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
-                Global.applicationTracker.getTopActivity().startActivity(loginIntent);
-            }
+
             Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), LoginService.class);
-            Global.applicationTracker.getTopActivity().startService(loginIntent);
+            Global.applicationTracker.getTopActivity().startForegroundService(loginIntent);
         }else{  // 자동 로그인 처리
             JSONObject deviceInfo = DeviceInfo.getDeviceInfo(app);
             JSONObject lastSessionLog = LocalStore.getInstance().getSessionLog();

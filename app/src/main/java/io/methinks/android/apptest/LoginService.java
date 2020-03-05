@@ -53,20 +53,27 @@ public class LoginService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        HandlerThread thread = new HandlerThread("login_start", Process.THREAD_PRIORITY_BACKGROUND);
+        /*HandlerThread thread = new HandlerThread("login_start", Process.THREAD_PRIORITY_BACKGROUND);
         thread.start();
 
         serviceLooper = thread.getLooper();
-        serviceHandler = new ServiceHandler(serviceLooper);
+        serviceHandler = new ServiceHandler(serviceLooper);*/
+
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
 
-        Message msg = serviceHandler.obtainMessage();
-        msg.arg1 = startId;
-        serviceHandler.sendMessage(msg);
+//        Message msg = serviceHandler.obtainMessage();
+//        msg.arg1 = startId;
+//        serviceHandler.sendMessage(msg);
+        if(Global.screenSharing != null && !Global.isSharedScreen){
+            Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
+            Global.applicationTracker.getTopActivity().startActivity(loginIntent);
+        }
+
+        drawLoginPopup();
 
         return START_STICKY;
     }
