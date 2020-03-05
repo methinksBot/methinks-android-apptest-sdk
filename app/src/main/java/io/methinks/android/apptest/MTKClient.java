@@ -409,7 +409,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         /**
          *  Setting Env (dev / prod) from client side
          * */
-        /*if (Global.isDebugModeFromInspector) {
+        if (Global.isDebugModeFromInspector) {
             LinearLayout mainContainer = new LinearLayout(activity);
             ViewGroup.LayoutParams mainParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             mainContainer.setOrientation(LinearLayout.VERTICAL);
@@ -479,7 +479,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             });
         } else {
             getClientLogo();
-        }*/
+        }
         getClientLogo();
     }
 

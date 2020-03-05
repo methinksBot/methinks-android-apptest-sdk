@@ -80,7 +80,7 @@ public class Global {
     protected static String sProjectId;
     protected static String sTestUserCode;
     protected static String sLogoURL;
-    protected static boolean isDebugModeFromInspector = true;
+    protected static boolean isDebugModeFromInspector = false;
     protected static boolean isDebugMode;
     protected static String sCampaignParticipantId;
     protected static String sUserId;
