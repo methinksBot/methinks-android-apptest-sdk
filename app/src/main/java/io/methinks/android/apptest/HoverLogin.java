@@ -9,7 +9,6 @@ import android.widget.TextView;
 import io.methinks.android.apptest.question.custom.widget.MethinksEditText;
 import io.methinks.android.apptest.question.custom.widget.MethinksTextView;
 
-import static android.view.View.VISIBLE;
 
 public class HoverLogin {
 
@@ -30,7 +29,7 @@ public class HoverLogin {
         bgrnd = new LinearLayout(context);
         LinearLayout.LayoutParams bgparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         bgrnd.setLayoutParams(bgparams);
-        bgrnd.setBackgroundColor(0xFFF);
+        bgrnd.setBackgroundColor(0xFFFFFF);
 
 
     }
