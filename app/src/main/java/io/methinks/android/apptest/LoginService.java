@@ -34,13 +34,17 @@ public class LoginService extends Service {
 
         @Override
         public void handleMessage(Message msg) {
-            if(Global.screenSharing != null && !Global.isSharedScreen){
-                Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
-                Global.applicationTracker.getTopActivity().startActivity(loginIntent);
-            }
+            getPermission();
             /** Synchronized task for drawing Login Popup */
             drawLoginPopup();
             stopSelf(msg.arg1);
+        }
+    }
+
+    private synchronized void getPermission() {
+        if(Global.screenSharing != null && !Global.isSharedScreen){
+            Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
+            Global.applicationTracker.getTopActivity().startActivity(loginIntent);
         }
     }
 
