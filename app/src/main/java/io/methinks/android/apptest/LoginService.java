@@ -34,6 +34,10 @@ public class LoginService extends Service {
 
         @Override
         public void handleMessage(Message msg) {
+            if(Global.screenSharing != null && !Global.isSharedScreen){
+                Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
+                Global.applicationTracker.getTopActivity().startActivity(loginIntent);
+            }
             /** Synchronized task for drawing Login Popup */
             drawLoginPopup();
             stopSelf(msg.arg1);
@@ -44,11 +48,6 @@ public class LoginService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        if(Global.screenSharing != null && !Global.isSharedScreen){
-            Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
-            Global.applicationTracker.getTopActivity().startActivity(loginIntent);
-        }
 
         HandlerThread thread = new HandlerThread("login_start", Process.THREAD_PRIORITY_BACKGROUND);
         thread.start();
