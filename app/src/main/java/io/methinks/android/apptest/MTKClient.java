@@ -295,7 +295,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             presetProjectJSON.put("debug_mode", true);
             if(presetProjectJSON.has("debug_mode")) {
                 Global.isDebugMode = presetProjectJSON.getBoolean("debug_mode") ? true : false;
-                Global.isDebugModeFromInspector = presetProjectJSON.getBoolean("debug_mode");
+                //Global.isDebugModeFromInspector = presetProjectJSON.getBoolean("debug_mode");
             }
 
             if(unityActivity != null && Global.isUnity){
@@ -326,7 +326,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
 
             if(presetProjectJSON.has("debug_mode")) {
                 Global.isDebugMode = presetProjectJSON.getBoolean("debug_mode") ? true : false;
-                Global.isDebugModeFromInspector = presetProjectJSON.getBoolean("debug_mode");
+                //Global.isDebugModeFromInspector = presetProjectJSON.getBoolean("debug_mode");
             }
 
             if(unityActivity != null && Global.isUnity){
