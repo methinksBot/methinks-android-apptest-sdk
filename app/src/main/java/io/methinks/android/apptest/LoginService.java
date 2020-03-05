@@ -1,7 +1,13 @@
 package io.methinks.android.apptest;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Build;
@@ -11,6 +17,7 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
+import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -59,6 +66,31 @@ public class LoginService extends Service {
         serviceLooper = thread.getLooper();
         serviceHandler = new ServiceHandler(serviceLooper);*/
 
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder builder;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            String CHANNEL_ID = "login_service_channel";
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Login service", NotificationManager.IMPORTANCE_HIGH);
+            channel.setDescription("Login");
+            channel.enableLights(true);
+            channel.setLightColor(Color.RED);
+            Log.d("[NOTIFICATION CHANNEL] :" + notificationManager);
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(channel);
+            }
+            builder = new NotificationCompat.Builder(this, CHANNEL_ID);
+        }else {
+            builder = new NotificationCompat.Builder(this);
+        }
+
+        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.methinks_apptest_logo))
+                .setSmallIcon(R.drawable.methinks_apptest_logo)
+                .setContentTitle(getString(R.string.patcher_text_apptest))
+                .setContentText(getString(R.string.patcher_msg_apptest_is_running))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.patcher_msg_methinks_apptest_is_running)))
+                .setOngoing(true);
+
+        startForeground(1, builder.build());
     }
 
     @Override

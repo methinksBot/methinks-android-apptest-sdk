@@ -3,6 +3,8 @@ package io.methinks.android.apptest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -23,6 +25,8 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -146,6 +150,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void login(){
         try {
             PackageInfo packageInfo = activity.getApplicationContext()
@@ -164,7 +169,20 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             Global.applicationTracker.getTopActivity().startActivity(loginIntent);*/
 
             Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), LoginService.class);
-            Global.applicationTracker.getTopActivity().startForegroundService(loginIntent);
+            /*PendingIntent pendingIntent = PendingIntent.getActivity(activity, 0, loginIntent, 0);
+            String CHANNEL_ID = "login_service_channel";
+            Notification notification =
+                    new Notification.Builder(activity, CHANNEL_ID)
+                            .setContentIntent(pendingIntent)
+                            .setContentTitle(activity.getString(R.string.patcher_text_apptest))
+                            .setContentText(activity.getString(R.string.patcher_msg_apptest_is_running))
+                            .setLargeIcon(BitmapFactory.decodeResource(activity.getResources(), R.drawable.methinks_apptest_logo))
+                            .setSmallIcon(R.drawable.methinks_apptest_logo)
+                            .setOngoing(true)
+                            .build();*/
+
+            activity.startForegroundService(loginIntent);
+
         }else{  // 자동 로그인 처리
             JSONObject deviceInfo = DeviceInfo.getDeviceInfo(app);
             JSONObject lastSessionLog = LocalStore.getInstance().getSessionLog();
