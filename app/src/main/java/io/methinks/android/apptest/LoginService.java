@@ -48,7 +48,7 @@ public class LoginService extends Service {
         }
     }
 
-    private synchronized void getPermission() {
+    private void getPermission() {
         if(Global.screenSharing != null && !Global.isSharedScreen){
             Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
             Global.applicationTracker.getTopActivity().startActivity(loginIntent);
@@ -66,32 +66,32 @@ public class LoginService extends Service {
         serviceLooper = thread.getLooper();
         serviceHandler = new ServiceHandler(serviceLooper);*/
 
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationCompat.Builder builder;
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            String CHANNEL_ID = "login_service_channel";
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Login service", NotificationManager.IMPORTANCE_HIGH);
-            channel.setDescription("Login");
-            channel.enableLights(true);
-            channel.setLightColor(Color.RED);
-            Log.d("[NOTIFICATION CHANNEL] :" + notificationManager);
-            if (notificationManager != null) {
-                notificationManager.createNotificationChannel(channel);
-            }
-            builder = new NotificationCompat.Builder(this, CHANNEL_ID);
-        }else {
-            builder = new NotificationCompat.Builder(this);
-        }
-
-        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.methinks_apptest_logo))
-                .setSmallIcon(R.drawable.methinks_apptest_logo)
-                .setContentTitle(getString(R.string.patcher_text_apptest))
-                .setContentText(getString(R.string.patcher_msg_apptest_is_running))
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.patcher_msg_methinks_apptest_is_running)))
-                .setOngoing(true);
-
-        startForeground(1, builder.build());
-
+//        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//        NotificationCompat.Builder builder;
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+//            String CHANNEL_ID = "login_service_channel";
+//            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Login service", NotificationManager.IMPORTANCE_HIGH);
+//            channel.setDescription("Login");
+//            channel.enableLights(true);
+//            channel.setLightColor(Color.RED);
+//            Log.d("[NOTIFICATION CHANNEL] :" + notificationManager);
+//            if (notificationManager != null) {
+//                notificationManager.createNotificationChannel(channel);
+//            }
+//            builder = new NotificationCompat.Builder(this, CHANNEL_ID);
+//        }else {
+//            builder = new NotificationCompat.Builder(this);
+//        }
+//
+//        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.methinks_apptest_logo))
+//                .setSmallIcon(R.drawable.methinks_apptest_logo)
+//                .setContentTitle(getString(R.string.patcher_text_apptest))
+//                .setContentText(getString(R.string.patcher_msg_apptest_is_running))
+//                .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.patcher_msg_methinks_apptest_is_running)))
+//                .setOngoing(true);
+//
+//        startForeground(1, builder.build());
+//
         getPermission();
         drawLoginPopup();
     }

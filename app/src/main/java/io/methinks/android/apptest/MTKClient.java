@@ -163,10 +163,10 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
 
         Log.d("Try to login now...");
         if(Global.sTestUserCode == null){   // 로그인 필요. 로그인 화면 보여줌
-            Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), LoginActivity.class);
-            Global.applicationTracker.getTopActivity().startActivity(loginIntent);
+//            Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), LoginActivity.class);
+//            Global.applicationTracker.getTopActivity().startActivity(loginIntent);
 
-            //Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), LoginService.class);
+            Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), LoginService.class);
             /*PendingIntent pendingIntent = PendingIntent.getActivity(activity, 0, loginIntent, 0);
             String CHANNEL_ID = "login_service_channel";
             Notification notification =
@@ -179,7 +179,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                             .setOngoing(true)
                             .build();*/
 
-            //activity.startForegroundService(loginIntent);
+            activity.startService(loginIntent);
 
         }else{  // 자동 로그인 처리
             JSONObject deviceInfo = DeviceInfo.getDeviceInfo(app);
