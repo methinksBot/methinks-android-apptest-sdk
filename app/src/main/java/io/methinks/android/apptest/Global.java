@@ -95,6 +95,7 @@ public class Global {
     protected static Intent hoverIntent;
     public static Hover hover;
     public static HoverPopup hoverPopup;
+    public static HoverLogin hoverLogin;
 
     protected static ScreenSharing screenSharing;
     protected static MediaProjectionManager mediaProjectionManager;

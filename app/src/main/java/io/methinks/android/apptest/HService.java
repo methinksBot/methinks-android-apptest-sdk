@@ -66,7 +66,6 @@ public class HService extends Service {
         super.onCreate();
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        Log.w("##################PREPARE####################");
         NotificationCompat.Builder builder;
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             String CHANNEL_ID = "horver_service_channel";
@@ -151,7 +150,6 @@ public class HService extends Service {
         try {
             WindowManager.LayoutParams params;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                Log.w("SDK VERSION for initHover == over Oreo");
                 params = new WindowManager.LayoutParams(
                         WindowManager.LayoutParams.WRAP_CONTENT,
                         WindowManager.LayoutParams.WRAP_CONTENT,
@@ -160,7 +158,6 @@ public class HService extends Service {
                         PixelFormat.TRANSLUCENT
                 );
             } else {
-                Log.w("SDK VERSION for initHover == under Oreo");
                 params = new WindowManager.LayoutParams(
                         WindowManager.LayoutParams.WRAP_CONTENT,
                         WindowManager.LayoutParams.WRAP_CONTENT,
@@ -191,7 +188,6 @@ public class HService extends Service {
 
         WindowManager.LayoutParams params;
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            Log.w("SDK VERSION for initHoverPopup == over Oreo");
             params = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.MATCH_PARENT,
                     WindowManager.LayoutParams.MATCH_PARENT,
@@ -200,7 +196,6 @@ public class HService extends Service {
                     PixelFormat.TRANSLUCENT
             );
         }else{
-            Log.w("SDK VERSION for initHoverPopup == under Oreo");
             params = new WindowManager.LayoutParams(
                     WindowManager.LayoutParams.MATCH_PARENT,
                     WindowManager.LayoutParams.MATCH_PARENT,

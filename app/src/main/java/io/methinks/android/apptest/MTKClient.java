@@ -131,8 +131,9 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
     }
 
 
-
-
+    /**
+     *  get context from here, and make application context from host app
+     */
     public static synchronized MTKClient getInstance(Context context) {
         if (instance == null) {
             instance = new MTKClient(context);
@@ -159,8 +160,10 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
 
         Log.d("Try to login now...");
         if(Global.sTestUserCode == null){   // 로그인 필요. 로그인 화면 보여줌
-            Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), LoginActivity.class);
-            Global.applicationTracker.getTopActivity().startActivity(loginIntent);
+            /*Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), LoginActivity.class);
+            Global.applicationTracker.getTopActivity().startActivity(loginIntent);*/
+            Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), LoginService.class);
+            Global.applicationTracker.getTopActivity().startService(loginIntent);
         }else{  // 자동 로그인 처리
             JSONObject deviceInfo = DeviceInfo.getDeviceInfo(app);
             JSONObject lastSessionLog = LocalStore.getInstance().getSessionLog();
@@ -272,7 +275,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             if(presetProjectJSON.has("id"))
                 Global.sProjectId = presetProjectJSON.getString("id");
 
-            //presetProjectJSON.put("debug_mode", false);
+            presetProjectJSON.put("debug_mode", true);
             if(presetProjectJSON.has("debug_mode")) {
                 Global.isDebugMode = presetProjectJSON.getBoolean("debug_mode") ? true : false;
                 Global.isDebugModeFromInspector = presetProjectJSON.getBoolean("debug_mode");
@@ -399,7 +402,10 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
 
         LocalStore.getInstance().init(app);
 
-        if (Global.isDebugModeFromInspector) {
+        /**
+         *  Setting Env (dev / prod) from client side
+         * */
+        /*if (Global.isDebugModeFromInspector) {
             LinearLayout mainContainer = new LinearLayout(activity);
             ViewGroup.LayoutParams mainParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             mainContainer.setOrientation(LinearLayout.VERTICAL);
@@ -469,7 +475,8 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             });
         } else {
             getClientLogo();
-        }
+        }*/
+        getClientLogo();
     }
 
     private void getClientLogo(){

@@ -36,6 +36,7 @@
             android:launchMode="singleTop"
             android:theme="@style/NoTitleBarTheme" />
         <service android:name=".HService" />
+        <service android:name=".LoginService"/>
 
 
     </application>
