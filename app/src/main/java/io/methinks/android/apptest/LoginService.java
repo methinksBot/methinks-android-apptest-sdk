@@ -103,12 +103,12 @@ public class LoginService extends Service {
 //        Message msg = serviceHandler.obtainMessage();
 //        msg.arg1 = startId;
 //        serviceHandler.sendMessage(msg);
-        if(Global.screenSharing != null && !Global.isSharedScreen){
-            Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
-            Global.applicationTracker.getTopActivity().startActivity(loginIntent);
-        }
-
-        drawLoginPopup();
+//        if(Global.screenSharing != null && !Global.isSharedScreen){
+//            Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
+//            Global.applicationTracker.getTopActivity().startActivity(loginIntent);
+//        }
+//
+//        drawLoginPopup();
 
         return START_STICKY;
     }
