@@ -91,6 +91,9 @@ public class LoginService extends Service {
                 .setOngoing(true);
 
         startForeground(1, builder.build());
+
+        getPermission();
+        drawLoginPopup();
     }
 
     @Override
