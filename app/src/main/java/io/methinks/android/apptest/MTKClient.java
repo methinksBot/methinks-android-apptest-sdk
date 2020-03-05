@@ -149,8 +149,6 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
     }
 
 
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void login(){
         try {
             PackageInfo packageInfo = activity.getApplicationContext()
@@ -495,7 +493,6 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         } else {
             getClientLogo();
         }
-        getClientLogo();
     }
 
     private void getClientLogo(){
