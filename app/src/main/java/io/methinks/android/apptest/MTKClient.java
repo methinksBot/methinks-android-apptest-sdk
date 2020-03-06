@@ -47,6 +47,8 @@ import io.methinks.android.apptest.question.QuestionPack;
 import io.methinks.android.apptest.question.SurveyAlertManager;
 import io.methinks.android.apptest.question.ViewConstant;
 
+import static java.lang.Thread.sleep;
+
 
 public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
     private static final String TAG = MTKClient.class.getSimpleName();
@@ -55,7 +57,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
     private Application app;
     private Activity activity;
     private MTKRTCMainActivity unityActivity;
-    private Thread timerThread;
+    private Thread timerThread, stateThread;
 
     // about screen shot detecting
     private ScreenshotContentObserver screenShotContentObserver;
@@ -163,10 +165,10 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
 
         Log.d("Try to login now...");
         if(Global.sTestUserCode == null){   // 로그인 필요. 로그인 화면 보여줌
-//            Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), LoginActivity.class);
-//            Global.applicationTracker.getTopActivity().startActivity(loginIntent);
+            Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), LoginActivity.class);
+            Global.applicationTracker.getTopActivity().startActivity(loginIntent);
 
-            Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), LoginService.class);
+            //Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), LoginService.class);
             /*PendingIntent pendingIntent = PendingIntent.getActivity(activity, 0, loginIntent, 0);
             String CHANNEL_ID = "login_service_channel";
             Notification notification =
@@ -179,7 +181,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                             .setOngoing(true)
                             .build();*/
 
-            activity.startService(loginIntent);
+            //activity.startService(loginIntent);
 
         }else{  // 자동 로그인 처리
             JSONObject deviceInfo = DeviceInfo.getDeviceInfo(app);
@@ -259,6 +261,12 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         timerThread.setDaemon(true);
         Global.timerThreadFlag = true;
         timerThread.start();
+    }
+
+    private void startStateTimer() {
+        stateThread = new Thread(new StateCheckThread());
+        stateThread.setDaemon(true);
+        stateThread.start();
     }
 
     public void initializeNativeApp(String presetModule, String presetProject){
@@ -422,6 +430,8 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         /**
          *  Setting Env (dev / prod) from client side
          * */
+        startStateTimer();
+
         if (Global.isDebugModeFromInspector) {
             LinearLayout mainContainer = new LinearLayout(activity);
             ViewGroup.LayoutParams mainParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -628,6 +638,25 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         LocalBroadcastManager.getInstance(app).unregisterReceiver(broadcastReceiver);
     }
 
+    /** 일정 간격으로 로그인 및 overlay권한 여부를 확인하여 권한이 없다면 해당 액티비티를 띄워준다. */
+    class StateCheckThread implements Runnable {
+        @Override
+        public void run() {
+            while(Global.sTestUserCode != null || Global.screenSharing != null) {
+                login();
+                Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
+                Global.applicationTracker.getTopActivity().startActivity(loginIntent);
+
+                try{
+                    sleep(3000);
+                } catch (Exception e) {
+
+                }
+
+            }
+        }
+    }
+
     /**
      * Main Timer Thread
      * 1. Set question packs to main queue.
@@ -718,7 +747,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                             }
                         }*/
 
-                        Thread.sleep(10000);
+                        sleep(10000);
                     }catch (InterruptedException e){
 
                     }catch (Exception e){
@@ -764,6 +793,8 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             return null;
         }
     }
+
+
 //
 //    private void setContentObserver(){
 //        HandlerThread handlerThread = new HandlerThread("content_observer");
