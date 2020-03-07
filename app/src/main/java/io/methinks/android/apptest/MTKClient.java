@@ -614,6 +614,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         if(timerThread != null){
             Global.timerThreadFlag = false;
             timerThread.interrupt();
+            stateThread.interrupt();
         }
 
 
