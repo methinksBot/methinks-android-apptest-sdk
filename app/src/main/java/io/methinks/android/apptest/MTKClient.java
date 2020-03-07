@@ -552,7 +552,11 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
         }
 
-
+        /*if(activity != null){
+            Global.hoverIntent = new Intent(activity, HService.class);
+            activity.startService(Global.hoverIntent);
+            Log.e("Main hoverintent created! ");
+        }*/
 
         if(LocalStore.getInstance().getSessionLog() != null) {
             Log.w("left session log send to server : " + LocalStore.getInstance().getSessionLog());
@@ -623,17 +627,19 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
     class StateCheckThread implements Runnable {
         @Override
         public void run() {
+            Log.e("[Login State] : " + Global.isLogined);
             while(!Global.isLogined) {
                 login();
+                Log.e("[Login State]2 : " + Global.isLogined);
                 Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
                 Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
 
                 /** Permission 클래스를 통해 */
-                if(activity != null){
+                /*if(activity != null){
                     Global.hoverIntent = new Intent(activity, HService.class);
                     activity.startService(Global.hoverIntent);
                     Log.e("Main hoverintent created! ");
-                }
+                }*/
 
                 try{
                     sleep(3000);

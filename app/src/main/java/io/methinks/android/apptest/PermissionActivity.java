@@ -179,6 +179,7 @@ public class PermissionActivity extends AppCompatActivity {
     private void checkOverlayPermission(){
         if(isGrantedOverlay()){
             isGrantedOverlayPermission = true;
+            Log.d("OverlayPermission 결과: "+ isGrantedOverlayPermission);
             if(Global.isScreenStreamAllowed){
                 checkShowTouches();
             }else{
@@ -189,6 +190,8 @@ public class PermissionActivity extends AppCompatActivity {
             Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + this.getPackageName()));
             ((Activity) this).startActivityForResult(intent, Global.REQUEST_OVERLAY_PERMISSION);
             Log.d("Request Overlay permission to user.");
+            Log.d("OverlayPermission 결과 (else): "+ isGrantedOverlayPermission);
+            checkOverlayPermission();
         }
     }
 
