@@ -628,7 +628,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
     class StateCheckThread implements Runnable {
         @Override
         public void run() {
-            while(Global.sTestUserCode != null) {
+            while(!Global.isLogined) {
                 login();
                 Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
                 Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
