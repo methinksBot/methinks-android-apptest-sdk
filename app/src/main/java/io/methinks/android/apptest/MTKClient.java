@@ -548,8 +548,8 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         }
 
         if(Global.screenSharing != null && !Global.isSharedScreen){
-            Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
-            Global.applicationTracker.getTopActivity().startActivity(loginIntent);
+            Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
+            Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
         }
 
         /** Permission 클래스를 통해 */
@@ -627,18 +627,18 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
     class StateCheckThread implements Runnable {
         @Override
         public void run() {
-            //while(Global.sTestUserCode != null || Global.screenSharing != null) {
+            while(Global.sTestUserCode != null) {
                 login();
-                Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
-                Global.applicationTracker.getTopActivity().startActivity(loginIntent);
+                Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
+                Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
 
-//                try{
-//                    sleep(3000);
-//                } catch (Exception e) {
-//
-//                }
+                try{
+                    sleep(3000);
+                } catch (Exception e) {
 
-            //}
+                }
+
+            }
         }
     }
 
