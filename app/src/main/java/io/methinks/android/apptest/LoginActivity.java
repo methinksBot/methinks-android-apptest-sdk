@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,7 +78,8 @@ public class LoginActivity extends AppCompatActivity {
                             finish();
                             return;
                         }else{
-                            Log.e("AppTest user can't login to AppTest server now.");
+                            Log.e("AppTest user can't login to AppTest server now. Reason is : " + error);
+                            Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
                             Global.sTestUserCode = null;
                             testUserCodeEditText.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
                         }

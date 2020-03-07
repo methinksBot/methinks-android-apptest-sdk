@@ -168,21 +168,6 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), LoginActivity.class);
             Global.applicationTracker.getTopActivity().startActivity(loginIntent);
 
-            //Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), LoginService.class);
-            /*PendingIntent pendingIntent = PendingIntent.getActivity(activity, 0, loginIntent, 0);
-            String CHANNEL_ID = "login_service_channel";
-            Notification notification =
-                    new Notification.Builder(activity, CHANNEL_ID)
-                            .setContentIntent(pendingIntent)
-                            .setContentTitle(activity.getString(R.string.patcher_text_apptest))
-                            .setContentText(activity.getString(R.string.patcher_msg_apptest_is_running))
-                            .setLargeIcon(BitmapFactory.decodeResource(activity.getResources(), R.drawable.methinks_apptest_logo))
-                            .setSmallIcon(R.drawable.methinks_apptest_logo)
-                            .setOngoing(true)
-                            .build();*/
-
-            //activity.startService(loginIntent);
-
         }else{  // 자동 로그인 처리
             JSONObject deviceInfo = DeviceInfo.getDeviceInfo(app);
             JSONObject lastSessionLog = LocalStore.getInstance().getSessionLog();
