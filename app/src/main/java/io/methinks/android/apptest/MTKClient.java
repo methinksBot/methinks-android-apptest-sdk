@@ -628,7 +628,8 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         @Override
         public void run() {
             Log.e("[Login State] : " + Global.isLogined);
-            while(!Global.isLogined) {
+            if(!Global.isLogined) {
+                Log.e("CURRENT ACTIVITY NAME: " + Global.applicationTracker.getTopActivity());
                 login();
                 Log.e("[Login State]2 : " + Global.isLogined);
                 Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
