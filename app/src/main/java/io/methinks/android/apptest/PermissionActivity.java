@@ -191,7 +191,6 @@ public class PermissionActivity extends AppCompatActivity {
             ((Activity) this).startActivityForResult(intent, Global.REQUEST_OVERLAY_PERMISSION);
             Log.d("Request Overlay permission to user.");
             Log.d("OverlayPermission 결과 (else): "+ isGrantedOverlayPermission);
-            checkOverlayPermission();
         }
     }
 
