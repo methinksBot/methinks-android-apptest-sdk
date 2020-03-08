@@ -41,4 +41,9 @@
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/sdk_white_full_rounded_background</item>
     </style>
+
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/dark_grey_blue_three</item>
+    </style>
 </resources>

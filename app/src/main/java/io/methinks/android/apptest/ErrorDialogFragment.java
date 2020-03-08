@@ -35,7 +35,7 @@ public class ErrorDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AccountAccessActivityTheme);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
         builder.setMessage(errorString)
                 .setPositiveButton(R.string.common_text_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) { }
