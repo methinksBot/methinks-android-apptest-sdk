@@ -15,19 +15,7 @@ public class ErrorDialogFragment extends DialogFragment {
     @SuppressLint("ValidFragment")
     public ErrorDialogFragment(String errorCode) {
         this();
-        switch (errorCode) {
-            case "removedFromCampaign":
-                this.errorString = "You are no longer a part of this project.";
-                break;
-            case "cantSeeProject":
-                this.errorString = "The project has ended.";
-                break;
-            case "invalidUserCode":
-                this.errorString = "Invalid code.";
-                break;
-            default:
-                break;
-        }
+        this.errorString = errorCode;
     }
 
     public ErrorDialogFragment() {}

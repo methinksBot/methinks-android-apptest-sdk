@@ -80,7 +80,25 @@ public class LoginActivity extends AppCompatActivity {
                         }else{
                             Log.e("AppTest user can't login to AppTest server now. Reason is : " + error);
 
-                            new ErrorDialogFragment(error).show(getSupportFragmentManager(), "login_error");
+                            String errorString = "";
+                            switch (error) {
+                                case "removedFromCampaign":
+                                    errorString = "You are no longer a part of this project.";
+                                    break;
+                                case "cantSeeProject":
+                                    errorString = "The project has ended.";
+                                    testUserCodeEditText.getText().clear();
+                                    break;
+                                case "invalidUserCode":
+                                    errorString = "Invalid code.";
+                                    testUserCodeEditText.getText().clear();
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                            new ErrorDialogFragment(errorString).show(getSupportFragmentManager(), "login_error");
+
                             //Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
                             Global.sTestUserCode = null;
                             testUserCodeEditText.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
