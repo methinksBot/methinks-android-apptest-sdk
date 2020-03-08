@@ -486,7 +486,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                 }
             });
         } else {
-            getClientLogo();
+            //getClientLogo();
         }
     }
 
@@ -630,10 +630,11 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             Log.e("[Login State] : " + Global.isLogined);
             if(!Global.isLogined) {
                 Log.e("CURRENT ACTIVITY NAME: " + Global.applicationTracker.getTopActivity());
-                login();
+                //login();
+                getClientLogo();
                 Log.e("[Login State]2 : " + Global.isLogined);
-                Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
-                Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
+//                Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
+//                Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
 
                 /** Permission 클래스를 통해 */
                 /*if(activity != null){
