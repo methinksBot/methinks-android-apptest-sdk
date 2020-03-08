@@ -93,6 +93,15 @@ public class LoginActivity extends AppCompatActivity {
                                     errorString = "Invalid code.";
                                     testUserCodeEditText.getText().clear();
                                     break;
+                                case "projectIsOver":
+                                    errorString = "The project has ended. Thank you for your participation!";
+                                    break;
+                                case "projectIsNotStarted":
+                                    errorString = "The project has not yet started. Please stay tuned.";
+                                    break;
+                                case "invalidProject":
+                                    errorString = "This app is no longer available for testing.";
+                                    break;
                                 default:
                                     break;
                             }
