@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.e("AppTest user can't login to AppTest server now. Reason is : " + error);
 
                             new ErrorDialogFragment(error).show(getSupportFragmentManager(), "login_error");
-                            Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
                             Global.sTestUserCode = null;
                             testUserCodeEditText.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
                         }
