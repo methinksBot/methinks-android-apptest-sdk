@@ -123,15 +123,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         Global.applicationTracker = ApplicationTracker.getInstance(app);
         Global.applicationTracker.init(this);
 
-        /*if(activity != null){
-            Global.hoverIntent = new Intent(activity, HService.class);
-            activity.startService(Global.hoverIntent);
-            Log.e("Main hoverintent created! ");
-        }*/
-
         LocalBroadcastManager.getInstance(app).registerReceiver(broadcastReceiver, new IntentFilter(Global.LOCAL_BROADCAST_RECEIVE_INTENT_FILTER_ACTION));
-
-
 
         Log.d("Completed creating MTKClient instance.");
     }
@@ -630,18 +622,8 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             Log.e("[Login State] : " + Global.isLogined);
             if(!Global.isLogined) {
                 Log.e("CURRENT ACTIVITY NAME: " + Global.applicationTracker.getTopActivity());
-                //login();
                 getClientLogo();
-                Log.e("[Login State]2 : " + Global.isLogined);
-//                Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
-//                Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
-
-                /** Permission 클래스를 통해 */
-                /*if(activity != null){
-                    Global.hoverIntent = new Intent(activity, HService.class);
-                    activity.startService(Global.hoverIntent);
-                    Log.e("Main hoverintent created! ");
-                }*/
+                //Log.e("[Login State]2 : " + Global.isLogined);
 
                 try{
                     sleep(3000);
