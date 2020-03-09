@@ -25,13 +25,13 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
 
         builder.setTitle(R.string.patcher_req_show_touch)
                 .setView(inflater.inflate(R.layout.sdk_show_touches_dialog, null))
-                .setPositiveButton(R.string.patcher_show_touch_option_first, new DialogInterface.OnClickListener() {
+                .setNeutralButton(R.string.patcher_show_touch_option_first, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         /** Enable show touches on user's own */
                         startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS), Global.REQUEST_SHOW_TOUCHES);
                     }
                 })
-                .setNegativeButton(R.string.patcher_show_touch_option_second, new DialogInterface.OnClickListener() {
+                .setNeutralButton(R.string.patcher_show_touch_option_second, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         /** Enable show touches by methinks_show_touches Extension app */
 
