@@ -87,11 +87,9 @@ public class LoginActivity extends AppCompatActivity {
                                     break;
                                 case "cantSeeProject":
                                     errorString = "The project has ended.";
-                                    testUserCodeEditText.getText().clear();
                                     break;
                                 case "invalidUserCode":
                                     errorString = "Invalid code.";
-                                    testUserCodeEditText.getText().clear();
                                     break;
                                 case "projectIsOver":
                                     errorString = "The project has ended. Thank you for your participation!";
@@ -105,8 +103,9 @@ public class LoginActivity extends AppCompatActivity {
                                 default:
                                     break;
                             }
-
                             new ErrorDialogFragment(errorString).show(getSupportFragmentManager(), "login_error");
+                            testUserCodeEditText.getText().clear();
+
 
                             //Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
                             Global.sTestUserCode = null;
