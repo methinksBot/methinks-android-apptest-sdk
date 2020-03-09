@@ -613,7 +613,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         LocalBroadcastManager.getInstance(app).unregisterReceiver(broadcastReceiver);
     }
 
-    /** 일정 간격으로 로그인 및 overlay권한 여부를 확인하여 권한이 없다면 해당 액티비티를 띄워준다. */
+
     class StateCheckThread implements Runnable {
         @Override
         public void run() {

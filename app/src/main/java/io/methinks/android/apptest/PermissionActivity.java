@@ -221,8 +221,8 @@ public class PermissionActivity extends AppCompatActivity {
     private void checkShowTouches(){
         boolean enableShowTouches = Settings.System.getInt(getContentResolver(), "show_touches", 1) != 0;
         if(!enableShowTouches){
-            new ErrorDialogFragment(getString(R.string.patcher_req_show_touch)).show(getSupportFragmentManager(), "show_touches");
-            startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS), Global.REQUEST_SHOW_TOUCHES);
+            new ShowTouchSetupDialogFragment().show(getSupportFragmentManager(), "show_touches_dialog");
+
             //Toast.makeText(this, getString(R.string.patcher_req_show_touch), Toast.LENGTH_LONG).show();
             Log.d("Request SHOW TOUCHES permission to user.");
         }else{
