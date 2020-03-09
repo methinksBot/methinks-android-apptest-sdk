@@ -48,11 +48,11 @@
 	<string name="patcher_msg_download_new_version">Please download the new version to continue the playtest.\nDO NOT delete the current version, or you will lose all your progress!</string>
 	<string name="patcher_your_progress">Your progress:</string>
 	<string name="patcher_text_download">Download</string>
-	<string name="sdk_text_start">Start</string>
-	<string name="sdk_text_close">Close</string>
-	<string name="sdk_text_next">Next</string>
-	<string name="sdk_text_strongly_agree">Strongly\nAgree</string>
-	<string name="sdk_text_strongly_disagree">Strongly\nDisagree</string>
+	<string name="patcher_text_start">Start</string>
+	<string name="patcher_text_close">Close</string>
+	<string name="patcher_text_next">Next</string>
+	<string name="patcher_text_strongly_agree">Strongly\nAgree</string>
+	<string name="patcher_text_strongly_disagree">Strongly\nDisagree</string>
 	<string name="patcher_msg_successfully_submitted">Successfully submitted!</string>
 	<string name="patcher_msg_something_wrong">❗️Something is wrong, please try again.</string>
 	<string name="patcher_msg_suggestion_desc">Your suggestions help make a better app! Please be descriptive.</string>
@@ -66,4 +66,11 @@
 	<string name="patcher_text_apptest">App test</string>
 	<string name="patcher_msg_methinks_apptest_is_running">methinks app test is running now...</string>
 	<string name="patcher_confirm">Confirm</string>
+	<!--New-->
+	<string name="patcher_req_show_touch">You should enable show touches option for the app test</string>
+	<string name="patcher_show_touch_setup">Please select way of turn on the show touches.</string>
+	<string name="patcher_show_touch_setup_option_first">If you want to turn on show touches on your own, select setup.</string>
+	<string name="patcher_show_touch_setup_option_second">If you want to enable show touches automatically with our extension file, select download.</string>
+	<string name="patcher_show_touch_option_first">setup</string>
+	<string name="patcher_show_touch_option_second">download</string>
 </resources>

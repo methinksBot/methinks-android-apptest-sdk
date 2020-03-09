@@ -89,12 +89,10 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         Log.d("Creating MTKClient instance...");
         if(context instanceof Application){
             this.app = (Application)context;
-            Log.w("Based on Application!!!");
         }else{
             if(context instanceof Activity){
                 this.app = (Application)(context.getApplicationContext());
                 this.activity = (Activity)context;
-                Log.w("Based on Activity!!!");
             }
             Global.isUnity = false;
             if(context instanceof MTKRTCMainActivity){
@@ -116,12 +114,12 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         screenShotContentObserver = new ScreenshotContentObserver(handler, app.getContentResolver());
         screenShotContentObserver.register();
 
-        //Log.d("CHECK CURRENT ACTIVITY: " + activity);
-
         LocalStore.getInstance().init(context);
 
         Global.applicationTracker = ApplicationTracker.getInstance(app);
         Global.applicationTracker.init(this);
+
+        Global.isPlayedByEmulator = Build.getRadioVersion().equals("") ? true : false;
 
         LocalBroadcastManager.getInstance(app).registerReceiver(broadcastReceiver, new IntentFilter(Global.LOCAL_BROADCAST_RECEIVE_INTENT_FILTER_ACTION));
 

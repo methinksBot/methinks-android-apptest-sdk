@@ -48,11 +48,11 @@
 	<string name="patcher_msg_download_new_version">테스트 진행을 위해 새로운 버전을 다운로드 하십시오. 지금 가지고 있는 앱을 지우면 지금까지의 진척 사항이 모두 삭제 될 수 있으니 지우지 말고 다운로드만 하십시오. </string>
 	<string name="patcher_your_progress">프로젝트 진행도 :</string>
 	<string name="patcher_text_download">다운로드</string>
-	<string name="sdk_text_start">시작</string>
-	<string name="sdk_text_close">종료</string>
-	<string name="sdk_text_next">다음</string>
-	<string name="sdk_text_strongly_agree">매우 동의</string>
-	<string name="sdk_text_strongly_disagree">매우\n동의하지 않음</string>
+	<string name="patcher_text_start">시작</string>
+	<string name="patcher_text_close">종료</string>
+	<string name="patcher_text_next">다음</string>
+	<string name="patcher_text_strongly_agree">매우 동의</string>
+	<string name="patcher_text_strongly_disagree">매우\n동의하지 않음</string>
 	<string name="patcher_msg_successfully_submitted">성공적으로 보냈습니다!</string>
 	<string name="patcher_msg_something_wrong">문제가 있습니다. 다시 시도하세요. </string>
 	<string name="patcher_msg_suggestion_desc">당신의 제안은 더 좋은 앱을 만드는데 큰 도움이 됩니다. 가능하면 자세히 적어 주세요!</string>
@@ -66,4 +66,10 @@
 	<string name="patcher_text_apptest">앱 테스트</string>
 	<string name="patcher_msg_methinks_apptest_is_running">미띵스 유저 테스트를 진행 중입니다...</string>
 	<string name="patcher_confirm">확인</string>
+	<!--New-->
+	<string name="patcher_req_show_touch">앱 테스트를 위해 탭한 항목 표시 옵션의 활성화가 필요합니다.</string>
+	<string name="patcher_show_touch_setup">탭한 항목 표시 활성화 방법을 선택 해 주세요.</string>
+	<string name="patcher_show_touch_setup_option_first">스스로 개발자모드에 접근하여 터치 포인터 활성화가 가능하다면 설정을 탭하여 직접 설정 해주세요.</string>
+	<string name="patcher_show_touch_setup_option_second">개발자모드 액세스 없이 확장 파일 설치를 통해 자동적으로 터치포인터를 활성화 하고 싶으시다면 다운로드를 탭 해주세요. </string>
+
 </resources>

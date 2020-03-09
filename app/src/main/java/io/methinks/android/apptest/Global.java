@@ -72,6 +72,7 @@ public class Global {
     protected static boolean isSharedScreen;
     protected static boolean isScreenStreamAllowed;
     protected static boolean isShowingAnnouncement;
+    protected static boolean isPlayedByEmulator;
     public static boolean isShowingQuestion;
     public static boolean isShowingReport;
     protected static long sLoginTime;

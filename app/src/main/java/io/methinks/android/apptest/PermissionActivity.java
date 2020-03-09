@@ -53,11 +53,6 @@ public class PermissionActivity extends AppCompatActivity {
             Global.mediaProjectionManager = mediaProjectionManager;
         }
 
-        /*if (Build.VERSION.SDK_INT >= 29 && ContextCompat.checkSelfPermission(this, Manifest.permission.FOREGROUND_SERVICE) != PackageManager.PERMISSION_GRANTED) {
-            Log.e("No FOREGROUND_SERVICE Permission.");
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.FOREGROUND_SERVICE}, Global.REQUEST_FOREGROUND_SERVICE);
-        }*/
-
         checkOverlayPermission();
     }
 
@@ -73,9 +68,9 @@ public class PermissionActivity extends AppCompatActivity {
             Global.screenCaptureIntent = data;
             Global.screenCaptureResultCode = resultCode;
             ScreenSharing screenSharing = new ScreenSharing(PermissionActivity.this.getApplication());
-            //if (Build.VERSION.SDK_INT < 29) {
-                screenSharing.start();
-            //}
+
+            screenSharing.start();
+
             Global.screenSharing = screenSharing;
             checkExternalStoragePermission();
         }else if(requestCode == Global.REQUEST_OVERLAY_PERMISSION){
@@ -226,8 +221,9 @@ public class PermissionActivity extends AppCompatActivity {
     private void checkShowTouches(){
         boolean enableShowTouches = Settings.System.getInt(getContentResolver(), "show_touches", 1) != 0;
         if(!enableShowTouches){
+            new ErrorDialogFragment(getString(R.string.patcher_req_show_touch)).show(getSupportFragmentManager(), "show_touches");
             startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS), Global.REQUEST_SHOW_TOUCHES);
-            Toast.makeText(this, "Turn on show touches before starting app test!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, getString(R.string.patcher_req_show_touch), Toast.LENGTH_LONG).show();
             Log.d("Request SHOW TOUCHES permission to user.");
         }else{
             if(!isGrantedCapturePermission){

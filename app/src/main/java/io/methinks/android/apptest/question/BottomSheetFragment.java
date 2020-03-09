@@ -135,10 +135,10 @@ public class BottomSheetFragment extends DialogFragment {
         boolean isBugReport = getArguments().getBoolean("isBugReport", false);
         boolean isRequired = getArguments().getBoolean("isBugReport", false);
 
-        closeSurvey.setText(getString(R.string.sdk_text_close));
+        closeSurvey.setText(getString(R.string.patcher_text_close));
 
         if(isQuestion)
-            submit.setText(getString(R.string.sdk_text_next));
+            submit.setText(getString(R.string.patcher_text_next));
         else
             submit.setText(getString(R.string.patcher_done));
 
@@ -217,7 +217,7 @@ public class BottomSheetFragment extends DialogFragment {
                 public void onPageSelected(int position) {
                     if (currOrientation == Configuration.ORIENTATION_PORTRAIT) {
                         if (position == 0) {
-                            submit.setText(getString(R.string.sdk_text_next));
+                            submit.setText(getString(R.string.patcher_text_next));
                         }
 //                        else if (position == ViewConstant.questions.size() - 1) {
 //                            ViewGroup.LayoutParams paramsQ = viewPager.getLayoutParams();
@@ -250,7 +250,7 @@ public class BottomSheetFragment extends DialogFragment {
                         }
                     } else if (currOrientation == Configuration.ORIENTATION_LANDSCAPE) {
                         if (position == 0) {
-                            submit.setText(getString(R.string.sdk_text_next));
+                            submit.setText(getString(R.string.patcher_text_next));
                         } else if(ViewConstant.questions.get(position).optString("type").equals("range")){
                             ViewGroup.LayoutParams params1 = viewPager.getLayoutParams();
                             params1.height = screenHeight * 1/2;
