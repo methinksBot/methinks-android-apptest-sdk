@@ -220,6 +220,7 @@ public class PermissionActivity extends AppCompatActivity {
 
     private void checkShowTouches(){
         boolean enableShowTouches = Settings.System.getInt(getContentResolver(), "show_touches", 1) != 0;
+        Log.e("ShowTouches: " + enableShowTouches);
         if(!enableShowTouches){
             new ShowTouchSetupDialogFragment(this).show(getSupportFragmentManager(), "show_touches_dialog");
 

@@ -34,7 +34,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                 .setView(inflater.inflate(R.layout.sdk_show_touches_dialog, null))
                 .setPositiveButton(R.string.patcher_show_touch_option_first, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        /** Check developer mode enabled */
+                        /** Check developer mode enabled   1 = dev on , 0 = dev off   */
                         int devCheck = Settings.Secure.getInt(context.getContentResolver(), Settings.Global.DEVELOPMENT_SETTINGS_ENABLED , 0);
                         Toast.makeText(context, "개발자모드 결과: " + devCheck, Toast.LENGTH_LONG).show();
                         /** Enable show touches on user's own */
