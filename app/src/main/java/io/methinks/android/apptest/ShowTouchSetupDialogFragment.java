@@ -125,7 +125,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
         Uri uri = Uri.parse(url);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 
-        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
             startActivity(intent);
         }
     }
