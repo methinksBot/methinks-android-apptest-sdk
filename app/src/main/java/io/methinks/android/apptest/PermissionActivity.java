@@ -230,7 +230,7 @@ public class PermissionActivity extends AppCompatActivity {
         //Log.e("ShowTouches: " + enableShowTouches);
         if(!enableShowTouches){
             new ShowTouchSetupDialogFragment(this).show(getSupportFragmentManager(), "show_touches_dialog");
-
+            checkShowTouches();
             //Toast.makeText(this, getString(R.string.patcher_req_show_touch), Toast.LENGTH_LONG).show();
             Log.d("Request SHOW TOUCHES permission to user.");
         }else{

@@ -42,8 +42,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
         this.context = context;
     }
     public ShowTouchSetupDialogFragment() {
-        this.url = Global.isDebugMode ? Global.DEV_METHINKS_SERVER_URL : Global.PROD_METHINKS_SERVER_URL
-                    + "/";
+        this.url = Global.isDebugMode ? Global.DEV_METHINKS_SERVER_URL : Global.PROD_METHINKS_SERVER_URL;
     }
 
     @Override
@@ -101,10 +100,6 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     downloadSupportApp();
                                 }
-                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                }
                             });
 
                             AlertDialog alertDialog = builder.create();
@@ -125,11 +120,9 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
     }
 
     private void redirectToGuide() {
-        Uri uri = Uri.parse(url);
+        Uri uri = Uri.parse(url + "/project/instruction/" + Global.sProjectId);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         if (intent.resolveActivity(context.getPackageManager()) != null ) {
-            Log.w("INTENT CHECK SUCCEEDED");
-            Log.w(activity.toString());
             activity.startActivityForResult(intent, Global.REQUEST_SHOW_DEV_GUIDE);
         }
     }
@@ -163,7 +156,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
         downloadID = downloadManager.enqueue(request);
 
         String destination = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
-        System.out.println("경로 " + destination);
+        //System.out.println("경로 " + destination);
         String fileName = "methinks_touchsupports.apk";
         destination += fileName;
 
