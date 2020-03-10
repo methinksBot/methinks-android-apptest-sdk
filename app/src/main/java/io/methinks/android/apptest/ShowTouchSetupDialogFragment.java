@@ -69,7 +69,6 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                                         @Override
                                         public void onClick(View v) {
                                             redirectToGuide();
-                                            getActivity().startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS), Global.REQUEST_SHOW_TOUCHES);
                                         }
                                     })
                                     .show();
@@ -126,7 +125,8 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 
         if (intent.resolveActivity(context.getPackageManager()) != null) {
-            startActivity(intent);
+            Log.w("INTENT CHECK SUCCEEDED");
+            startActivityForResult(intent, Global.REQUEST_SHOW_TOUCHES);
         }
     }
 
