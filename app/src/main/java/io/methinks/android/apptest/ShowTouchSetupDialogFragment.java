@@ -62,13 +62,14 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
 
                         } else {
                             // to return current activity..
-                            getActivity().startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS), Global.REQUEST_SHOW_TOUCHES);
+
                             Snackbar.make(getActivity().findViewById(R.id.devModeCoordinatorLayout), R.string.patcher_set_devmode, Snackbar.LENGTH_INDEFINITE)
                                     .setActionTextColor(getResources().getColor(R.color.cornflower))
                                     .setAction(R.string.patcher_set_devmode_guide, new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
                                             redirectToGuide();
+                                            getActivity().startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS), Global.REQUEST_SHOW_TOUCHES);
                                         }
                                     })
                                     .show();
