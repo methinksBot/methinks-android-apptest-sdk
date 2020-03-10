@@ -73,8 +73,8 @@
     <!--New-->
     <string name="patcher_req_show_touch">You should enable show touches option for the app test</string>
     <string name="patcher_show_touch_setup">Please select way of turn on the show touches.</string>
-    <string name="patcher_show_touch_setup_option_first">If you want to turn on show touches on your own, select setup.</string>
-    <string name="patcher_show_touch_setup_option_second">If you want to enable show touches automatically with our extension file, select download.</string>
+    <string name="patcher_show_touch_setup_option_first"> - If you want to turn on show touches on your own, select setup.</string>
+    <string name="patcher_show_touch_setup_option_second"> - If you want to enable show touches automatically with our extension file, select download.</string>
     <string name="patcher_show_touch_option_first">setup</string>
     <string name="patcher_show_touch_option_second">download</string>
 
