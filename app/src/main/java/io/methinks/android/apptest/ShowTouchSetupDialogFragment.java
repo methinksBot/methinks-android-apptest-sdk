@@ -127,7 +127,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
     private void redirectToGuide() {
         Uri uri = Uri.parse(url);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        if (intent.resolveActivity(context.getPackageManager()) != null && ) {
+        if (intent.resolveActivity(context.getPackageManager()) != null ) {
             Log.w("INTENT CHECK SUCCEEDED");
             try {
                 getActivity().startActivityForResult(intent, Global.REQUEST_SHOW_DEV_GUIDE);
