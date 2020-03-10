@@ -91,7 +91,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                         Log.w("서포트 앱 설치여부 " + inInstalled);
 
                         if (!inInstalled) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
 
                             builder.setTitle("알림").setMessage("계속 진행하기 위해 확장 앱이 필요합니다. 설치를 허가하시겠습니까?");
                             builder.setCancelable(false);
@@ -159,15 +159,19 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
         final BroadcastReceiver onComplete = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", new File(context.getExternalFilesDir(null), "methinks_touchsupports.apk"));
-                Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
-                openFileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                openFileIntent.setData(contentUri);
-                activity.startActivity(openFileIntent);
-                context.unregisterReceiver(this);
+                long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+                if (id == downloadID) {
+                    Uri contentUri = downloadManager.getUriForDownloadedFile(downloadID);
+                    Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
+                    openFileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    openFileIntent.setData(contentUri);
+                    activity.startActivity(openFileIntent);
+                    context.unregisterReceiver(this);
+                }
             }
         };
+
         context.registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
     }
 }
