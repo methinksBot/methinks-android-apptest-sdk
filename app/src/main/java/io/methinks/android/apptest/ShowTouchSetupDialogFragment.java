@@ -34,6 +34,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
     PackageManager pm;
     private long downloadID;
     private String url;
+    private Activity activity;
 
     @SuppressLint("ValidFragment")
     public ShowTouchSetupDialogFragment(Context context) {
@@ -41,7 +42,8 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
         this.context = context;
     }
     public ShowTouchSetupDialogFragment() {
-        this.url = Global.isDebugMode ? Global.DEV_METHINKS_SERVER_URL : Global.PROD_METHINKS_SERVER_URL;
+        this.url = Global.isDebugMode ? Global.DEV_METHINKS_SERVER_URL : Global.PROD_METHINKS_SERVER_URL
+                    + "/";
     }
 
     @Override
@@ -49,6 +51,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
         LayoutInflater inflater = requireActivity().getLayoutInflater();
+        activity = getActivity();
 
         builder.setTitle(R.string.patcher_req_show_touch)
                 .setView(inflater.inflate(R.layout.sdk_show_touches_dialog, null))
@@ -64,7 +67,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                         } else {
                             // to return current activity..
 
-                            Snackbar.make(getActivity().findViewById(R.id.devModeCoordinatorLayout), R.string.patcher_set_devmode, Snackbar.LENGTH_INDEFINITE)
+                            Snackbar.make(activity.findViewById(R.id.devModeCoordinatorLayout), R.string.patcher_set_devmode, Snackbar.LENGTH_INDEFINITE)
                                     .setActionTextColor(getResources().getColor(R.color.cornflower))
                                     .setAction(R.string.patcher_set_devmode_guide, new View.OnClickListener() {
                                         @Override
@@ -124,10 +127,13 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
     private void redirectToGuide() {
         Uri uri = Uri.parse(url);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        Activity activity = getActivity();
-        if (intent.resolveActivity(context.getPackageManager()) != null && activity != null) {
+        if (intent.resolveActivity(context.getPackageManager()) != null && ) {
             Log.w("INTENT CHECK SUCCEEDED");
-            getActivity().startActivityForResult(intent, Global.REQUEST_SHOW_DEV_GUIDE);
+            try {
+                getActivity().startActivityForResult(intent, Global.REQUEST_SHOW_DEV_GUIDE);
+            } catch(Exception e) {
+                Log.e(e.toString());
+            }
         }
     }
 
