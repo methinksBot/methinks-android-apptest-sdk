@@ -1,7 +1,9 @@
 package io.methinks.android.apptest;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +15,6 @@ import java.util.zip.Inflater;
 public class ShowTouchSetupDialogFragment extends DialogFragment {
 
     private String errorString;
-
 
     public ShowTouchSetupDialogFragment() {}
 
@@ -28,7 +29,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.patcher_show_touch_option_first, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         /** Enable show touches on user's own */
-                        startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS), Global.REQUEST_SHOW_TOUCHES);
+                        getActivity().startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS), Global.REQUEST_SHOW_TOUCHES);
                     }
                 })
                 .setNeutralButton(R.string.patcher_show_touch_option_second, new DialogInterface.OnClickListener() {
