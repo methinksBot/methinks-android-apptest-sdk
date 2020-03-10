@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/patcher_show_touch_setup"
+        android:textColor="@color/dark_grey_blue_three"
         android:textSize="12sp"
         android:paddingBottom="5dp"/>
 
@@ -17,7 +18,7 @@
         android:layout_height="wrap_content"
         android:text="@string/patcher_show_touch_setup_option_first"
         android:textColor="@color/charcoal_grey"
-        android:textSize="11sp"
+        android:textSize="12sp"
         android:paddingBottom="3dp"/>
 
     <TextView
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         android:text="@string/patcher_show_touch_setup_option_second"
         android:textColor="@color/charcoal_grey"
-        android:textSize="11sp"
+        android:textSize="12sp"
         android:paddingBottom="3dp"/>
 
 
