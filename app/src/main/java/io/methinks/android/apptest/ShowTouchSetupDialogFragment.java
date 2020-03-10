@@ -55,7 +55,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         /** Check developer mode enabled   1 = dev on , 0 = dev off   */
                         boolean devCheck = Settings.Secure.getInt(context.getContentResolver(), Settings.Global.DEVELOPMENT_SETTINGS_ENABLED , 0) != 0;
-
+                        devCheck = false;
                         if (devCheck) {
                             /** Enable show touches on user's own */
                             getActivity().startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS), Global.REQUEST_SHOW_TOUCHES);
