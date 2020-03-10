@@ -1,6 +1,7 @@
 package io.methinks.android.apptest;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DownloadManager;
@@ -123,10 +124,10 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
     private void redirectToGuide() {
         Uri uri = Uri.parse(url);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
+        Activity activity = getActivity();
+        if (intent.resolveActivity(context.getPackageManager()) != null && activity != null) {
             Log.w("INTENT CHECK SUCCEEDED");
-            getActivity().startActivityForResult(intent, Global.REQUEST_SHOW_TOUCHES);
+            getActivity().startActivityForResult(intent, Global.REQUEST_SHOW_DEV_GUIDE);
         }
     }
 

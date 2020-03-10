@@ -75,7 +75,9 @@ public class PermissionActivity extends AppCompatActivity {
             checkExternalStoragePermission();
         }else if(requestCode == Global.REQUEST_OVERLAY_PERMISSION){
             checkOverlayPermission();
-        }else if(requestCode == Global.REQUEST_SHOW_TOUCHES){
+        }else if(requestCode == Global.REQUEST_SHOW_TOUCHES) {
+            checkShowTouches();
+        }else if(requestCode == Global.REQUEST_SHOW_DEV_GUIDE) {
             checkShowTouches();
         }else if(requestCode == Global.REQUEST_SCREEN_SHARING){
             setResult(RESULT_CANCELED);
