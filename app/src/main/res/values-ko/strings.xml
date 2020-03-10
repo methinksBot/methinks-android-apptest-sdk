@@ -71,5 +71,7 @@
 	<string name="patcher_show_touch_setup">탭한 항목 표시 활성화 방법을 선택 해 주세요.</string>
 	<string name="patcher_show_touch_setup_option_first">스스로 개발자모드에 접근하여 터치 포인터 활성화가 가능하다면 설정을 탭하여 직접 설정 해주세요.</string>
 	<string name="patcher_show_touch_setup_option_second">개발자모드 액세스 없이 확장 파일 설치를 통해 자동적으로 터치포인터를 활성화 하고 싶으시다면 다운로드를 탭 해주세요. </string>
+	<string name="patcher_show_touch_option_first">설정</string>
+	<string name="patcher_show_touch_option_second">다운로드</string>
 
 </resources>
