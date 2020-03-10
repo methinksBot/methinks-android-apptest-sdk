@@ -156,13 +156,6 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
         DownloadManager downloadManager = (DownloadManager) context.getSystemService(DOWNLOAD_SERVICE);
         downloadID = downloadManager.enqueue(request);
 
-        String destination = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
-        //System.out.println("경로 " + destination);
-        String fileName = "methinks_touchsupports.apk";
-        destination += fileName;
-
-        final Uri uri = Uri.parse("file://" + destination);
-        final String finalDestination = destination;
         final BroadcastReceiver onComplete = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
