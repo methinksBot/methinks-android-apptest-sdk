@@ -159,8 +159,10 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
         final BroadcastReceiver onComplete = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
+
                 long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-                if (id == downloadID) {
+                Log.w("Installing Extension success : " + id + "/" + downloadID);
+                //if (id == downloadID) {
                     Uri contentUri = downloadManager.getUriForDownloadedFile(downloadID);
                     Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
                     openFileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -168,7 +170,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                     openFileIntent.setData(contentUri);
                     activity.startActivity(openFileIntent);
                     context.unregisterReceiver(this);
-                }
+                //}
             }
         };
 
