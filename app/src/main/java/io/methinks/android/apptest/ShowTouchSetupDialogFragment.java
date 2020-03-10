@@ -126,7 +126,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
 
         if (intent.resolveActivity(context.getPackageManager()) != null) {
             Log.w("INTENT CHECK SUCCEEDED");
-            startActivityForResult(intent, Global.REQUEST_SHOW_TOUCHES);
+            getActivity().startActivityForResult(intent, Global.REQUEST_SHOW_TOUCHES);
         }
     }
 
@@ -173,7 +173,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                 openFileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 openFileIntent.setData(contentUri);
-                startActivity(openFileIntent);
+                getActivity().startActivity(openFileIntent);
                 context.unregisterReceiver(this);
             }
         };
