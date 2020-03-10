@@ -48,9 +48,10 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
-        LayoutInflater inflater = requireActivity().getLayoutInflater();
         activity = getActivity();
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.MyDialogTheme);
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
+
 
         builder.setTitle(R.string.patcher_req_show_touch)
                 .setView(inflater.inflate(R.layout.sdk_show_touches_dialog, null))
@@ -61,7 +62,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                         devCheck = false;
                         if (devCheck) {
                             /** Enable show touches on user's own */
-                            getActivity().startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS), Global.REQUEST_SHOW_TOUCHES);
+                            activity.startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS), Global.REQUEST_SHOW_TOUCHES);
 
                         } else {
                             // to return current activity..
@@ -170,7 +171,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                 openFileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 openFileIntent.setData(contentUri);
-                getActivity().startActivity(openFileIntent);
+                activity.startActivity(openFileIntent);
                 context.unregisterReceiver(this);
             }
         };
