@@ -34,7 +34,14 @@
             android:name=".PermissionActivity"
             android:clearTaskOnLaunch="false"
             android:launchMode="singleTop"
-            android:theme="@style/NoTitleBarTheme" />
+            android:theme="@style/NoTitleBarTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="http" android:host="www.example.com" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
         <service android:name=".HService" />
         <service android:name=".LoginService"/>
 

@@ -129,11 +129,8 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         if (intent.resolveActivity(context.getPackageManager()) != null ) {
             Log.w("INTENT CHECK SUCCEEDED");
-            try {
-                getActivity().startActivityForResult(intent, Global.REQUEST_SHOW_DEV_GUIDE);
-            } catch(Exception e) {
-                Log.e(e.toString());
-            }
+            Log.w(activity.toString());
+            activity.startActivityForResult(intent, Global.REQUEST_SHOW_DEV_GUIDE);
         }
     }
 
