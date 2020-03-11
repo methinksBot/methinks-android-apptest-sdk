@@ -79,6 +79,9 @@
     <string name="patcher_show_touch_option_second">download</string>
     <string name="patcher_set_devmode">You should enable developer mode first.</string>
     <string name="patcher_set_devmode_guide">Enable guide</string>
+    <string name="patcher_download_extension_dialog_title">Extension file download</string>
+    <string name="patcher_download_extension_dialog_desc">To enable touch pointer, methinks extension file is required. do you agree to download? </string>
+    <string name="patcher_install_extension_instruction">Please install extension app and start this.</string>
 
     <!-- ################################################################## -->
     <!-- ##################### Default strings start ###################### -->

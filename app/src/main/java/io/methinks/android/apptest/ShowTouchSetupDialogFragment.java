@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
@@ -94,7 +95,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                         if (!inInstalled) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
 
-                            builder.setTitle("알림").setMessage("계속 진행하기 위해 확장 앱이 필요합니다. 설치를 허가하시겠습니까?");
+                            builder.setTitle(getString(R.string.patcher_download_extension_dialog_title)).setMessage(getString(R.string.patcher_download_extension_dialog_desc));
                             builder.setCancelable(false);
                             // positive 버튼 설정
                             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -104,11 +105,15 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                                 }
                             });
 
-                            AlertDialog alertDialog = builder.create();
+                            Dialog installdialog = builder.create();
+                            installdialog.setCanceledOnTouchOutside(false);
+                            AlertDialog alertDialog = (AlertDialog)installdialog;
                             alertDialog.show();
 
                         } else {
-
+                            Intent intent = activity.getPackageManager().getLaunchIntentForPackage("io.methinks.android.methinks_touchsupports");
+                            startActivityForResult(intent, Global.REQUEST_SHOW_TOUCHES);
+                            Toast.makeText(context, "Touch Pointer Enabled", Toast.LENGTH_LONG).show();
                         }
 
                     }
@@ -163,15 +168,15 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
 
                 long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
                 Log.w("Installing Extension success : " + id + "/" + downloadID + BuildConfig.APPLICATION_ID);
+
                 if (id == downloadID) {
                     Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", new File(activity.getExternalFilesDir(null), "methinks_touchsupports.apk"));
-                    Log.w("[URI]: "+ contentUri.toString());
 
                     Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
-                    //openFileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     openFileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    openFileIntent.setData(contentUri);//, "application/vnd.android.package-archive");
+                    openFileIntent.setData(contentUri);
+                    Toast.makeText(context, "Please install extension app and start this.", Toast.LENGTH_LONG);
                     activity.startActivityForResult(openFileIntent, Global.EXTENTION_INSTALL_DONE);
                     context.unregisterReceiver(this);
                 }
