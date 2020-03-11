@@ -11,6 +11,7 @@ import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.view.View;
 import android.view.Window;
@@ -82,9 +83,12 @@ public class PermissionActivity extends AppCompatActivity {
         }else if(requestCode == Global.EXTENTION_INSTALL_DONE) {
             checkShowTouches();
         }else if(requestCode == Global.REQUEST_EXTENSION_SHOW_TOUCHES) {
-            Intent intent = getIntent();
-            finish();
-            startActivity(intent);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    checkShowTouches();
+                }
+            }, 500);
         }else if(requestCode == Global.REQUEST_SCREEN_SHARING){
             setResult(RESULT_CANCELED);
             checkOverlayPermission();
