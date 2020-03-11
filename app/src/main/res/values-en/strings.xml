@@ -78,4 +78,6 @@
 	<string name="patcher_download_extension_dialog_title">Extension file download</string>
 	<string name="patcher_download_extension_dialog_desc">To enable touch pointer, methinks extension file is required. do you agree to download? </string>
 	<string name="patcher_install_extension_instruction">Please install extension app and start this.</string>
+	<string name="patcher_install_extension_by_user_title">install extension app</string>
+	<string name="patcher_install_extension_by_user_desc">Please install apk file(methinks_touchsupports.apk) what you downloaded and restart apptest.</string>
 </resources>

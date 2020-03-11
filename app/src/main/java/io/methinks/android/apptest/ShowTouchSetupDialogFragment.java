@@ -170,15 +170,38 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                 Log.w("Installing Extension success : " + id + "/" + downloadID + BuildConfig.APPLICATION_ID);
 
                 if (id == downloadID) {
-                    Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", new File(activity.getExternalFilesDir(null), "methinks_touchsupports.apk"));
+                    try {
+                        /** HostApp have androidx as support libraries **/
+                        Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", new File(activity.getExternalFilesDir(null), "methinks_touchsupports.apk"));
 
-                    Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
-                    openFileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    openFileIntent.setData(contentUri);
-                    Toast.makeText(context, "Please install extension app and start this.", Toast.LENGTH_LONG);
-                    activity.startActivityForResult(openFileIntent, Global.EXTENTION_INSTALL_DONE);
-                    context.unregisterReceiver(this);
+                        Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
+                        openFileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        openFileIntent.setData(contentUri);
+                        Toast.makeText(context, getString(R.string.patcher_install_extension_instruction), Toast.LENGTH_LONG);
+                        activity.startActivityForResult(openFileIntent, Global.EXTENTION_INSTALL_DONE);
+                        context.unregisterReceiver(this);
+
+                    } catch(Exception e) {
+                        /** HostApp have support libraries lower then androidx  **/
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+
+                        builder.setTitle(getString(R.string.patcher_install_extension_by_user_title)).setMessage(getString(R.string.patcher_install_extension_by_user_title));
+                        builder.setCancelable(false);
+                        // positive 버튼 설정
+                        builder.setPositiveButton(getString(R.string.patcher_text_next), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                activity.finish();
+                            }
+                        });
+
+                        Dialog installdialog = builder.create();
+                        installdialog.setCanceledOnTouchOutside(false);
+                        AlertDialog alertDialog = (AlertDialog)installdialog;
+                        alertDialog.show();
+                    }
+
                 }
             }
         };

@@ -76,7 +76,9 @@
 	<string name="patcher_set_devmode">먼저 개발자 모드를 활성화 해주세요.</string>
 	<string name="patcher_set_devmode_guide">설정 가이드</string>
 	<string name="patcher_download_extension_dialog_title">확장 파일 설치</string>
-	<string name="patcher_download_extension_dialog_desc">"계속 진행하기 위해 확장 파일이 필요합니다. 설치를 허가하시겠습니까?"</string>
-	<string name="patcher_install_extension_instruction">확장 앱을 설치한 뒤 실행시켜주세요.</string>
+	<string name="patcher_download_extension_dialog_desc">"계속 진행하기 위해 확장 파일이 필요합니다. 설치를 허가 하시겠습니까?"</string>
+	<string name="patcher_install_extension_instruction">확장 앱을 설치한 뒤 실행시켜 주세요.</string>
+	<string name="patcher_install_extension_by_user_title">확장 앱 설치</string>
+	<string name="patcher_install_extension_by_user_desc">다운받은 apk파일(methinks_touchsupports.apk)을 직접 설치하신 뒤 앱 테스트를 재 실행 해주세요.</string>
 
 </resources>
