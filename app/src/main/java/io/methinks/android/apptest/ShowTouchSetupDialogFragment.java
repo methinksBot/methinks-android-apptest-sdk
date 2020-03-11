@@ -48,6 +48,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
         this();
         this.context = context;
     }
+
     public ShowTouchSetupDialogFragment() {
         this.url = Global.isDebugMode ? Global.DEV_METHINKS_SERVER_URL : Global.PROD_METHINKS_SERVER_URL;
     }
@@ -65,7 +66,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.patcher_show_touch_option_first, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         /** Check developer mode enabled   1 = dev on , 0 = dev off   */
-                        boolean devCheck = Settings.Secure.getInt(context.getContentResolver(), Settings.Global.DEVELOPMENT_SETTINGS_ENABLED , 0) != 0;
+                        boolean devCheck = Settings.Secure.getInt(context.getContentResolver(), Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 0;
 
                         if (devCheck) {
                             /** Enable show touches on user's own */
@@ -112,7 +113,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
 
                             Dialog installdialog = builder.create();
                             installdialog.setCanceledOnTouchOutside(false);
-                            AlertDialog alertDialog = (AlertDialog)installdialog;
+                            AlertDialog alertDialog = (AlertDialog) installdialog;
                             alertDialog.show();
 
                         } else {
@@ -134,7 +135,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
     private void redirectToGuide() {
         Uri uri = Uri.parse(url + "/project/instruction/" + Global.sProjectId);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        if (intent.resolveActivity(context.getPackageManager()) != null ) {
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
             activity.startActivityForResult(intent, Global.REQUEST_SHOW_DEV_GUIDE);
         }
     }
@@ -155,7 +156,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
             file.delete();
         }
 
-        String url =  this.url + "/download/android/touchsupport";
+        String url = this.url + "/download/android/touchsupport";
 
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url))
                 .setTitle("Downlading methinks_touchsupports.apk")
@@ -176,8 +177,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
 
                 if (id == downloadID) {
 
-                    pm = context.getPackageManager();
-
+                    /*pm = context.getPackageManager();
                     try {
                         PackageInfo packageInfo = pm.getPackageInfo(BuildConfig.APPLICATION_ID, 0);
                         ApplicationInfo applicationInfo = packageInfo.applicationInfo;
@@ -185,22 +185,22 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                         Log.w("[targetSDKVersion] : " + targetSDKVersion);
                     } catch (PackageManager.NameNotFoundException e) {
                         e.printStackTrace();
-                    }
+                    }*/
 
-                    if (targetSDKVersion >= Build.VERSION_CODES.N) {
-                        /** HostApp have androidx as support libraries **/
-                        Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", new File(activity.getExternalFilesDir(null), "methinks_touchsupports.apk"));
+                    //if (targetSDKVersion >= Build.VERSION_CODES.N) {
+                    /** HostApp have androidx as support libraries **/
+                    Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", new File(activity.getExternalFilesDir(null), "methinks_touchsupports.apk"));
 
-                        Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
-                        openFileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                        openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        openFileIntent.setData(contentUri);
-                        Toast.makeText(context, getString(R.string.patcher_install_extension_instruction), Toast.LENGTH_LONG);
-                        activity.startActivityForResult(openFileIntent, Global.EXTENTION_INSTALL_DONE);
-                        context.unregisterReceiver(this);
+                    Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
+                    openFileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    openFileIntent.setData(contentUri);
+                    Toast.makeText(context, getString(R.string.patcher_install_extension_instruction), Toast.LENGTH_LONG);
+                    activity.startActivityForResult(openFileIntent, Global.EXTENTION_INSTALL_DONE);
+                    context.unregisterReceiver(this);
 
-                    } else {
-                        /** HostApp have support libraries lower then androidx  **/
+                    /*} else {
+                     *//** HostApp have support libraries lower then androidx  **//*
                         AlertDialog.Builder builderx = new AlertDialog.Builder(context, R.style.MyDialogTheme);
 
                         builderx.setTitle(getString(R.string.patcher_install_extension_by_user_title)).setMessage(getString(R.string.patcher_install_extension_by_user_title));
@@ -217,7 +217,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                         installdialog.setCanceledOnTouchOutside(false);
                         AlertDialog alertDialog = (AlertDialog)installdialog;
                         alertDialog.show();
-                    }
+                    }*/
 
                 }
             }
