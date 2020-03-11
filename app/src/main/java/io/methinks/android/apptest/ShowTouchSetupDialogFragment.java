@@ -24,9 +24,7 @@ import androidx.fragment.app.DialogFragment;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
-import java.net.URL;
 
-import static android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED;
 import static android.content.Context.DOWNLOAD_SERVICE;
 
 
@@ -164,7 +162,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
             public void onReceive(Context context, Intent intent) {
 
                 long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-                Log.w("Installing Extension success : " + id + "/" + downloadID);
+                Log.w("Installing Extension success : " + id + "/" + downloadID + BuildConfig.APPLICATION_ID);
                 if (id == downloadID) {
                     Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", new File(activity.getExternalFilesDir(null), "methinks_touchsupports.apk"));
                     Log.w("[URI]: "+ contentUri.toString());
