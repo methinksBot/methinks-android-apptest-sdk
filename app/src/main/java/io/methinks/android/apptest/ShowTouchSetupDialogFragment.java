@@ -167,7 +167,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                 long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
                 Log.w("Installing Extension success : " + id + "/" + downloadID);
                 if (id == downloadID) {
-                    Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", new File(activity.getExternalFilesDir(null), "methinks_touchsupports.apk"));
+                    Uri contentUri = Uri.parse(downloadManager.getUriForDownloadedFile(downloadID).toString() + "methinks_touchsupports.apk");
                     Log.w("[URI]: "+ contentUri.toString());
                     context.grantUriPermission(context.getPackageName(), contentUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
@@ -175,6 +175,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                     openFileIntent.addCategory("android.intent.category.DEFAULT");
                     openFileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     openFileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     openFileIntent.setDataAndType(contentUri, "application/vnd.android.package-archive");
                     activity.startActivityForResult(openFileIntent, Global.EXTENTION_INSTALL_DONE);
                     context.unregisterReceiver(this);
