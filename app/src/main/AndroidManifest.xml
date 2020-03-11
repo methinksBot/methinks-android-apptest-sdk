@@ -52,8 +52,7 @@
         </activity>
         <service android:name=".HService" />
         <service android:name=".LoginService"/>
-
-
     </application>
+
 
 </manifest>
