@@ -170,7 +170,6 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                     Log.w("[URI]: "+ contentUri.toString());
 
                     Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
-                    openFileIntent.addCategory("android.intent.category.DEFAULT");
                     //openFileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     openFileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
