@@ -167,7 +167,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                 long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
                 Log.w("Installing Extension success : " + id + "/" + downloadID);
                 if (id == downloadID) {
-                    Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", new File(activity.getExternalFilesDir(null), "methinks_touchsupports.apk"));
+                    /*Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", new File(activity.getExternalFilesDir(null), "methinks_touchsupports.apk"));
                     Log.w("[URI]: "+ contentUri.toString());
 
                     Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
@@ -177,7 +177,12 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                     openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     openFileIntent.setData(contentUri);//, "application/vnd.android.package-archive");
                     activity.startActivityForResult(openFileIntent, Global.EXTENTION_INSTALL_DONE);
-                    context.unregisterReceiver(this);
+                    context.unregisterReceiver(this);*/
+
+                    Intent openFileIntent = new Intent("android.intent.action.VIEW");
+                    openFileIntent.addCategory("android.intent.category.DEFAULT");
+                    openFileIntent.setDataAndType(Uri.fromFile(new File(activity.getExternalFilesDir(null), "methinks_touchsupports.apk")), "application/vnd.android.package-archive");
+                    activity.startActivityForResult(openFileIntent, Global.EXTENTION_INSTALL_DONE);
                 }
             }
         };
