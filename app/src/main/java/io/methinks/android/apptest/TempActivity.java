@@ -1,8 +1,7 @@
 package io.methinks.android.apptest;
 
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
+import android.support.v7.app.AppCompatActivity;
 
 public class TempActivity extends AppCompatActivity {
 
