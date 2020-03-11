@@ -112,7 +112,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
 
                         } else {
                             Intent intent = activity.getPackageManager().getLaunchIntentForPackage("io.methinks.android.methinks_touchsupports");
-                            startActivityForResult(intent, Global.REQUEST_SHOW_TOUCHES);
+                            activity.startActivityForResult(intent, Global.REQUEST_SHOW_TOUCHES);
                             Toast.makeText(context, "Touch Pointer Enabled", Toast.LENGTH_LONG).show();
                         }
 
