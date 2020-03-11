@@ -14,15 +14,14 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.Settings;
-import android.provider.SyncStateContract;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.net.URL;
@@ -167,7 +166,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                 long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
                 Log.w("Installing Extension success : " + id + "/" + downloadID);
                 if (id == downloadID) {
-                    /*Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", new File(activity.getExternalFilesDir(null), "methinks_touchsupports.apk"));
+                    Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", new File(activity.getExternalFilesDir(null), "methinks_touchsupports.apk"));
                     Log.w("[URI]: "+ contentUri.toString());
 
                     Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
@@ -177,12 +176,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                     openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     openFileIntent.setData(contentUri);//, "application/vnd.android.package-archive");
                     activity.startActivityForResult(openFileIntent, Global.EXTENTION_INSTALL_DONE);
-                    context.unregisterReceiver(this);*/
-
-                    Intent openFileIntent = new Intent("android.intent.action.VIEW");
-                    openFileIntent.addCategory("android.intent.category.DEFAULT");
-                    openFileIntent.setDataAndType(Uri.fromFile(new File(activity.getExternalFilesDir(null), "methinks_touchsupports.apk")), "application/vnd.android.package-archive");
-                    activity.startActivityForResult(openFileIntent, Global.EXTENTION_INSTALL_DONE);
+                    context.unregisterReceiver(this);
                 }
             }
         };

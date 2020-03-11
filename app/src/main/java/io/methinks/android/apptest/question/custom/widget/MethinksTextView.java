@@ -3,9 +3,11 @@ package io.methinks.android.apptest.question.custom.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import java.util.Locale;
 
@@ -16,7 +18,7 @@ import io.methinks.android.apptest.R;
  * Created by kgy 2019. 9. 24.
  */
 
-public class MethinksTextView extends android.support.v7.widget.AppCompatTextView {
+public class MethinksTextView extends AppCompatTextView {
     private static final String TAG = MethinksTextView.class.getSimpleName();
     private Context context;
     private AttributeSet attrs;

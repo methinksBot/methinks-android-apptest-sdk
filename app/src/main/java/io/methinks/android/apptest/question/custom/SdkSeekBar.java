@@ -6,12 +6,14 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 
+import androidx.appcompat.widget.AppCompatSeekBar;
+
 
 /**
  * Created by kgy 2019. 9. 24.
  */
 
-public class SdkSeekBar extends android.support.v7.widget.AppCompatSeekBar {
+public class SdkSeekBar extends AppCompatSeekBar {
     private static final String TAG = "KSeekbar";
     private Context context;
 

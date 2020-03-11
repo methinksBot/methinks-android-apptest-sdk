@@ -8,6 +8,8 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
+import androidx.appcompat.widget.AppCompatEditText;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +21,7 @@ import io.methinks.android.apptest.R;
 /**
  * Created by kgy 2019. 9. 24.
  */
-public class MethinksEditText extends android.support.v7.widget.AppCompatEditText {
+public class MethinksEditText extends AppCompatEditText {
     private static final String TAG = MethinksEditText.class.getSimpleName();
 
     private Context context;
