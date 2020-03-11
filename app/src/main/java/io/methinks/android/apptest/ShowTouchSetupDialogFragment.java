@@ -166,16 +166,17 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
 
                 long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
                 Log.w("Installing Extension success : " + id + "/" + downloadID);
-                //if (id == downloadID) {
+                if (id == downloadID) {
                     Uri contentUri = downloadManager.getUriForDownloadedFile(downloadID);
+                    Log.w(contentUri.toString());
+
                     Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
                     openFileIntent.addCategory("android.intent.category.DEFAULT");
-//                    openFileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//                    openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    openFileIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     openFileIntent.setDataAndType(contentUri, "application/vnd.android.package-archive");
                     activity.startActivityForResult(openFileIntent, Global.EXTENTION_INSTALL_DONE);
                     context.unregisterReceiver(this);
-                //}
+                }
             }
         };
 
