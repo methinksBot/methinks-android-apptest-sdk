@@ -30,7 +30,6 @@ import com.google.android.material.snackbar.Snackbar;
 import java.io.File;
 
 import static android.content.Context.DOWNLOAD_SERVICE;
-import static org.webrtc.ContextUtils.getApplicationContext;
 
 
 public class ShowTouchSetupDialogFragment extends DialogFragment {
@@ -195,7 +194,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                     openFileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     openFileIntent.setData(contentUri);
-                    Toast.makeText(context, getString(R.string.patcher_install_extension_instruction), Toast.LENGTH_LONG);
+                    //Toast.makeText(context, getString(R.string.patcher_install_extension_instruction), Toast.LENGTH_LONG);
                     activity.startActivityForResult(openFileIntent, Global.EXTENTION_INSTALL_DONE);
                     context.unregisterReceiver(this);
 
