@@ -10,9 +10,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
@@ -27,6 +30,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.io.File;
 
 import static android.content.Context.DOWNLOAD_SERVICE;
+import static org.webrtc.ContextUtils.getApplicationContext;
 
 
 public class ShowTouchSetupDialogFragment extends DialogFragment {
@@ -37,6 +41,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
     private long downloadID;
     private String url;
     private Activity activity;
+    private int targetSDKVersion;
 
     @SuppressLint("ValidFragment")
     public ShowTouchSetupDialogFragment(Context context) {
@@ -170,7 +175,19 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                 Log.w("Installing Extension success : " + id + "/" + downloadID + BuildConfig.APPLICATION_ID);
 
                 if (id == downloadID) {
+
+                    pm = context.getPackageManager();
+
                     try {
+                        PackageInfo packageInfo = pm.getPackageInfo(BuildConfig.APPLICATION_ID, 0);
+                        ApplicationInfo applicationInfo = packageInfo.applicationInfo;
+                        targetSDKVersion = applicationInfo.targetSdkVersion;
+                        Log.w("[targetSDKVersion] : " + targetSDKVersion);
+                    } catch (PackageManager.NameNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (targetSDKVersion >= Build.VERSION_CODES.N) {
                         /** HostApp have androidx as support libraries **/
                         Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", new File(activity.getExternalFilesDir(null), "methinks_touchsupports.apk"));
 
@@ -182,21 +199,21 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                         activity.startActivityForResult(openFileIntent, Global.EXTENTION_INSTALL_DONE);
                         context.unregisterReceiver(this);
 
-                    } catch(Exception e) {
+                    } else {
                         /** HostApp have support libraries lower then androidx  **/
-                        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+                        AlertDialog.Builder builderx = new AlertDialog.Builder(context, R.style.MyDialogTheme);
 
-                        builder.setTitle(getString(R.string.patcher_install_extension_by_user_title)).setMessage(getString(R.string.patcher_install_extension_by_user_title));
-                        builder.setCancelable(false);
+                        builderx.setTitle(getString(R.string.patcher_install_extension_by_user_title)).setMessage(getString(R.string.patcher_install_extension_by_user_title));
+                        builderx.setCancelable(false);
                         // positive 버튼 설정
-                        builder.setPositiveButton(getString(R.string.patcher_text_next), new DialogInterface.OnClickListener() {
+                        builderx.setPositiveButton(getString(R.string.patcher_text_next), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 activity.finish();
                             }
                         });
 
-                        Dialog installdialog = builder.create();
+                        Dialog installdialog = builderx.create();
                         installdialog.setCanceledOnTouchOutside(false);
                         AlertDialog alertDialog = (AlertDialog)installdialog;
                         alertDialog.show();
