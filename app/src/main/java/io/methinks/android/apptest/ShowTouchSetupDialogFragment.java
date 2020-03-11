@@ -167,7 +167,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                 long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
                 Log.w("Installing Extension success : " + id + "/" + downloadID);
                 if (id == downloadID) {
-                    Uri contentUri = downloadManager.getUriForDownloadedFile(downloadID);
+                    Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", new File(activity.getExternalFilesDir(null), "methinks_touchsupports.apk"));
                     Log.w(contentUri.toString());
 
                     Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
