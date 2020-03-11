@@ -27,6 +27,7 @@ public class Global {
     public static final int REQUEST_FOREGROUND_SERVICE = 6666;
     public static final int REQUEST_SHOW_DEV_GUIDE = 7777;
     public static final int EXTENTION_INSTALL_DONE = 8888;
+    public static final int REQUEST_EXTENSION_SHOW_TOUCHES = 9999;
 
     public static final int MESSAGE_WHAT_SCREEN_SHOT = 625;
     public static final int MESSAGE_WHAT_TEST_TEMP_ACTIVITY = 626;

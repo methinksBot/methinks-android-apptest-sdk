@@ -81,6 +81,10 @@ public class PermissionActivity extends AppCompatActivity {
             checkShowTouches();
         }else if(requestCode == Global.EXTENTION_INSTALL_DONE) {
             checkShowTouches();
+        }else if(requestCode == Global.REQUEST_EXTENSION_SHOW_TOUCHES) {
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
         }else if(requestCode == Global.REQUEST_SCREEN_SHARING){
             setResult(RESULT_CANCELED);
             checkOverlayPermission();

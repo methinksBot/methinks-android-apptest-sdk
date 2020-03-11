@@ -112,7 +112,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
 
                         } else {
                             Intent intent = activity.getPackageManager().getLaunchIntentForPackage("io.methinks.android.methinks_touchsupports");
-                            activity.startActivityForResult(intent, Global.REQUEST_SHOW_TOUCHES);
+                            activity.startActivityForResult(intent, Global.REQUEST_EXTENSION_SHOW_TOUCHES);
                             Toast.makeText(context, "Touch Pointer Enabled", Toast.LENGTH_LONG).show();
                         }
 
@@ -184,42 +184,5 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
         };
 
         context.registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-    }
-
-    class ProgressVisualizer extends Thread{
-        @Override
-        public void run() {
-            boolean downloading = true;
-
-            while(downloading) {
-                DownloadManager.Query q = new DownloadManager.Query();
-                q.setFilterById(downloadID);
-
-                Cursor cursor = downloadManager.query(q);
-                cursor.moveToFirst();
-                int bytes_downloaded = cursor.getInt(cursor
-                        .getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
-                int bytes_total = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
-
-                if (cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)) == DownloadManager.STATUS_SUCCESSFUL) {
-                    downloading = false;
-                }
-
-                final double dl_progress = (bytes_downloaded / bytes_total) * 100;
-
-                activity.runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-
-                        //mProgressBar.setProgress((int) dl_progress);
-
-                    }
-                });
-
-                //Log.d(SyncStateContract.Constants.MAIN_VIEW_ACTIVITY, statusMessage(cursor));
-                cursor.close();
-            }
-        }
     }
 }
