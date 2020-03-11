@@ -11,10 +11,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.provider.SyncStateContract;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.FileProvider;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.net.URL;
 
+import static android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED;
 import static android.content.Context.DOWNLOAD_SERVICE;
 
 
@@ -32,6 +35,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
 
     private Context context;
     PackageManager pm;
+    DownloadManager downloadManager;
     private long downloadID;
     private String url;
     private Activity activity;
@@ -153,7 +157,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
                 .setDestinationUri(Uri.fromFile(file));
 
-        DownloadManager downloadManager = (DownloadManager) context.getSystemService(DOWNLOAD_SERVICE);
+        downloadManager = (DownloadManager) context.getSystemService(DOWNLOAD_SERVICE);
         downloadID = downloadManager.enqueue(request);
 
         final BroadcastReceiver onComplete = new BroadcastReceiver() {
@@ -165,15 +169,53 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                 //if (id == downloadID) {
                     Uri contentUri = downloadManager.getUriForDownloadedFile(downloadID);
                     Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
-                    openFileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    openFileIntent.setData(contentUri);
-                    activity.startActivity(openFileIntent);
+                    openFileIntent.addCategory("android.intent.category.DEFAULT");
+//                    openFileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                    openFileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    openFileIntent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+                    activity.startActivityForResult(openFileIntent, Global.EXTENTION_INSTALL_DONE);
                     context.unregisterReceiver(this);
                 //}
             }
         };
 
         context.registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+    }
+
+    class ProgressVisualizer extends Thread{
+        @Override
+        public void run() {
+            boolean downloading = true;
+
+            while(downloading) {
+                DownloadManager.Query q = new DownloadManager.Query();
+                q.setFilterById(downloadID);
+
+                Cursor cursor = downloadManager.query(q);
+                cursor.moveToFirst();
+                int bytes_downloaded = cursor.getInt(cursor
+                        .getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
+                int bytes_total = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
+
+                if (cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)) == DownloadManager.STATUS_SUCCESSFUL) {
+                    downloading = false;
+                }
+
+                final double dl_progress = (bytes_downloaded / bytes_total) * 100;
+
+                activity.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        //mProgressBar.setProgress((int) dl_progress);
+
+                    }
+                });
+
+                //Log.d(SyncStateContract.Constants.MAIN_VIEW_ACTIVITY, statusMessage(cursor));
+                cursor.close();
+            }
+        }
     }
 }

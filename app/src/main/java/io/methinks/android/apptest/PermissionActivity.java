@@ -27,6 +27,8 @@ import java.util.Objects;
 
 import io.methinks.android.rtc.MTKScreenSharingPermUtil;
 
+import static io.methinks.android.apptest.Global.EXTENTION_INSTALL_DONE;
+
 
 public class PermissionActivity extends AppCompatActivity {
     private static final String TAG = PermissionActivity.class.getSimpleName();
@@ -78,6 +80,8 @@ public class PermissionActivity extends AppCompatActivity {
         }else if(requestCode == Global.REQUEST_SHOW_TOUCHES) {
             checkShowTouches();
         }else if(requestCode == Global.REQUEST_SHOW_DEV_GUIDE) {
+            checkShowTouches();
+        }else if(requestCode == Global.EXTENTION_INSTALL_DONE) {
             checkShowTouches();
         }else if(requestCode == Global.REQUEST_SCREEN_SHARING){
             setResult(RESULT_CANCELED);
