@@ -3,10 +3,9 @@ package io.methinks.android.apptest.question.custom;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.support.v7.widget.AppCompatSeekBar;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-
-import androidx.appcompat.widget.AppCompatSeekBar;
 
 
 /**

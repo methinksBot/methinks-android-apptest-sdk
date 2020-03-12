@@ -1,13 +1,11 @@
 package io.methinks.android.apptest.question;
 
 import android.content.Context;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.CoordinatorLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 
 public class CustomBottomSheetBehavior<V extends View> extends BottomSheetBehavior<V> {

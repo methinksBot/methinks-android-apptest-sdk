@@ -1,10 +1,9 @@
 package io.methinks.android.apptest.sectionedrecyclerviewadapter;
 
 
+import android.support.annotation.LayoutRes;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-import androidx.annotation.LayoutRes;
-import androidx.recyclerview.widget.RecyclerView;
 
 
 /**

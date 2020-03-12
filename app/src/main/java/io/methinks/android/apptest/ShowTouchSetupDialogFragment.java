@@ -18,14 +18,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
-
-import androidx.core.content.FileProvider;
-import androidx.fragment.app.DialogFragment;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 
@@ -175,19 +173,8 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                 Log.w("Installing Extension success : " + id + "/" + downloadID + BuildConfig.APPLICATION_ID);
 
                 if (id == downloadID) {
-
-                    /*pm = context.getPackageManager();
-                    try {
-                        PackageInfo packageInfo = pm.getPackageInfo(BuildConfig.APPLICATION_ID, 0);
-                        ApplicationInfo applicationInfo = packageInfo.applicationInfo;
-                        targetSDKVersion = applicationInfo.targetSdkVersion;
-                        Log.w("[targetSDKVersion] : " + targetSDKVersion);
-                    } catch (PackageManager.NameNotFoundException e) {
-                        e.printStackTrace();
-                    }*/
-
-                    //if (targetSDKVersion >= Build.VERSION_CODES.N) {
-                    /** HostApp have androidx as support libraries **/
+                    /*if (targetSDKVersion >= Build.VERSION_CODES.N) {
+                    *//** HostApp have androidx as support libraries **//*
                     Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", new File(activity.getExternalFilesDir(null), "methinks_touchsupports.apk"));
 
                     Intent openFileIntent = new Intent(Intent.ACTION_VIEW);
@@ -198,25 +185,25 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                     activity.startActivityForResult(openFileIntent, Global.EXTENTION_INSTALL_DONE);
                     context.unregisterReceiver(this);
 
-                    /*} else {
-                     *//** HostApp have support libraries lower then androidx  **//*
-                        AlertDialog.Builder builderx = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+                    } else {*/
+                     /** HostApp have support libraries lower then androidx  **/
+                    AlertDialog.Builder builderx = new AlertDialog.Builder(context, R.style.MyDialogTheme);
 
-                        builderx.setTitle(getString(R.string.patcher_install_extension_by_user_title)).setMessage(getString(R.string.patcher_install_extension_by_user_title));
-                        builderx.setCancelable(false);
-                        // positive 버튼 설정
-                        builderx.setPositiveButton(getString(R.string.patcher_text_next), new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                activity.finish();
-                            }
-                        });
+                    builderx.setTitle(getString(R.string.patcher_install_extension_by_user_title)).setMessage(getString(R.string.patcher_install_extension_by_user_title));
+                    builderx.setCancelable(false);
+                    // positive 버튼 설정
+                    builderx.setPositiveButton(getString(R.string.patcher_text_next), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            activity.finish();
+                        }
+                    });
 
-                        Dialog installdialog = builderx.create();
-                        installdialog.setCanceledOnTouchOutside(false);
-                        AlertDialog alertDialog = (AlertDialog)installdialog;
-                        alertDialog.show();
-                    }*/
+                    Dialog installdialog = builderx.create();
+                    installdialog.setCanceledOnTouchOutside(false);
+                    AlertDialog alertDialog = (AlertDialog) installdialog;
+                    alertDialog.show();
+                    //}
 
                 }
             }

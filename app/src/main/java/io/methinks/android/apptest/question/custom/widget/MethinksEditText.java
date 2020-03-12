@@ -3,12 +3,11 @@ package io.methinks.android.apptest.question.custom.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.support.v7.widget.AppCompatEditText;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-
-import androidx.appcompat.widget.AppCompatEditText;
 
 import java.util.ArrayList;
 import java.util.Arrays;
