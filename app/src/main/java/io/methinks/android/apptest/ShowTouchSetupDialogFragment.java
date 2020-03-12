@@ -188,7 +188,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
 
                     Log.e("ACTIVITIVITI I: " + getActivity());
 
-                    AlertDialog.Builder lastbuilder = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
+                    /*AlertDialog.Builder lastbuilder = new AlertDialog.Builder(activity, R.style.MyDialogTheme);
 
                     lastbuilder.setTitle(getString(R.string.patcher_install_extension_by_user_title))
                             .setMessage(getString(R.string.patcher_install_extension_by_user_desc))
@@ -203,8 +203,17 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                     Dialog installdialog = lastbuilder.create();
                     installdialog.setCanceledOnTouchOutside(false);
                     AlertDialog alertDialog = (AlertDialog) installdialog;
-                    alertDialog.show();
+                    alertDialog.show();*/
                     //}
+                    Snackbar.make(activity.findViewById(R.id.devModeCoordinatorLayout), R.string.patcher_install_extension_by_user_desc, Snackbar.LENGTH_INDEFINITE)
+                            .setActionTextColor(getResources().getColor(R.color.cornflower))
+                            .setAction(R.string.patcher_text_next, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    activity.finish();
+                                }
+                            })
+                            .show();
 
                 }
             }
