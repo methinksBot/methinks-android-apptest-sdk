@@ -184,20 +184,23 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                     context.unregisterReceiver(this);
 
                     } else {*/
-                     /** HostApp have support libraries lower then androidx  **/
-                    AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.MyDialogTheme);
+                    /** HostApp have support libraries lower then androidx  **/
 
-                    builder.setTitle(getString(R.string.patcher_install_extension_by_user_title)).setMessage(getString(R.string.patcher_install_extension_by_user_desc));
-                    builder.setCancelable(false);
-                    // positive 버튼 설정
-                    builder.setPositiveButton(getString(R.string.patcher_text_next), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            activity.finish();
-                        }
-                    });
+                    Log.e("ACTIVITIVITI I: " + activity);
 
-                    Dialog installdialog = builder.create();
+                    AlertDialog.Builder lastbuilder = new AlertDialog.Builder(activity, R.style.MyDialogTheme);
+
+                    lastbuilder.setTitle(getString(R.string.patcher_install_extension_by_user_title))
+                            .setMessage(getString(R.string.patcher_install_extension_by_user_desc))
+                            .setCancelable(false)
+                            .setPositiveButton(getString(R.string.patcher_text_next), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    activity.finish();
+                                }
+                            });
+
+                    Dialog installdialog = lastbuilder.create();
                     installdialog.setCanceledOnTouchOutside(false);
                     AlertDialog alertDialog = (AlertDialog) installdialog;
                     alertDialog.show();
