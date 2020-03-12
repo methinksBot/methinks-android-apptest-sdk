@@ -186,9 +186,9 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                     } else {*/
                     /** HostApp have support libraries lower then androidx  **/
 
-                    Log.e("ACTIVITIVITI I: " + activity);
+                    Log.e("ACTIVITIVITI I: " + getActivity());
 
-                    AlertDialog.Builder lastbuilder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+                    AlertDialog.Builder lastbuilder = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
 
                     lastbuilder.setTitle(getString(R.string.patcher_install_extension_by_user_title))
                             .setMessage(getString(R.string.patcher_install_extension_by_user_desc))
