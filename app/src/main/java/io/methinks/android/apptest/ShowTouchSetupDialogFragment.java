@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -38,7 +37,6 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
     private long downloadID;
     private String url;
     private Activity activity;
-    private int targetSDKVersion;
 
     @SuppressLint("ValidFragment")
     public ShowTouchSetupDialogFragment(Context context) {
@@ -55,7 +53,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         activity = getActivity();
         AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.MyDialogTheme);
-        LayoutInflater inflater = requireActivity().getLayoutInflater();
+        LayoutInflater inflater = activity.getLayoutInflater();
 
 
         builder.setTitle(R.string.patcher_req_show_touch)
@@ -96,7 +94,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                         Log.w("서포트 앱 설치여부 " + inInstalled);
 
                         if (!inInstalled) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.MyDialogTheme);
 
                             builder.setTitle(getString(R.string.patcher_download_extension_dialog_title)).setMessage(getString(R.string.patcher_download_extension_dialog_desc));
                             builder.setCancelable(false);
@@ -187,19 +185,19 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
 
                     } else {*/
                      /** HostApp have support libraries lower then androidx  **/
-                    AlertDialog.Builder builderx = new AlertDialog.Builder(context, R.style.MyDialogTheme);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.MyDialogTheme);
 
-                    builderx.setTitle(getString(R.string.patcher_install_extension_by_user_title)).setMessage(getString(R.string.patcher_install_extension_by_user_title));
-                    builderx.setCancelable(false);
+                    builder.setTitle(getString(R.string.patcher_install_extension_by_user_title)).setMessage(getString(R.string.patcher_install_extension_by_user_desc));
+                    builder.setCancelable(false);
                     // positive 버튼 설정
-                    builderx.setPositiveButton(getString(R.string.patcher_text_next), new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton(getString(R.string.patcher_text_next), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             activity.finish();
                         }
                     });
 
-                    Dialog installdialog = builderx.create();
+                    Dialog installdialog = builder.create();
                     installdialog.setCanceledOnTouchOutside(false);
                     AlertDialog alertDialog = (AlertDialog) installdialog;
                     alertDialog.show();
