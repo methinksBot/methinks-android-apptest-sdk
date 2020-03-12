@@ -210,7 +210,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                             .setAction(R.string.patcher_text_next, new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    activity.finish();
+                                    activity.recreate();
                                 }
                             })
                             .show();
