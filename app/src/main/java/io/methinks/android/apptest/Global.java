@@ -95,6 +95,7 @@ public class Global {
     protected static int sAnnouncementCount;
     protected static boolean lastReportTypeIsBug;
     protected static boolean completedPermission;
+    protected static boolean blockEmulator = false;
 
     // For hover
     protected static HService hService;

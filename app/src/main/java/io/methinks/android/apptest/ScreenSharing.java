@@ -41,6 +41,13 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                         System.out.println("getJanusRoomInfo : " + response);
                         JSONObject result = response.getJSONObject("result");
                         Log.e(result.toString());
+
+                        Global.blockEmulator = result.getBoolean("blockEmulator");
+                        /** Block emulator**/
+                        if (Global.blockEmulator && Global.isPlayedByEmulator) {
+                            finish();
+                        }
+
                         String targetServer = Global.isDebugMode ? "dev" : "prod";
                         mtkVideoChatClient = new MTKVideoChatClient.Builder()
                                 .context(app)

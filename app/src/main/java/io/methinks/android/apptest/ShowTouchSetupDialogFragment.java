@@ -206,7 +206,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                     alertDialog.show();*/
                     //}
                     Snackbar.make(activity.findViewById(R.id.devModeCoordinatorLayout), R.string.patcher_install_extension_by_user_desc, Snackbar.LENGTH_INDEFINITE)
-                            .setActionTextColor(getResources().getColor(R.color.cornflower))
+                            .setActionTextColor(activity.getResources().getColor(R.color.cornflower))
                             .setAction(R.string.patcher_text_next, new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
