@@ -200,9 +200,9 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                                 }
                             });
 
-                    Dialog installdialog = lastbuilder.create();
-                    installdialog.setCanceledOnTouchOutside(false);
-                    AlertDialog alertDialog = (AlertDialog) installdialog;
+                    /*Dialog installdialog = lastbuilder.create();
+                    installdialog.setCanceledOnTouchOutside(false);*/
+                    AlertDialog alertDialog = lastbuilder.create();
                     alertDialog.show();
                     //}
 
