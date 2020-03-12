@@ -120,6 +120,7 @@ public class HttpManager {
 //            String url = "http://10.0.1.19:3000" + "/login";
             JSONObject params = new JSONObject();
             params.put("deviceInfo", deviceInfo);
+            params.put("isPlayedByEmulator", Global.isPlayedByEmulator);
 
             if(prevSession != null)
                 params.put("prevSession", prevSession);
@@ -167,6 +168,7 @@ public class HttpManager {
             String url = serverURL + "/log";
             JSONObject params = new JSONObject();
             params.put("session", session);
+            params.put("isPlayedByEmulator", Global.isPlayedByEmulator);
             String[]strings = new String[]{url, Global.HTTP_POST, params.toString()};
 
             new HttpAsyncTask(callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, strings);
