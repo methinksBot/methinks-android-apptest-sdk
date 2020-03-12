@@ -188,7 +188,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
 
                     Log.e("ACTIVITIVITI I: " + activity);
 
-                    AlertDialog.Builder lastbuilder = new AlertDialog.Builder(activity, R.style.MyDialogTheme);
+                    AlertDialog.Builder lastbuilder = new AlertDialog.Builder(context, R.style.MyDialogTheme);
 
                     lastbuilder.setTitle(getString(R.string.patcher_install_extension_by_user_title))
                             .setMessage(getString(R.string.patcher_install_extension_by_user_desc))
@@ -200,9 +200,9 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                                 }
                             });
 
-                    /*Dialog installdialog = lastbuilder.create();
-                    installdialog.setCanceledOnTouchOutside(false);*/
-                    AlertDialog alertDialog = lastbuilder.create();
+                    Dialog installdialog = lastbuilder.create();
+                    installdialog.setCanceledOnTouchOutside(false);
+                    AlertDialog alertDialog = (AlertDialog) installdialog;
                     alertDialog.show();
                     //}
 
