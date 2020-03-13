@@ -37,6 +37,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
     private long downloadID;
     private String url;
     private Activity activity;
+    private boolean inInstalled;
 
     @SuppressLint("ValidFragment")
     public ShowTouchSetupDialogFragment(Context context) {
@@ -90,7 +91,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
 
                         /** check methinks_touch_support is existing on user's device */
                         pm = context.getPackageManager();
-                        boolean inInstalled = isPackageInstalled("io.methinks.android.methinks_touchsupports", pm);
+                        inInstalled = isPackageInstalled(Global.LOCAL_STORE_EXTENSION_NAME, pm);
                         Log.w("서포트 앱 설치여부 " + inInstalled);
 
                         if (!inInstalled) {
@@ -112,7 +113,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                             alertDialog.show();
 
                         } else {
-                            Intent intent = activity.getPackageManager().getLaunchIntentForPackage("io.methinks.android.methinks_touchsupports");
+                            Intent intent = activity.getPackageManager().getLaunchIntentForPackage(Global.LOCAL_STORE_EXTENSION_NAME);
                             activity.startActivityForResult(intent, Global.REQUEST_EXTENSION_SHOW_TOUCHES);
                             Toast.makeText(context, "Touch Pointer Enabled", Toast.LENGTH_LONG).show();
                         }
@@ -210,7 +211,12 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                             .setAction(R.string.patcher_text_next, new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    activity.recreate();
+                                    if (!inInstalled) {
+                                        this.show();
+                                    } else {
+                                        activity.recreate();
+                                    }
+
                                 }
                             })
                             .show();
@@ -220,5 +226,12 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
         };
 
         context.registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+    }
+
+    class showTouchAutoDetect implements Runnable {
+        @Override
+        public void run() {
+            if
+        }
     }
 }

@@ -43,6 +43,7 @@ public class Global {
     protected static final String LOCAL_STORE_TEST_USER_CODE_KEY = "test_user_code";
     protected static final String LOCAL_STORE_SESSION_LOG_KEY = "session_log";
     protected static final String LOCAL_STORE_ANSWER_KEY = "answer";
+    protected static final String LOCAL_STORE_EXTENSION_NAME = "io.methinks.android.methinks_touchsupports";
 
     protected static final String JIN_PATCHER_SERVER_URL = "http://10.0.1.19:3000";
     protected static final String DEV_PATCHER_SERVER_URL = "https://apptest-dev.methinks.io";
