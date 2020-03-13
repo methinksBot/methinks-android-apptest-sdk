@@ -206,19 +206,26 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
                     AlertDialog alertDialog = (AlertDialog) installdialog;
                     alertDialog.show();*/
                     //}
+
+                    View.OnClickListener snackbarOnClickListener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (!inInstalled) {
+                                //this.show();
+                                Snackbar.make(activity.findViewById(R.id.devModeCoordinatorLayout), R.string.patcher_install_extension_by_user_desc, Snackbar.LENGTH_INDEFINITE)
+                                        .setActionTextColor(activity.getResources().getColor(R.color.cornflower))
+                                        .setAction(R.string.patcher_text_next, this::onClick)
+                                        .show();
+                            } else {
+                                activity.recreate();
+                            }
+
+                        }
+                    };
+
                     Snackbar.make(activity.findViewById(R.id.devModeCoordinatorLayout), R.string.patcher_install_extension_by_user_desc, Snackbar.LENGTH_INDEFINITE)
                             .setActionTextColor(activity.getResources().getColor(R.color.cornflower))
-                            .setAction(R.string.patcher_text_next, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    if (!inInstalled) {
-                                        this.show();
-                                    } else {
-                                        activity.recreate();
-                                    }
-
-                                }
-                            })
+                            .setAction(R.string.patcher_text_next, snackbarOnClickListener)
                             .show();
 
                 }
@@ -228,10 +235,10 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
         context.registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
     }
 
-    class showTouchAutoDetect implements Runnable {
+    /*class showTouchAutoDetect implements Runnable {
         @Override
         public void run() {
             if
         }
-    }
+    }*/
 }
