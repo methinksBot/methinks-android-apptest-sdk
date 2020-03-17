@@ -32,9 +32,8 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
     private MTKPublisher mainPublisher;
     private Activity activity;
 
-    public ScreenSharing(Application app, Activity activity) {
+    public ScreenSharing(Application app) {
         this.app = app;
-        this.activity = activity;
         this.eglBase = EglBase.create();
     }
 
@@ -55,7 +54,7 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                         if (Global.blockEmulator && Global.isPlayedByEmulator) {
                             Log.e("[EMULATOR BLOCKING TEST2] :" + Global.isPlayedByEmulator + " / " + Global.blockEmulator);
 
-                            AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.MyDialogTheme);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(Global.applicationTracker.getTopActivity(), R.style.MyDialogTheme);
 
                             builder.setTitle(R.string.patcher_block_emulator_title).setMessage(R.string.patcher_block_emulator_desc);
                             builder.setCancelable(false);
