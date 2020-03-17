@@ -61,8 +61,9 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                             builder.setPositiveButton(R.string.patcher_next, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
+                                    Global.applicationTracker.getTopActivity().stopService(Global.hoverIntent);
                                     Global.applicationTracker.getTopActivity().finishAffinity();
-                                    System.exit(0);
+                                    //System.exit(0);
                                 }
                             });
 
