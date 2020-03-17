@@ -46,7 +46,7 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                         Log.e(result.toString());
 
                         Global.blockEmulator = result.getBoolean("blockEmulator");
-                        
+
                         /** Block emulator**/
                         Log.e("[EMULATOR BLOCKING] :" + Global.isPlayedByEmulator + " / " + Global.blockEmulator);
                         if (Global.blockEmulator && Global.isPlayedByEmulator) {
