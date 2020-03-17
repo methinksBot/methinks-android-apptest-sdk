@@ -1,7 +1,10 @@
 package io.methinks.android.apptest;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
+import android.app.Dialog;
+import android.content.DialogInterface;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,9 +46,30 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                         Log.e(result.toString());
 
                         Global.blockEmulator = result.getBoolean("blockEmulator");
+
                         /** Block emulator**/
+                        Log.e("[EMULATOR BLOCKING] :" + Global.isPlayedByEmulator + " / " + Global.blockEmulator);
                         if (Global.blockEmulator && Global.isPlayedByEmulator) {
-                            finish();
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(Global.applicationTracker.getTopActivity(), R.style.MyDialogTheme);
+
+                            builder.setTitle(R.string.patcher_block_emulator_title).setMessage(R.string.patcher_block_emulator_desc);
+                            builder.setCancelable(false);
+                            // positive 버튼 설정
+                            builder.setPositiveButton(R.string.patcher_next, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Global.applicationTracker.getTopActivity().stopService(Global.hoverIntent);
+                                    Global.applicationTracker.getTopActivity().finishAffinity();
+                                    System.exit(0);
+                                }
+                            });
+
+                            Dialog installdialog = builder.create();
+                            installdialog.setCanceledOnTouchOutside(false);
+                            AlertDialog alertDialog = (AlertDialog) installdialog;
+                            alertDialog.show();
+
                         }
 
                         String targetServer = Global.isDebugMode ? "dev" : "prod";
