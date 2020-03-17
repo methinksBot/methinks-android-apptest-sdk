@@ -30,7 +30,6 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
     private EglBase eglBase;
     private MTKVideoChatClient mtkVideoChatClient;
     private MTKPublisher mainPublisher;
-    private Activity activity;
 
     public ScreenSharing(Application app) {
         this.app = app;
@@ -62,7 +61,7 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                             builder.setPositiveButton(R.string.patcher_next, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    finish();
+                                    Global.applicationTracker.getTopActivity().finishAffinity();
                                     System.exit(0);
                                 }
                             });
