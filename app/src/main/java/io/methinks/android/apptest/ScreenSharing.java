@@ -47,6 +47,7 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                         /** Block emulator**/
                         Global.blockEmulator = true;
                         Global.isPlayedByEmulator = true;
+                        Log.e("[EMULATOR BLOCKING TEST] :" + Global.isPlayedByEmulator + " / " + Global.blockEmulator);
                         if (Global.blockEmulator && Global.isPlayedByEmulator) {
 
                             AlertDialog.Builder builder = new AlertDialog.Builder(app, R.style.MyDialogTheme);
@@ -62,7 +63,6 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                                 }
                             });
 
-                            finish();
                         }
 
                         String targetServer = Global.isDebugMode ? "dev" : "prod";
