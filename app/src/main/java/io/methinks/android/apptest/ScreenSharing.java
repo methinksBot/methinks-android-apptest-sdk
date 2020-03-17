@@ -2,6 +2,7 @@ package io.methinks.android.apptest;
 
 import android.app.AlertDialog;
 import android.app.Application;
+import android.content.DialogInterface;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,7 +45,23 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
 
                         Global.blockEmulator = result.getBoolean("blockEmulator");
                         /** Block emulator**/
+                        Global.blockEmulator = true;
+                        Global.isPlayedByEmulator = true;
                         if (Global.blockEmulator && Global.isPlayedByEmulator) {
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(app, R.style.MyDialogTheme);
+
+                            builder.setTitle(R.string.patcher_block_emulator_title).setMessage(R.string.patcher_block_emulator_desc);
+                            builder.setCancelable(false);
+                            // positive 버튼 설정
+                            builder.setPositiveButton(R.string.patcher_next, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    finish();
+                                    System.exit(0);
+                                }
+                            });
+
                             finish();
                         }
 

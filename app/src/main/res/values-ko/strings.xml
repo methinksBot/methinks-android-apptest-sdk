@@ -80,5 +80,7 @@
 	<string name="patcher_install_extension_instruction">확장 앱을 설치한 뒤 실행시켜 주세요.</string>
 	<string name="patcher_install_extension_by_user_title">확장 앱 설치</string>
 	<string name="patcher_install_extension_by_user_desc">다운받은 methinks_touchsupports.apk를 직접 설치하신 뒤 앱 테스트를 재 실행 해주세요.</string>
+	<string name="patcher_block_emulator_title">에뮬레이터 사용 불가</string>
+	<string name="patcher_block_emulator_desc">호스트가 해당 앱의 에뮬레이터 구동을 금지 하였습니다.</string>
 
 </resources>

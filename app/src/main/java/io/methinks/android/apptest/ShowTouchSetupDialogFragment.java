@@ -156,6 +156,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
 
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url))
                 .setTitle("Downlading methinks_touchsupports.apk")
+                .setDescription("Downloading...")
                 .addRequestHeader("Authorization", "m3ThiNqs!")
                 .setMimeType("application/vnd.android.package-archive")
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)

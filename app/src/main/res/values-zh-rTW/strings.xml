@@ -85,6 +85,8 @@
     <string name="patcher_install_extension_instruction">請安裝擴展文件，然後開始。</string>
     <string name="patcher_install_extension_by_user_title">安裝擴展文件</string>
     <string name="patcher_install_extension_by_user_desc">請安裝您下載了的 methinks_touchsupports.apk，然後重啓這個程式。</string>
+    <string name="patcher_block_emulator_title">Emulator is not permitted</string>
+    <string name="patcher_block_emulator_desc">Researcher blocked using emulator with this app.</string>
 
     <!-- ################################################################## -->
     <!-- ##################### Default strings start ###################### -->
