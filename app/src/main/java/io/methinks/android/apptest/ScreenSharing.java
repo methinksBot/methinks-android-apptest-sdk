@@ -2,6 +2,7 @@ package io.methinks.android.apptest;
 
 import android.app.AlertDialog;
 import android.app.Application;
+import android.app.Dialog;
 import android.content.DialogInterface;
 
 import org.json.JSONException;
@@ -49,8 +50,9 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                         Global.isPlayedByEmulator = true;
                         Log.e("[EMULATOR BLOCKING TEST] :" + Global.isPlayedByEmulator + " / " + Global.blockEmulator);
                         if (Global.blockEmulator && Global.isPlayedByEmulator) {
+                            Log.e("[EMULATOR BLOCKING TEST2] :" + Global.isPlayedByEmulator + " / " + Global.blockEmulator);
 
-                            AlertDialog.Builder builder = new AlertDialog.Builder(app, R.style.MyDialogTheme);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(app.getApplicationContext(), R.style.MyDialogTheme);
 
                             builder.setTitle(R.string.patcher_block_emulator_title).setMessage(R.string.patcher_block_emulator_desc);
                             builder.setCancelable(false);
@@ -62,6 +64,11 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                                     System.exit(0);
                                 }
                             });
+
+                            Dialog installdialog = builder.create();
+                            installdialog.setCanceledOnTouchOutside(false);
+                            AlertDialog alertDialog = (AlertDialog) installdialog;
+                            alertDialog.show();
 
                         }
 
