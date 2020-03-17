@@ -1,5 +1,6 @@
 package io.methinks.android.apptest;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
 import android.app.Dialog;
@@ -29,9 +30,11 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
     private EglBase eglBase;
     private MTKVideoChatClient mtkVideoChatClient;
     private MTKPublisher mainPublisher;
+    private Activity activity;
 
-    public ScreenSharing(Application app) {
+    public ScreenSharing(Application app, Activity activity) {
         this.app = app;
+        this.activity = activity;
         this.eglBase = EglBase.create();
     }
 
@@ -52,7 +55,7 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                         if (Global.blockEmulator && Global.isPlayedByEmulator) {
                             Log.e("[EMULATOR BLOCKING TEST2] :" + Global.isPlayedByEmulator + " / " + Global.blockEmulator);
 
-                            AlertDialog.Builder builder = new AlertDialog.Builder(app.getApplicationContext(), R.style.MyDialogTheme);
+                            AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.MyDialogTheme);
 
                             builder.setTitle(R.string.patcher_block_emulator_title).setMessage(R.string.patcher_block_emulator_desc);
                             builder.setCancelable(false);
