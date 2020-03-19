@@ -88,7 +88,7 @@ public class Global {
     protected static String sTestUserCode;
     protected static String sLogoURL;
     protected static boolean isDebugModeFromInspector = false;
-    protected static boolean isDebugMode;
+    protected static boolean isDebugMode = false;
     protected static String sCampaignParticipantId;
     protected static String sUserId;
     protected static String sScreenName;
