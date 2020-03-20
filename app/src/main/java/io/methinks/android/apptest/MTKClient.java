@@ -29,6 +29,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -120,6 +121,8 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
         Global.isPlayedByEmulator = Build.getRadioVersion().equals("") ? true : false;
 
         LocalBroadcastManager.getInstance(app).registerReceiver(broadcastReceiver, new IntentFilter(Global.LOCAL_BROADCAST_RECEIVE_INTENT_FILTER_ACTION));
+
+        Global.applicationTracker.getTopActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
 
         Log.d("Completed creating MTKClient instance.");
     }
