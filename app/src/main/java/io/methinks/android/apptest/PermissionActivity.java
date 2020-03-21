@@ -53,6 +53,7 @@ public class PermissionActivity extends AppCompatActivity {
             Global.mediaProjectionManager = mediaProjectionManager;
         }
 
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         checkOverlayPermission();
     }
 

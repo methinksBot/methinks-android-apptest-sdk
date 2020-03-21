@@ -29,6 +29,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -96,6 +97,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             if(context instanceof MTKRTCMainActivity){
                 Global.isUnity = true;
                 unityActivity = (MTKRTCMainActivity)context;
+                unityActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
             }
         }
         Global.app = app;
