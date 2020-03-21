@@ -97,7 +97,6 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             if(context instanceof MTKRTCMainActivity){
                 Global.isUnity = true;
                 unityActivity = (MTKRTCMainActivity)context;
-                unityActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
             }
         }
         Global.app = app;

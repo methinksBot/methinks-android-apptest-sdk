@@ -44,7 +44,6 @@ public class ApplicationTracker {
 
     public void addManually(Activity activity, final ActivityReadyCallback callback){
         Log.d("Adding activity to Activity State Tracker manually because Activity is passed onResume() already. ");
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
 
         activityStack.add(activity);
         activityLifes.put(activity.getClass().getSimpleName(), "resume");
@@ -59,6 +58,8 @@ public class ApplicationTracker {
             Global.hoverIntent = new Intent(activity, HService.class);
             Log.e("hoverintent created!");
         }
+
+        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
     }
 
 
@@ -82,12 +83,15 @@ public class ApplicationTracker {
             @Override
             public void onActivityStarted(@NonNull Activity activity) {
                 Log.d("onActivityStarted() : " + activity.getClass().getSimpleName());
+                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+
                 activityLifes.put(activity.getClass().getSimpleName(), "start");
             }
 
             @Override
             public void onActivityResumed(@NonNull Activity activity) {
                 Log.d("onActivityResumed() : " + activity.getClass().getSimpleName());
+                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
                 if(isBackground){
                     long diff = (new Date().getTime() / 1000) - Global.sForegroundTime;
                     if(diff > 10 * 60)
