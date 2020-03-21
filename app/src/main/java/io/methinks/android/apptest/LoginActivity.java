@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
             logoImageView.setImageResource(R.drawable.img_logo_methinks);
         }
 
-        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
 
         EditText testUserCodeEditText = (EditText)findViewById(R.id.testUserCode);
         testUserCodeEditText.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#4D77DD")));
