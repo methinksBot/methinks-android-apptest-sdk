@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +29,6 @@ public class AnnouncementActivity extends AppCompatActivity {
             finish();
             return;
         }
-
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
 
         JSONObject statusResult = Global.loginResult.optJSONObject("statusResult");
 
