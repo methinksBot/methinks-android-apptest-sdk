@@ -69,7 +69,7 @@ public class PermissionActivity extends AppCompatActivity {
             Global.screenCaptureResultCode = resultCode;
             ScreenSharing screenSharing = new ScreenSharing(PermissionActivity.this.getApplication());
 
-            //screenSharing.start();
+            screenSharing.start();
 
             Global.screenSharing = screenSharing;
             checkExternalStoragePermission();

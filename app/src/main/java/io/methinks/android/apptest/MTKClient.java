@@ -3,7 +3,6 @@ package io.methinks.android.apptest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
-import android.app.Dialog;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -488,38 +487,6 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                     if(response.has("result") && response.getString("status").equals(Global.RESPONSE_OK)){
                         String savedLogoURL = LocalStore.getInstance().getLogoURL();
                         String logoURL = response.getJSONObject("result").getString("url");
-
-                        /** ####### Block emulator #######**/
-                        JSONObject result = response.getJSONObject("result");
-                        try {
-                            Global.blockEmulator = result.getBoolean("blockEmulator");
-                        } catch (Exception e) {
-                            Log.e("No blockEmulator fom Patcher Server.\n" + e.toString());
-                        }
-                        Log.e("[EMULATOR BLOCKING] :" + Global.isPlayedByEmulator + " / " + Global.blockEmulator);
-                        if (Global.blockEmulator && Global.isPlayedByEmulator) {
-
-                            AlertDialog.Builder builder = new AlertDialog.Builder(Global.applicationTracker.getTopActivity(), R.style.MyDialogTheme);
-
-                            builder.setTitle(R.string.patcher_block_emulator_title).setMessage(R.string.patcher_block_emulator_desc);
-                            builder.setCancelable(false);
-                            // positive 버튼 설정
-                            builder.setPositiveButton(R.string.patcher_next, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    Global.applicationTracker.getTopActivity().stopService(Global.hoverIntent);
-                                    Global.applicationTracker.getTopActivity().finishAffinity();
-                                    System.exit(0);
-                                }
-                            });
-
-                            Dialog installdialog = builder.create();
-                            installdialog.setCanceledOnTouchOutside(false);
-                            AlertDialog alertDialog = (AlertDialog) installdialog;
-                            alertDialog.show();
-                        }
-
-
                         if(savedLogoURL != null && savedLogoURL.equals(logoURL)){ // 이전에 캐싱한 로고 이미지와 같을 때
                             String encodedImage = LocalStore.getInstance().getLogoImage();
                             if(TextUtils.isEmpty(encodedImage)){
