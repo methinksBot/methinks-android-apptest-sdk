@@ -179,7 +179,7 @@ public class HttpManager {
 
     public void getEventTrigger(Callback callback) {
         try{
-            String url = serverURL + "/getEventTrigger";
+            String url = serverURL + "/getEventTriggers";
             JSONObject params = new JSONObject();
             params.put("project-name", Global.sProjectId);
             String[] strings = new String[]{url, Global.HTTP_POST, params.toString()};
