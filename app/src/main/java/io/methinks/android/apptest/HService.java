@@ -23,19 +23,26 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import io.methinks.android.apptest.question.QuestionPack;
 import io.methinks.android.apptest.question.SurveyAlertManager;
@@ -48,6 +55,7 @@ public class HService extends Service {
     private final IBinder binder = new LocalBinder();
 
     private TransparentView bgrnd;
+    public Context context;
 
     @Nullable
     @Override
@@ -96,6 +104,7 @@ public class HService extends Service {
 
         startForeground(1, builder.build());
         prepareDraw();
+        context = Global.applicationTracker.getTopActivity().getApplicationContext();
     }
 
     private void initTouchPointer(){
@@ -268,7 +277,7 @@ public class HService extends Service {
             Global.hoverPopup.isOpened = false;
         });
 
-        Global.hoverPopup.shootevent.setOnClickListener(view -> {
+        Global.hoverPopup.eventRecyclerView.setOnClickListener(view -> {
 
         });
 
@@ -282,13 +291,15 @@ public class HService extends Service {
                         if(response != null && error == null){
                             if(response.has("result") && response.getString("status").equals(Global.RESPONSE_OK)){
                                 JSONArray result = response.getJSONArray("result");
-                                String[] eventArray = new String[result.length()];
+                                Global.eventArray = new String[result.length()];
                                 for (int i=0; i<result.length(); i++) {
                                     String object = result.getJSONObject(i).getString("eventName");
-                                    eventArray[i] = object;
+                                    Global.eventArray[i] = object;
                                 }
 
-                                Log.e("현재 이벤트 리스트 :" + eventArray);
+                                Global.hoverPopup.mAdapter = new EventAdapter(Global.eventArray);
+                                Global.hoverPopup.eventRecyclerView.setAdapter(Global.hoverPopup.mAdapter);
+                                Log.e("현재 이벤트 리스트 :" + Global.eventArray.toString());
                             }
                         }else{
                             Log.e(error);
@@ -383,5 +394,47 @@ public class HService extends Service {
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
         return (float) dp * (metrics.densityDpi / 160f);
+    }
+
+    public static class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
+        private String[] mDataset;
+
+        public static class EventViewHolder extends RecyclerView.ViewHolder {
+            // each data item is just a string in this case
+            public TextView textView;
+            public EventViewHolder(TextView v) {
+                super(v);
+                textView = v;
+            }
+        }
+
+        public EventAdapter(String[] myDataset) {
+            mDataset = myDataset;
+        }
+
+        @Override
+        public EventAdapter.EventViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            // create a new view
+            TextView v = (TextView) LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.event_item, parent, false);
+
+            EventViewHolder vh = new EventViewHolder(v);
+            return vh;
+        }
+
+        // Replace the contents of a view (invoked by the layout manager)
+        @Override
+        public void onBindViewHolder(EventViewHolder holder, int position) {
+            // - get element from your dataset at this position
+            // - replace the contents of the view with that element
+            holder.textView.setText(mDataset[position]);
+
+        }
+
+        // Return the size of your dataset (invoked by the layout manager)
+        @Override
+        public int getItemCount() {
+            return mDataset.length;
+        }
     }
 }
