@@ -428,7 +428,12 @@ public class HService extends Service {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
             holder.textView.setText(mDataset[position]);
-
+            holder.textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    MTKClient.getInstance(Global.applicationTracker.getTopActivity()).sendMessage("event", holder.textView.getText().toString());
+                }
+            });
         }
 
         // Return the size of your dataset (invoked by the layout manager)
