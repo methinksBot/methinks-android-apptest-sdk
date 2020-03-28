@@ -59,7 +59,12 @@ public class ApplicationTracker {
             Log.e("hoverintent created!");
         }
 
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+            }
+        });
     }
 
 
@@ -70,8 +75,13 @@ public class ApplicationTracker {
             @Override
             public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle bundle) {
                 Log.d("onActivityCreated() : " + activity.getClass().getSimpleName());
-                
-                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+                    }
+                });
 
                 activityLifes.put(activity.getClass().getSimpleName(), "create");
                 if(Global.hoverIntent == null){
@@ -83,7 +93,12 @@ public class ApplicationTracker {
             @Override
             public void onActivityStarted(@NonNull Activity activity) {
                 Log.d("onActivityStarted() : " + activity.getClass().getSimpleName());
-                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+                    }
+                });
 
                 activityLifes.put(activity.getClass().getSimpleName(), "start");
             }
@@ -91,7 +106,12 @@ public class ApplicationTracker {
             @Override
             public void onActivityResumed(@NonNull Activity activity) {
                 Log.d("onActivityResumed() : " + activity.getClass().getSimpleName());
-                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+                    }
+                });
                 if(isBackground){
                     long diff = (new Date().getTime() / 1000) - Global.sForegroundTime;
                     if(diff > 10 * 60)

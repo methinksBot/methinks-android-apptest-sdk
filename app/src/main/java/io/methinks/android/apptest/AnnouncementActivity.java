@@ -31,7 +31,12 @@ public class AnnouncementActivity extends AppCompatActivity {
             return;
         }
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+            }
+        });
 
         JSONObject statusResult = Global.loginResult.optJSONObject("statusResult");
 
