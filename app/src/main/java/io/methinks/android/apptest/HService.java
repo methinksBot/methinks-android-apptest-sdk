@@ -282,8 +282,13 @@ public class HService extends Service {
                         if(response != null && error == null){
                             if(response.has("result") && response.getString("status").equals(Global.RESPONSE_OK)){
                                 JSONArray result = response.getJSONArray("result");
-                                String object = result.getJSONObject(0).getString("eventName");
-                                Log.e("현재 이벤트 리스트 :" + object);
+                                String[] eventArray = new String[result.length()];
+                                for (int i=0; i<result.length(); i++) {
+                                    String object = result.getJSONObject(i).getString("eventName");
+                                    eventArray[i] = object;
+                                }
+
+                                Log.e("현재 이벤트 리스트 :" + eventArray);
                             }
                         }else{
                             Log.e(error);
