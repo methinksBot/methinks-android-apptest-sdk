@@ -31,6 +31,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -280,8 +281,9 @@ public class HService extends Service {
                     try{
                         if(response != null && error == null){
                             if(response.has("result") && response.getString("status").equals(Global.RESPONSE_OK)){
-                                JSONObject result = response.getJSONObject("result");
-                                Log.e("현재 이벤트 리스트 :" + result.toString());
+                                JSONArray result = response.getJSONArray("result");
+                                String object = result.getJSONObject(0).getString("eventName");
+                                Log.e("현재 이벤트 리스트 :" + object);
                             }
                         }else{
                             Log.e(error);
