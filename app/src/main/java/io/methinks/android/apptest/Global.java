@@ -12,6 +12,7 @@ import android.os.Build;
 
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.Queue;
 
 import io.methinks.android.apptest.question.QuestionPack;
@@ -104,6 +105,7 @@ public class Global {
     public static Hover hover;
     public static HoverPopup hoverPopup;
     public static HoverLogin hoverLogin;
+    public static String[] eventArray;
 
     protected static ScreenSharing screenSharing;
     protected static MediaProjectionManager mediaProjectionManager;
