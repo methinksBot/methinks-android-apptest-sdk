@@ -13,7 +13,7 @@ public class HoverPopup {
 
     private Context context;
     protected LinearLayout hoverPopup;
-    protected TextView bugReport, suggestion, cancel;
+    protected TextView bugReport, suggestion, cancel, shootevent;
     public boolean isOpened;
 
     public HoverPopup(Context context) {
@@ -29,12 +29,17 @@ public class HoverPopup {
         bugReport = hoverPopup.findViewById(R.id.popup_hover_bug_report);
         suggestion = hoverPopup.findViewById(R.id.popup_hover_suggestion);
         cancel = hoverPopup.findViewById(R.id.popup_hover_cancel);
+        shootevent = hoverPopup.findViewById(R.id.popup_hover_shootevent);
 
     }
 
     public void setVisible(){
         isOpened = true;
         hoverPopup.setVisibility(View.VISIBLE);
+    }
+
+    public void setVisibleEvent() {
+        shootevent.setVisibility(View.VISIBLE);
     }
 
     public void setInvisible(){

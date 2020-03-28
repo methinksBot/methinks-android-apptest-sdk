@@ -17,7 +17,9 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Binder;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
@@ -29,7 +31,14 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
+
+import io.methinks.android.apptest.question.QuestionPack;
+import io.methinks.android.apptest.question.SurveyAlertManager;
+import io.methinks.android.apptest.question.ViewConstant;
 
 public class HService extends Service {
     private static final String TAG = HService.class.getSimpleName();
@@ -262,6 +271,33 @@ public class HService extends Service {
             Global.hover.setInvisible();
             Global.hoverPopup.setInvisible();
             Global.hoverPopup.isOpened = false;
+        });
+
+        Global.hoverPopup.shootevent.setOnClickListener(view -> {
+
+        });
+
+        Global.hoverPopup.bugReport.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Global.hoverPopup.setVisibleEvent();
+                // Get Event list from server for debug
+                new HttpManager().getEventTrigger((response, error) -> {
+                    try{
+                        if(response != null && error == null){
+                            if(response.has("result") && response.getString("status").equals(Global.RESPONSE_OK)){
+                                JSONObject result = response.getJSONObject("result");
+                                Log.e("현재 이벤트 리스트 :" + result.toString());
+                            }
+                        }else{
+                            Log.e(error);
+                        }
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                });
+                return false;
+            }
         });
 
         Global.hoverPopup.suggestion.setOnClickListener(view -> {
