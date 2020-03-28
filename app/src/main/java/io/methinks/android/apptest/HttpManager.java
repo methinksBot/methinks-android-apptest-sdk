@@ -177,6 +177,19 @@ public class HttpManager {
         }
     }
 
+    public void getEventTrigger(Callback callback) {
+        try{
+            String url = serverURL + "/getEventTrigger";
+            JSONObject params = new JSONObject();
+            params.put("project-name", Global.sProjectId);
+            String[] strings = new String[]{url, Global.HTTP_POST, params.toString()};
+
+            new HttpAsyncTask(callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, strings);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void event(String eventName, Callback callback){
         if(eventName == null)
             throw new NullPointerException("eventName is required.");
