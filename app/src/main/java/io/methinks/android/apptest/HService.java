@@ -287,36 +287,38 @@ public class HService extends Service {
 
         });
 
-        Global.hoverPopup.bugReport.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                Global.hoverPopup.setVisibleEvent();
-                // Get Event list from server for debug
-                new HttpManager().getEventTrigger((response, error) -> {
-                    try{
-                        if(response != null && error == null){
-                            if(response.has("result") && response.getString("status").equals(Global.RESPONSE_OK)){
-                                JSONArray result = response.getJSONArray("result");
-                                Global.eventArray = new String[result.length()];
-                                for (int i=0; i<result.length(); i++) {
-                                    String object = result.getJSONObject(i).getString("eventName");
-                                    Global.eventArray[i] = object;
-                                }
+        if (Global.isInternalTester) {
+            Global.hoverPopup.bugReport.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    Global.hoverPopup.setVisibleEvent();
+                    // Get Event list from server for debug
+                    new HttpManager().getEventTrigger((response, error) -> {
+                        try{
+                            if(response != null && error == null){
+                                if(response.has("result") && response.getString("status").equals(Global.RESPONSE_OK)){
+                                    JSONArray result = response.getJSONArray("result");
+                                    Global.eventArray = new String[result.length()];
+                                    for (int i=0; i<result.length(); i++) {
+                                        String object = result.getJSONObject(i).getString("eventName");
+                                        Global.eventArray[i] = object;
+                                    }
 
-                                Global.hoverPopup.mAdapter = new EventAdapter(Global.eventArray);
-                                Global.hoverPopup.eventRecyclerView.setAdapter(Global.hoverPopup.mAdapter);
-                                Log.e("현재 이벤트 리스트 :" + Global.eventArray.toString());
+                                    Global.hoverPopup.mAdapter = new EventAdapter(Global.eventArray);
+                                    Global.hoverPopup.eventRecyclerView.setAdapter(Global.hoverPopup.mAdapter);
+                                    Log.e("현재 이벤트 리스트 :" + Global.eventArray.toString());
+                                }
+                            }else{
+                                Log.e(error);
                             }
-                        }else{
-                            Log.e(error);
+                        }catch (JSONException e){
+                            e.printStackTrace();
                         }
-                    }catch (JSONException e){
-                        e.printStackTrace();
-                    }
-                });
-                return false;
-            }
-        });
+                    });
+                    return false;
+                }
+            });
+        }
 
         Global.hoverPopup.suggestion.setOnClickListener(view -> {
             Global.isShowingReport = true;
