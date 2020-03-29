@@ -71,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                             Global.sId = Global.generateRandomString();
                             Global.isLogined = true;
                             Global.isNew = true;
+                            Global.isInternalTester = result.getBoolean("isInternalTester");
 
 
                             Intent announcementIntent = new Intent(LoginActivity.this, AnnouncementActivity.class);

@@ -12,6 +12,7 @@ import android.os.Build;
 
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.Queue;
 
 import io.methinks.android.apptest.question.QuestionPack;
@@ -79,6 +80,7 @@ public class Global {
     protected static boolean isScreenStreamAllowed;
     protected static boolean isShowingAnnouncement;
     protected static boolean isPlayedByEmulator;
+    protected static boolean isInternalTester;
     public static boolean isShowingQuestion;
     public static boolean isShowingReport;
     protected static long sLoginTime;
@@ -104,6 +106,7 @@ public class Global {
     public static Hover hover;
     public static HoverPopup hoverPopup;
     public static HoverLogin hoverLogin;
+    public static String[] eventArray;
 
     protected static ScreenSharing screenSharing;
     protected static MediaProjectionManager mediaProjectionManager;

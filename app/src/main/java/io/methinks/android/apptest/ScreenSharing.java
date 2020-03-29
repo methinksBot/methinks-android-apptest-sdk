@@ -76,7 +76,7 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
 
                         }
 
-                        String targetServer = Global.isDebugMode ? "dev" : "prod";
+                        /*String targetServer = Global.isDebugMode ? "dev" : "prod";
                         mtkVideoChatClient = new MTKVideoChatClient.Builder()
                                 .context(app)
                                 .bucket(result.getString("bucketName"))    // us-oregon or kr-seoul from Campaign's bucketName
@@ -95,7 +95,7 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                                 .sId(Global.sId)
                                 .listener(ScreenSharing.this)
                                 .build();
-                        mtkVideoChatClient.connect();
+                        mtkVideoChatClient.connect();*/
                     }else{
 
                     }

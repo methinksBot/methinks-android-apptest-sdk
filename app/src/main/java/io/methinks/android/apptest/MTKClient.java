@@ -182,6 +182,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                             Global.sId = Global.generateRandomString();
                             Global.isLogined = true;
                             Global.isNew = true;
+                            Global.isInternalTester = result.getBoolean("isInternalTester");
 
                             Intent announcementIntent = new Intent(Global.applicationTracker.getTopActivity(), AnnouncementActivity.class);
                             Global.applicationTracker.getTopActivity().startActivity(announcementIntent);

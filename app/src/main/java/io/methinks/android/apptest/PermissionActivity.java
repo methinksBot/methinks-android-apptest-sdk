@@ -63,7 +63,7 @@ public class PermissionActivity extends AppCompatActivity {
         Log.e("requestCode: " + requestCode + ", resultCode : " + resultCode);
 
         if(requestCode == Global.REQUEST_SCREEN_SHARING && resultCode == RESULT_OK){
-            isGrantedCapturePermission = true;
+            /*isGrantedCapturePermission = true;
             Global.isSharedScreen = true;
             Global.screenCaptureIntent = data;
             Global.screenCaptureResultCode = resultCode;
@@ -72,7 +72,7 @@ public class PermissionActivity extends AppCompatActivity {
             screenSharing.start();
 
             Global.screenSharing = screenSharing;
-            checkExternalStoragePermission();
+            checkExternalStoragePermission();*/
         }else if(requestCode == Global.REQUEST_OVERLAY_PERMISSION){
             checkOverlayPermission();
         }else if(requestCode == Global.REQUEST_SHOW_TOUCHES) {
@@ -244,8 +244,18 @@ public class PermissionActivity extends AppCompatActivity {
             Log.d("Request SHOW TOUCHES permission to user.");
         }else{
             if(!isGrantedCapturePermission){
-                MTKScreenSharingPermUtil.checkPermissionCapture(this, Global.REQUEST_SCREEN_SHARING, mediaProjectionManager);
-                Log.d("Request SCREEN CAPTURE permission to user.");
+                //MTKScreenSharingPermUtil.checkPermissionCapture(this, Global.REQUEST_SCREEN_SHARING, mediaProjectionManager);
+                //Log.d("Request SCREEN CAPTURE permission to user.");
+                isGrantedCapturePermission = true;
+                Global.isSharedScreen = true;
+                //Global.screenCaptureIntent = data;
+                //Global.screenCaptureResultCode = resultCode;
+                ScreenSharing screenSharing = new ScreenSharing(PermissionActivity.this.getApplication());
+
+                screenSharing.start();
+
+                Global.screenSharing = screenSharing;
+                checkExternalStoragePermission();
             }
         }
     }
