@@ -37,6 +37,8 @@ public class HoverPopup {
         cancel = hoverPopup.findViewById(R.id.popup_hover_cancel);
         eventRecyclerView = hoverPopup.findViewById(R.id.popup_hover_shootevent);
 
+        //Log.e("CURRENT STATUS: "+ context + "\n" + hoverPopup + "\n" + eventRecyclerView + "\n" + bugReport);
+
         eventRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
