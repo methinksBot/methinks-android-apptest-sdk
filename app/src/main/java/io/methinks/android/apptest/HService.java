@@ -102,9 +102,11 @@ public class HService extends Service {
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.patcher_msg_methinks_apptest_is_running)))
                 .setOngoing(true);
 
-        startForeground(1, builder.build());
-        prepareDraw();
-        context = Global.applicationTracker.getTopActivity().getApplicationContext();
+        if (!Global.hideHoverButton) {
+            startForeground(1, builder.build());
+            prepareDraw();
+            context = Global.applicationTracker.getTopActivity().getApplicationContext();
+        }
     }
 
     private void initTouchPointer(){
