@@ -54,7 +54,7 @@ public class ApplicationTracker {
             calledReadyCallback = true;
         }
 
-        if(Global.hoverIntent == null && !Global.hideHoverButton){
+        if(Global.hoverIntent == null){
             Global.hoverIntent = new Intent(activity, HService.class);
             Log.e("hoverintent created!");
         }
@@ -84,7 +84,7 @@ public class ApplicationTracker {
                 });
 
                 activityLifes.put(activity.getClass().getSimpleName(), "create");
-                if(Global.hoverIntent == null && !Global.hideHoverButton){
+                if(Global.hoverIntent == null){
                     Global.hoverIntent = new Intent(activity, HService.class);
                     Log.e("hoverintent created!");
                 }
