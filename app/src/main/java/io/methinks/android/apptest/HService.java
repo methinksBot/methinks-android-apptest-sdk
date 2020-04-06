@@ -101,9 +101,9 @@ public class HService extends Service {
                 .setContentText(getString(R.string.patcher_msg_apptest_is_running))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.patcher_msg_methinks_apptest_is_running)))
                 .setOngoing(true);
+        startForeground(1, builder.build());
 
         if (!Global.hideHoverButton) {
-            startForeground(1, builder.build());
             prepareDraw();
             context = Global.applicationTracker.getTopActivity().getApplicationContext();
         }
@@ -350,10 +350,12 @@ public class HService extends Service {
 
     @Override
     public void onDestroy() {
-        //Toast.makeText(this, "Hover service Stopped", Toast.LENGTH_SHORT).show();
-        windowManager.removeViewImmediate(Global.hover);
-        windowManager.removeViewImmediate(Global.hoverPopup.hoverPopup);
-        super.onDestroy();
+        if (!Global.hideHoverButton) {
+            //Toast.makeText(this, "Hover service Stopped", Toast.LENGTH_SHORT).show();
+            windowManager.removeViewImmediate(Global.hover);
+            windowManager.removeViewImmediate(Global.hoverPopup.hoverPopup);
+            super.onDestroy();
+        }
     }
 
     @Override
