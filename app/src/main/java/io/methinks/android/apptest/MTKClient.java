@@ -183,6 +183,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                             Global.isLogined = true;
                             Global.isNew = true;
                             Global.isInternalTester = result.getBoolean("isInternalTester");
+                            Global.hideHoverButton = result.getBoolean("hideHoverButton");
 
                             Intent announcementIntent = new Intent(Global.applicationTracker.getTopActivity(), AnnouncementActivity.class);
                             Global.applicationTracker.getTopActivity().startActivity(announcementIntent);
