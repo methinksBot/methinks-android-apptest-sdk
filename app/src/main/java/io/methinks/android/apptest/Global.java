@@ -161,7 +161,7 @@ public class Global {
             }
         }
 
-        if(Global.hoverIntent == null){
+        if(Global.hoverIntent == null && !Global.hideHoverButton){
             throw new NullPointerException("ApplicationTracker object can't be null to create HoverService");
         }
 
