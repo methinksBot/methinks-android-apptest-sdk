@@ -154,7 +154,7 @@ public class Global {
             return;
         }
 
-        if(Global.hoverIntent == null){
+        if(Global.hoverIntent == null && !Global.hideHoverButton){
             if(Global.applicationTracker != null){
                 Global.hoverIntent = new Intent(Global.applicationTracker.getFirstActivity(), HService.class);
                 Log.e("hoverintent created!");
