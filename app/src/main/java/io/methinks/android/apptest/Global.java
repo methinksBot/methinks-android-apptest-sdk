@@ -81,7 +81,7 @@ public class Global {
     protected static boolean isShowingAnnouncement;
     protected static boolean isPlayedByEmulator;
     protected static boolean isInternalTester;
-    protected static boolean hideHoverButton;
+    protected static boolean hideHoverButton = true;
     public static boolean isShowingQuestion;
     public static boolean isShowingReport;
     protected static long sLoginTime;
