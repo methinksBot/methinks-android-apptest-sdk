@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                             Global.isLogined = true;
                             Global.isNew = true;
                             Global.isInternalTester = result.getBoolean("isInternalTester");
+                            Global.hideHoverButton = result.getBoolean("hideHoverButton");
 
 
                             Intent announcementIntent = new Intent(LoginActivity.this, AnnouncementActivity.class);
