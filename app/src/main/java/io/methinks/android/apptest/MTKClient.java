@@ -3,6 +3,7 @@ package io.methinks.android.apptest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
+import android.app.Dialog;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -185,6 +186,31 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                             Global.isNew = true;
                             Global.isInternalTester = result.getBoolean("isInternalTester");
                             Global.hideHoverButton = result.getBoolean("hideHoverButton");
+
+                            try {
+                                Global.blockEmulator = result.getBoolean("blockEmulator");
+                            } catch (Exception e) {
+                                Log.e("No blockEmulator fom Patcher Server.\n" + e.toString());
+                            }
+                            Log.e("[EMULATOR BLOCKING] :" + Global.isPlayedByEmulator + " / " + Global.blockEmulator);
+                            if (Global.blockEmulator && Global.isPlayedByEmulator) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(Global.applicationTracker.getTopActivity(), R.style.MyDialogTheme);
+                                builder.setTitle(R.string.patcher_block_emulator_title).setMessage(R.string.patcher_block_emulator_desc);
+                                builder.setCancelable(false);
+                                // positive 버튼 설정
+                                builder.setPositiveButton(R.string.patcher_next, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        Global.applicationTracker.getTopActivity().stopService(Global.hoverIntent);
+                                        Global.applicationTracker.getTopActivity().finishAffinity();
+                                        System.exit(0);
+                                    }
+                                });
+                                Dialog installdialog = builder.create();
+                                installdialog.setCanceledOnTouchOutside(false);
+                                AlertDialog alertDialog = (AlertDialog) installdialog;
+                                alertDialog.show();
+                            }
 
                             Intent announcementIntent = new Intent(Global.applicationTracker.getTopActivity(), AnnouncementActivity.class);
                             Global.applicationTracker.getTopActivity().startActivity(announcementIntent);
