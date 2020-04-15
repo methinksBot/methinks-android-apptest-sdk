@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
+import android.net.Uri;
 import android.os.Build;
 
 import org.json.JSONObject;
@@ -97,9 +98,11 @@ public class Global {
     protected static String sScreenName;
     protected static int sSuveyCount;
     protected static int sAnnouncementCount;
+    protected static int minimumTestBuildNumber;
     protected static boolean lastReportTypeIsBug;
     protected static boolean completedPermission;
     protected static boolean blockEmulator = false;
+
 
     // For hover
     protected static HService hService;
@@ -136,6 +139,15 @@ public class Global {
 
         return transactionId.toString();
 
+    }
+
+    protected static void redirectToGuide() {
+        String url = Global.isDebugMode ? Global.DEV_METHINKS_SERVER_URL : Global.PROD_METHINKS_SERVER_URL;
+        Uri uri = Uri.parse(url + "/project/instruction/" + Global.sProjectId);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        if (intent.resolveActivity(Global.applicationTracker.getTopActivity().getPackageManager()) != null) {
+            Global.applicationTracker.getTopActivity().startActivityForResult(intent, Global.REQUEST_SHOW_DEV_GUIDE);
+        }
     }
 
     protected static void startService(Activity activity){

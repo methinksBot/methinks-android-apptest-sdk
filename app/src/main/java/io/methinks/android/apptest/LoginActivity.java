@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,7 +22,11 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
+
+import static io.methinks.android.apptest.Global.redirectToGuide;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
@@ -76,6 +81,40 @@ public class LoginActivity extends AppCompatActivity {
                             Global.isNew = true;
                             Global.isInternalTester = result.getBoolean("isInternalTester");
                             Global.hideHoverButton = result.getBoolean("hideHoverButton");
+                            Global.minimumTestBuildNumber = result.getInt("minimumTestBuildNumber");
+
+                            String presetString = null;
+                            try {
+                                InputStream is = Global.applicationTracker.getTopActivity().getAssets().open("preset.json");
+                                int fileSize = is.available();
+                                byte[] buffer = new byte[fileSize];
+                                is.read(buffer);
+                                is.close();
+                                presetString = new String(buffer, "UTF-8");
+                                JSONObject presetObject = new JSONObject(presetString);
+                                int currentBuildNumber = presetObject.getInt("buildNumber");
+                                Log.e("[Current BuildNumber]: " + currentBuildNumber);
+
+                                if (currentBuildNumber < Global.minimumTestBuildNumber) {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(Global.applicationTracker.getTopActivity(), R.style.MyDialogTheme);
+                                    builder.setTitle(R.string.patcher_build_number_cont).setMessage(R.string.patcher_block_emulator_desc);
+                                    builder.setCancelable(false);
+                                    // positive 버튼 설정
+                                    builder.setPositiveButton(R.string.patcher_next, new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Global.redirectToGuide();
+                                        }
+                                    });
+                                    Dialog installdialog = builder.create();
+                                    installdialog.setCanceledOnTouchOutside(false);
+                                    AlertDialog alertDialog = (AlertDialog) installdialog;
+                                    alertDialog.show();
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
 
                             /** Block emulator**/
                             try {

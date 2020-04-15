@@ -87,7 +87,8 @@
     <string name="patcher_install_extension_by_user_desc">請安裝您下載了的 methinks_touchsupports.apk，然後重啓這個程式。</string>
     <string name="patcher_block_emulator_title">Emulator is not permitted</string>
     <string name="patcher_block_emulator_desc">Researcher blocked using emulator with this app.</string>
-    <string name="patcher_user_already_logined">You are joined this session with another device. </string>
+    <string name="patcher_user_already_logined">You are already joined this session with another device. </string>
+    <string name="patcher_build_number_cont">You are using older version. For update to latest version, go to installation page.</string>
 
     <!-- ################################################################## -->
     <!-- ##################### Default strings start ###################### -->
