@@ -45,6 +45,37 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                         JSONObject result = response.getJSONObject("result");
                         Log.e(result.toString());
 
+                        try {
+                            Global.blockEmulator = result.getBoolean("blockEmulator");
+                        } catch (Exception e) {
+                            Log.e("No blockEmulator fom Patcher Server.\n" + e.toString());
+                        }
+
+                        /** Block emulator**/
+                        Log.e("[EMULATOR BLOCKING] :" + Global.isPlayedByEmulator + " / " + Global.blockEmulator);
+                        if (Global.blockEmulator && Global.isPlayedByEmulator) {
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(Global.applicationTracker.getTopActivity(), R.style.MyDialogTheme);
+
+                            builder.setTitle(R.string.patcher_block_emulator_title).setMessage(R.string.patcher_block_emulator_desc);
+                            builder.setCancelable(false);
+                            // positive 버튼 설정
+                            builder.setPositiveButton(R.string.patcher_next, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Global.applicationTracker.getTopActivity().stopService(Global.hoverIntent);
+                                    Global.applicationTracker.getTopActivity().finishAffinity();
+                                    System.exit(0);
+                                }
+                            });
+
+                            Dialog installdialog = builder.create();
+                            installdialog.setCanceledOnTouchOutside(false);
+                            AlertDialog alertDialog = (AlertDialog) installdialog;
+                            alertDialog.show();
+
+                        }
+
                         /*String targetServer = Global.isDebugMode ? "dev" : "prod";
                         mtkVideoChatClient = new MTKVideoChatClient.Builder()
                                 .context(app)
