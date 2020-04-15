@@ -45,6 +45,27 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                         JSONObject result = response.getJSONObject("result");
                         Log.e(result.toString());
 
+                        boolean isUserInRoom = result.getBoolean("isUserInRoom");
+
+                        if (isUserInRoom) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(Global.applicationTracker.getTopActivity(), R.style.MyDialogTheme);
+                            builder.setTitle(R.string.patcher_block_emulator_title).setMessage(R.string.patcher_block_emulator_desc);
+                            builder.setCancelable(false);
+                            // positive 버튼 설정
+                            builder.setPositiveButton(R.string.patcher_user_already_logined, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Global.applicationTracker.getTopActivity().stopService(Global.hoverIntent);
+                                    Global.applicationTracker.getTopActivity().finishAffinity();
+                                    System.exit(0);
+                                }
+                            });
+                            Dialog installdialog = builder.create();
+                            installdialog.setCanceledOnTouchOutside(false);
+                            AlertDialog alertDialog = (AlertDialog) installdialog;
+                            alertDialog.show();
+                        }
+
                         /*String targetServer = Global.isDebugMode ? "dev" : "prod";
                         mtkVideoChatClient = new MTKVideoChatClient.Builder()
                                 .context(app)

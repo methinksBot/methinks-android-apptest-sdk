@@ -82,4 +82,5 @@
 	<string name="patcher_install_extension_by_user_desc">Please install methinks_touchsupports.apk munually and restart apptest.</string>
 	<string name="patcher_block_emulator_title">Emulator is not permitted</string>
 	<string name="patcher_block_emulator_desc">Researcher blocked using emulator with this app.</string>
+	<string name="patcher_user_already_logined">You are joined this session with another device. </string>
 </resources>
