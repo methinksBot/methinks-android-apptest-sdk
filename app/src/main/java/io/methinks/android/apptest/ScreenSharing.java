@@ -49,10 +49,10 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
 
                         if (isUserInRoom) {
                             AlertDialog.Builder builder = new AlertDialog.Builder(Global.applicationTracker.getTopActivity(), R.style.MyDialogTheme);
-                            builder.setTitle(R.string.patcher_block_emulator_title).setMessage(R.string.patcher_block_emulator_desc);
+                            builder.setTitle(R.string.patcher_user_already_logined);
                             builder.setCancelable(false);
                             // positive 버튼 설정
-                            builder.setPositiveButton(R.string.patcher_user_already_logined, new DialogInterface.OnClickListener() {
+                            builder.setPositiveButton(R.string.patcher_next, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     Global.applicationTracker.getTopActivity().stopService(Global.hoverIntent);
