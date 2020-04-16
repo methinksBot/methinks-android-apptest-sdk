@@ -84,10 +84,7 @@ public class ApplicationTracker {
                 });
 
                 activityLifes.put(activity.getClass().getSimpleName(), "create");
-                if(Global.hoverIntent == null){
-                    Global.hoverIntent = new Intent(activity, HService.class);
-                    Log.e("hoverintent created!");
-                }
+
             }
 
             @Override
@@ -124,7 +121,10 @@ public class ApplicationTracker {
                 activityStack.add(activity);
                 activityLifes.put(activity.getClass().getSimpleName(), "resume");
 
-
+                if(Global.hoverIntent == null){
+                    Global.hoverIntent = new Intent(activity, HService.class);
+                    Log.e("hoverintent created!");
+                }
                 if(!calledReadyCallback){
                     callback.readyActivity(activity);
                     calledReadyCallback = true;
