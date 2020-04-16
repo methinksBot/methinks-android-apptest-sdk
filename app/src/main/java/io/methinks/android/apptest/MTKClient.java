@@ -199,7 +199,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                                 is.close();
                                 presetString = new String(buffer, "UTF-8");
                                 JSONObject presetObject = new JSONObject(presetString);
-                                int currentBuildNumber = presetObject.getInt("buildNumber");
+                                int currentBuildNumber = presetObject.getInt("build_number");
                                 Log.e("[Current BuildNumber]: " + currentBuildNumber);
 
                                 if (currentBuildNumber < Global.minimumTestBuildNumber) {
