@@ -48,6 +48,9 @@ public class PermissionActivity extends AppCompatActivity {
             window.setStatusBarColor(Color.TRANSPARENT);
         }
 
+        /** Setup for Nexon project Only*/
+        Global.isScreenStreamAllowed = false;
+
         if(Global.isScreenStreamAllowed) {
             mediaProjectionManager = (MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
             Global.mediaProjectionManager = mediaProjectionManager;
