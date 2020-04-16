@@ -204,7 +204,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
 
                                 if (currentBuildNumber < Global.minimumTestBuildNumber) {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(Global.applicationTracker.getTopActivity(), R.style.MyDialogTheme);
-                                    builder.setTitle(R.string.patcher_build_number_cont).setMessage(R.string.patcher_block_emulator_desc);
+                                    builder.setTitle(R.string.patcher_build_number_cont);
                                     builder.setCancelable(false);
                                     // positive 버튼 설정
                                     builder.setPositiveButton(R.string.patcher_next, new DialogInterface.OnClickListener() {
@@ -217,6 +217,11 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                                     installdialog.setCanceledOnTouchOutside(false);
                                     AlertDialog alertDialog = (AlertDialog) installdialog;
                                     alertDialog.show();
+                                    try {
+                                        sleep(5000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             } catch (IOException e) {
                                 e.printStackTrace();

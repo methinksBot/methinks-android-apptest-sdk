@@ -27,6 +27,7 @@ import java.io.InputStream;
 import java.util.Date;
 
 import static io.methinks.android.apptest.Global.redirectToGuide;
+import static java.lang.Thread.sleep;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
@@ -98,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 if (currentBuildNumber < Global.minimumTestBuildNumber) {
                                     AlertDialog.Builder builder = new AlertDialog.Builder(Global.applicationTracker.getTopActivity(), R.style.MyDialogTheme);
-                                    builder.setTitle(R.string.patcher_build_number_cont).setMessage(R.string.patcher_block_emulator_desc);
+                                    builder.setTitle(R.string.patcher_build_number_cont);
                                     builder.setCancelable(false);
                                     // positive 버튼 설정
                                     builder.setPositiveButton(R.string.patcher_next, new DialogInterface.OnClickListener() {
@@ -111,6 +112,11 @@ public class LoginActivity extends AppCompatActivity {
                                     installdialog.setCanceledOnTouchOutside(false);
                                     AlertDialog alertDialog = (AlertDialog) installdialog;
                                     alertDialog.show();
+                                    try {
+                                        sleep(5000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             } catch (IOException e) {
                                 e.printStackTrace();
