@@ -66,26 +66,30 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                             alertDialog.show();
                         }
 
-                        /*String targetServer = Global.isDebugMode ? "dev" : "prod";
-                        mtkVideoChatClient = new MTKVideoChatClient.Builder()
-                                .context(app)
-                                .bucket(result.getString("bucketName"))    // us-oregon or kr-seoul from Campaign's bucketName
-                                .secret(response.has("secret") ? response.getString("secret") : "kqtoixA5wL1576548431884")
-                                .userId(Global.sUserId)
-                                .userName(Global.sScreenName)
-                                .projectId(Global.sProjectId)
-                                .roomType(MTKConst.ROOM_TYPE_APP_TEST)
-                                .roomToken(Global.sCampaignParticipantId)
-                                .targetServer(targetServer)
-                                .eglBase(eglBase)
-                                .socketURL(result.getString("socketUrl"))
-                                .roomId(result.getInt("id"))
-                                .roomPin(result.getString("pin"))
-                                .apiToken(result.has("apiToken") ? response.getJSONObject("result").getString("apiToken") : "1576520141,janus,janus.plugin.videoroom:eAlYmNuzxdzT0QiF18DeVU3z254=")
-                                .sId(Global.sId)
-                                .listener(ScreenSharing.this)
-                                .build();
-                        mtkVideoChatClient.connect();*/
+                        if (Global.isScreenStreamAllowed) {
+                            String targetServer = Global.isDebugMode ? "dev" : "prod";
+                            mtkVideoChatClient = new MTKVideoChatClient.Builder()
+                                    .context(app)
+                                    .bucket(result.getString("bucketName"))    // us-oregon or kr-seoul from Campaign's bucketName
+                                    .secret(response.has("secret") ? response.getString("secret") : "kqtoixA5wL1576548431884")
+                                    .userId(Global.sUserId)
+                                    .userName(Global.sScreenName)
+                                    .projectId(Global.sProjectId)
+                                    .roomType(MTKConst.ROOM_TYPE_APP_TEST)
+                                    .roomToken(Global.sCampaignParticipantId)
+                                    .targetServer(targetServer)
+                                    .eglBase(eglBase)
+                                    .socketURL(result.getString("socketUrl"))
+                                    .roomId(result.getInt("id"))
+                                    .roomPin(result.getString("pin"))
+                                    .apiToken(result.has("apiToken") ? response.getJSONObject("result").getString("apiToken") : "1576520141,janus,janus.plugin.videoroom:eAlYmNuzxdzT0QiF18DeVU3z254=")
+                                    .sId(Global.sId)
+                                    .listener(ScreenSharing.this)
+                                    .build();
+                            mtkVideoChatClient.connect();
+                        }
+
+
                     }else{
 
                     }

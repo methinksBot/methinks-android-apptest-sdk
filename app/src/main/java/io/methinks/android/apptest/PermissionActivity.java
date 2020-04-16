@@ -189,6 +189,10 @@ public class PermissionActivity extends AppCompatActivity {
             if(Global.isScreenStreamAllowed){
                 checkShowTouches();
             }else{
+                /** 스크린레코딩 없을 시 터치포인터 enable X. 곧바로 screenshare.start() start내부에 또 isScreenStreamAllowed분기 존재. */
+                ScreenSharing screenSharing = new ScreenSharing(PermissionActivity.this.getApplication());
+                screenSharing.start();
+                Global.screenSharing = screenSharing;
                 checkExternalStoragePermission();
             }
         }else{
