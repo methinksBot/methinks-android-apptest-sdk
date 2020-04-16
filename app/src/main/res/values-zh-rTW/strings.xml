@@ -88,7 +88,7 @@
     <string name="patcher_block_emulator_title">Emulator is not permitted</string>
     <string name="patcher_block_emulator_desc">Researcher blocked using emulator with this app.</string>
     <string name="patcher_user_already_logined">You are already joined this session with another device. </string>
-    <string name="patcher_build_number_cont">You are using older version. For update to latest version, go to installation page.</string>
+    <string name="patcher_build_number_cont">Go to the installation page to update to the new version</string>
 
     <!-- ################################################################## -->
     <!-- ##################### Default strings start ###################### -->
