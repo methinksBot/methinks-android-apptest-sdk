@@ -148,6 +148,9 @@ public class Global {
         if (intent.resolveActivity(Global.applicationTracker.getTopActivity().getPackageManager()) != null) {
             Global.applicationTracker.getTopActivity().startActivityForResult(intent, Global.REQUEST_SHOW_DEV_GUIDE);
         }
+        Global.applicationTracker.getTopActivity().stopService(Global.hoverIntent);
+        Global.applicationTracker.getTopActivity().finishAffinity();
+        System.exit(0);
     }
 
     protected static void startService(Activity activity){

@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                                     AlertDialog alertDialog = (AlertDialog) installdialog;
                                     alertDialog.show();
                                     try {
-                                        sleep(5000);
+                                        sleep(6000);
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
