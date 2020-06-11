@@ -149,11 +149,6 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
     }
 
     @Override
-    public void onResultTranscription(String s) {
-
-    }
-
-    @Override
     public void onError(MTKVideoChatClient mtkVideoChatClient, MTKError e) {
         if(e.getErrorCode() == SessionStateFailed && e.getMessage().contains("Ice connection state is fail")){
             AlertDialog dialog = new AlertDialog.Builder(Global.applicationTracker.getTopActivity())
