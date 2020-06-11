@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/sdk_white_full_rounded_background">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <include
+                android:id="@+id/top_container"
+                layout="@layout/sdk_cell_question_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <LinearLayout
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:id="@+id/num_container"
+                        android:background="@color/butterscotch"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+                    <io.mtksdk.inappsurvey.custom.SdkSeekBarDotContainer
+                        android:id="@+id/dot_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:paddingLeft = "13dp"
+                        android:paddingRight="13dp"
+                        />
+                    <io.mtksdk.inappsurvey.custom.SdkSeekBar
+                        android:id="@+id/sdk_seek_bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:paddingLeft = "13dp"
+                        android:paddingRight="13dp"
+                        android:max="100"
+                        android:progressDrawable="@drawable/seekbar_progress"
+                        android:thumb="@drawable/seekbar_dot"
+
+                        android:splitTrack="false"
+                        style="@style/SeekbarStyle"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:weightSum="0.99"
+                        android:orientation="horizontal">
+                        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+                            android:id="@+id/low"
+                            android:layout_weight="0.33"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:fw="@string/font_weight_regular"
+                            android:text="Bad"
+                            android:letterSpacing="0.02"
+                            android:lineSpacingExtra="12dp"
+                            android:textColor="@color/silver"
+                            android:textSize="14dp"
+
+                            android:gravity="center_vertical|start"
+                            app:layout_constraintLeft_toLeftOf="parent" />
+                        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+                            android:id="@+id/mid"
+                            android:layout_weight="0.33"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:fw="@string/font_weight_regular"
+                            android:text="Mid"
+                            android:letterSpacing="0.02"
+                            android:lineSpacingExtra="12dp"
+                            android:textColor="@color/silver"
+                            android:textSize="14dp"
+
+                            android:gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent" />
+                        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+                            android:id="@+id/high"
+                            android:layout_weight="0.33"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:fw="@string/font_weight_regular"
+                            android:text="Good"
+                            android:letterSpacing="0.02"
+                            android:lineSpacingExtra="12dp"
+                            android:textColor="@color/silver"
+                            android:textSize="14dp"
+
+                            android:gravity="center_vertical|end"
+                            app:layout_constraintRight_toRightOf="parent" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

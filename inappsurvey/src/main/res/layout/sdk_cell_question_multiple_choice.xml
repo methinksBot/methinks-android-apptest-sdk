@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/cell_multiple_choice_main_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/question_multiple_choice_top_bottom_padding"
+    android:paddingBottom="@dimen/question_multiple_choice_top_bottom_padding"
+    android:paddingLeft="24dp"
+    android:paddingRight="16dp"
+    android:focusable="true"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/check_box"
+        android:src="@drawable/ic_img_single_select_nor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/choice_form"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:layout_marginLeft="24dp"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+            android:id="@+id/choice"
+            android:maxLines="3"
+            android:textSize="14dp"
+            app:fw="@string/font_weight_regular"
+
+            android:textColor="@color/charcoal_grey"
+            android:lineSpacingExtra="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:id="@+id/underline"
+            android:layout_marginTop="2dp"
+            android:background="@color/pale_grey_two"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/open_end_answer_form"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_marginLeft="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <io.mtksdk.inappsurvey.custom.widget.MethinksEditText
+            android:id="@+id/open_end_answer"
+            android:textCursorDrawable="@null"
+            android:hint="@string/common_text_other"
+            android:imeOptions="actionDone"
+            android:textColorHint="@color/silver"
+            android:background="@android:color/transparent"
+            android:maxLines="1"
+            android:textSize="14dp"
+            app:fw="@string/font_weight_regular"
+            android:textColor="@color/charcoal_grey"
+            android:letterSpacing="0.02"
+            android:lineSpacingExtra="12dp"
+            android:inputType="textCapSentences"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:id="@+id/open_end_answer_underline"
+            android:layout_marginTop="2dp"
+            android:background="@color/pale_grey_two"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

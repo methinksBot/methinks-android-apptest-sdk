@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/img_scale_handle" android:state_pressed="true" >
+        <size
+            android:width="22dp"
+            android:height="22dp" />
+    </item>
+    <item android:drawable="@drawable/img_scale_handle">
+        <size
+            android:width="22dp"
+            android:height="22dp" />
+    </item>
+</selector>
+

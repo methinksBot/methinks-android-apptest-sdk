@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp"
+    android:layout_marginRight="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <io.mtksdk.inappsurvey.custom.widget.MethinksEditText
+            android:id="@+id/answer_edit_text"
+            android:textCursorDrawable="@null"
+            android:inputType="textCapSentences|textMultiLine|textNoSuggestions"
+            android:background="@android:color/transparent"
+            android:minLines="1"
+            android:maxLines="3"
+            android:lines="3"
+            android:hint="Enter your answer here."
+            android:textSize="14dp"
+            app:fw="@string/font_weight_regular"
+
+            android:textColor="@color/charcoal_grey"
+            android:textColorHint="@color/silver"
+            android:letterSpacing="0.02"
+            android:lineSpacingExtra="12dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/answer_delete_button_container"
+            android:visibility="gone"
+            android:gravity="center"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <ImageView
+                android:src="@drawable/ic_close_16_x"
+                android:alpha="0.56"
+                android:adjustViewBounds="true"
+                android:scaleType="fitStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+        android:id="@+id/open_end_answer_underline"
+        android:layout_marginTop="2dp"
+        android:background="@color/pale_grey_two"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+</LinearLayout>

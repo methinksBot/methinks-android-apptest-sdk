@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/sdk_white_full_rounded_background"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/top_container"
+        android:orientation="horizontal"
+        android:paddingTop="25dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+            app:fw="@string/font_weight_regular"
+            android:id="@+id/question_content"
+            android:text=""
+            android:scrollbars="vertical"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:lineSpacingExtra="6dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp"/>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/attached_image"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+
+        android:layout_marginBottom="16dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

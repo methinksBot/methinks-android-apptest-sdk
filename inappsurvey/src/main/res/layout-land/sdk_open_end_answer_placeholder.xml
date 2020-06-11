@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/question_open_end_answer_placeholder_container"
+    android:orientation="horizontal"
+    android:focusable="true"
+    android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/add_answer_container"
+        android:clickable="false"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/add_answer"
+            android:src="@drawable/ic_plus"
+            android:alpha="0.29"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:layout_margin="5dp"
+            android:layout_width="14dp"
+            android:layout_height="14dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:clickable="false"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+            android:clickable="false"
+            android:background="@drawable/dot_border"
+            android:maxLines="1"
+            android:text="Add your answer"
+            android:textSize="14dp"
+            app:fw="@string/font_weight_regular"
+
+            android:textColor="@color/silver"
+            android:textColorHint="@color/silver"
+            android:letterSpacing="0.02"
+            android:lineSpacingExtra="12dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

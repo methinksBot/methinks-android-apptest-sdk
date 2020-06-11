@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    style="@style/bottomSheetStyleWrapper"
+    app:layout_behavior="io.mtksdk.viewcontroller.CustomBottomSheetBehavior">
+
+    <LinearLayout
+        android:background="@drawable/sdk_white_full_rounded_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--<LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp">
+
+            <ImageButton
+                android:id="@+id/close_survey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_close_16_x"
+                android:background="@android:color/transparent"/>
+        </LinearLayout>-->
+
+        <io.mtksdk.inappsurvey.custom.SdkQuestionViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="290dp" />
+
+        <LinearLayout
+            android:id="@+id/popup_methinks_controller_container"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+                android:visibility="visible"
+                android:id="@+id/submit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/sdk_cornflower_full_rounded_button"
+                android:clickable="true"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Next"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                app:fw="@string/font_weight_medium" />
+
+            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+                android:visibility="gone"
+                android:id="@+id/finish_button"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="110dp"
+                android:layout_marginEnd="110dp"
+                android:background="@drawable/cornflower_close_button"
+                android:gravity="center"
+                android:text="Close"
+                android:textColor="@color/cornflower"
+                android:layout_marginBottom="30dp"/>
+        </LinearLayout>
+
+        <include
+            layout = "@layout/sdk_mtk_logo_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:visibility="gone"
+            android:id="@+id/space">
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -44,9 +44,8 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.LinkedList;
 
-import io.methinks.android.apptest.question.QuestionPack;
-import io.methinks.android.apptest.question.SurveyAlertManager;
-import io.methinks.android.apptest.question.ViewConstant;
+import io.mtksdk.inappsurvey.SurveyAlertManager;
+import io.mtksdk.inappsurvey.ViewConstant;
 
 import static java.lang.Thread.sleep;
 
