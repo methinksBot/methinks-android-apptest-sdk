@@ -248,8 +248,8 @@ public class PermissionActivity extends AppCompatActivity {
             Log.d("Request SHOW TOUCHES permission to user.");
         }else{
             if(!isGrantedCapturePermission){
-                //MTKScreenSharingPermUtil.checkPermissionCapture(this, Global.REQUEST_SCREEN_SHARING, mediaProjectionManager);
-                //Log.d("Request SCREEN CAPTURE permission to user.");
+                MTKScreenSharingPermUtil.checkPermissionCapture(this, Global.REQUEST_SCREEN_SHARING, mediaProjectionManager);
+                Log.d("Request SCREEN CAPTURE permission to user.");
                 isGrantedCapturePermission = true;
                 Global.isSharedScreen = true;
                 //Global.screenCaptureIntent = data;
