@@ -85,6 +85,7 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                                     .apiToken(result.has("apiToken") ? response.getJSONObject("result").getString("apiToken") : "1576520141,janus,janus.plugin.videoroom:eAlYmNuzxdzT0QiF18DeVU3z254=")
                                     .sId(Global.sId)
                                     .listener(ScreenSharing.this)
+                                    .baseFeature("apptest_sdk")
                                     .build();
                             mtkVideoChatClient.connect();
                         }
