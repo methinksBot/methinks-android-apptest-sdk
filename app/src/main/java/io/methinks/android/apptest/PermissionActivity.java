@@ -73,6 +73,8 @@ public class PermissionActivity extends AppCompatActivity {
 
             Global.screenSharing = screenSharing;
             checkExternalStoragePermission();*/
+            Global.screenCaptureIntent = data;
+            Global.screenCaptureResultCode = resultCode;
         }else if(requestCode == Global.REQUEST_OVERLAY_PERMISSION){
             checkOverlayPermission();
         }else if(requestCode == Global.REQUEST_SHOW_TOUCHES) {
@@ -190,6 +192,7 @@ public class PermissionActivity extends AppCompatActivity {
                 checkShowTouches();
             }else{
                 /** 스크린레코딩 없을 시 터치포인터 enable X. 곧바로 screenshare.start() start내부에 또 isScreenStreamAllowed분기 존재. */
+                // 이 경우 mtkrtc는 레코딩없이 api콜만 실행.
                 ScreenSharing screenSharing = new ScreenSharing(PermissionActivity.this.getApplication());
                 screenSharing.start();
                 Global.screenSharing = screenSharing;
