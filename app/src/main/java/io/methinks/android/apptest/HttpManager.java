@@ -76,6 +76,24 @@ public class HttpManager {
         new HttpAsyncTask(callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, strings);
     }
 
+    public void getIceServerUrl(Callback callback) {
+        String url = "https://appr.tc/params";
+        String[]strings = new String[]{url, Global.HTTP_GET, null};
+
+        Log.d("Ice Request Current URL: " + Arrays.toString(strings));
+
+        new HttpAsyncTask(callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, strings);
+    }
+
+    public void getIceServerList(String target, Callback callback) {
+        String url = target;
+        String[] strings = new String[]{url, Global.HTTP_GET, null};
+
+        Log.d("Ice List Request Current URL: " + Arrays.toString(strings));
+
+        new HttpAsyncTask(callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, strings);
+    }
+
     /**
      * @params
      * "{
