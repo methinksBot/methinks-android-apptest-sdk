@@ -6,10 +6,12 @@ import android.app.Application;
 import android.app.Dialog;
 import android.content.DialogInterface;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.webrtc.EglBase;
 import org.webrtc.MediaStream;
+import org.webrtc.PeerConnection;
 
 import java.util.ArrayList;
 
@@ -30,6 +32,8 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
     private EglBase eglBase;
     private MTKVideoChatClient mtkVideoChatClient;
     private MTKPublisher mainPublisher;
+    private String iceServerList = "";
+    private ArrayList<PeerConnection.IceServer> iceServers = new ArrayList<>();
 
     public ScreenSharing(Application app) {
         this.app = app;
@@ -66,30 +70,79 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                             alertDialog.show();
                         }
 
-                        if (Global.isScreenStreamAllowed) {
-                            String targetServer = Global.isDebugMode ? "dev" : "prod";
-                            mtkVideoChatClient = new MTKVideoChatClient.Builder()
-                                    .context(app)
-                                    .bucket(result.getString("bucketName"))    // us-oregon or kr-seoul from Campaign's bucketName
-                                    .secret(response.has("secret") ? response.getString("secret") : "kqtoixA5wL1576548431884")
-                                    .userId(Global.sUserId)
-                                    .userName(Global.sScreenName)
-                                    .projectId(Global.sProjectId)
-                                    .roomType(MTKConst.ROOM_TYPE_APP_TEST)
-                                    .roomToken(Global.sCampaignParticipantId)
-                                    .targetServer(targetServer)
-                                    .eglBase(eglBase)
-                                    .socketURL(result.getString("socketUrl"))
-                                    .roomId(result.getInt("id"))
-                                    .roomPin(result.getString("pin"))
-                                    .apiToken(result.has("apiToken") ? response.getJSONObject("result").getString("apiToken") : "1576520141,janus,janus.plugin.videoroom:eAlYmNuzxdzT0QiF18DeVU3z254=")
-                                    .sId(Global.sId)
-                                    .listener(ScreenSharing.this)
-                                    .baseFeature("apptest_sdk")
-                                    .build();
-                            mtkVideoChatClient.connect();
-                        }
+                        /** IceServer Info fetching proc */
+                        new HttpManager().getIceServerUrl((res, err) -> {
+                            try {
+                                String iceServerUrl = "";
+                                if(res != null && err == null && res.getString("status").equals(Global.RESPONSE_OK)) {
+                                    if(res.has("ice_server_url")) {
+                                        iceServerUrl = res.getString("ice_server_url");
+                                        Log.e("ICESerVer: " + iceServerUrl);
+                                        Log.d(res.toString());
 
+                                        new HttpManager().getIceServerList(iceServerUrl, (respon, erro) -> {
+                                           try {
+                                               if (respon != null && erro == null && respon.getString("status").equals(Global.RESPONSE_OK)) {
+                                                   if (respon.has("iceServers")) {
+                                                       iceServerList = respon.getJSONArray("iceServers").toString();
+                                                       try {
+                                                           JSONArray iceServersAry = new JSONArray(iceServerList);
+                                                           for (int i = 0; i < iceServersAry.length(); ++i) {
+                                                               JSONObject server = iceServersAry.getJSONObject(i);
+                                                               JSONArray turnUrls = server.getJSONArray("urls");
+                                                               String username = server.has("username") ? server.getString("username") : "";
+                                                               String credential = server.has("credential") ? server.getString("credential") : "";
+                                                               for (int j = 0; j < turnUrls.length(); j++) {
+                                                                   String turnUrl = turnUrls.getString(j);
+                                                                   iceServers.add(PeerConnection.IceServer.builder(turnUrl).setUsername(username).setPassword(credential).createIceServer());
+                                                               }
+                                                           }
+
+                                                           /** mtkrtc Initializing */
+                                                           if (Global.isScreenStreamAllowed) {
+                                                               String targetServer = Global.isDebugMode ? "dev" : "prod";
+                                                               mtkVideoChatClient = new MTKVideoChatClient.Builder()
+                                                                       .context(app)
+                                                                       .bucket(result.getString("bucketName"))    // us-oregon or kr-seoul from Campaign's bucketName
+                                                                       .secret(response.has("secret") ? response.getString("secret") : "kqtoixA5wL1576548431884")
+                                                                       .userId(Global.sUserId)
+                                                                       .userName(Global.sScreenName)
+                                                                       .projectId(Global.sProjectId)
+                                                                       .roomType(MTKConst.ROOM_TYPE_APP_TEST)
+                                                                       .roomToken(Global.sCampaignParticipantId)
+                                                                       .targetServer(targetServer)
+                                                                       .eglBase(eglBase)
+                                                                       .socketURL(result.getString("socketUrl"))
+                                                                       .roomId(result.getInt("id"))
+                                                                       .roomPin(result.getString("pin"))
+                                                                       .apiToken(result.has("apiToken") ? response.getJSONObject("result").getString("apiToken") : "1576520141,janus,janus.plugin.videoroom:eAlYmNuzxdzT0QiF18DeVU3z254=")
+                                                                       .sId(Global.sId)
+                                                                       .listener(ScreenSharing.this)
+                                                                       .baseFeature("apptest_sdk")
+                                                                       .iceServers(iceServers)
+                                                                       .build();
+                                                               mtkVideoChatClient.connect();
+                                                           }
+
+
+                                                       } catch (JSONException e) {
+                                                           e.printStackTrace();
+                                                       }
+                                                   } else {
+                                                       Log.e("There is no IceServers Info!!!");
+                                                   }
+                                               }
+                                           } catch (Exception e) {
+
+                                           }
+                                        });
+                                    }
+                                }
+
+                            }catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        });
 
                     }else{
 

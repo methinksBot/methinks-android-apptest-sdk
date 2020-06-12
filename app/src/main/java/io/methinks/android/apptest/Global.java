@@ -62,6 +62,7 @@ public class Global {
     protected static final String MESSAGE_RESET_SDK = "sdk_reset";
 
     protected static final String HTTP_POST = "POST";
+    protected static final String HTTP_GET = "GET";
     public static final String RESPONSE_OK = "ok";
     protected static final String RESPONSE_ERROR = "error";
 
