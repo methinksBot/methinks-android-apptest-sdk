@@ -14,7 +14,7 @@
     android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/check_box"
-        android:src="@drawable/ic_img_single_select_nor"
+        app:srcCompat="@drawable/ic_img_single_select_nor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <LinearLayout

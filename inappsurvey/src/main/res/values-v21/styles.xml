@@ -88,14 +88,14 @@
 
     <!-- Question Activity theme -->
     <style name="SdkQuestionActivityTheme" parent="SdkAppTheme">
-        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:statusBarColor">@color/twilight</item>
     </style>
 
     <!-- Menu theme -->
     <style name="AllMenuActivityTheme" parent="SdkAppTheme">
-        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:statusBarColor">@color/dark_grey_blue_three</item>
     </style>
@@ -138,21 +138,21 @@
 
     <!-- Basic WebView theme -->
     <style name="BasicWebViewTheme" parent="SdkAppTheme">
-        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:statusBarColor">@color/dark_grey_blue_three</item>
     </style>
 
     <!-- Send Application theme -->
     <style name="ApplicationSubmitTheme" parent="SdkAppTheme">
-        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:statusBarColor">@color/dark_grey_blue_three</item>
     </style>
 
     <!-- Forgot password theme -->
     <style name="ForgotPasswordActivityTheme" parent="SdkAppTheme">
-        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:statusBarColor">@color/twilight</item>
     </style>
@@ -242,7 +242,7 @@
     <style name="BasicPopupDialogTheme" parent="Theme.AppCompat.Dialog">
         <item name="windowNoTitle">true</item>
         <item name="android:windowFrame">@null</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowFullscreen">true</item>
@@ -256,7 +256,7 @@
     <style name="PlaybackPopupDialogTheme" parent="Theme.AppCompat.Dialog">
         <item name="windowNoTitle">true</item>
         <item name="android:windowFrame">@null</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowFullscreen">true</item>
@@ -275,7 +275,7 @@
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">@color/twilight</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="fontFamily">sans-serif-medium</item>
         <item name="android:letterSpacing">0.04</item>
     </style>
 
@@ -304,7 +304,7 @@
         <item name="android:minHeight">0dip</item>
         <item name="android:maxHeight">4dip</item>
         <item name="android:focusable">true</item>
-        <item name="android:colorControlHighlight">@android:color/transparent</item>
+        <item name="colorControlHighlight">@android:color/transparent</item>
     </style>
 
     <style name="DateAndTimePickerTheme" parent="Theme.AppCompat.Light.Dialog">
@@ -336,7 +336,7 @@
 
     <style name="AppModalStyle"
         parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/sdk_white_full_rounded_background</item>
+        <item name="background">@drawable/sdk_white_full_rounded_background</item>
     </style>
 
     <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
@@ -344,14 +344,14 @@
     </style>
 
     <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@android:color/transparent</item>
+        <item name="background">@android:color/transparent</item>
     </style>
 
     <style name="Theme.Transparent" parent="android:Theme">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>

@@ -3,12 +3,12 @@ package io.mtksdk.inappsurvey.custom.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.support.v7.widget.AppCompatEditText;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +20,7 @@ import io.mtksdk.inappsurvey.R;
 /**
  * Created by kgy 2019. 9. 24.
  */
-public class MethinksEditText extends EditText {
+public class MethinksEditText extends AppCompatEditText {
     private static final String TAG = MethinksEditText.class.getSimpleName();
 
     private Context context;

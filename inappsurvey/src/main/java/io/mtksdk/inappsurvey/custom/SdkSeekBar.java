@@ -3,6 +3,7 @@ package io.mtksdk.inappsurvey.custom;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.support.v7.widget.AppCompatSeekBar;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 
@@ -11,7 +12,7 @@ import android.util.DisplayMetrics;
  * Created by kgy 2019. 9. 24.
  */
 
-public class SdkSeekBar extends androidx.appcompat.widget.AppCompatSeekBar {
+public class SdkSeekBar extends AppCompatSeekBar {
     private static final String TAG = "KSeekbar";
     private Context context;
 
