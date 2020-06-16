@@ -38,9 +38,6 @@ import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 
-import io.methinks.android.apptest.question.SurveyAlertManager;
-import io.methinks.android.apptest.question.ViewConstant;
-
 public class HService extends Service {
     private static final String TAG = HService.class.getSimpleName();
 
