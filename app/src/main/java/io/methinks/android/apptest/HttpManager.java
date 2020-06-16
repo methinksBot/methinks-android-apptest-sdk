@@ -230,7 +230,7 @@ public class HttpManager {
         try{
             String url = serverURL + "/inAppSections";
             JSONObject params = new JSONObject();
-            params.put("questionPackId", questionPackId);
+            params.put("packId", questionPackId);
             String[]strings = new String[]{url, Global.HTTP_POST, params.toString()};
 
             new HttpAsyncTask(callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, strings);
