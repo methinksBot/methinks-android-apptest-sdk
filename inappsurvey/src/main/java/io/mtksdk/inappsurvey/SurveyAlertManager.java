@@ -22,14 +22,14 @@ public class SurveyAlertManager extends AppCompatActivity {
         thirdUser = act;
         ViewConstant.packId = packId;
 
-        for (int i = 0; i < response.optJSONObject("result").optJSONArray("data").length(); i++) {
-            String sectionId = response.optJSONObject("result").optJSONArray("data").optJSONObject(i).optJSONObject("section").optString("objectId");
+        for (int i = 0; i < response.optJSONObject("result").optJSONArray("sections").length(); i++) {
+            String sectionId = response.optJSONObject("result").optJSONArray("sections").optJSONObject(i).optJSONObject("section").optString("objectId");
 
             if (i == 0) {
                 ViewConstant.firstSectionId = sectionId;
             }
-            JSONArray questionArr = response.optJSONObject("result").optJSONArray("data").optJSONObject(i).optJSONArray("questions");
-            JSONArray sectionLayout = response.optJSONObject("result").optJSONArray("data").optJSONObject(i).optJSONObject("section").optJSONArray("sectionLayout");
+            JSONArray questionArr = response.optJSONObject("result").optJSONArray("sections").optJSONObject(i).optJSONArray("questions");
+            JSONArray sectionLayout = response.optJSONObject("result").optJSONArray("sections").optJSONObject(i).optJSONObject("section").optJSONArray("sectionLayout");
             if (questionArr != null && sectionLayout != null) {
                 Section newSec = new Section(sectionId, questionArr, sectionLayout);
                 newSec.createQuestionObject();
