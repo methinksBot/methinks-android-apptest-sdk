@@ -6,9 +6,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import io.methinks.android.apptest.question.custom.widget.MethinksEditText;
-import io.methinks.android.apptest.question.custom.widget.MethinksTextView;
-
+import io.mtksdk.inappsurvey.custom.widget.MethinksEditText;
+import io.mtksdk.inappsurvey.custom.widget.MethinksTextView;
 
 public class HoverLogin {
 
@@ -30,8 +29,6 @@ public class HoverLogin {
         LinearLayout.LayoutParams bgparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         bgrnd.setLayoutParams(bgparams);
         bgrnd.setBackgroundColor(0xFFFFFF);
-
-
     }
 
 }
