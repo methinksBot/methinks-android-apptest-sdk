@@ -63,7 +63,7 @@
                         android:layout_marginTop="20dp"
                         android:weightSum="0.99"
                         android:orientation="horizontal">
-                        <io.methinks.android.apptest.question.custom.widget.MethinksTextView
+                        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
                             android:id="@+id/low"
                             android:layout_weight="0.33"
                             android:layout_width="0dp"
@@ -75,7 +75,7 @@
                             android:textColor="@color/silver"
                             android:textSize="14dp"
                             android:gravity="center_vertical|start" />
-                        <io.methinks.android.apptest.question.custom.widget.MethinksTextView
+                        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
                             android:id="@+id/mid"
                             android:layout_weight="0.33"
                             android:layout_width="0dp"
@@ -90,7 +90,7 @@
                             android:gravity="center"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp" />
-                        <io.methinks.android.apptest.question.custom.widget.MethinksTextView
+                        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
                             android:id="@+id/high"
                             android:layout_weight="0.33"
                             android:layout_width="0dp"

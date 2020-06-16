@@ -43,7 +43,7 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <io.methinks.android.apptest.question.custom.widget.MethinksTextView
+            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
                 android:visibility="visible"
                 android:id="@+id/submit"
                 android:layout_width="0dp"
@@ -61,7 +61,7 @@
                 android:textSize="20dp"
                 app:fw="@string/font_weight_medium" />
 
-            <io.methinks.android.apptest.question.custom.widget.MethinksTextView
+            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
                 android:visibility="gone"
                 android:id="@+id/finish_button"
                 android:layout_width="match_parent"

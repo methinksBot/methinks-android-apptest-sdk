@@ -24,11 +24,6 @@
             android:launchMode="singleTop"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name=".question.ViewControllerManager"
-            android:clearTaskOnLaunch="false"
-            android:launchMode="singleTop"
-            android:theme="@style/NoTitleBarTheme" />
-        <activity
             android:name=".AnnouncementActivity"
             android:theme="@style/NoTitleBarTheme" />
         <activity

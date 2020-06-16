@@ -24,7 +24,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <io.methinks.android.apptest.question.custom.widget.MethinksTextView
+            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
                 android:id="@+id/report_cancel"
                 android:gravity="center"
                 android:text="@string/common_text_cancel"
@@ -38,7 +38,7 @@
                 android:background="@color/blue_grey"
                 android:layout_width="0.5dp"
                 android:layout_height="match_parent" />
-            <io.methinks.android.apptest.question.custom.widget.MethinksTextView
+            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
                 android:id="@+id/report_submit"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
@@ -79,7 +79,7 @@
                     android:paddingBottom="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <io.methinks.android.apptest.question.custom.widget.MethinksEditText
+                    <io.mtksdk.inappsurvey.custom.widget.MethinksEditText
                         android:id="@+id/report_content"
                         android:imeOptions="actionDone"
                         android:padding="10dp"

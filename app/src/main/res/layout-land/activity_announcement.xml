@@ -20,7 +20,7 @@
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
-        <io.methinks.android.apptest.question.custom.widget.MethinksTextView
+        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
             android:id="@+id/announcement_project_title"
             android:text="@string/patcher_android_welcome_hi"
             android:textSize="20dp"
@@ -30,7 +30,7 @@
             android:paddingEnd="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <io.methinks.android.apptest.question.custom.widget.MethinksTextView
+        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
             android:id="@+id/announcement_project_progress"
             android:text="@string/patcher_your_progress"
             android:textSize="15dp"
@@ -40,7 +40,7 @@
             android:paddingEnd="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <io.methinks.android.apptest.question.custom.widget.MethinksTextView
+        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
             android:id="@+id/announcement_project_duration"
             android:textSize="11dp"
             android:textColor="@android:color/darker_gray"
@@ -85,7 +85,7 @@
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
-                        <io.methinks.android.apptest.question.custom.widget.MethinksTextView
+                        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
                             android:id="@+id/announcement_announce_count"
                             android:visibility="gone"
                             android:textColor="@color/white"
@@ -102,7 +102,7 @@
                             android:layout_height="wrap_content" />
                     </LinearLayout>
                 </FrameLayout>
-                <io.methinks.android.apptest.question.custom.widget.MethinksTextView
+                <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
                     android:id="@+id/announcement_announce_title"
                     android:lines="1"
                     android:maxLines="1"
@@ -136,7 +136,7 @@
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
-                        <io.methinks.android.apptest.question.custom.widget.MethinksTextView
+                        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
                             android:id="@+id/announcement_survey_count"
                             android:visibility="gone"
                             android:textColor="@color/white"
@@ -153,7 +153,7 @@
                             android:layout_height="wrap_content" />
                     </LinearLayout>
                 </FrameLayout>
-                <io.methinks.android.apptest.question.custom.widget.MethinksTextView
+                <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
                     android:id="@+id/announcement_survey_title"
                     android:lines="1"
                     android:maxLines="1"

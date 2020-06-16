@@ -24,7 +24,7 @@
                     android:layout_height="80dp"
                     android:src="@drawable/img_logo_methinks_original3x" />
             </LinearLayout>
-            <io.methinks.android.apptest.question.custom.widget.MethinksTextView
+            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
                 android:gravity="center"
                 android:id="@+id/close_methinks_title"
                 android:layout_width="match_parent"
