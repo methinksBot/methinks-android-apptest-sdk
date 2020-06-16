@@ -719,41 +719,47 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                             Global.isShowingQuestion = true;
                             QuestionPack pack = Global.packQueue.peek();
                             if(Global.eventQuestionPack != null){
-                                Global.eventQuestionPack.fetch(() -> {
-                                    ViewConstant.pack = Global.eventQuestionPack;
+                                Global.eventQuestionPack.fetch(() -> {});
+                                    //ViewConstant.pack = Global.eventQuestionPack;
 
-                                    new Handler(Looper.getMainLooper()).post(() -> {
+                                    // It's going to be happened inside of fetch()
+                                    /*new Handler(Looper.getMainLooper()).post(() -> {
                                         Global.hover.setInvisible();
                                         Global.hoverPopup.setInvisible();
                                         Global.hoverPopup.isOpened = false;
 
                                         SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), Global.eventQuestionPack.isRequired());
-                                    });
-                                });
+                                    });*/
+                                //});
                             }else if(pack.getType().equals(QuestionPack.SESSION_BASED_TYPE)){ // session based type
                                 if(pack.isFetched() && Global.loginResult.getInt("sessionCount") >= pack.getSession()){
-                                    ViewConstant.pack = pack;
+                                    //ViewConstant.pack = pack;
 
-                                    new Handler(Looper.getMainLooper()).post(() -> {
+                                    /*new Handler(Looper.getMainLooper()).post(() -> {
                                         Global.hover.setInvisible();
                                         Global.hoverPopup.setInvisible();
                                         Global.hoverPopup.isOpened = false;
 
                                         SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), pack.isRequired());
-                                    });
+                                    });*/
+
+                                    pack.fetch(() -> {});
+
                                 }
 
                             }else if(pack.getType().equals(QuestionPack.TIME_BASED_TYPE)){  // time based type
                                 if(Global.loginResult.has("totalSessionTime")){
                                     if(pack.isFetched() && Global.loginResult.getLong("totalSessionTime") > pack.getTime()){
-                                        ViewConstant.pack = pack;
+                                        /*ViewConstant.pack = pack;
                                         new Handler(Looper.getMainLooper()).post(() -> {
                                             Global.hover.setInvisible();
                                             Global.hoverPopup.setInvisible();
                                             Global.hoverPopup.isOpened = false;
 
                                             SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), pack.isRequired());
-                                        });
+                                        });*/
+
+                                        pack.fetch(() -> {});
                                     }
                                 }
                             }
