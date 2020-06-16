@@ -37,8 +37,8 @@ public class SurveyAlertManager extends AppCompatActivity {
             }
         }
 
-        Question testQ = ViewConstant.sectionContainer.get(ViewConstant.firstSectionId).getQuestionPacks().get(2);
-        Log.i("first Question", testQ.getText() + " " + testQ.getQuestionType());
+        /*Question testQ = ViewConstant.sectionContainer.get(ViewConstant.firstSectionId).getQuestionPacks().get(2);
+        Log.i("first Question", testQ.getText() + " " + testQ.getQuestionType());*/
 
         Intent myIntent = new Intent(thirdUser, ViewControllerManager.class);
         thirdUser.startActivity(myIntent);
