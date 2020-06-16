@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application;
 import android.app.Dialog;
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -14,12 +12,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.database.ContentObserver;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -44,7 +39,6 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.LinkedList;
 
-import io.methinks.android.apptest.question.QuestionPack;
 import io.mtksdk.inappsurvey.SurveyAlertManager;
 import io.mtksdk.inappsurvey.ViewConstant;
 
@@ -417,13 +411,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                             if(!Global.isShowingReport && !Global.isShowingQuestion){
                                 Global.isShowingQuestion = true;
                                 Global.eventQuestionPack.fetch(() -> {
-                                    ViewConstant.pack = Global.eventQuestionPack;
-                                    Global.hover.setInvisible();
-                                    Global.hoverPopup.setInvisible();
-                                    Global.hoverPopup.isOpened = false;
-
-                                    Log.e("sendMessage isRequired : " + Global.eventQuestionPack.isRequired());
-                                    new Handler(Looper.getMainLooper()).post(() -> SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), Global.eventQuestionPack.isRequired()));
+                                    //ViewConstant.pack = Global.eventQuestionPack;
                                 });
                             }
                         }

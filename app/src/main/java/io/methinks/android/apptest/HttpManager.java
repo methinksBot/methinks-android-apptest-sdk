@@ -223,6 +223,22 @@ public class HttpManager {
         }
     }
 
+    public void inAppSections(String questionPackId, Callback callback) {
+        if(questionPackId == null)
+            throw new NullPointerException("eventName is required.");
+
+        try{
+            String url = serverURL + "/inAppSections";
+            JSONObject params = new JSONObject();
+            params.put("questionPackId", questionPackId);
+            String[]strings = new String[]{url, Global.HTTP_POST, params.toString()};
+
+            new HttpAsyncTask(callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, strings);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
     public void answer(String questionPackId, JSONObject answer, Callback callback){
         if(questionPackId == null)
             throw new NullPointerException("questionPackId is required.");

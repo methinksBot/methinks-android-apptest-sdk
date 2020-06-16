@@ -1,11 +1,17 @@
-package io.methinks.android.apptest.question;
+package io.methinks.android.apptest;
+
+import android.app.Activity;
+import android.os.Handler;
+import android.os.Looper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import io.methinks.android.apptest.Global;
+import io.methinks.android.apptest.HttpManager;
 import io.methinks.android.apptest.Log;
+import io.mtksdk.inappsurvey.SurveyAlertManager;
 import io.mtksdk.inappsurvey.ViewConstant;
 
 public class QuestionPack {
@@ -27,14 +33,18 @@ public class QuestionPack {
     private boolean isFetched;
 
     public QuestionPack(JSONObject pack, String type) {
-        this.packId = pack.optString("questionPackId");
+        /*this.packId = pack.optString("questionPackId");
         this.isRequired = pack.optBoolean("required", false);
 //        this.isRequired = pack.optBoolean("isRequired", false);
         this.type = type;
         this.session = pack.optInt("session");
-        this.time = pack.optInt("time");
+        this.time = pack.optInt("time");*/
+        JSONObject surveyPack = pack.optJSONObject("surveyPack");
+        this.packId = surveyPack.optString("objectId");
+        this.type = type;
+        this.time = surveyPack.optInt("createdAt");
 
-        fetch();
+        //fetch();
     }
 
     public static String getSessionBasedType() {
@@ -89,7 +99,7 @@ public class QuestionPack {
         return questions;
     }
 
-    private void fetch(){
+   /* private void fetch(){
         ViewConstant.setQuestionPack(this, (response, error) -> {
             try{
                 if(response != null){
@@ -109,9 +119,34 @@ public class QuestionPack {
             }
 
         });
+    }*/
+
+    public void fetch(FetchCallback callback) {
+        new HttpManager().inAppSections(packId, (response, error) -> {
+            try {
+                if (response != null) {
+                    if (response.has("status") && response.getString("status").equals(Global.RESPONSE_OK)) {
+                        JSONObject result = response.optJSONObject("result");
+                        if (result != null && result.has("sections") && result.optJSONArray("sections").length() > 0) {
+                            isFetched = true;
+
+                            Global.hover.setInvisible();
+                            Global.hoverPopup.setInvisible();
+                            Global.hoverPopup.isOpened = false;
+
+                            Log.e("sendMessage isRequired : " + Global.eventQuestionPack.isRequired());
+                            new Handler(Looper.getMainLooper()).post(() -> SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), response, packId));
+                            callback.done();
+                        }
+                    }
+                }
+            } catch (JSONException e){
+                e.printStackTrace();
+            }
+        });
     }
 
-    public void fetch(FetchCallback callback){
+    /*public void fetch(FetchCallback callback){
         ViewConstant.setQuestionPack(this, (response, error) -> {
             try{
                 if(response != null){
@@ -133,7 +168,7 @@ public class QuestionPack {
                 e.printStackTrace();
             }
         });
-    }
+    }*/
     public interface FetchCallback{
         void done();
     }
