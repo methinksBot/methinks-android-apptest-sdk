@@ -29,6 +29,9 @@
         <activity
             android:name=".ReportActivity"
             android:theme="@style/NoTitleBarTheme" />
+
+        <activity android:name="io.mtksdk.inappsurvey.ViewControllerManager"/>
+
         <activity
             android:name=".PermissionActivity"
             android:clearTaskOnLaunch="false"
