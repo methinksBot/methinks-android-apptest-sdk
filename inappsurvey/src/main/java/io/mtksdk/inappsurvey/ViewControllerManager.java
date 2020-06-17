@@ -3,6 +3,7 @@ package io.mtksdk.inappsurvey;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 
@@ -14,7 +15,7 @@ import java.util.HashMap;
  * Created by kgy 2019. 9. 24.
  */
 
-public class ViewControllerManager extends AppCompatActivity {
+public class ViewControllerManager extends FragmentActivity {
     protected static HashMap<String, ArrayList<Object>> answerMap;
     protected static Context context;
     public static HashMap<String, Object> cache;

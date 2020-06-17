@@ -1,6 +1,7 @@
 package io.mtksdk.inappsurvey;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -39,7 +41,7 @@ public class BottomSheetFragment extends DialogFragment {
     protected org.json.JSONObject currQuestion;
     protected static HashMap<String, String> sequenceLogicCache;
     protected static HashMap<String, Object> cache;
-    protected AppCompatActivity act;
+    protected FragmentActivity act;
     protected int screenHeightP;
     protected int screenWidthP;
     public int screenHeightL;
@@ -52,7 +54,8 @@ public class BottomSheetFragment extends DialogFragment {
 
     public BottomSheetFragment() {}
 
-    public BottomSheetFragment(AppCompatActivity act, int height, int width, String firstSectionId) {
+    @SuppressLint("ValidFragment")
+    public BottomSheetFragment(FragmentActivity act, int height, int width, String firstSectionId) {
         this.act = act;
         this.screenHeightP = height;
         this.screenWidthP = width;
