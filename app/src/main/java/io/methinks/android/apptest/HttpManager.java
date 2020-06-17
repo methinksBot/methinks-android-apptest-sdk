@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.telecom.Call;
 import android.text.TextUtils;
 import android.util.Base64;
 
@@ -257,6 +258,15 @@ public class HttpManager {
         }catch (JSONException e){
             e.printStackTrace();
         }
+    }
+
+    public void inAppAnswer(String packId, JSONObject answer, Callback callback) {
+        if (packId == null)
+            throw new NullPointerException("packId is required.");
+        else if (answer == null)
+            throw new NullPointerException("answer is required");
+
+
     }
 
     public void capture(String reason, String type, String imageData, Callback callback){
