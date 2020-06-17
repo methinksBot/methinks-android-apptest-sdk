@@ -2,6 +2,7 @@ package io.mtksdk.inappsurvey;
 
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -41,7 +42,7 @@ public class BottomSheetFragment extends DialogFragment {
     protected org.json.JSONObject currQuestion;
     protected static HashMap<String, String> sequenceLogicCache;
     protected static HashMap<String, Object> cache;
-    protected FragmentActivity act;
+    protected Activity act;
     protected int screenHeightP;
     protected int screenWidthP;
     public int screenHeightL;
@@ -55,7 +56,7 @@ public class BottomSheetFragment extends DialogFragment {
     public BottomSheetFragment() {}
 
     @SuppressLint("ValidFragment")
-    public BottomSheetFragment(FragmentActivity act, int height, int width, String firstSectionId) {
+    public BottomSheetFragment(Activity act, int height, int width, String firstSectionId) {
         this.act = act;
         this.screenHeightP = height;
         this.screenWidthP = width;
