@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':android_mtkrtc'
 rootProject.name='MTKApptestSDK'
