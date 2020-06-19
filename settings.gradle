@@ -1,2 +1,3 @@
-include ':app', ':inappsurvey'
+include ':app', ':inappsurvey', ':inappsurvey_mode'
 rootProject.name='MTKApptestSDK'
+project(':inappsurvey_mode').projectDir = new File('inappsurvey_module')
