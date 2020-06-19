@@ -52,7 +52,7 @@ dependencies {
 //    implementation('com.github.methinksBot:methinks-android-rtc-sdk:1.0.7') {
 //        transitive = true
 //    }
-    compileOnly name: 'mtkrtc', ext: 'aar'
+    implementation name: 'mtkrtc', ext: 'aar'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }
 
