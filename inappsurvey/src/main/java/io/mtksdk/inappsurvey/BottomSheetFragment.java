@@ -1,6 +1,8 @@
 package io.mtksdk.inappsurvey;
 
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -39,7 +41,7 @@ public class BottomSheetFragment extends DialogFragment {
     protected org.json.JSONObject currQuestion;
     protected static HashMap<String, String> sequenceLogicCache;
     protected static HashMap<String, Object> cache;
-    protected AppCompatActivity act;
+    protected Activity act;
     protected int screenHeightP;
     protected int screenWidthP;
     public int screenHeightL;
