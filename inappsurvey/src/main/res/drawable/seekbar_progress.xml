@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <corners android:radius="3dip" />
+            <gradient android:startColor="@color/pale_grey_two" android:endColor="@color/pale_grey_two" android:angle="270" />
+        </shape>
+
+    </item>
+        <!--android:drawable="@drawable/red_scrubber_track_holo_light"/>-->
+    <item android:id="@android:id/secondaryProgress">
+        <clip>
+            <shape android:shape="rectangle">
+                <corners android:radius="3dip" />
+                <gradient android:startColor="@color/apple_green" android:endColor="@color/apple_green" android:angle="270" />
+            </shape>
+        </clip>
+    </item>
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <corners android:radius="3dip" />
+                <gradient android:startColor="@color/cornflower" android:endColor="@color/cornflower" android:angle="270" />
+            </shape>
+        </clip>
+    </item>
+
+</layer-list>
+
+
+<!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >-->
+
+    <!--<item android:id="@android:id/background">-->
+        <!--<shape android:shape="line">-->
+            <!--<corners android:radius="3dp" />-->
+            <!--<stroke android:width="6dp" android:color="@color/pale_grey_two" />-->
+        <!--</shape>-->
+    <!--</item>-->
+    <!--<item android:id="@android:id/secondaryProgress">-->
+        <!--<clip>-->
+            <!--<shape android:shape="line">-->
+                <!--<corners android:radius="3dp" />-->
+                <!--<stroke android:width="6dp" android:color="@color/pale_grey_two" />-->
+
+            <!--</shape>-->
+        <!--</clip>-->
+    <!--</item>-->
+    <!--<item android:id="@android:id/progress">-->
+        <!--<shape android:shape="line">-->
+            <!--<corners android:radius="3dp" />-->
+            <!--<stroke android:width="6dp" android:color="@color/cornflower" />-->
+        <!--</shape>-->
+    <!--</item>-->
+
+<!--</layer-list>-->
