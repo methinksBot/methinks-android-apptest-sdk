@@ -14,6 +14,7 @@ import io.mtksdk.inappsurvey.converter.Section;
 
 public class SurveyAlertManager extends AppCompatActivity {
 
+
     protected static Context thirdUser;
     protected static NetworkManager nm = new NetworkManager();
     protected static ViewControllerManager vcm = new ViewControllerManager();
