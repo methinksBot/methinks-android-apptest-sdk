@@ -11,6 +11,10 @@ import java.util.HashMap;
 
 import io.mtksdk.inappsurvey.ViewConstant;
 
+/**
+ * Created by kgy 2020. 6. 19.
+ */
+
 public class Section {
     private String sectionId;
     private JSONArray questions;

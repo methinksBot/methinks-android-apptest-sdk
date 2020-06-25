@@ -3,9 +3,7 @@ package io.mtksdk.inappsurvey.custom.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
-
-import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
@@ -17,7 +15,7 @@ import io.mtksdk.inappsurvey.R;
  * Created by kgy 2019. 9. 24.
  */
 
-public class MethinksTextView extends AppCompatTextView {
+public class MethinksTextView extends androidx.appcompat.widget.AppCompatTextView {
     private static final String TAG = MethinksTextView.class.getSimpleName();
     private Context context;
     private AttributeSet attrs;

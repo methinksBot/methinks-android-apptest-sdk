@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
             <ImageView
-                app:srcCompat="@drawable/ic_close_16_x"
+                android:src="@drawable/ic_close_16_x"
                 android:alpha="0.56"
                 android:adjustViewBounds="true"
                 android:scaleType="fitStart"

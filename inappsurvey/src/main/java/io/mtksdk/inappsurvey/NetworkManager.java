@@ -1,8 +1,7 @@
 package io.mtksdk.inappsurvey;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.util.Log;
-
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -15,7 +14,11 @@ import java.io.UnsupportedEncodingException;
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
 
-public class NetworkManager extends AppCompatActivity {
+/**
+ * Created by kgy 2019. 9. 24.
+ */
+
+public class NetworkManager extends Activity {
 
     final String METHINKS_SDK_URL_SURVEYQUESTION = "functions/getSurveyQuestions";
     final String METHINKS_SDK_URL_COMPLETE = "functions/surveyCompletion";

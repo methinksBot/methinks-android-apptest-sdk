@@ -2,7 +2,6 @@ package io.mtksdk.inappsurvey.adapter;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONObject;
 
@@ -84,17 +85,17 @@ public class SdkMultipleChoiceAdapter extends StatelessSection {
     }
 
     @Override
-    public android.support.v7.widget.RecyclerView.ViewHolder getItemViewHolder(View view) {
+    public RecyclerView.ViewHolder getItemViewHolder(View view) {
         return new ViewHolder(view);
     }
 
     @Override
-    public android.support.v7.widget.RecyclerView.ViewHolder getHeaderViewHolder(View view){
+    public RecyclerView.ViewHolder getHeaderViewHolder(View view){
         return new QuestionHeaderViewHolder(view);
     }
 
     @Override
-    public void onBindItemViewHolder(android.support.v7.widget.RecyclerView.ViewHolder holder, final int position) {
+    public void onBindItemViewHolder(RecyclerView.ViewHolder holder, final int position) {
         final ViewHolder itemHolder = (ViewHolder) holder;
         itemHolder.setIsRecyclable(false);
         if(!viewHolders.containsKey(position)){
@@ -144,7 +145,7 @@ public class SdkMultipleChoiceAdapter extends StatelessSection {
     }
 
     @Override
-    public void onBindHeaderViewHolder(android.support.v7.widget.RecyclerView.ViewHolder holder) {
+    public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder) {
         final QuestionHeaderViewHolder headerHolder = (QuestionHeaderViewHolder) holder;
         headerHolder.questionContent.setText(questionText);
     }
@@ -221,7 +222,7 @@ public class SdkMultipleChoiceAdapter extends StatelessSection {
 
 
 
-    public class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public View itemView;
         public LinearLayout mainLayout;
         public ImageView imageView;
@@ -248,7 +249,7 @@ public class SdkMultipleChoiceAdapter extends StatelessSection {
         }
     }
 
-    public class QuestionHeaderViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
+    public class QuestionHeaderViewHolder extends RecyclerView.ViewHolder {
         public TextView questionContent;
         public ImageView attachedImage;
 

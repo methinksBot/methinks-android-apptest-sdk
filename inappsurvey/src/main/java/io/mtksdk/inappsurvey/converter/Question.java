@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+/**
+ * Created by kgy 2020. 6. 19.
+ */
+
 public class Question implements Serializable {
     private String sectionId;
     private String questionId;

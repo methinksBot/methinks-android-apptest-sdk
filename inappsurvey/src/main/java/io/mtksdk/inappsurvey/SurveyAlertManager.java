@@ -2,8 +2,9 @@ package io.mtksdk.inappsurvey;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,8 +13,11 @@ import org.json.JSONObject;
 import io.mtksdk.inappsurvey.converter.Question;
 import io.mtksdk.inappsurvey.converter.Section;
 
-public class SurveyAlertManager extends AppCompatActivity {
+/**
+ * Created by kgy 2019. 9. 24.
+ */
 
+public class SurveyAlertManager extends AppCompatActivity {
 
     protected static Context thirdUser;
     protected static NetworkManager nm = new NetworkManager();
@@ -38,8 +42,8 @@ public class SurveyAlertManager extends AppCompatActivity {
             }
         }
 
-        /*Question testQ = ViewConstant.sectionContainer.get(ViewConstant.firstSectionId).getQuestionPacks().get(2);
-        Log.i("first Question", testQ.getText() + " " + testQ.getQuestionType());*/
+//        Question testQ = ViewConstant.sectionContainer.get(ViewConstant.firstSectionId).getQuestionPacks().get(2);
+//        Log.i("first Question", testQ.getText() + " " + testQ.getQuestionType());
 
         Intent myIntent = new Intent(thirdUser, ViewControllerManager.class);
         thirdUser.startActivity(myIntent);

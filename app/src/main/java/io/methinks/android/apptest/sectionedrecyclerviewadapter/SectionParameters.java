@@ -1,7 +1,7 @@
 package io.methinks.android.apptest.sectionedrecyclerviewadapter;
 
 
-import android.support.annotation.LayoutRes;
+import androidx.annotation.LayoutRes;
 
 /**
  * Class used as constructor parameters of {@link Section}.

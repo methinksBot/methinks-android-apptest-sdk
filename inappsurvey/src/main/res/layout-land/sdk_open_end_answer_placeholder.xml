@@ -17,7 +17,7 @@
         android:layout_height="wrap_content">
         <ImageButton
             android:id="@+id/add_answer"
-            app:srcCompat="@drawable/ic_plus"
+            android:src="@drawable/ic_plus"
             android:alpha="0.29"
             android:layout_gravity="center"
             android:background="@android:color/transparent"

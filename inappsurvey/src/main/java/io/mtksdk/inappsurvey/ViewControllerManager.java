@@ -2,12 +2,38 @@ package io.mtksdk.inappsurvey;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import io.mtksdk.inappsurvey.adapter.ViewControllerAdapter;
+import io.mtksdk.inappsurvey.fragment.BaseFragment;
+
+import org.json.JSONException;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import static io.mtksdk.inappsurvey.ViewConstant.answer;
+import static io.mtksdk.inappsurvey.ViewConstant.apiKey;
+import static io.mtksdk.inappsurvey.ViewConstant.packId;
 
 
 /**

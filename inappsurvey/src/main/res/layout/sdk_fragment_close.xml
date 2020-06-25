@@ -22,7 +22,7 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="80dp"
-                    app:srcCompat="@drawable/img_logo_methinks_original3x" />
+                    android:src="@drawable/img_logo_methinks_original3x" />
             </LinearLayout>
             <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
                 android:gravity="center"

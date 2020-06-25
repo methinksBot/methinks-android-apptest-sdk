@@ -6,7 +6,7 @@
     android:background="@drawable/sliding_up_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/close_sliding_panel"
         android:background="@color/white"
         android:layout_width="match_parent"
@@ -31,15 +31,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:alpha="0.87"
-            app:srcCompat="@drawable/ic_close"
+            android:src="@drawable/ic_close"
             android:background="@android:color/transparent"
             android:paddingTop="18dp"
             android:paddingBottom="18dp"
             android:paddingRight="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-    </android.support.constraint.ConstraintLayout>
-    <android.support.constraint.ConstraintLayout
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/replace_to_text"
         android:visibility="gone"
         android:clickable="true"
@@ -51,7 +51,7 @@
             android:id="@+id/text_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:srcCompat="@drawable/ic_question_openended"
+            android:src="@drawable/ic_question_openended"
             android:alpha="0.54"
             android:background="@android:color/transparent"
             android:layout_marginLeft="16dp"
@@ -69,8 +69,8 @@
             android:layout_marginLeft="32dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-    </android.support.constraint.ConstraintLayout>
-    <android.support.constraint.ConstraintLayout
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/replace_to_voice"
         android:visibility="gone"
         android:clickable="true"
@@ -82,7 +82,7 @@
             android:id="@+id/voice_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:srcCompat="@drawable/ic_video_interview_voice_active"
+            android:src="@drawable/ic_video_interview_voice_active"
             android:alpha="0.54"
             android:background="@android:color/transparent"
             android:layout_marginLeft="16dp"
@@ -101,8 +101,8 @@
             android:layout_marginLeft="32dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-    </android.support.constraint.ConstraintLayout>
-    <android.support.constraint.ConstraintLayout
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/replace_to_video"
         android:visibility="gone"
         android:clickable="true"
@@ -114,7 +114,7 @@
             android:id="@+id/video_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:srcCompat="@drawable/ic_video_interview_video_active"
+            android:src="@drawable/ic_video_interview_video_active"
             android:alpha="0.54"
             android:background="@android:color/transparent"
             android:layout_marginLeft="16dp"
@@ -133,7 +133,7 @@
             android:layout_marginLeft="32dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>

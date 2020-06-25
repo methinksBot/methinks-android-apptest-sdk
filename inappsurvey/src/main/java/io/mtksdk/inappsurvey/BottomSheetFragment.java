@@ -1,18 +1,10 @@
 package io.mtksdk.inappsurvey;
 
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.BottomSheetDialogFragment;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -24,14 +16,30 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import io.mtksdk.inappsurvey.ViewConstant;
 import io.mtksdk.inappsurvey.adapter.ViewControllerAdapter;
+import io.mtksdk.inappsurvey.R;
 import io.mtksdk.inappsurvey.converter.Question;
 import io.mtksdk.inappsurvey.custom.widget.MethinksTextView;
 import io.mtksdk.inappsurvey.fragment.BaseFragment;
 
+/**
+ * Created by kgy 2019. 9. 24.
+ */
 
 public class BottomSheetFragment extends DialogFragment {
 
@@ -54,7 +62,6 @@ public class BottomSheetFragment extends DialogFragment {
 
     public BottomSheetFragment() {}
 
-    @SuppressLint("ValidFragment")
     public BottomSheetFragment(Activity act, int height, int width, String firstSectionId) {
         this.act = act;
         this.screenHeightP = height;
