@@ -26,6 +26,7 @@
 	<string name="patcher_next">다음</string>
 	<string name="patcher_bug_report">버그 또는 문제 리포트</string>
 	<string name="patcher_suggestion">제안</string>
+	<string name="patcher_forum">포럼</string>
 	<string name="patcher_project_requirement">프로젝트 요구 사항</string>
 	<string name="patcher_other">기타</string>
 	<string name="patcher_mobile_test_platform">모바일 테스트 플랫폼</string>

@@ -26,6 +26,7 @@
 	<string name="patcher_next">Siguiente</string>
 	<string name="patcher_bug_report">Informe de errores</string>
 	<string name="patcher_suggestion">Sugerencia</string>
+	<string name="patcher_forum">Forum</string>
 	<string name="patcher_project_requirement">Requisitos del proyecto</string>
 	<string name="patcher_other">Otro</string>
 	<string name="patcher_mobile_test_platform">Plataforma de Prueba Móvil</string>

@@ -30,6 +30,7 @@
     <string name="patcher_next">Next</string>
     <string name="patcher_bug_report">Bug report</string>
     <string name="patcher_suggestion">Suggestion</string>
+    <string name="patcher_forum">Forum</string>
     <string name="patcher_project_requirement">Project requirement</string>
     <string name="patcher_other">Other</string>
     <string name="patcher_mobile_test_platform">Mobile Test Platform</string>

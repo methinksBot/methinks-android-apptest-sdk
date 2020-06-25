@@ -16,7 +16,7 @@ public class HoverPopup {
 
     private Context context;
     protected LinearLayout hoverPopup;
-    protected TextView bugReport, suggestion, cancel;
+    protected TextView bugReport, suggestion, forum, cancel;
     protected RecyclerView eventRecyclerView;
     public RecyclerView.Adapter mAdapter;
     public RecyclerView.LayoutManager layoutManager;
@@ -34,6 +34,7 @@ public class HoverPopup {
 
         bugReport = hoverPopup.findViewById(R.id.popup_hover_bug_report);
         suggestion = hoverPopup.findViewById(R.id.popup_hover_suggestion);
+        forum = hoverPopup.findViewById(R.id.popup_hover_forum);
         cancel = hoverPopup.findViewById(R.id.popup_hover_cancel);
         eventRecyclerView = hoverPopup.findViewById(R.id.popup_hover_shootevent);
 

@@ -324,6 +324,12 @@ public class HService extends Service {
             Global.hoverPopup.setInvisible();
             Global.hoverPopup.isOpened = false;
         });
+
+        Global.hoverPopup.forum.setOnClickListener(view -> {
+
+            // start forum activity from library.
+
+        });
     }
 
     @Override

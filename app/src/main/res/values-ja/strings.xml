@@ -26,6 +26,7 @@
 	<string name="patcher_next">次へ</string>
 	<string name="patcher_bug_report">バグまたは問題レポート</string>
 	<string name="patcher_suggestion">提案</string>
+	<string name="patcher_forum">Forum</string>
 	<string name="patcher_project_requirement">プロジェクト要求事項</string>
 	<string name="patcher_other">その他</string>
 	<string name="patcher_mobile_test_platform">使用者コード</string>

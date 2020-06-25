@@ -60,6 +60,22 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <View
+                android:background="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp" />
+            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+                android:id="@+id/popup_hover_forum"
+                android:textColor="#007AFF"
+                app:fw="@string/font_weight_medium"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:text="@string/patcher_forum"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
 

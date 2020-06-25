@@ -31,6 +31,7 @@
     <string name="patcher_next">下一個</string>
     <string name="patcher_bug_report">BUG或是問題報告</string>
     <string name="patcher_suggestion">提議</string>
+    <string name="patcher_forum">Forum</string>
     <string name="patcher_project_requirement">項目要求事項</string>
     <string name="patcher_other">其他</string>
     <string name="patcher_mobile_test_platform">手機測試平台</string>
