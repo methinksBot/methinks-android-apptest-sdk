@@ -39,6 +39,8 @@ import org.json.JSONException;
 
 import java.io.ByteArrayOutputStream;
 
+import io.methinks.android.methinks_android_forum_sdk.ForumManager;
+
 public class HService extends Service {
     private static final String TAG = HService.class.getSimpleName();
 
@@ -329,7 +331,14 @@ public class HService extends Service {
         Global.hoverPopup.forum.setOnClickListener(view -> {
 
             // start forum activity from library.
+            Global.isShowingReport = true;
+            Global.lastReportTypeIsBug = false;
 
+            new ForumManager(context, "4ci4XDoax4", "ric242", true);
+
+            Global.hover.setInvisible();
+            Global.hoverPopup.setInvisible();
+            Global.hoverPopup.isOpened = false;
         });
     }
 
