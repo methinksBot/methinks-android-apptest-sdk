@@ -12,6 +12,7 @@ public class ForumManager {
         Global.isDubugMode = isDebug;
 
         Intent forumMainIntent = new Intent(context, ForumMainActivity.class);
+        forumMainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(forumMainIntent);
     }
 }
