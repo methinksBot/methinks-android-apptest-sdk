@@ -12,18 +12,8 @@
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ForumMainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activity.ForumSectionActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.ForumSection" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".activity.ForumMainActivity" />
+        <activity android:name=".activity.ForumSectionActivity" />
         <activity android:name=".activity.ForumPostCreateActivity" />
         <activity android:name=".activity.ForumPostDetailActivity" />
         <activity android:name=".activity.ForumPostUpdateActivity" />
