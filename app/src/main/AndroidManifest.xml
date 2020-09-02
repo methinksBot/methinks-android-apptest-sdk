@@ -42,7 +42,9 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
-        <service android:name=".HService" />
+        <service
+            android:name=".HService"
+            android:foregroundServiceType="mediaProjection"/>
     </application>
 
 </manifest>
