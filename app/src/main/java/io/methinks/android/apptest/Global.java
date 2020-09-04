@@ -67,6 +67,7 @@ public class Global {
 
     public static Application app;
     protected static MTKClient client;
+    protected static MTKRecorder recorder;
 
     protected static ApplicationTracker applicationTracker;
 
@@ -94,6 +95,7 @@ public class Global {
     protected static String sCampaignParticipantId;
     protected static String sUserId;
     protected static String sScreenName;
+    protected static String recordingOption = "disable";
     protected static int sSuveyCount;
     protected static int sAnnouncementCount;
     protected static int minimumTestBuildNumber;

@@ -54,6 +54,8 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
     private MTKRTCMainActivity unityActivity;
     private Thread timerThread, stateThread;
 
+    private MTKRecorder mtkRecorder;
+
     // about screen shot detecting
     private ScreenshotContentObserver screenShotContentObserver;
     private static final String SORT_ORDER = MediaStore.Images.Media.DATE_ADDED + " DESC";
@@ -116,6 +118,8 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
 
         Global.isPlayedByEmulator = Build.getRadioVersion().equals("") ? true : false;
 
+        this.mtkRecorder = MTKRecorder.getInstance(app);
+
         LocalBroadcastManager.getInstance(app).registerReceiver(broadcastReceiver, new IntentFilter(Global.LOCAL_BROADCAST_RECEIVE_INTENT_FILTER_ACTION));
 
         Log.d("Completed creating MTKClient instance.");
@@ -166,9 +170,9 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                             Log.d("AppTest user is completed login. : " + response);
                             LocalStore.getInstance().putTestUserCode(Global.sTestUserCode);
 
-
                             JSONObject result = response.getJSONObject("result");
                             Global.isScreenStreamAllowed = result.has("isScreenStreamAllowed") && result.getBoolean("isScreenStreamAllowed");
+                            Global.recordingOption = result.has("recordingOption") ? result.getString("recordingOption") : "disable";
                             Global.sLoginTime = new Date().getTime() / 1000;
                             Global.sessionStartTime = Global.sLoginTime;
                             Global.sForegroundTime = Global.sLoginTime;
