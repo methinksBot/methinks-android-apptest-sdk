@@ -27,7 +27,7 @@ public class MTKRecorder {
      *   partially recording.
      * */
 
-    private void makeRecording(String event) {
+    public void makeRecording(String event) {
         if (isActivated && Global.recordingMode.equals("default")) {
             Log.e("Another recording is in progress or Mode is defferent.");
             return;
@@ -39,7 +39,7 @@ public class MTKRecorder {
         // TODO: 2020/09/07 set timer thread to count 10 min
     }
 
-    private void startRecording(String event) {
+    public void startRecording(String event) {
         if (isActivated && Global.recordingMode.equals("default")) {
             Log.e("Another recording is in progress or Mode is defferent.");
             return;
@@ -50,7 +50,7 @@ public class MTKRecorder {
 
     }
 
-    private void endRecording(String event) {
+    public void endRecording(String event) {
         if (Global.recordingMode.equals("default")) {
             Log.e("Another recording is in progress");
             return;
