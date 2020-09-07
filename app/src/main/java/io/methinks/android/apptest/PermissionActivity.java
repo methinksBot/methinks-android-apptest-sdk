@@ -254,6 +254,8 @@ public class PermissionActivity extends AppCompatActivity {
                 Log.e("RecordingMode: " + Global.recordingMode + "/" + Global.recordTicket);
                 if (Global.recordingMode.equals("full") || (Global.recordingMode.equals("default") && Global.recordTicket))
                     MTKScreenSharingPermUtil.checkPermissionCapture(this, Global.REQUEST_SCREEN_SHARING, mediaProjectionManager);
+                else
+                    checkExternalStoragePermission();
                 /*Log.d("Request SCREEN CAPTURE permission to user.");
                 isGrantedCapturePermission = true;
                 Global.isSharedScreen = true;
