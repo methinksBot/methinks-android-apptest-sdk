@@ -251,6 +251,7 @@ public class PermissionActivity extends AppCompatActivity {
         }else{
             if(!isGrantedCapturePermission){
                 /** media projection and screen sharing is started when it's allowed. */
+                Log.e("RecordingMode: " + Global.recordingMode + "/" + Global.recordTicket);
                 if (Global.recordingMode.equals("full") || (Global.recordingMode.equals("default") && Global.recordTicket))
                     MTKScreenSharingPermUtil.checkPermissionCapture(this, Global.REQUEST_SCREEN_SHARING, mediaProjectionManager);
                 /*Log.d("Request SCREEN CAPTURE permission to user.");
