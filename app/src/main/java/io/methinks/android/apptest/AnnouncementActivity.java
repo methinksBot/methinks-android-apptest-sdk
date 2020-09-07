@@ -116,8 +116,10 @@ public class AnnouncementActivity extends AppCompatActivity {
             throw new NullPointerException("ApplicationTracker's top activity can't be null to show PermissionActivity");
         }
 
-        Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
-        Global.applicationTracker.getTopActivity().startActivity(loginIntent);
+        if (Global.recordingMode.equals("full")) {
+            Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
+            Global.applicationTracker.getTopActivity().startActivity(loginIntent);
+        }
         Log.d("Announcement Activity is finished");
         super.finish();
     }

@@ -95,7 +95,7 @@ public class Global {
     protected static String sCampaignParticipantId;
     protected static String sUserId;
     protected static String sScreenName;
-    protected static String recordingOption = "disable";
+    protected static String recordingMode = "default";
     protected static int sSuveyCount;
     protected static int sAnnouncementCount;
     protected static int minimumTestBuildNumber;

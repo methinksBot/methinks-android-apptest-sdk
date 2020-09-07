@@ -172,7 +172,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
 
                             JSONObject result = response.getJSONObject("result");
                             Global.isScreenStreamAllowed = result.has("isScreenStreamAllowed") && result.getBoolean("isScreenStreamAllowed");
-                            Global.recordingOption = result.has("recordingOption") ? result.getString("recordingOption") : "disable";
+                            Global.recordingMode = result.has("recordingMode") ? result.getString("recordingMode") : "default";
                             Global.sLoginTime = new Date().getTime() / 1000;
                             Global.sessionStartTime = Global.sLoginTime;
                             Global.sForegroundTime = Global.sLoginTime;
@@ -596,7 +596,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             screenShotContentObserver.register();
         }
 
-        if(Global.screenSharing != null && !Global.isSharedScreen){
+        if(Global.screenSharing != null && !Global.isSharedScreen && Global.recordingMode.equals("full")){
             Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
             Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
         }

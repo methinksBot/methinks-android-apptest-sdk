@@ -1,6 +1,7 @@
 package io.methinks.android.apptest;
 
 import android.content.Context;
+import android.content.Intent;
 
 public class MTKRecorder {
 
@@ -22,24 +23,38 @@ public class MTKRecorder {
         return instance;
     }
 
+    /**
+     *   partially recording.
+     * */
+
     private void makeRecording(String event) {
-        if (isActivated) {
-            Log.e("Another recording is in progress");
+        if (isActivated && Global.recordingMode.equals("default")) {
+            Log.e("Another recording is in progress or Mode is defferent.");
             return;
         }
+
+        Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
+        Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
+
+        // TODO: 2020/09/07 set timer thread to count 10 min
     }
 
     private void startRecording(String event) {
-        if (isActivated) {
-            Log.e("Another recording is in progress");
+        if (isActivated && Global.recordingMode.equals("default")) {
+            Log.e("Another recording is in progress or Mode is defferent.");
             return;
         }
 
+        Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
+        Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
 
     }
 
     private void endRecording(String event) {
-
+        if (Global.recordingMode.equals("default")) {
+            Log.e("Another recording is in progress");
+            return;
+        }
     }
 
     private void pauseRecording(String event) {
@@ -49,4 +64,8 @@ public class MTKRecorder {
     private void resumeRecording(String event) {
 
     }
+
+
+
+
 }
