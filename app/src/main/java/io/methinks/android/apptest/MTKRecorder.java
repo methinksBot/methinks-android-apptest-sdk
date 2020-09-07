@@ -12,7 +12,6 @@ public class MTKRecorder {
     private boolean recordTrigger = false;
 
     public MTKRecorder(Context context) {
-        Global.recordTicket = true;
     }
 
     public static synchronized MTKRecorder getInstance(Context context) {
@@ -45,7 +44,7 @@ public class MTKRecorder {
             Log.e("Another recording is in progress or Mode is defferent.");
             return;
         }
-
+        Global.recordTicket = true;
         Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
         Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
 
