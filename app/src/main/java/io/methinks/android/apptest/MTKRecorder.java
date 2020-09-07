@@ -9,6 +9,7 @@ public class MTKRecorder {
 
     private String recordingMode = "default";
     private boolean isActivated = false;
+    private String currentEvent = "";
     private boolean recordTrigger = false;
 
     public MTKRecorder(Context context) {
@@ -44,6 +45,7 @@ public class MTKRecorder {
             Log.e("Another recording is in progress or Mode is defferent.");
             return;
         }
+
         Global.recordTicket = true;
         Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
         Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
@@ -55,6 +57,8 @@ public class MTKRecorder {
             Log.e("Another recording is in progress");
             return;
         }
+
+        Global.screenSharing.end();
     }
 
     private void pauseRecording(String event) {
