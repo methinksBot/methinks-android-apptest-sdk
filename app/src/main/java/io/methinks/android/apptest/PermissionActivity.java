@@ -35,7 +35,6 @@ public class PermissionActivity extends AppCompatActivity {
     private MediaProjectionManager mediaProjectionManager;
     private boolean isGrantedOverlayPermission;
     private boolean isGrantedCapturePermission;
-    private boolean showDeveloperOption;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,7 +187,7 @@ public class PermissionActivity extends AppCompatActivity {
         if(isGrantedOverlay()){
             isGrantedOverlayPermission = true;
             Log.d("OverlayPermission 결과: "+ isGrantedOverlayPermission);
-            if(Global.isScreenStreamAllowed){
+            if(!Global.recordingMode.equals("none")){
                 checkShowTouches();
             }else{
                 /** 스크린레코딩 없을 시 터치포인터 enable X. 곧바로 screenshare.start() start내부에 또 isScreenStreamAllowed분기 존재. */
@@ -251,7 +250,9 @@ public class PermissionActivity extends AppCompatActivity {
             Log.d("Request SHOW TOUCHES permission to user.");
         }else{
             if(!isGrantedCapturePermission){
-                MTKScreenSharingPermUtil.checkPermissionCapture(this, Global.REQUEST_SCREEN_SHARING, mediaProjectionManager);
+                /** media projection and screen sharing is started when it's allowed. */
+                if (Global.recordingMode.equals("full") || (Global.recordingMode.equals("default") && Global.recordTicket))
+                    MTKScreenSharingPermUtil.checkPermissionCapture(this, Global.REQUEST_SCREEN_SHARING, mediaProjectionManager);
                 /*Log.d("Request SCREEN CAPTURE permission to user.");
                 isGrantedCapturePermission = true;
                 Global.isSharedScreen = true;

@@ -7,11 +7,12 @@ public class MTKRecorder {
 
     private static volatile MTKRecorder instance;
 
-    private boolean forceStopRecording = false;
+    private String recordingMode = "default";
     private boolean isActivated = false;
+    private boolean recordTrigger = false;
 
     public MTKRecorder(Context context) {
-
+        Global.recordTicket = true;
     }
 
     public static synchronized MTKRecorder getInstance(Context context) {

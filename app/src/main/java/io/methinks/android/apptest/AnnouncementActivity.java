@@ -93,8 +93,6 @@ public class AnnouncementActivity extends AppCompatActivity {
             });
         }
 
-
-
         View.OnClickListener closeListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,10 +114,9 @@ public class AnnouncementActivity extends AppCompatActivity {
             throw new NullPointerException("ApplicationTracker's top activity can't be null to show PermissionActivity");
         }
 
-        if (Global.recordingMode.equals("full")) {
-            Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
-            Global.applicationTracker.getTopActivity().startActivity(loginIntent);
-        }
+        Intent loginIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
+        Global.applicationTracker.getTopActivity().startActivity(loginIntent);
+
         Log.d("Announcement Activity is finished");
         super.finish();
     }

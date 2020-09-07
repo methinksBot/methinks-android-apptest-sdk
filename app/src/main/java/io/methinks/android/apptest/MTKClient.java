@@ -596,7 +596,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             screenShotContentObserver.register();
         }
 
-        if(Global.screenSharing != null && !Global.isSharedScreen && Global.recordingMode.equals("full")){
+        if(Global.screenSharing != null && !Global.isSharedScreen){
             Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
             Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
         }

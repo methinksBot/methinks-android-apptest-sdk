@@ -149,7 +149,7 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                                                     }
 
                                                     /** mtkrtc Initializing */
-                                                    if (Global.isScreenStreamAllowed) {
+                                                    if (!Global.recordingMode.equals("none")) {
                                                         String targetServer = Global.isDebugMode ? "dev" : "prod";
                                                         mtkVideoChatClient = new MTKVideoChatClient.Builder()
                                                                 .context(app)
