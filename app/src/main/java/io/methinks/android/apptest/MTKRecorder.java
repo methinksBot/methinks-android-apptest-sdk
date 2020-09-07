@@ -9,7 +9,7 @@ public class MTKRecorder {
 
     private String recordingMode = "default";
     private boolean isActivated = false;
-    private String currentEvent = "";
+    private String currentRecordingEvent;
     private boolean recordTrigger = false;
 
     public MTKRecorder(Context context) {
@@ -29,11 +29,13 @@ public class MTKRecorder {
      * */
 
     public void makeRecording(String event) {
-        if (isActivated && Global.recordingMode.equals("default")) {
+        if (Global.recordTicket && Global.recordingMode.equals("default")) {
             Log.e("Another recording is in progress or Mode is defferent.");
             return;
         }
 
+        currentRecordingEvent = event;
+        Global.recordTicket = true;
         Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
         Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
 
@@ -41,31 +43,38 @@ public class MTKRecorder {
     }
 
     public void startRecording(String event) {
-        if (isActivated && Global.recordingMode.equals("default")) {
+        if (Global.recordTicket && Global.recordingMode.equals("default")) {
             Log.e("Another recording is in progress or Mode is defferent.");
             return;
         }
 
+        currentRecordingEvent = event;
         Global.recordTicket = true;
+
+        Global.client.sendMessage(Global.MESSAGE_EVENT, event + ":start");
+
         Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
         Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
 
     }
 
     public void endRecording(String event) {
-        if (Global.recordingMode.equals("default")) {
-            Log.e("Another recording is in progress");
+        if (Global.recordingMode.equals("default") && !currentRecordingEvent.equals(event)) {
+            Log.e("There is no proper ending option.");
             return;
         }
 
+        Global.client.sendMessage(Global.MESSAGE_EVENT, event + ":end");
+
+        Global.recordTicket = false;
         Global.screenSharing.end();
     }
 
-    private void pauseRecording(String event) {
+    public void pauseRecording(String event) {
 
     }
 
-    private void resumeRecording(String event) {
+    public void resumeRecording(String event) {
 
     }
 
