@@ -2,6 +2,7 @@ package io.methinks.android.apptest;
 
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 public class MTKRecorder {
 
@@ -51,7 +52,7 @@ public class MTKRecorder {
         currentRecordingEvent = event;
         Global.recordTicket = true;
 
-        Global.client.sendMessage(Global.MESSAGE_EVENT, event + ":start");
+        Global.client.sendMessage(Global.MESSAGE_EVENT, event);
 
         Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
         Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
@@ -64,10 +65,11 @@ public class MTKRecorder {
             return;
         }
 
-        Global.client.sendMessage(Global.MESSAGE_EVENT, event + ":end");
+        Global.client.sendMessage(Global.MESSAGE_EVENT, event);
 
         Global.recordTicket = false;
-        Global.screenSharing.end();
+        Global.screenSharing.finish();
+        Toast.makeText(Global.applicationTracker.getTopActivity(), event + " recording is ended.", Toast.LENGTH_LONG).show();
     }
 
     public void pauseRecording(String event) {

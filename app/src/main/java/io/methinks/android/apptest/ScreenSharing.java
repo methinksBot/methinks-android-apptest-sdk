@@ -202,7 +202,9 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
     }
 
     public void end() {
-        mtkVideoChatClient.disconnect();
+        if(mtkVideoChatClient != null) {
+            mtkVideoChatClient.disconnect();
+        }
     }
 
     @Override
