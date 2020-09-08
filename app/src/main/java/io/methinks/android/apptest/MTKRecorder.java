@@ -3,6 +3,9 @@ package io.methinks.android.apptest;
 import android.content.Context;
 import android.content.Intent;
 
+import io.methinks.android.rtc.MTKPerson;
+import io.methinks.android.rtc.MTKPublisher;
+
 public class MTKRecorder {
 
     private static volatile MTKRecorder instance;
@@ -11,6 +14,7 @@ public class MTKRecorder {
     private boolean isActivated = false;
     private String currentRecordingEvent;
     private boolean recordTrigger = false;
+    private MTKPublisher mainPublisher;
 
     public MTKRecorder(Context context) {
     }
