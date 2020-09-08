@@ -34,7 +34,8 @@
             android:name=".PermissionActivity"
             android:clearTaskOnLaunch="false"
             android:launchMode="singleTop"
-            android:theme="@style/NoTitleBarTheme">
+            android:theme="@style/NoTitleBarTheme"
+            android:foregroundServiceType="mediaProjection">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <data android:scheme="http" android:host="www.example.com" />
