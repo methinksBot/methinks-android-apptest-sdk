@@ -48,7 +48,7 @@ public class PermissionActivity extends AppCompatActivity {
             window.setStatusBarColor(Color.TRANSPARENT);
         }
 
-        if(Global.isScreenStreamAllowed) {
+        if(!Global.recordingMode.equals("none")) {
             mediaProjectionManager = (MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
             Global.mediaProjectionManager = mediaProjectionManager;
         }
@@ -63,6 +63,7 @@ public class PermissionActivity extends AppCompatActivity {
         Log.e("requestCode: " + requestCode + ", resultCode : " + resultCode);
 
         if(requestCode == Global.REQUEST_SCREEN_SHARING && resultCode == RESULT_OK){
+            Global.mediaProjection = mediaProjectionManager.getMediaProjection(resultCode, data);
             isGrantedCapturePermission = true;
             Global.screenCaptureIntent = data;
             Global.screenCaptureResultCode = resultCode;
