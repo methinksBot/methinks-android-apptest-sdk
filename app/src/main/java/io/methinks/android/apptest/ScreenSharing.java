@@ -207,6 +207,26 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
         }
     }
 
+    public void unpublish() {
+        if(mtkVideoChatClient != null) {
+            if (mainPublisher != null) {
+                mtkVideoChatClient.unpublish(mainPublisher);
+            } else {
+                Log.e("mainPublisher is null!!");
+            }
+        }
+    }
+
+    public void republish() {
+        if(mtkVideoChatClient != null) {
+            mainPublisher = new MTKPublisher(MTKPerson.StreamVideoType.screen, Global.screenCaptureIntent);
+            mainPublisher.setPublishAudio(false);
+            mainPublisher.setPublishVideo(true);
+
+            mtkVideoChatClient.publish(mainPublisher);
+        }
+    }
+
     @Override
     public void onChangedClientState(MTKVideoChatClient client, MTKVideoChatClient.MTKVideoChatClientState state) {
         if(state == MTKVideoChatClient.MTKVideoChatClientState.connected && mainPublisher == null){

@@ -73,11 +73,21 @@ public class MTKRecorder {
     }
 
     public void pauseRecording(String event) {
+        if (Global.recordingMode.equals("default") && !currentRecordingEvent.equals(event)) {
+            Log.e("There is no proper recording status.");
+            return;
+        }
 
+        Global.screenSharing.unpublish();
     }
 
     public void resumeRecording(String event) {
+        if (Global.recordingMode.equals("default") && !currentRecordingEvent.equals(event)) {
+            Log.e("There is no proper recording status.");
+            return;
+        }
 
+        Global.screenSharing.republish();
     }
 
 
