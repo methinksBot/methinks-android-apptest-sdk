@@ -210,7 +210,7 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
     public void unpublish() {
         if(mtkVideoChatClient != null) {
             if (mainPublisher != null) {
-                mtkVideoChatClient.unpublish(mainPublisher);
+                mtkVideoChatClient.unpublishPause(mainPublisher);
             } else {
                 Log.e("mainPublisher is null!!");
             }
@@ -223,7 +223,7 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
             mainPublisher.setPublishAudio(false);
             mainPublisher.setPublishVideo(true);
 
-            mtkVideoChatClient.publish(mainPublisher);
+            mtkVideoChatClient.publishResume(mainPublisher);
         }
     }
 
