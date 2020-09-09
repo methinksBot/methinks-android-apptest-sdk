@@ -402,6 +402,10 @@ public class HService extends Service {
         return encoded;
     }
 
+    public void endMediaProjection() {
+        Global.mediaProjection.stop();
+    }
+
     private float convertDpToPixel(Context context, int dp){
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();

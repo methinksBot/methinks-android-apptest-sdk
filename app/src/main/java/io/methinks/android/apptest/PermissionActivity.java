@@ -65,6 +65,7 @@ public class PermissionActivity extends AppCompatActivity {
         if(requestCode == Global.REQUEST_SCREEN_SHARING && resultCode == RESULT_OK){
             isGrantedCapturePermission = true;
             Global.screenCaptureIntent = data;
+            Global.mediaProjection = mediaProjectionManager.getMediaProjection(resultCode, data);
             Global.screenCaptureResultCode = resultCode;
             Global.isSharedScreen = true;
             ScreenSharing screenSharing = new ScreenSharing(PermissionActivity.this.getApplication());
