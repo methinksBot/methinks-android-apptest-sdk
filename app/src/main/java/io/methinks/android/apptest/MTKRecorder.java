@@ -25,24 +25,7 @@ public class MTKRecorder {
         return instance;
     }
 
-    /**
-     *   partially recording.
-     * */
-
-    public void makeRecording(String event) {
-        if (Global.recordTicket && Global.recordingMode.equals("default")) {
-            Log.e("Another recording is in progress or Mode is defferent.");
-            return;
-        }
-
-        currentRecordingEvent = event;
-        Global.recordTicket = true;
-        Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
-        Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
-
-        // TODO: 2020/09/07 set timer thread to count 10 min
-    }
-
+    /** create Screenshare with new session. */
     public void startRecording(String event) {
         if (Global.recordTicket && Global.recordingMode.equals("default")) {
             Log.e("Another recording is in progress or Mode is defferent.");
@@ -59,6 +42,7 @@ public class MTKRecorder {
 
     }
 
+    /** end Screenshare. */
     public void endRecording(String event) {
         if (Global.recordingMode.equals("default") && !currentRecordingEvent.equals(event)) {
             Log.e("There is no proper ending option.");
@@ -68,10 +52,11 @@ public class MTKRecorder {
         Global.client.sendMessage(Global.MESSAGE_EVENT, event);
 
         Global.recordTicket = false;
-        Global.screenSharing.finish();
+        Global.screenSharing.end();
         Toast.makeText(Global.applicationTracker.getTopActivity(), event + " recording is ended.", Toast.LENGTH_LONG).show();
     }
 
+    /** Stopping mediaProjection only. */
     public void pauseRecording(String event) {
         if (Global.recordingMode.equals("default") && !currentRecordingEvent.equals(event)) {
             Log.e("There is no proper recording status.");
@@ -81,6 +66,7 @@ public class MTKRecorder {
         Global.screenSharing.unpublish();
     }
 
+    /** Starting mediaProjection. */
     public void resumeRecording(String event) {
         if (Global.recordingMode.equals("default") && !currentRecordingEvent.equals(event)) {
             Log.e("There is no proper recording status.");
