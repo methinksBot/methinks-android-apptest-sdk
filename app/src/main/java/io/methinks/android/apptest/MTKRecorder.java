@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import java.util.Date;
+
 public class MTKRecorder {
 
     private static volatile MTKRecorder instance;
@@ -30,6 +32,26 @@ public class MTKRecorder {
         if (Global.recordTicket && Global.recordingMode.equals("default")) {
             Log.e("Another recording is in progress or Mode is defferent.");
             return;
+        }
+
+        currentRecordingEvent = event;
+        Global.recordTicket = true;
+
+        Global.client.sendMessage(Global.MESSAGE_EVENT, event);
+
+        Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
+        Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
+
+    }
+
+    public void startRecording(String event, int duration) {
+        if (Global.recordTicket && Global.recordingMode.equals("default")) {
+            Log.e("Another recording is in progress or Mode is defferent.");
+            return;
+        }
+
+        if (duration != 0) {
+            new RecordTimerThread(event, duration).run();
         }
 
         currentRecordingEvent = event;
@@ -77,6 +99,28 @@ public class MTKRecorder {
     }
 
 
+    class RecordTimerThread implements Runnable {
+        String event;
+        long duration;
 
+        RecordTimerThread(String event, long duration) {
+            this.event = event;
+            this.duration = duration;
+        }
+
+        @Override
+        public void run() {
+            Log.d("start recording timer thread!");
+            Global.recordingStartTime = new Date().getTime() / 1000;
+            while (Global.recordTimerThreadFlag) {
+                Global.sRecordingTime = new Date().getTime() / 1000;
+                if (Global.sRecordingTime - Global.recordingStartTime >= duration) {
+                    endRecording(event);
+                    Global.recordTimerThreadFlag = false;
+                }
+            }
+            Global.recordTimerThreadFlag = true;
+        }
+    }
 
 }

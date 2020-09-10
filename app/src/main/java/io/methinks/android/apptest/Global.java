@@ -73,6 +73,7 @@ public class Global {
 
     protected static String sId;
     protected static boolean timerThreadFlag;
+    protected static boolean recordTimerThreadFlag = true;
     protected static boolean isUnity;
     protected static boolean isNew;
     protected static boolean isLogined;
@@ -87,6 +88,8 @@ public class Global {
     protected static long sLoginTime;
     protected static long sessionStartTime;
     protected static long sForegroundTime;
+    protected static long recordingStartTime;
+    protected static long sRecordingTime;
     protected static String sProjectId;
     protected static String sTestUserCode;
     protected static String sLogoURL;
