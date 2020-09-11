@@ -88,9 +88,15 @@ public class MTKRecorder {
         Global.client.sendMessage(Global.MESSAGE_EVENT, event);
 
         Global.recordTicket = false;
+        Global.screenSharing.unpublish();
         Global.screenSharing.end();
         Global.currentRecordingEvent = null;
-        Toast.makeText(Global.applicationTracker.getTopActivity(), event + " recording is ended.", Toast.LENGTH_LONG).show();
+
+        Global.applicationTracker.getTopActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                Toast.makeText(Global.applicationTracker.getTopActivity(), event + " Recording is ended.", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     /** Stopping mediaProjection only. */
