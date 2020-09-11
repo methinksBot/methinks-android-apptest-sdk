@@ -12,7 +12,6 @@ public class MTKRecorder {
 
     private String recordingMode = "default";
     private boolean isActivated = false;
-    private String currentRecordingEvent;
     private boolean recordTrigger = false;
 
     public MTKRecorder(Context context) {
@@ -34,7 +33,7 @@ public class MTKRecorder {
             return;
         }
 
-        currentRecordingEvent = event;
+        Global.currentRecordingEvent = event;
         Global.recordTicket = true;
 
         Global.client.sendMessage(Global.MESSAGE_EVENT, event);
@@ -54,7 +53,7 @@ public class MTKRecorder {
             new RecordTimerThread(event, duration).run();
         }
 
-        currentRecordingEvent = event;
+        Global.currentRecordingEvent = event;
         Global.recordTicket = true;
 
         Global.client.sendMessage(Global.MESSAGE_EVENT, event);
@@ -66,7 +65,7 @@ public class MTKRecorder {
 
     /** end Screenshare. */
     public void endRecording(String event) {
-        if (Global.recordingMode.equals("default") && !currentRecordingEvent.equals(event)) {
+        if (Global.recordingMode.equals("default") && !Global.currentRecordingEvent.equals(event)) {
             Log.e("There is no proper ending option.");
             return;
         }
@@ -75,12 +74,13 @@ public class MTKRecorder {
 
         Global.recordTicket = false;
         Global.screenSharing.end();
+        Global.currentRecordingEvent = null;
         Toast.makeText(Global.applicationTracker.getTopActivity(), event + " recording is ended.", Toast.LENGTH_LONG).show();
     }
 
     /** Stopping mediaProjection only. */
     public void pauseRecording(String event) {
-        if (Global.recordingMode.equals("default") && !currentRecordingEvent.equals(event)) {
+        if (Global.recordingMode.equals("default") && !Global.currentRecordingEvent.equals(event)) {
             Log.e("There is no proper recording status.");
             return;
         }

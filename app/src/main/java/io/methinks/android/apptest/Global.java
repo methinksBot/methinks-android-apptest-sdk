@@ -99,6 +99,7 @@ public class Global {
     protected static String sUserId;
     protected static String sScreenName;
     protected static String recordingMode = "default";
+    protected static String currentRecordingEvent;
     protected static int sSuveyCount;
     protected static int sAnnouncementCount;
     protected static int minimumTestBuildNumber;
