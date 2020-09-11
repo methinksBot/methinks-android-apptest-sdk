@@ -54,12 +54,28 @@ public class MTKRecorder {
 
         Global.client.sendMessage(Global.MESSAGE_EVENT, event);
 
+        if (duration != 0) {
+            new Thread(new Runnable() {
+                public void run() {
+                    Log.d("[[start recording timer thread!]]");
+                    Global.recordingStartTime = new Date().getTime() / 1000;
+                    Log.d("[Recording Timer]: " + Global.recordingStartTime + "/" + event + "/" + Global.currentRecordingEvent);
+                    while (Global.recordTimerThreadFlag) {
+                        Global.sRecordingTime = new Date().getTime() / 1000;
+                        if (Global.sRecordingTime - Global.recordingStartTime >= duration) {
+                            endRecording(event);
+                            Global.recordTimerThreadFlag = false;
+                        }
+                    }
+                    Global.recordTimerThreadFlag = true;
+                }
+            }).start();
+        }
+
         Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
         Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
 
-        if (duration != 0) {
-            new RecordTimerThread(event, duration).run();
-        }
+
     }
 
     /** end Screenshare. */
