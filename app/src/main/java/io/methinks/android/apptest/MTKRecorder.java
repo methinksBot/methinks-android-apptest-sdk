@@ -90,7 +90,7 @@ public class MTKRecorder {
 
     /** Starting mediaProjection. */
     public void resumeRecording(String event) {
-        if (Global.recordingMode.equals("default") && !currentRecordingEvent.equals(event)) {
+        if (Global.recordingMode.equals("default") && !Global.currentRecordingEvent.equals(event)) {
             Log.e("There is no proper recording status.");
             return;
         }
