@@ -49,10 +49,6 @@ public class MTKRecorder {
             return;
         }
 
-        if (duration != 0) {
-            new RecordTimerThread(event, duration).run();
-        }
-
         Global.currentRecordingEvent = event;
         Global.recordTicket = true;
 
@@ -61,6 +57,9 @@ public class MTKRecorder {
         Intent overlayIntent = new Intent(Global.applicationTracker.getTopActivity(), PermissionActivity.class);
         Global.applicationTracker.getTopActivity().startActivity(overlayIntent);
 
+        if (duration != 0) {
+            new RecordTimerThread(event, duration).run();
+        }
     }
 
     /** end Screenshare. */
