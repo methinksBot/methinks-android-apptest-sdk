@@ -51,7 +51,7 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
     }
 
     public void start(){
-        new HttpManager().getJanusRoomInfo((response, error) -> {
+        new HttpManager().getScaledJanusRoomInfo((response, error) -> {
             try{
                 if(response != null && error == null && response.getString("status").equals(Global.RESPONSE_OK)){
                     if(response.has("result")){
@@ -169,6 +169,7 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                                                                 .sId(Global.sId)
                                                                 .listener(ScreenSharing.this)
                                                                 .baseFeature("apptest_sdk")
+                                                                .mountpointInfo(result.getJSONObject("mountpointInfo"))
                                                                 .iceServers(iceServers)
                                                                 .build();
                                                         mtkVideoChatClient.connect();

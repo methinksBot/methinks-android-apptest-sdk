@@ -56,6 +56,13 @@ public class HttpManager {
         new HttpAsyncTask(callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, strings);
     }
 
+    public void getScaledJanusRoomInfo(Callback callback){
+        String url = serverURL + "/getScaledJanusRoomInfo";
+        String[]strings = new String[]{url, Global.HTTP_POST, null};
+
+        new HttpAsyncTask(callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, strings);
+    }
+
     /**
      * To get logo dynamically.
      * @param "You don't need it"
