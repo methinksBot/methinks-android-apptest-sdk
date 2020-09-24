@@ -58,10 +58,13 @@ public class MTKRecorder {
             new Thread(new Runnable() {
                 public void run() {
                     Log.d("[[start recording timer thread!]]");
-                    Global.recordingStartTime = new Date().getTime() / 1000;
                     Log.d("[Recording Timer]: " + Global.recordingStartTime + "/" + event + "/" + Global.currentRecordingEvent);
+
+                    Global.recordingStartTime = new Date().getTime() / 1000;
                     while (Global.recordTimerThreadFlag) {
+
                         Global.sRecordingTime = new Date().getTime() / 1000;
+                        Log.e("Passed Time: " + (Global.sRecordingTime - Global.recordingStartTime));
                         if (Global.sRecordingTime - Global.recordingStartTime >= duration) {
                             endRecording(event);
                             Global.recordTimerThreadFlag = false;
