@@ -172,7 +172,7 @@ public class ShowTouchSetupDialogFragment extends DialogFragment {
             public void onReceive(Context context, Intent intent) {
 
                 long id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-                Log.w("Installing Extension success : " + id + "/" + downloadID + BuildConfig.APPLICATION_ID);
+                //Log.w("Installing Extension success : " + id + "/" + downloadID + BuildConfig.APPLICATION_ID);
 
                 if (id == downloadID) {
                     /*if (targetSDKVersion >= Build.VERSION_CODES.N) {
