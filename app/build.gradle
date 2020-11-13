@@ -25,10 +25,10 @@ android {
 
 dependencies {
     compileOnly files('libs/classes.jar')
-    compileOnly 'androidx.recyclerview:recyclerview:1.0.0'
+    //implementation 'androidx.recyclerview:recyclerview:1.1.0'
     compileOnly 'androidx.appcompat:appcompat:1.0.0'
     compileOnly 'androidx.core:core:1.0.0'
-    compileOnly 'com.google.android.material:material:1.0.0'
+    compileOnly 'com.google.android.material:material:1.0.0-rc01'
     compileOnly('com.github.methinksBot:methinks-android-rtc-sdk:1.1.6') {
         transitive = true
     }
@@ -36,8 +36,8 @@ dependencies {
     compileOnly 'com.squareup.okhttp3:okhttp:3.9.1'
 
     //implementation 'com.google.android.material:material:1.0.0'
-    compileOnly project(':inappsurvey')
-    compileOnly project(':forum')
+    implementation project(':inappsurvey')
+    implementation project(':forum')
 }
 
 
