@@ -2,12 +2,16 @@ package io.methinks.android.methinks_android_forum_sdk.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import io.methinks.android.methinks_android_forum_sdk.Global;
+import io.methinks.android.methinks_android_forum_sdk.Global.Type;
 import io.methinks.android.methinks_android_forum_sdk.HttpManager;
 import io.methinks.android.methinks_android_forum_sdk.Log;
 import io.methinks.android.methinks_android_forum_sdk.R;
@@ -36,7 +41,6 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 import static io.methinks.android.methinks_android_forum_sdk.Global.REQUEST_CODE_GALLERY;
-import static io.methinks.android.methinks_android_forum_sdk.Global.forumNickName;
 import static io.methinks.android.methinks_android_forum_sdk.Global.getImageId;
 
 public class ForumPostCreateActivity extends AppCompatActivity {
@@ -49,6 +53,7 @@ public class ForumPostCreateActivity extends AppCompatActivity {
     private EditText descEditor;
     private TextView textCounter;
     private TextView postSave;
+    private ImageView loadingIcon;
 
     public boolean isFirstImage = true;
 
@@ -62,6 +67,11 @@ public class ForumPostCreateActivity extends AppCompatActivity {
     private ParcelFileDescriptor inputPFD;
 
     private String sectionId;
+
+    private Drawable darkerBackground;
+    private Drawable lighterBackground;
+
+    private Animation loadingAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,15 +92,21 @@ public class ForumPostCreateActivity extends AppCompatActivity {
         descEditor = findViewById(R.id.desc_editor);
         textCounter = findViewById(R.id.text_counter);
         postSave = findViewById(R.id.save_new_post);
+        loadingIcon = findViewById(R.id.loading_icon);
 
         imagePanel.setLayoutManager(imageLayoutManager);
         profileIcon.setImageResource(getImageId(activity, Global.forumProfile));
         profileNickName.setText(Global.forumNickName);
 
+        darkerBackground = getResources().getDrawable(R.drawable.background_post_darker);
+        lighterBackground = getResources().getDrawable(R.drawable.background_post_write);
+
+        loadingAnim = AnimationUtils.loadAnimation(this, R.anim.anim_save_loading);
+
         addImageBtn.setOnClickListener(addImageOnClickListener);
         backBtn.setOnClickListener(backbtnClickListener);
         descEditor.addTextChangedListener(descEditorWatcher);
-        postSave.setOnClickListener(saveOnClickListener);
+        postSave.setOnTouchListener(saveOnTouchListener);
 
         Bundle extras = getIntent().getExtras();
         sectionId = extras.getString("sectionId");
@@ -127,6 +143,25 @@ public class ForumPostCreateActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             saveNewPost();
+        }
+    };
+
+    View.OnTouchListener saveOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            switch(motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    postSave.setBackground(darkerBackground);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    postSave.setBackground(lighterBackground);
+                    postSave.setText("");
+                    loadingIcon.startAnimation(loadingAnim);
+                    loadingIcon.setVisibility(View.VISIBLE);
+                    saveNewPost();
+                    break;
+            }
+            return true;
         }
     };
 
@@ -186,6 +221,13 @@ public class ForumPostCreateActivity extends AppCompatActivity {
     };
 
     public void saveNewPost() {
+        if (titleEditor.getText().toString().matches("")) {
+            Toast.makeText(activity, R.string.forum_no_title,Toast.LENGTH_LONG).show();
+            return;
+        } else if (descEditor.getText().toString().matches("")) {
+            Toast.makeText(activity, R.string.forum_no_desc,Toast.LENGTH_LONG).show();
+            return;
+        }
         JSONObject newPost = new JSONObject();
         try {
             newPost.put("sectionId", sectionId);
@@ -213,14 +255,16 @@ public class ForumPostCreateActivity extends AppCompatActivity {
 
                 try {
                     JSONObject result = new JSONObject(res);
-                    if (!result.has("result") || !result.getString("status").equals("ok")) {
+
+                    Boolean isNotValidResult = Global.type == Type.Patcher
+                            ? !result.has("result") || !result.getString("status").equals("ok")
+                            : !result.has("result");
+                    if (isNotValidResult) {
                         Log.e("No result!!!");
                         return;
                     }
 
                     JSONObject post = result.getJSONObject("result");
-                    JSONObject participant = post.getJSONObject("participant");
-
 
                     ArrayList<String> attachments = new ArrayList<>();
                     if (post.has("attachments")) {
@@ -240,8 +284,8 @@ public class ForumPostCreateActivity extends AppCompatActivity {
                     Intent intent = new Intent(activity, ForumPostDetailActivity.class);
                     intent.putExtra("sectionId", sectionId);
                     intent.putExtra("postId", post.getString("objectId"));
-                    intent.putExtra("userName", participant.getString("forumNickName"));
-                    intent.putExtra("profile", participant.getString("forumEmoji"));
+                    intent.putExtra("userName", Global.forumNickName);
+                    intent.putExtra("profile", Global.forumProfile);
                     intent.putExtra("postTitle", post.getString("postTitle"));
                     intent.putExtra("postText", post.getString("postText"));
                     intent.putExtra("likeCount", likeCount);

@@ -38,7 +38,7 @@
                     android:layout_margin="12dp"
                     android:padding="2dp"
                     android:background="@drawable/background_post_profile"
-                    android:src="@drawable/logoprofile"/>
+                    android:src="@drawable/img_logoprofile"/>
 
                 <TextView
                     android:id="@+id/writer_nickname"

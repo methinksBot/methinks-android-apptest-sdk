@@ -1,16 +1,23 @@
 package io.methinks.android.methinks_android_forum_sdk.viewHolder;
 
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.TimeZone;
+import android.net.Uri;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,13 +34,15 @@ import io.methinks.android.methinks_android_forum_sdk.R;
 import io.methinks.android.methinks_android_forum_sdk.activity.ForumCommentActivity;
 import io.methinks.android.methinks_android_forum_sdk.activity.ForumPostDetailActivity;
 import io.methinks.android.methinks_android_forum_sdk.adapter.ImagesUrlAdapter;
+import io.methinks.android.methinks_android_forum_sdk.util.HtmlUtil;
+import io.methinks.android.methinks_android_forum_sdk.util.OnLinkClickListener;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
 import static io.methinks.android.methinks_android_forum_sdk.Global.getImageId;
 
-public class CommentViewHolder extends RecyclerView.ViewHolder {
+public class CommentViewHolder extends RecyclerView.ViewHolder implements OnLinkClickListener {
     private Activity activity;
 
     public String sectionId;
@@ -50,6 +59,11 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
     public ImageView commentReply;
     public TextView commentReplyCount;
     public ImageView commentDelete;
+
+    public LinearLayout toCommentPointer;
+    public LinearLayout toCommentPanel;
+    public TextView toCommentCreator;
+    public TextView toCommentText;
 
     public String likedUsers;
 
@@ -78,6 +92,10 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
         this.commentReplyCount = itemView.findViewById(R.id.comment_reply_count);
         this.commentDelete = itemView.findViewById(R.id.comment_delete);
         this.imagePanel = itemView.findViewById(R.id.images_panel);
+        this.toCommentPointer = itemView.findViewById(R.id.tocomment_pointer);
+        this.toCommentPanel = itemView.findViewById(R.id.tocomment_panel);
+        //this.toCommentCreator = itemView.findViewById(R.id.tocomment_creator);
+        this.toCommentText = itemView.findViewById(R.id.tocomment_text);
         this.base = base;
 
         imageLayoutManager = new LinearLayoutManager(activity);
@@ -85,32 +103,61 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
         imagePanel.setLayoutManager(imageLayoutManager);
 
         commentLike.setOnClickListener(likeClickListener);
-        //commentReply.setOnClickListener(commentClickListener);
+        commentReply.setOnClickListener(commentClickListener);
         commentDelete.setOnClickListener(deleteClickListener);
     }
 
+    @SuppressLint("ResourceAsColor")
     public void onBind(JSONObject commentObj) {
         try {
             commentId = commentObj.getString("objectId");
-            JSONObject participant = commentObj.getJSONObject("participant");
+            JSONObject participant = commentObj.has("participant") ? commentObj.getJSONObject("participant") : null;
             JSONObject post = commentObj.getJSONObject("post");
             JSONObject section = commentObj.getJSONObject("section");
+
             postId = post.getString("objectId");
             sectionId = section.getString("objectId");
+
             if (commentObj.has("attachments")) {
                 Log.d("call Attachments: " + commentObj.getJSONArray("attachments").toString());
                 attachments = commentObj.getJSONArray("attachments");
             }
 
-            commentCreator.setText(participant.has("forumNickName") ?
-                    participant.getString("forumNickName") : "participant");
+            // if current comment is belonged to another comment
+            if (commentObj.has("toComment")) {
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) toCommentPointer.getLayoutParams();
+                params.width = ActionBar.LayoutParams.WRAP_CONTENT;
+                toCommentPointer.setLayoutParams(params);
+                params = (LinearLayout.LayoutParams) toCommentPanel.getLayoutParams();
+                params.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                toCommentPanel.setLayoutParams(params);
 
-            commetProfile.setImageResource(participant.has("forumEmoji") ?
-                    getImageId(activity, participant.getString("forumEmoji")) :
-                    R.drawable.logoprofile);
+                JSONObject toComment = commentObj.getJSONObject("toComment");
+                Log.e("toComment: " + toComment);
+                toCommentText.setText(toComment.getString("commentText"));
+            }
+
+
+            if (participant != null){
+                commentCreator.setText(participant.has("forumNickName") ?
+                        participant.getString("forumNickName") : "participant");
+
+                commetProfile.setImageResource(participant.has("forumEmoji") ?
+                        getImageId(activity, participant.getString("forumEmoji")) :
+                        R.drawable.img_logoprofile);
+
+                feedbackHandler(participant.getString("objectId"));
+            } else {
+                commentCreator.setText("Admin");
+
+                commetProfile.setImageResource(R.drawable.img_logoprofile);
+
+                feedbackHandler("admin");
+            }
+
 
             commentCreatedAt.setText(passedTimeCalc(commentObj.getString("createdAt")));
-            commentDesc.setText(commentObj.getString("commentText"));
+
 
             if (commentObj.has("likedUsers")) {
                 if (commentObj.getJSONArray("likedUsers").length() > 0) {
@@ -118,19 +165,29 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
                     commentLikeCount.setText(String.valueOf(commentObj.getJSONArray("likedUsers").length()));
                 }
             } else { commentLikeCount.setText("0"); }
+
             if (commentObj.has("commentCount")) {
                 if (commentObj.getInt("commentCount") > 0) {
                     commentReplyCount.setVisibility(View.VISIBLE);
                     commentReplyCount.setText(commentObj.getString("commentCount"));
+                    commentReply.setActivated(true);
                 }
             } else { commentReplyCount.setText("0"); }
 
+
             this.likedUsers = commentObj.has("likedUsers") ?
                     commentObj.getString("likedUsers") : null;
-            feedbackHandler(participant.getString("objectId"));
 
+            if (commentObj.has("isDeleted") && commentObj.getBoolean("isDeleted")) {
+                commentDesc.setText(R.string.forum_deleted_comment);
+                commentDesc.setTextColor(R.color.deleted_comment_color);
+            } else {
+                commentDesc.setText(HtmlUtil.fromHtml(commentObj.getString("commentText"), this));
+                commentDesc.setMovementMethod(LinkMovementMethod.getInstance());
+                commentDesc.setClickable(true);
+                getAllPostAttachments();
+            }
 
-            getAllPostAttachments();
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -195,10 +252,6 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
             commentReplyCount.setVisibility(View.VISIBLE);
         } else if (Integer.parseInt(commentReplyCount.getText().toString()) == 0)
             commentReplyCount.setVisibility(View.INVISIBLE);
-
-    }
-
-    public void reInitializeCounters(int like, int comment) {
 
     }
 
@@ -285,14 +338,20 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
                     try {
                         JSONObject result = new JSONObject(res);
                         JSONObject comment = result.getJSONObject("result");
-                        //Log.d(comment.toString());
+                        Log.d(comment.toString());
 
                         activity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 try {
                                     //Log.e(comment.getJSONArray("likedUsers").toString());
-                                    commentLikeCount.setText(String.valueOf(comment.getJSONArray("likedUsers").length()));
+                                    int likeCount =
+                                            comment.has("likedUsers")
+                                                    && comment.getJSONArray("likedUsers").length() > 0
+                                            ? comment.getJSONArray("likedUsers").length()
+                                            : 0;
+
+                                    commentLikeCount.setText(String.valueOf(likeCount));
                                     counterVisibility();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -312,12 +371,17 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
     public void checkOwnedComment(String participantId) {
         /** If current user is writer */
         //Log.d("pass:" + Global.forumNickName + "/" + commentCreator.getText());
-        if (Global.participantId.equals(participantId)) {
-            if (base.equals("post"))
-                ForumPostDetailActivity.commentIcon.setActivated(true);
+        if (participantId.equals("admin")) {
+
         } else {
-            commentDelete.setVisibility(View.INVISIBLE);
+            if (Global.participantId.equals(participantId)) {
+                if (base.equals("post"))
+                    ForumPostDetailActivity.commentIcon.setActivated(true);
+            } else {
+                commentDelete.setVisibility(View.INVISIBLE);
+            }
         }
+
     }
 
     String passedTimeCalc(String createdAt) {
@@ -356,5 +420,11 @@ public class CommentViewHolder extends RecyclerView.ViewHolder {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void onLinkClick(@NotNull String url) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        activity.startActivity(browserIntent);
     }
 }

@@ -324,10 +324,15 @@
         <item name="fw">@string/font_weight_regular</item>
     </style>
 
-    <!--bottomsheetdialogtheme-->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/cornflower_blue</item>
     </style>
+
+    <!--bottomsheetdialogtheme-->
+<!--    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+<!--        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>-->
+<!--    </style>-->
 
     <style name="AppBottomSheetDialogTheme"
         parent="Theme.Design.Light.BottomSheetDialog">

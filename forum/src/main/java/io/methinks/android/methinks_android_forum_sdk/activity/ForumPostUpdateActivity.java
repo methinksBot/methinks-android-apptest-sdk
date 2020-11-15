@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import io.methinks.android.methinks_android_forum_sdk.Global;
+import io.methinks.android.methinks_android_forum_sdk.Global.Type;
 import io.methinks.android.methinks_android_forum_sdk.HttpManager;
 import io.methinks.android.methinks_android_forum_sdk.Log;
 import io.methinks.android.methinks_android_forum_sdk.R;
@@ -300,14 +301,15 @@ public class ForumPostUpdateActivity extends AppCompatActivity {
 
                 try {
                     JSONObject result = new JSONObject(res);
-                    if (!result.has("result") || !result.getString("status").equals("ok")) {
+                    Boolean isNotValidResult = Global.type == Type.Patcher
+                            ? !result.has("result") || !result.getString("status").equals("ok")
+                            : !result.has("result");
+                    if (isNotValidResult) {
                         Log.e("No result!!!");
                         return;
                     }
 
                     JSONObject post = result.getJSONObject("result");
-                    JSONObject participant = post.getJSONObject("participant");
-
 
                     ArrayList<String> attachments = new ArrayList<>();
                     if (post.has("attachments")) {
@@ -327,8 +329,8 @@ public class ForumPostUpdateActivity extends AppCompatActivity {
                     Intent intent = new Intent(activity, ForumPostDetailActivity.class);
                     intent.putExtra("sectionId", sectionId);
                     intent.putExtra("postId", post.getString("objectId"));
-                    intent.putExtra("userName", participant.getString("forumNickName"));
-                    intent.putExtra("profile", participant.getString("forumEmoji"));
+                    intent.putExtra("userName", Global.forumNickName);
+                    intent.putExtra("profile", Global.forumProfile);
                     intent.putExtra("postTitle", post.getString("postTitle"));
                     intent.putExtra("postText", post.getString("postText"));
                     intent.putExtra("likeCount", likeCount);

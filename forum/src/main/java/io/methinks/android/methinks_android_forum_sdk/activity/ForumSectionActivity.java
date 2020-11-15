@@ -2,7 +2,9 @@ package io.methinks.android.methinks_android_forum_sdk.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -21,7 +23,6 @@ import io.methinks.android.methinks_android_forum_sdk.HttpManager;
 import io.methinks.android.methinks_android_forum_sdk.Log;
 import io.methinks.android.methinks_android_forum_sdk.R;
 import io.methinks.android.methinks_android_forum_sdk.adapter.PostAdapter;
-import io.methinks.android.methinks_android_forum_sdk.adapter.SectionAdapter;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -34,6 +35,9 @@ public class ForumSectionActivity extends AppCompatActivity {
     private String sectionId;
     private ImageView backBtn;
     private ImageView postCreateBtn;
+
+    private Drawable darkerBackground;
+    private Drawable lighterBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +52,10 @@ public class ForumSectionActivity extends AppCompatActivity {
 
         postRecyclerView.setLayoutManager(postLayoutManager);
         backBtn.setOnClickListener(backbtnClickListener);
-        postCreateBtn.setOnClickListener(postCreateClickListener);
+        postCreateBtn.setOnTouchListener(postCreateOnTouchListener);
+
+        darkerBackground = getResources().getDrawable(R.drawable.background_post_darker);
+        lighterBackground = getResources().getDrawable(R.drawable.background_post_write);
 
 
         Bundle extras = getIntent().getExtras();
@@ -81,8 +88,9 @@ public class ForumSectionActivity extends AppCompatActivity {
                         return;
                     }
 
-                    //Log.d(result.toString());
+//                    Log.d(result.toString());
                     JSONArray posts = result.getJSONArray("result");
+                    Log.e(posts.toString());
                     for (int i=0; i<posts.length(); i++) {
                         JSONObject section = posts.getJSONObject(i);
                         Log.d(section.toString());
@@ -113,7 +121,7 @@ public class ForumSectionActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             //Global.isUserAllocated = false;
-            if (Global.isUserAllocated == true) {
+            if (Global.isUserAllocated) {
                 // go to postCreate Activity
                 Log.d("User is updated");
                 Intent intent = new Intent(activity, ForumPostCreateActivity.class);
@@ -125,6 +133,34 @@ public class ForumSectionActivity extends AppCompatActivity {
                 Intent intent = new Intent(activity, ForumProfileCreateActivity.class);
                 activity.startActivity(intent);
             }
+        }
+    };
+
+    View.OnTouchListener postCreateOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            switch(motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    postCreateBtn.setBackground(darkerBackground);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    postCreateBtn.setBackground(lighterBackground);
+                    //Global.isUserAllocated = false;
+                    if (Global.isUserAllocated) {
+                        // go to postCreate Activity
+                        Log.d("User is updated");
+                        Intent intent = new Intent(activity, ForumPostCreateActivity.class);
+                        intent.putExtra("sectionId", sectionId);
+                        activity.startActivity(intent);
+                    } else {
+                        // go to profileCreate Activity
+                        Log.d("No user set profile");
+                        Intent intent = new Intent(activity, ForumProfileCreateActivity.class);
+                        activity.startActivity(intent);
+                    }
+                    break;
+            }
+            return true;
         }
     };
 }

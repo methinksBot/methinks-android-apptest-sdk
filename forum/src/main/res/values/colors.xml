@@ -46,6 +46,7 @@
     <color name="charcoal_grey_70">#b340474e</color>
     <color name="white_87">#ddffffff</color>
     <color name="deep_sky_blue">#007aff</color>
+    <color name="darker_sky_blue">#0051AA</color>
     <color name="clear_blue">#3068ef</color>
     <color name="clear_blue_50">#803068ef</color>
     <color name="clear_blue_30">#4D3068ef</color>
@@ -190,5 +191,6 @@
     <color name="post_delete_color">#ff3b30</color>
     <color name="post_border">#77000000</color>
     <color name="comment_border">#55000000</color>
+    <color name="deleted_comment_color">#ff3455</color>
 
 </resources>

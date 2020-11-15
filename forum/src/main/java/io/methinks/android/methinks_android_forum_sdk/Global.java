@@ -3,7 +3,6 @@ package io.methinks.android.methinks_android_forum_sdk;
 import android.content.Context;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.TimeZone;
-import android.view.View;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -16,8 +15,6 @@ public class Global {
     protected static final String HTTP_POST = "POST";
     protected static final String HTTP_GET = "GET";
 
-    protected static final String DEV_METHINKS_SERVER_URL = "https://dev.methinks.io";
-    protected static final String PROD_METHINKS_SERVER_URL = "https://methinks.io";
     protected static final String DEV_PATCHER_SERVER_URL = "https://apptest-dev.methinks.io";
     protected static final String PROD_PATCHER_SERVER_URL = "https://apptest.methinks.io";
 
@@ -25,13 +22,39 @@ public class Global {
 
     public static String campaignId;
     public static String userId;
+    public static String sessionToken = null;
     public static String forumNickName = null;
     public static String forumProfile = null;
     public static String userObjectId = null;
     public static String participantId = null;
     public static boolean isUserAllocated = false;
 
-    public static boolean isDubugMode = true;
+    // for methinks, nexon project
+    public static String serverUrl = null;
+    public static String applicationId = null;
+    public static String clientKey = null;
+
+    public static boolean isDebugMode = true;
+    public static Type type;
+
+    public enum Type {
+        Methinks,
+        Nexon,
+        Patcher
+    }
+
+    public static void init() {
+        sessionToken = null;
+        forumNickName = null;
+        forumProfile = null;
+        userObjectId = null;
+        participantId = null;
+        serverUrl = null;
+        applicationId = null;
+        clientKey = null;
+        isUserAllocated = false;
+        isDebugMode = true;
+    }
 
     static public int getImageId(Context context, String imageName) {
         return context.getResources().getIdentifier("drawable/" + imageName, null, context.getPackageName());

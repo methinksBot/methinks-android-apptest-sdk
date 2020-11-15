@@ -99,6 +99,10 @@
     <string name="forum_post_create_title">Title</string>
     <string name="forum_post_create_desc">Description</string>
     <string name="forum_post_create_image">Add Images</string>
+    <string name="forum_no_title">Please enter title.</string>
+    <string name="forum_no_desc">Please enter description.</string>
+    <string name="forum_no_comment">Please enter comment.</string>
+    <string name="forum_deleted_comment">This comment is deleted.</string>
 
     <!-- ################################################################## -->
     <!-- ##################### Default strings start ###################### -->

@@ -3,8 +3,11 @@ package io.methinks.android.methinks_android_forum_sdk.activity;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -41,6 +44,12 @@ public class ForumProfileCreateActivity extends AppCompatActivity {
     private String nickName;
     private TextView saveButton;
     private ImageView backBtn;
+    private ImageView loadingIcon;
+
+    private Drawable darkerBackground;
+    private Drawable lighterBackground;
+
+    private Animation loadingAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +60,17 @@ public class ForumProfileCreateActivity extends AppCompatActivity {
         newNickNameEdit = findViewById(R.id.new_nickname);
         saveButton = findViewById(R.id.save_new_profile);
         backBtn = findViewById(R.id.back_btn);
+        loadingIcon = findViewById(R.id.loading_icon);
 
         profileBackground = getResources().getDrawable(R.drawable.background_post_profile);
         profileBackgroundSelected = getResources().getDrawable(R.drawable.background_post_profile_selected);
 
-        saveButton.setOnClickListener(saveOnClickListener);
+        darkerBackground = getResources().getDrawable(R.drawable.background_post_darker);
+        lighterBackground = getResources().getDrawable(R.drawable.background_post_write);
+
+        loadingAnim = AnimationUtils.loadAnimation(this, R.anim.anim_save_loading);
+
+        saveButton.setOnTouchListener(saveOnTouchListener);
         backBtn.setOnClickListener(backbtnClickListener);
 
         filteringDrawable();
@@ -127,6 +142,42 @@ public class ForumProfileCreateActivity extends AppCompatActivity {
                     callSetForumProfile();
                 }
             }
+        }
+    };
+
+    View.OnTouchListener saveOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            switch(motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    saveButton.setBackground(darkerBackground);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    saveButton.setBackground(lighterBackground);
+                    saveButton.setText("");
+                    loadingIcon.startAnimation(loadingAnim);
+                    loadingIcon.setVisibility(View.VISIBLE);
+                    nickName = newNickNameEdit.getText().toString();
+
+                    if (nickName.length() < 2) {
+                        Toast.makeText(activity, R.string.forum_no_nickname,Toast.LENGTH_LONG).show();
+                    } else {
+                        if (selectedIcon == null) {
+                            Toast.makeText(activity, R.string.forum_no_profile_icon,Toast.LENGTH_LONG).show();
+                        } else {
+                            try {
+                                selectedIconFileName = getResources().getResourceEntryName(selectedIcon.getInt(null));
+                                Log.d("Trying to call Create: " + selectedIconFileName);
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            callSetForumProfile();
+                        }
+                    }
+                    break;
+            }
+            return true;
         }
     };
 

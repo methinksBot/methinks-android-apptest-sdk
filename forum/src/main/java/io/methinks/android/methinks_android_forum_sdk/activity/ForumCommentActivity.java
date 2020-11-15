@@ -2,12 +2,16 @@ package io.methinks.android.methinks_android_forum_sdk.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import io.methinks.android.methinks_android_forum_sdk.Global;
+import io.methinks.android.methinks_android_forum_sdk.Global.Type;
 import io.methinks.android.methinks_android_forum_sdk.HttpManager;
 import io.methinks.android.methinks_android_forum_sdk.Log;
 import io.methinks.android.methinks_android_forum_sdk.R;
@@ -47,6 +52,7 @@ public class ForumCommentActivity extends AppCompatActivity {
     private EditText descEditor;
     private TextView textCounter;
     private TextView commentSave;
+    private ImageView loadingIcon;
 
     private String sectionId;
     private String postId;
@@ -64,6 +70,11 @@ public class ForumCommentActivity extends AppCompatActivity {
     public static JSONArray attachedImages;
 
     private ParcelFileDescriptor inputPFD;
+
+    private Drawable darkerBackground;
+    private Drawable lighterBackground;
+
+    private Animation loadingAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +95,7 @@ public class ForumCommentActivity extends AppCompatActivity {
         addImageBtn = findViewById(R.id.comment_add_image);
         commentSave = findViewById(R.id.save_new_comment);
         imagePanel = findViewById(R.id.image_attaching_panel);
+        loadingIcon = findViewById(R.id.loading_icon);
 
         imagePanel.setLayoutManager(imageLayoutManager);
         profileIcon.setImageResource(getImageId(activity, Global.forumProfile));
@@ -100,10 +112,15 @@ public class ForumCommentActivity extends AppCompatActivity {
             baseCommentCount = extras.getInt("commentCount");
         }
 
+        loadingAnim = AnimationUtils.loadAnimation(this, R.anim.anim_save_loading);
+
+        darkerBackground = getResources().getDrawable(R.drawable.background_post_darker);
+        lighterBackground = getResources().getDrawable(R.drawable.background_post_write);
+
         addImageBtn.setOnClickListener(addImageOnClickListener);
         backBtn.setOnClickListener(backbtnClickListener);
         descEditor.addTextChangedListener(descEditorWatcher);
-        commentSave.setOnClickListener(saveOnClickListener);
+        commentSave.setOnTouchListener(saveOnTouchListener);
 
     }
 
@@ -112,7 +129,31 @@ public class ForumCommentActivity extends AppCompatActivity {
         public void onClick(View view) { saveNewComment(); }
     };
 
+    View.OnTouchListener saveOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            switch(motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    commentSave.setBackground(darkerBackground);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    commentSave.setBackground(lighterBackground);
+                    commentSave.setText("");
+                    loadingIcon.startAnimation(loadingAnim);
+                    loadingIcon.setVisibility(View.VISIBLE);
+                    saveNewComment();
+                    break;
+            }
+            return true;
+        }
+    };
+
     public void saveNewComment() {
+        if (descEditor.getText().toString().matches("")) {
+            Toast.makeText(activity, R.string.forum_no_comment,Toast.LENGTH_LONG).show();
+            return;
+        }
+
         JSONObject newComment = new JSONObject();
         try {
             newComment.put("sectionId", sectionId);
@@ -143,7 +184,10 @@ public class ForumCommentActivity extends AppCompatActivity {
 
                 try {
                     JSONObject result = new JSONObject(res);
-                    if (!result.has("result") || !result.getString("status").equals("ok")) {
+                    Boolean isNotValidResult = Global.type == Type.Patcher
+                            ? !result.has("result") || !result.getString("status").equals("ok")
+                            : !result.has("result");
+                    if (isNotValidResult) {
                         Log.e("No result!!!");
                         return;
                     }
@@ -171,7 +215,10 @@ public class ForumCommentActivity extends AppCompatActivity {
 
                 try {
                     JSONObject result = new JSONObject(res);
-                    if (!result.has("result") || !result.getString("status").equals("ok")) {
+                    Boolean isNotValidResult = Global.type == Type.Patcher
+                            ? !result.has("result") || !result.getString("status").equals("ok")
+                            : !result.has("result");
+                    if (isNotValidResult) {
                         Log.e("No result!!!");
                         return;
                     }
@@ -179,7 +226,7 @@ public class ForumCommentActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(activity, "New Comment is created.",Toast.LENGTH_LONG).show();
+                            Toast.makeText(activity, "New Comment is created.", Toast.LENGTH_LONG).show();
                         }
                     });
                     activity.finish();
@@ -190,6 +237,7 @@ public class ForumCommentActivity extends AppCompatActivity {
             }
         });
     }
+
 
     TextWatcher descEditorWatcher = new TextWatcher() {
         @Override

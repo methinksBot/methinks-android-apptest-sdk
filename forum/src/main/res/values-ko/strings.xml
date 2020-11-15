@@ -94,4 +94,8 @@
 	<string name="forum_post_create_title">제목을 입력하세요.</string>
 	<string name="forum_post_create_desc">내용을 입력하세요.</string>
 	<string name="forum_post_create_image">이미지 추가</string>
+	<string name="forum_no_title">제목을 입력하세요.</string>
+	<string name="forum_no_desc">내용을 입력하세요.</string>
+	<string name="forum_no_comment">댓글을 입력하세요.</string>
+	<string name="forum_deleted_comment">삭제된 댓글입니다.</string>
 </resources>

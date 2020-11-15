@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import io.methinks.android.methinks_android_forum_sdk.Global;
+import io.methinks.android.methinks_android_forum_sdk.Global.Type;
 import io.methinks.android.methinks_android_forum_sdk.HttpManager;
 import io.methinks.android.methinks_android_forum_sdk.Log;
 import io.methinks.android.methinks_android_forum_sdk.R;
@@ -45,7 +46,7 @@ public class ForumMainActivity extends AppCompatActivity {
         sectionRecyclerView.setLayoutManager(sectionLayoutManager);
         backBtn.setOnClickListener(backbtnClickListener);
 
-        getParticipantInfo();
+        if(Global.type == Type.Patcher) getParticipantInfo();
     }
 
     @Override
@@ -74,7 +75,7 @@ public class ForumMainActivity extends AppCompatActivity {
                     // no participant == admin
                     if (!result.has("result")) {
                         Global.forumNickName = getString(R.string.patcher_text_admin);
-                        Global.forumProfile = "logoprofile";
+                        Global.forumProfile = "img_logoprofile";
                         Global.isUserAllocated = true;
                     } else {
                         JSONObject participant = result.getJSONObject("result");

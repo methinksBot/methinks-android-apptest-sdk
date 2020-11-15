@@ -1,12 +1,11 @@
 package io.methinks.android.methinks_android_forum_sdk.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.TimeZone;
-import android.os.Build;
-import android.os.SystemClock;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,24 +13,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
+import io.methinks.android.methinks_android_forum_sdk.Global;
 import io.methinks.android.methinks_android_forum_sdk.Log;
 import io.methinks.android.methinks_android_forum_sdk.R;
 import io.methinks.android.methinks_android_forum_sdk.activity.ForumPostDetailActivity;
-import io.methinks.android.methinks_android_forum_sdk.activity.ForumSectionActivity;
+import io.methinks.android.methinks_android_forum_sdk.activity.ForumProfileCreateActivity;
 
 import static io.methinks.android.methinks_android_forum_sdk.Global.getImageId;
 
@@ -53,7 +49,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public void onBindViewHolder(PostViewHolder holder, int position) {
         try {
-            holder.onBind(postData.getJSONObject(position));
+            JSONObject post;
+            if(Global.type == Global.Type.Patcher) {
+                post = postData.getJSONObject(position);
+            } else {
+                post = postData.getJSONObject(position).getJSONObject("post");
+            }
+            holder.onBind(post);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -80,6 +82,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         public ArrayList<String> attachments;
         public String likedUsers;
+
+        public String postTextWithHtml;
 
 
         public PostViewHolder(View itemView, Activity activity) {
@@ -108,6 +112,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                         String singleAttachment = attachment.replaceAll("\"", "");
                         attachments.add(singleAttachment);
                     }
+                } else {
+                    attachments = new ArrayList<>();
                 }
                 if (post.has("likedUsers")) {
                     likedUsers = post.getString("likedUsers");
@@ -117,7 +123,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 if (post.getString("writeUserType").equals("admin")) {
                     Log.d("You are Admin ");
                     userName.setText(R.string.patcher_text_admin);
-                    profile.setImageResource(R.drawable.logoprofile);
+                    profile.setImageResource(R.drawable.img_logoprofile);
                 } else {
                     // If post writer is thinker (participant is existed in object)
                     Log.d("You are Participant ");
@@ -130,7 +136,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
                 createdAt.setText(passedTimeCalc(post.getString("createdAt")));
                 postTitle.setText(post.getString("postTitle"));
-                postDesc.setText(post.getString("postText"));
+
+                postTextWithHtml = post.getString("postText");
+                String purePostText = post.getString("postText").replaceAll("\\<.*?\\>", "");
+                //Spanned descHtml = Html.fromHtml(post.getString("postText"));
+                if (purePostText.length() > 80) {
+                    purePostText = purePostText.substring(0, 80);
+                    purePostText += "...";
+                }
+                postDesc.setText(purePostText);
 
                 if (post.has("likedUsers")) {
                     likeCount.setVisibility(View.VISIBLE);
@@ -159,19 +173,26 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             @Override
             public void onClick(View view) {
                 //Log.e("Pre Counter: " + likeCount.getText() + "/" + commentCount.getText());
-                Intent intent = new Intent(activity, ForumPostDetailActivity.class);
-                intent.putExtra("postId", postId);
-                intent.putExtra("sectionId", sectionId);
-                intent.putExtra("userName", userName.getText());
-                intent.putExtra("profile", profileIconString);
-                intent.putExtra("postTitle", postTitle.getText());
-                intent.putExtra("postText", postDesc.getText());
-                intent.putExtra("likeCount", likeCount.getText());
-                intent.putExtra("commentCount", commentCount.getText());
-                intent.putExtra("createdAt", createdAt.getText());
-                intent.putExtra("attachments", attachments);
-                intent.putExtra("likedUsers", likedUsers);
-                activity.startActivity(intent);
+                if (Global.isUserAllocated) {
+                    Intent intent = new Intent(activity, ForumPostDetailActivity.class);
+                    intent.putExtra("postId", postId);
+                    intent.putExtra("sectionId", sectionId);
+                    intent.putExtra("userName", userName.getText());
+                    intent.putExtra("profile", profileIconString);
+                    intent.putExtra("postTitle", postTitle.getText());
+                    intent.putExtra("postText", postTextWithHtml);
+                    intent.putExtra("likeCount", likeCount.getText());
+                    intent.putExtra("commentCount", commentCount.getText());
+                    intent.putExtra("createdAt", createdAt.getText());
+                    intent.putExtra("attachments", attachments);
+                    intent.putExtra("likedUsers", likedUsers);
+                    activity.startActivity(intent);
+                } else {
+                    // go to profileCreate Activity
+                    Log.d("No user set profile");
+                    Intent intent = new Intent(activity, ForumProfileCreateActivity.class);
+                    activity.startActivity(intent);
+                }
             }
         };
 

@@ -73,16 +73,33 @@
         </LinearLayout>
 
     </ScrollView>
-    <TextView
-        android:id="@+id/save_new_profile"
-        android:layout_width="match_parent"
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:textSize="20dp"
-        android:textColor="@color/white"
         android:layout_margin="25dp"
-        android:padding="12dp"
-        android:textAlignment="center"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/background_profile_save"/>
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:id="@+id/save_new_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:padding="12dp"
+            android:textAlignment="center"
+            android:background="@drawable/background_post_write">
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/loading_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:tint="@color/white"
+            android:src="@drawable/ic_img_loading"
+            android:visibility="invisible"/>
+    </RelativeLayout>
 </RelativeLayout>

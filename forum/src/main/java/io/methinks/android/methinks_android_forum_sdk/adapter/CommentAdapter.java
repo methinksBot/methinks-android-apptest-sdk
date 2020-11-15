@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import io.methinks.android.methinks_android_forum_sdk.Global;
 import io.methinks.android.methinks_android_forum_sdk.R;
 import io.methinks.android.methinks_android_forum_sdk.viewHolder.CommentViewHolder;
 
@@ -32,7 +35,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
     @Override
     public void onBindViewHolder(CommentViewHolder holder,int position) {
         try {
-            holder.onBind(commentObjs.getJSONObject(position));
+            JSONObject comment;
+            if(Global.type == Global.Type.Patcher) {
+                comment = commentObjs.getJSONObject(position);
+            } else {
+                comment = commentObjs.getJSONObject(position).getJSONObject("comment");
+            }
+            holder.onBind(comment);
         } catch (JSONException e) {
             e.printStackTrace();
         }

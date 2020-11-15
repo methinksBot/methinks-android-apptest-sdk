@@ -2,11 +2,9 @@
 
 
 
-<!--    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
-<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-
-
-<!--    </style>-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
 
     <style name="NoTitleBarTheme" parent="Theme.AppCompat">
         <!--        <item name="android:windowNoTitle">true</item>-->
@@ -27,23 +25,25 @@
 <!--        <item name="android:backgroundDimEnabled">false</item>-->
     </style>
 
-    <!--bottomsheetdialogtheme-->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
-    </style>
-
-    <style name="AppBottomSheetDialogTheme"
-        parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/AppModalStyle</item>
-    </style>
-
-    <style name="AppModalStyle"
-        parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/sdk_white_full_rounded_background</item>
-    </style>
-
     <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:background">@color/white</item>
         <item name="android:textColor">@color/cornflower_blue</item>
     </style>
+
+    <!--bottomsheetdialogtheme-->
+<!--    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+<!--        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>-->
+<!--    </style>-->
+
+<!--    <style name="AppBottomSheetDialogTheme"-->
+<!--        parent="Theme.Design.Light.BottomSheetDialog">-->
+<!--        <item name="bottomSheetStyle">@style/AppModalStyle</item>-->
+<!--    </style>-->
+
+<!--    <style name="AppModalStyle"-->
+<!--        parent="Widget.Design.BottomSheet.Modal">-->
+<!--        <item name="android:background">@drawable/sdk_white_full_rounded_background</item>-->
+<!--    </style>-->
+
+
 </resources>

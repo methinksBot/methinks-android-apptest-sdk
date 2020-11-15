@@ -1,31 +1,39 @@
 package io.methinks.android.methinks_android_forum_sdk.activity;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.TimeZone;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import io.methinks.android.methinks_android_forum_sdk.Global;
 import io.methinks.android.methinks_android_forum_sdk.HttpManager;
@@ -33,6 +41,8 @@ import io.methinks.android.methinks_android_forum_sdk.Log;
 import io.methinks.android.methinks_android_forum_sdk.R;
 import io.methinks.android.methinks_android_forum_sdk.adapter.CommentAdapter;
 import io.methinks.android.methinks_android_forum_sdk.adapter.ImagesUrlAdapter;
+import io.methinks.android.methinks_android_forum_sdk.util.HtmlUtil;
+import io.methinks.android.methinks_android_forum_sdk.util.OnLinkClickListener;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
@@ -40,7 +50,7 @@ import okhttp3.Response;
 import static io.methinks.android.methinks_android_forum_sdk.Global.forumNickName;
 import static io.methinks.android.methinks_android_forum_sdk.Global.getImageId;
 
-public class ForumPostDetailActivity extends AppCompatActivity {
+public class ForumPostDetailActivity extends AppCompatActivity implements OnLinkClickListener {
     private Activity activity;
 
     private ImageView writerProfile;
@@ -55,6 +65,7 @@ public class ForumPostDetailActivity extends AppCompatActivity {
     private TextView commentCount;
     private TextView editPost;
     private TextView deletePost;
+    private ImageView backBtn;
 
     private RelativeLayout editMenuDialog;
 
@@ -83,6 +94,11 @@ public class ForumPostDetailActivity extends AppCompatActivity {
     public static RecyclerView.Adapter commentAdapter;
     private RecyclerView.LayoutManager commentLayoutManager;
 
+    private Drawable darkerBackground;
+    private Drawable lighterBackground;
+
+    private Animation feedbackAnim;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,9 +123,15 @@ public class ForumPostDetailActivity extends AppCompatActivity {
         deletePost = findViewById(R.id.post_delete);
         imagePanel = findViewById(R.id.images_panel);
         commentPanel = findViewById(R.id.comments_panel);
+        backBtn = findViewById(R.id.back_btn);
 
         imagePanel.setLayoutManager(imageLayoutManager);
         commentPanel.setLayoutManager(commentLayoutManager);
+
+        darkerBackground = getResources().getDrawable(R.drawable.background_edit_darker);
+        lighterBackground = getResources().getDrawable(R.drawable.background_edit_dialog);
+
+        feedbackAnim = AnimationUtils.loadAnimation(this, R.anim.anim_beat_effect);
 
         Bundle extras = getIntent().getExtras();
 
@@ -129,12 +151,16 @@ public class ForumPostDetailActivity extends AppCompatActivity {
         writerName.setText(writerNameVal);
         createdAt.setText(createdAtVal);
         postTitle.setText(postTitleVal);
-        postDesc.setText(postTextVal);
         likeCount.setText(likeCountVal);
         commentCount.setText(commentCountVal);
 
-        postLike.setOnClickListener(likeClickListener);
+        postDesc.setText(HtmlUtil.fromHtml(postTextVal, this));
+        postDesc.setMovementMethod(LinkMovementMethod.getInstance());
+        postDesc.setClickable(true);
+
+        postLike.setOnTouchListener(likeOnTouchListener);
         commentIcon.setOnClickListener(commentClickListener);
+        backBtn.setOnClickListener(backbtnClickListener);
 
         checkOwnedPost();
         likeDetector();
@@ -158,7 +184,7 @@ public class ForumPostDetailActivity extends AppCompatActivity {
     }
 
     public void likeDetector() {
-        if (likedUsers != null) {
+        if (likedUsers != null && Integer.parseInt(likeCountVal) > 0) {
             Log.e("likedUsers: " + likedUsers + "/" + Global.userObjectId);
             ArrayList<String> likedUserArray = new ArrayList<>();
             String likedUsersSource = likedUsers.replaceAll("[\\[\\](){}]", "");
@@ -173,47 +199,71 @@ public class ForumPostDetailActivity extends AppCompatActivity {
         }
     }
 
-    View.OnClickListener likeClickListener = new View.OnClickListener() {
+    OnLinkClickListener descOnLinkClickListener = new OnLinkClickListener() {
         @Override
-        public void onClick(View view) {
-            boolean like = !postLike.isActivated();
-            new HttpManager().likeForumPost(postId, like, new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) { }
+        public void onLinkClick(@NotNull String url) {
+            Toast.makeText(activity, "executing web view...", Toast.LENGTH_LONG).show();
+        }
+    };
 
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    String res = response.body().string();
-                    try {
-                        JSONObject result = new JSONObject(res);
-                        JSONObject post = result.getJSONObject("result");
-                        Log.d(post.toString());
+    View.OnTouchListener likeOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            switch(motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    break;
+                case MotionEvent.ACTION_UP:
+                    boolean like = !postLike.isActivated();
+                    Log.e("Current Like: " + like);
 
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    Log.e(post.getJSONArray("likedUsers").toString());
-                                    likeCount.setText(String.valueOf(post.getJSONArray("likedUsers").length()));
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                    postLike.setActivated(like);
+                    postLike.startAnimation(feedbackAnim);
+                    new HttpManager().likeForumPost(postId, like, new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) { }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String res = response.body().string();
+                            try {
+                                JSONObject result = new JSONObject(res);
+                                JSONObject post = result.getJSONObject("result");
+                                Log.d(post.toString());
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            int postLikeCount =
+                                                    post.has("likedUsers")
+                                                            && post.getJSONArray("likedUsers").length() > 0
+                                                            ? post.getJSONArray("likedUsers").length()
+                                                            : 0;
+                                            Log.e(String.valueOf(postLikeCount));
+                                            likeCount.setVisibility(View.VISIBLE);
+                                            likeCount.setText(String.valueOf(postLikeCount));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        });
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    postLike.setActivated(!postLike.isActivated());
-                }
-            });
+                        }
+                    });
+                    break;
+            }
+            return true;
         }
     };
 
     View.OnClickListener commentClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            //view.setActivated(true);
+            view.startAnimation(feedbackAnim);
             Intent intent = new Intent(activity, ForumCommentActivity.class);
             intent.putExtra("postId", postId);
             intent.putExtra("sectionId", sectionId);
@@ -239,17 +289,23 @@ public class ForumPostDetailActivity extends AppCompatActivity {
                         return;
                     }
                     JSONArray commentObjs = result.getJSONArray("result");
-                    if (commentObjs.length() != Integer.parseInt(commentCountVal)) {
-                        commentCountVal = String.valueOf(commentObjs.length());
-                        activity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                commentCount.setText(commentCountVal);
-                            }
-                        });
-                    }
+                    commentObjs = commentAligner(commentObjs);
 
-                    commentAdapter = new CommentAdapter(commentObjs, activity, "post");
+                    Log.e("comments Length: " + commentObjs.length());
+                    commentCountVal = String.valueOf(commentObjs.length());
+
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            commentCount.setVisibility(View.VISIBLE);
+                            commentCount.setText(commentCountVal);
+                        }
+                    });
+
+                    commentAdapter = new CommentAdapter(
+                            commentObjs,
+                            activity,
+                            "post");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -265,32 +321,132 @@ public class ForumPostDetailActivity extends AppCompatActivity {
         });
     }
 
-    public void getAllPostAttachments() {
-        new Thread(new Runnable() { @Override public void run() { // TODO Auto-generated method stub
-            JSONArray attachmentArray = new JSONArray();
-            imagesUrl = new ArrayList<>();
+    public JSONArray commentAligner(JSONArray comments) {
 
-            for (String ele : attachments) { attachmentArray.put(ele); }
+        ArrayList<JSONObject> commentArray = new ArrayList<>();
 
-            imageAssets = new HttpManager().getPostAttachments(attachmentArray);
-            //Log.d(imageAssets);
-            try {
-                JSONObject imageObj = new JSONObject(imageAssets);
-                if (imageObj.has("result")) {
-                    JSONArray assetsArray = imageObj.getJSONArray("result");
-
-                    // getting base64 string from url to keep images
-                    for (int i = 0; i < assetsArray.length(); i++) {
-                        JSONObject objectAsset = assetsArray.getJSONObject(i).getJSONObject("image");
-                        imagesUrl.add(objectAsset.getString("url"));
-                    }
-                    setAttachments();
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
+        try {
+            // conversing JSONArray to ArrayList.
+            for (int i=0; i<comments.length(); i++) {
+                commentArray.add(comments.getJSONObject(i));
             }
-        }}).start();
+
+            List commentList = commentArray;
+
+            Log.d("Comments: " + commentList);
+
+            for (int i=0; i<commentList.size(); i++) {
+                JSONObject curObj = (JSONObject) commentList.get(i);
+                if (curObj.has("toComment")) {
+
+                    // split
+                    List subList = new ArrayList<>(commentList.subList(0, i));
+                    List temp = findCommentSequence(subList, curObj);
+                    List last = new ArrayList<>(commentList.subList(i+1, commentList.size()));
+                    //Log.d("cur: " + commentList);
+                    //Log.d("temp: " + temp);
+                    //Log.d("last: " + last);
+
+                    commentList = new ArrayList<>();
+                    commentList.addAll(temp);
+                    commentList.addAll(last);
+
+                    //Log.d("Rearranged list: " + commentList.size() + "/" + commentList.size());
+                    //Log.d("After Comment: " + commentList);
+                }
+            }
+
+            JSONArray sortedList = new JSONArray();
+            for (int i=0; i<commentList.size(); i++) {
+                sortedList.put(commentList.get(i));
+            }
+            Log.e("Final List: " + sortedList);
+            return sortedList;
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public List findCommentSequence(List splitObj, JSONObject cur) {
+
+        try {
+            boolean isFind = false;
+            int compDepth = 0;
+
+            for (int i=0; i<splitObj.size(); i++) {
+                JSONObject curObj = (JSONObject) splitObj.get(i);
+                JSONObject toComment = cur.getJSONObject("toComment");
+
+                if (curObj.getString("objectId").equals(toComment.getString("objectId"))) {
+
+                    isFind = true;
+                    compDepth = curObj.getInt("depth");
+                    int commentCount = curObj.has("commentCount") ? curObj.getInt("commentCount") + 1 : 1;
+                    curObj.put("commentCount", commentCount);
+                    if (i == splitObj.size()-1) {
+                        splitObj.add(i+1, cur);
+                        Log.e("Index " + (i+1) + " is selected Index!");
+                        return splitObj;
+                    }
+
+                } else if (isFind) {
+
+                    if (curObj.getInt("depth") <= compDepth) {
+                        splitObj.add(i, cur);
+                        Log.e("Index " + i + " is selected Index!");
+                        return splitObj;
+                    } else if (i == splitObj.size()-1) {
+                        splitObj.add(i+1, cur);
+                        Log.e("Index " + (i+1) + " is selected Index!");
+                        return splitObj;
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public void getAllPostAttachments() {
+        if (attachments.size() > 0) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() { // TODO Auto-generated method stub
+                    JSONArray attachmentArray = new JSONArray();
+                    imagesUrl = new ArrayList<>();
+
+                    for (String ele : attachments) {
+                        attachmentArray.put(ele);
+                    }
+
+                    imageAssets = new HttpManager().getPostAttachments(attachmentArray);
+                    //Log.d(imageAssets);
+                    try {
+                        JSONObject imageObj = new JSONObject(imageAssets);
+                        if (imageObj.has("result")) {
+                            JSONArray assetsArray = imageObj.getJSONArray("result");
+
+                            // getting base64 string from url to keep images
+                            for (int i = 0; i < assetsArray.length(); i++) {
+                                JSONObject objectAsset = assetsArray.getJSONObject(i).getJSONObject("image");
+                                imagesUrl.add(objectAsset.getString("url"));
+                            }
+                            setAttachments();
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        } else {
+            Log.d("no attachments to bring");
+        }
     }
 
     public void setAttachments() {
@@ -325,6 +481,35 @@ public class ForumPostDetailActivity extends AppCompatActivity {
         });
     }
 
+    View.OnTouchListener editOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            switch(motionEvent.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    view.setBackground(darkerBackground);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    view.setBackground(lighterBackground);
+                    if (view == editPost) {
+                        Intent intent = new Intent(activity, ForumPostUpdateActivity.class);
+                        intent.putExtra("postId", postId);
+                        intent.putExtra("sectionId", sectionId);
+                        intent.putExtra("userName", forumNickName);
+                        intent.putExtra("profile", profileVal);
+                        intent.putExtra("postTitle", postTitleVal);
+                        intent.putExtra("postText", postTextVal);
+                        intent.putExtra("attachments", attachments);
+                        activity.startActivity(intent);
+                        finish();
+                    } else if (view == deletePost) {
+                        callDeleteForumPost();
+                    }
+                    break;
+            }
+            return true;
+        }
+    };
+
     public void checkOwnedPost() {
         /** If current user is writer */
         if (Global.forumNickName.equals(writerNameVal)) {
@@ -332,7 +517,14 @@ public class ForumPostDetailActivity extends AppCompatActivity {
             editMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    //editMenuDialog.setVisibility(View.VISIBLE);
+                    editMenuDialog.setAlpha(0f);
                     editMenuDialog.setVisibility(View.VISIBLE);
+
+                    editMenuDialog.animate()
+                            .alpha(1f)
+                            .setDuration(400)
+                            .setListener(null);
                 }
             });
             editMenuDialog.setOnClickListener(new View.OnClickListener() {
@@ -341,27 +533,21 @@ public class ForumPostDetailActivity extends AppCompatActivity {
                     editMenuDialog.setVisibility(View.INVISIBLE);
                 }
             });
-            editPost.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(activity, ForumPostUpdateActivity.class);
-                    intent.putExtra("postId", postId);
-                    intent.putExtra("sectionId", sectionId);
-                    intent.putExtra("userName", forumNickName);
-                    intent.putExtra("profile", profileVal);
-                    intent.putExtra("postTitle", postTitleVal);
-                    intent.putExtra("postText", postTextVal);
-                    intent.putExtra("attachments", attachments);
-                    activity.startActivity(intent);
-                    finish();
-                }
-            });
-            deletePost.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    callDeleteForumPost();
-                }
-            });
+            editPost.setOnTouchListener(editOnTouchListener);
+            deletePost.setOnTouchListener(editOnTouchListener);
         }
+    }
+
+    View.OnClickListener backbtnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            finish();
+        }
+    };
+
+    @Override
+    public void onLinkClick(@NotNull String url) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        this.startActivity(browserIntent);
     }
 }
