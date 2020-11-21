@@ -30,12 +30,14 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
 
-    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
-    implementation "androidx.core:core-ktx:+"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.0"
+    //implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    implementation files('libs/okhttp-3.9.1.jar')
+
+    implementation 'androidx.core:core:1.1.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10"
 }
 repositories {
     mavenCentral()

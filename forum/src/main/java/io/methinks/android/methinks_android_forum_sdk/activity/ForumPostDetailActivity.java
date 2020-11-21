@@ -154,7 +154,8 @@ public class ForumPostDetailActivity extends AppCompatActivity implements OnLink
         likeCount.setText(likeCountVal);
         commentCount.setText(commentCountVal);
 
-        postDesc.setText(HtmlUtil.fromHtml(postTextVal, this));
+//        postDesc.setText(HtmlUtil.fromHtml(postTextVal, this));
+        postDesc.setText(postTextVal);
         postDesc.setMovementMethod(LinkMovementMethod.getInstance());
         postDesc.setClickable(true);
 
@@ -282,7 +283,7 @@ public class ForumPostDetailActivity extends AppCompatActivity implements OnLink
             public void onResponse(Call call, Response response) throws IOException {
                 String res = response.body().string();
                 try {
-                    Log.d("Comments: " + res);
+                    Log.e("Comments: " + res);
                     JSONObject result = new JSONObject(res);
                     if (!result.has("result")) {
                         Log.e("No result!!!");

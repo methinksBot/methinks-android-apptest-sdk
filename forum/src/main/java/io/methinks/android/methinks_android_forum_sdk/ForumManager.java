@@ -23,6 +23,7 @@ public class ForumManager {
 
         Intent forumMainIntent = new Intent(context, ForumMainActivity.class);
         forumMainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Log.e("Forum for Patcher: " + Global.type);
         context.startActivity(forumMainIntent);
     }
 

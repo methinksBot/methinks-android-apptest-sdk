@@ -1,4 +1,3 @@
-include ':forum'
-include ':app', ':inappsurvey'
+include ':app', ':inappsurvey', ':forum'
+
 rootProject.name='MTKApptestSDK'
-project(':inappsurvey').projectDir = new File('inappsurvey')

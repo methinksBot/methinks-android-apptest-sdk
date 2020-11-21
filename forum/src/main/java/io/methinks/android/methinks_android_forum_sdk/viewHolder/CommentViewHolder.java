@@ -182,7 +182,8 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements OnLink
                 commentDesc.setText(R.string.forum_deleted_comment);
                 commentDesc.setTextColor(R.color.deleted_comment_color);
             } else {
-                commentDesc.setText(HtmlUtil.fromHtml(commentObj.getString("commentText"), this));
+//                commentDesc.setText(HtmlUtil.fromHtml(commentObj.getString("commentText"), this));
+                commentDesc.setText(commentObj.getString("commentText"));
                 commentDesc.setMovementMethod(LinkMovementMethod.getInstance());
                 commentDesc.setClickable(true);
                 getAllPostAttachments();
@@ -372,7 +373,7 @@ public class CommentViewHolder extends RecyclerView.ViewHolder implements OnLink
         /** If current user is writer */
         //Log.d("pass:" + Global.forumNickName + "/" + commentCreator.getText());
         if (participantId.equals("admin")) {
-
+            //admin
         } else {
             if (Global.participantId.equals(participantId)) {
                 if (base.equals("post"))
