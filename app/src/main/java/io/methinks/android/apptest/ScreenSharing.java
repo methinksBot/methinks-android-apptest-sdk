@@ -81,74 +81,72 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                             alertDialog.show();
                         }
 
-                        Global.isScreenStreamAllowed = false;
+                        /** IceServer Info fetching proc */
 
-//                        /** IceServer Info fetching proc */
-//
-//                        OkHttpClient okHttpClient = new OkHttpClient();
-//                        Request request = new Request.Builder()
-//                                .url("https://appr.tc/params")
-//                                .get()
-//                                .build();
+                        OkHttpClient okHttpClient = new OkHttpClient();
+                        Request request = new Request.Builder()
+                                .url("https://appr.tc/params")
+                                .get()
+                                .build();
 
-//                        okHttpClient.newCall(request).enqueue(new Callback() {
-//                            @Override
-//                            public void onFailure(Call call, IOException e) {
-//                                e.printStackTrace();
-//                            }
-//
-//                            @Override
-//                            public void onResponse(Call call, Response response) throws IOException {
-//                                String res = response.body().string();
-//                                String iceServerUrl = "";
-//                                try {
-//                                    JSONObject resultJson = new JSONObject(res);
-//                                    if(!resultJson.has("ice_server_url") || TextUtils.isEmpty(resultJson.getString("ice_server_url"))) {
-//                                        Log.e("No IceServerUrl");
-//                                        return;
-//                                    }
-//
-//                                    iceServerUrl = resultJson.getString("ice_server_url");
-//                                    Log.d("IcoUrl!!! " + iceServerUrl);
-//                                } catch (JSONException ex) {
-//                                    ex.printStackTrace();
-//                                }
-//
-//                                FormBody formBody = new FormBody.Builder().build();
-//
-//                                Request request1 = new Request.Builder()
-//                                        .url(iceServerUrl)
-//                                        .header("REFERER", "https://appr.tc")
-//                                        .post(formBody)
-//                                        .build();
-//
-//                                okHttpClient.newCall(request1).enqueue(new Callback() {
-//                                    @Override
-//                                    public void onFailure(Call call, IOException e) {
-//                                        e.printStackTrace();
-//                                    }
-//
-//                                    @Override
-//                                    public void onResponse(Call call, Response response) throws IOException {
-//                                        if(response.code() == 200) {
-//                                            String res = response.body().string();
-//                                            Log.d("Ice List!!!" + res);
-//                                            try {
-//                                                JSONObject resultJson = new JSONObject(res);
-//                                                iceServerList = resultJson.getJSONArray("iceServers").toString();
-//
-//                                                try {
-//                                                    JSONArray iceServersAry = new JSONArray(iceServerList);
-//                                                    for (int i = 0; i < iceServersAry.length(); ++i) {
-//                                                        JSONObject server = iceServersAry.getJSONObject(i);
-//                                                        JSONArray turnUrls = server.getJSONArray("urls");
-//                                                        String username = server.has("username") ? server.getString("username") : "";
-//                                                        String credential = server.has("credential") ? server.getString("credential") : "";
-//                                                        for (int j = 0; j < turnUrls.length(); j++) {
-//                                                            String turnUrl = turnUrls.getString(j);
-//                                                            iceServers.add(PeerConnection.IceServer.builder(turnUrl).setUsername(username).setPassword(credential).createIceServer());
-//                                                        }
-//                                                    }
+                        okHttpClient.newCall(request).enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                String res = response.body().string();
+                                String iceServerUrl = "";
+                                try {
+                                    JSONObject resultJson = new JSONObject(res);
+                                    if(!resultJson.has("ice_server_url") || TextUtils.isEmpty(resultJson.getString("ice_server_url"))) {
+                                        Log.e("No IceServerUrl");
+                                        return;
+                                    }
+
+                                    iceServerUrl = resultJson.getString("ice_server_url");
+                                    Log.d("IcoUrl!!! " + iceServerUrl);
+                                } catch (JSONException ex) {
+                                    ex.printStackTrace();
+                                }
+
+                                FormBody formBody = new FormBody.Builder().build();
+
+                                Request request1 = new Request.Builder()
+                                        .url(iceServerUrl)
+                                        .header("REFERER", "https://appr.tc")
+                                        .post(formBody)
+                                        .build();
+
+                                okHttpClient.newCall(request1).enqueue(new Callback() {
+                                    @Override
+                                    public void onFailure(Call call, IOException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    @Override
+                                    public void onResponse(Call call, Response response) throws IOException {
+                                        if(response.code() == 200) {
+                                            String res = response.body().string();
+                                            Log.d("Ice List!!!" + res);
+                                            try {
+                                                JSONObject resultJson = new JSONObject(res);
+                                                iceServerList = resultJson.getJSONArray("iceServers").toString();
+
+                                                try {
+                                                    JSONArray iceServersAry = new JSONArray(iceServerList);
+                                                    for (int i = 0; i < iceServersAry.length(); ++i) {
+                                                        JSONObject server = iceServersAry.getJSONObject(i);
+                                                        JSONArray turnUrls = server.getJSONArray("urls");
+                                                        String username = server.has("username") ? server.getString("username") : "";
+                                                        String credential = server.has("credential") ? server.getString("credential") : "";
+                                                        for (int j = 0; j < turnUrls.length(); j++) {
+                                                            String turnUrl = turnUrls.getString(j);
+                                                            iceServers.add(PeerConnection.IceServer.builder(turnUrl).setUsername(username).setPassword(credential).createIceServer());
+                                                        }
+                                                    }
 
                                                     /** mtkrtc Initializing */
                                                     if (Global.isScreenStreamAllowed) {
@@ -176,20 +174,20 @@ public class ScreenSharing implements MTKVideoChatClient.MTKRTCClientListener {
                                                         mtkVideoChatClient.connect();
                                                     }
 
-//
-//                                                } catch (JSONException e) {
-//                                                    e.printStackTrace();
-//                                                }
-//                                            } catch (JSONException ex) {
-//                                                ex.printStackTrace();
-//                                            }
-//                                        }
-//
-//
-//                                    }
-//                                });
-//                            }
-//                        });
+
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            } catch (JSONException ex) {
+                                                ex.printStackTrace();
+                                            }
+                                        }
+
+
+                                    }
+                                });
+                            }
+                        });
                     }else{
 
                     }
