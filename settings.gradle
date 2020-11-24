@@ -1,3 +1,4 @@
-include ':app', ':inappsurvey', ':forum'
+include ':inappsurvey'
+include ':app', ':forum'
 
 rootProject.name='MTKApptestSDK'

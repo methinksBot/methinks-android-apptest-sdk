@@ -34,76 +34,76 @@ public class NetworkManager extends Activity {
         public void onDownloadFail(boolean fail, Throwable e);
     }
 
-    public void getSurveyQuestion(String aKey, String surveyId, final NetworkManager.CallbackInterface callback) throws UnsupportedEncodingException {
-        try {
-            AsyncHttpClient clientQuestion = new AsyncHttpClient();
-
-            clientQuestion.addHeader("X-Parse-Application-Id", "mySDKAppId");
-            clientQuestion.addHeader("X-Parse-REST-API-Key", "myRESTAPIKey");
-
-            JSONObject params = new JSONObject();
-            params.put("aKey", aKey);
-            params.put("surveyId", surveyId);
-
-            StringEntity entity = new StringEntity(params.toString());
-
-
-            clientQuestion.post(this, BuildConfig.SERVER_URL + METHINKS_SDK_URL_SURVEYQUESTION, entity, "application/json", new JsonHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    callback.onDownloadSuccess(true, response);
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
-                    callback.onDownloadFail(true, e);
-
-                    Log.e("getSurveyQuestion", "Fail: " + e.toString());
-                    Log.d("getSurveyQuestion", "StatusCode :" + statusCode);
-                }
-            });
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void suveryCompletion(String aKey, String devId, String surveyId, JSONObject answer, final CallbackInterface callback) throws UnsupportedEncodingException {
-        try {
-            AsyncHttpClient clientSurvComp = new AsyncHttpClient();
-
-            clientSurvComp.addHeader("X-Parse-Application-Id", "mySDKAppId");
-            clientSurvComp.addHeader("X-Parse-REST-API-Key", "myRESTAPIKey");
-
-            JSONObject params = new JSONObject();
-            params.put("aKey", aKey);
-            params.put("devId", devId);
-            params.put("os", "android");
-            params.put("surveyId", surveyId);
-            if (answer != null && answer.length() != 0) {
-                params.put("answers", answer);
-            }
-
-            StringEntity entity = new StringEntity(params.toString());
-
-            clientSurvComp.post(this, BuildConfig.SERVER_URL + METHINKS_SDK_URL_COMPLETE, entity, "application/json", new JsonHttpResponseHandler(){
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    callback.onDownloadSuccess(true, response);
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
-                    callback.onDownloadFail(true, e);
-
-                    Log.e("suveryCompletion", "Fail: " + e.toString());
-                    Log.d("suveryCompletion", "StatusCode :" + statusCode);
-                }
-            });
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void getSurveyQuestion(String aKey, String surveyId, final NetworkManager.CallbackInterface callback) throws UnsupportedEncodingException {
+//        try {
+//            AsyncHttpClient clientQuestion = new AsyncHttpClient();
+//
+//            clientQuestion.addHeader("X-Parse-Application-Id", "mySDKAppId");
+//            clientQuestion.addHeader("X-Parse-REST-API-Key", "myRESTAPIKey");
+//
+//            JSONObject params = new JSONObject();
+//            params.put("aKey", aKey);
+//            params.put("surveyId", surveyId);
+//
+//            StringEntity entity = new StringEntity(params.toString());
+//
+//
+//            clientQuestion.post(this, BuildConfig.SERVER_URL + METHINKS_SDK_URL_SURVEYQUESTION, entity, "application/json", new JsonHttpResponseHandler() {
+//                @Override
+//                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                    callback.onDownloadSuccess(true, response);
+//                }
+//
+//                @Override
+//                public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
+//                    callback.onDownloadFail(true, e);
+//
+//                    Log.e("getSurveyQuestion", "Fail: " + e.toString());
+//                    Log.d("getSurveyQuestion", "StatusCode :" + statusCode);
+//                }
+//            });
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public void suveryCompletion(String aKey, String devId, String surveyId, JSONObject answer, final CallbackInterface callback) throws UnsupportedEncodingException {
+//        try {
+//            AsyncHttpClient clientSurvComp = new AsyncHttpClient();
+//
+//            clientSurvComp.addHeader("X-Parse-Application-Id", "mySDKAppId");
+//            clientSurvComp.addHeader("X-Parse-REST-API-Key", "myRESTAPIKey");
+//
+//            JSONObject params = new JSONObject();
+//            params.put("aKey", aKey);
+//            params.put("devId", devId);
+//            params.put("os", "android");
+//            params.put("surveyId", surveyId);
+//            if (answer != null && answer.length() != 0) {
+//                params.put("answers", answer);
+//            }
+//
+//            StringEntity entity = new StringEntity(params.toString());
+//
+//            clientSurvComp.post(this, BuildConfig.SERVER_URL + METHINKS_SDK_URL_COMPLETE, entity, "application/json", new JsonHttpResponseHandler(){
+//                @Override
+//                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                    callback.onDownloadSuccess(true, response);
+//                }
+//
+//                @Override
+//                public void onFailure(int statusCode, Header[] headers, Throwable e, JSONObject response) {
+//                    callback.onDownloadFail(true, e);
+//
+//                    Log.e("suveryCompletion", "Fail: " + e.toString());
+//                    Log.d("suveryCompletion", "StatusCode :" + statusCode);
+//                }
+//            });
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public void inAppSurveyCompletion(String aKey, String devId, String packId, JSONObject answer, final CallbackInterface callback) throws UnsupportedEncodingException {
         try {

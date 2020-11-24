@@ -78,7 +78,7 @@ public class SdkOpenEndShortFragment extends BaseFragment implements TextWatcher
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         answerMap = (HashMap<String, ArrayList<Object>>) getArguments().getSerializable("answerMap");
-        getShortForm = question.getRule().optInt("shortFormCount");
+        getShortForm = (int) question.getRule().get("shortFormCount");
     }
 
     @Override

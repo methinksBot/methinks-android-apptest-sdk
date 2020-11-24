@@ -1,5 +1,6 @@
 package io.mtksdk.inappsurvey.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -20,9 +21,9 @@ import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 
 
-import org.json.JSONArray;
+import org.json.simple.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,12 +94,13 @@ public class SdkLikertFragment extends BaseFragment {
         view = inflater.inflate(R.layout.sdk_fragment_likert, container, false);
         TextView tvLabel = (TextView) view.findViewById(R.id.question_content);
         tvLabel.setText(getQuestionText());
-//        DisplayMetrics displayMetrics = new DisplayMetrics();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) mContext).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int scale = getScale();
-//        int width = view.getWidth();
-//        int newWidth = (width - (int) convertDpToPixel(mContext, 36)) / scale;
-//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(newWidth, LinearLayout.LayoutParams.WRAP_CONTENT);
-//        params.gravity = Gravity.CENTER;
+        int width = displayMetrics.widthPixels;
+        int newWidth = (width - (int) convertDpToPixel(mContext, 36)) / scale;
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(newWidth, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.CENTER;
 
         MethinksTextView label01 = view.findViewById(R.id.tv_label_01);
         MethinksTextView label02 = view.findViewById(R.id.tv_label_02);
@@ -114,8 +116,6 @@ public class SdkLikertFragment extends BaseFragment {
         final ImageView dot05 = view.findViewById(R.id.iv_dot_05);
         final ImageView dot06 = view.findViewById(R.id.iv_dot_06);
         final ImageView dot07 = view.findViewById(R.id.iv_dot_07);
-        LinearLayout layout06 = view.findViewById(R.id.layout_06);
-        LinearLayout layout07 = view.findViewById(R.id.layout_07);
 
         imageMap.put(1, dot01);
         imageMap.put(2, dot02);
@@ -125,13 +125,41 @@ public class SdkLikertFragment extends BaseFragment {
         imageMap.put(6, dot06);
         imageMap.put(7, dot07);
 
+        label01.setText(labelList.get(0));
+        label02.setText(labelList.get(1));
+        label03.setText(labelList.get(2));
+        label04.setText(labelList.get(3));
+        label05.setText(labelList.get(4));
+        label01.setTextSize(13);
+        label02.setTextSize(13);
+        label03.setTextSize(13);
+        label04.setTextSize(13);
+        label05.setTextSize(13);
+        label01.setLayoutParams(params);
+        label02.setLayoutParams(params);
+        label03.setLayoutParams(params);
+        label04.setLayoutParams(params);
+        label05.setLayoutParams(params);
+
         if (scale == 7) {
-            layout06.setVisibility(View.VISIBLE);
-            layout07.setVisibility(View.VISIBLE);
             label06.setVisibility(View.VISIBLE);
             label07.setVisibility(View.VISIBLE);
             label06.setText(labelList.get(5));
             label07.setText(labelList.get(6));
+            label01.setTextSize(12);
+            label02.setTextSize(12);
+            label03.setTextSize(12);
+            label04.setTextSize(12);
+            label05.setTextSize(12);
+            label06.setTextSize(12);
+            label07.setTextSize(12);
+            label01.setLayoutParams(params);
+            label02.setLayoutParams(params);
+            label03.setLayoutParams(params);
+            label04.setLayoutParams(params);
+            label05.setLayoutParams(params);
+            label06.setLayoutParams(params);
+            label07.setLayoutParams(params);
             dot06.setVisibility(View.VISIBLE);
             dot07.setVisibility(View.VISIBLE);
             dot06.setOnClickListener(new View.OnClickListener() {
@@ -347,12 +375,12 @@ public class SdkLikertFragment extends BaseFragment {
         if (currSecSeq == null) {
             return;
         }
-        Iterator keys = currSecSeq.keys();
-        while(keys.hasNext()) {
-            String currKey = (String) keys.next();
-            JSONArray tempArr = currSecSeq.optJSONArray(currKey);
-            for (int i = 0; i < tempArr.length(); i++) {
-                sectionSecMap.put(tempArr.optString(i), currKey);
+
+        for (Object key : currSecSeq.keySet()) {
+            String currKey = (String) key;
+            JSONArray tempArr = (JSONArray) currSecSeq.get(currKey);
+            for (int i = 0; i < tempArr.size(); i++) {
+                sectionSecMap.put((String) tempArr.get(i), currKey);
             }
         }
     }
@@ -362,16 +390,23 @@ public class SdkLikertFragment extends BaseFragment {
     }
 
     public int getScale() {
-        return question.getRule().optInt("scale");
+        long tempL = (long) question.getRule().get("scale");
+        return (int) tempL;
     }
 
     public ArrayList<String> getLabelList() {
-        JSONArray labelList = question.getRule().optJSONArray("labels");
+        JSONArray labelList = (JSONArray) question.getRule().get("labels");
         ArrayList<String> output = new ArrayList<>();
-        for (int i = 0; i < labelList.length(); i++) {
-            output.add(labelList.optString(i));
+        for (int i = 0; i < labelList.size(); i++) {
+            output.add((String)labelList.get(i));
         }
         return output;
+    }
+
+    public static float convertDpToPixel(Context context, float dp){
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        return dp * (metrics.densityDpi / 160f);
     }
 
 }

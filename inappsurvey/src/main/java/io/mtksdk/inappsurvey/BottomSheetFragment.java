@@ -34,8 +34,11 @@ import io.mtksdk.inappsurvey.ViewConstant;
 import io.mtksdk.inappsurvey.adapter.ViewControllerAdapter;
 import io.mtksdk.inappsurvey.R;
 import io.mtksdk.inappsurvey.converter.Question;
+import io.mtksdk.inappsurvey.converter.Section;
 import io.mtksdk.inappsurvey.custom.widget.MethinksTextView;
 import io.mtksdk.inappsurvey.fragment.BaseFragment;
+
+import static io.mtksdk.inappsurvey.ViewConstant.startingType;
 
 /**
  * Created by kgy 2019. 9. 24.
@@ -59,6 +62,8 @@ public class BottomSheetFragment extends DialogFragment {
     public int displayState;
     public static String currSectionId;
     public static ArrayList<Question> currQuestionPack;
+    public static Section currSection;
+
 
     public BottomSheetFragment() {}
 
@@ -69,15 +74,10 @@ public class BottomSheetFragment extends DialogFragment {
         this.screenHeightL = width;
         this.screenWidthL = height;
         this.currSectionId = firstSectionId;
-        this.currQuestionPack = ViewConstant.sectionContainer.get(firstSectionId).getQuestionPacks();
+        this.currSection = ViewConstant.sectionContainer.get(firstSectionId);
+        this.currQuestionPack = currSection.getQuestionPacks();
         // Required empty public constructor
     }
-
-/*
-    public static BottomSheetFragment newInstance() {
-        return new BottomSheetFragment();
-    }
-*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -156,8 +156,6 @@ public class BottomSheetFragment extends DialogFragment {
         final ImageView logo = bottomSheetView.findViewById(R.id.logo);
         final MethinksTextView logoText = bottomSheetView.findViewById(R.id.logo_text);
         final LinearLayout space = bottomSheetView.findViewById(R.id.space);
-        submit.setText("Start");
-        displayState = 0;
 
         closeSurvey.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,14 +169,6 @@ public class BottomSheetFragment extends DialogFragment {
         winParams.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
         getDialog().getWindow().setAttributes(winParams);
 
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getDialog().dismiss();
-                act.finish();
-            }
-        });
-
         this.answerMap = new HashMap<>();                                                           //Map that stores answers
         sequenceLogicCache = new HashMap<>();
         cache = new HashMap<>();
@@ -188,14 +178,31 @@ public class BottomSheetFragment extends DialogFragment {
         adapter = new ViewControllerAdapter(getChildFragmentManager(), answerMap, questionPacks);
         viewPager.setAdapter(adapter);
 
-        int currPosition = viewPager.getCurrentItem();
+        int startPosition = viewPager.getCurrentItem();
+        BaseFragment startingFrag = (BaseFragment) adapter.getItem(startPosition);
         final ViewGroup.LayoutParams params = viewPager.getLayoutParams();
-        if (currPosition == 0 && currOrientation == Configuration.ORIENTATION_PORTRAIT) {
-            params.height = this.screenHeightP / 4;
+        if (currOrientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (startingType.equals("intro")) {
+                params.height = this.screenHeightP / 4;
+                submit.setText("Start");
+            } else if (startingType.equals("likert") || startingType.equals("smiley")) {
+                params.height = screenHeightP /3;
+            } else {
+                params.height = screenHeightP * 8/17;
+            }
             viewPager.requestLayout();
-        } else if (currPosition == 0 && currOrientation == Configuration.ORIENTATION_LANDSCAPE) {
-            params.height = this.screenHeightP / 4;
-            params.width = this.screenWidthP * 3/5;
+        } else {
+            if (startingType.equals("intro")) {
+                params.height = this.screenHeightL/4;
+                params.width = this.screenWidthL * 3/5;
+                submit.setText("Start");
+            } else if (startingType.equals("likert") || startingType.equals("smiley")) {
+                params.height = screenHeightL * 5/9;
+                params.width = this.screenWidthL * 3/5;
+            } else {
+                params.height = screenHeightL * 5/9;
+                params.width = this.screenWidthL * 3/5;
+            }
             viewPager.requestLayout();
         }
 
@@ -212,6 +219,7 @@ public class BottomSheetFragment extends DialogFragment {
                 String currType = currFrag.getType();
                 if (currOrientation == Configuration.ORIENTATION_PORTRAIT) {
                     if (currType.equals("intro")) {
+                        displayState = 0;
                         submit.setText("Start");
                     } else if (currType.equals("outro")) {
                         displayState = 1;
@@ -228,6 +236,10 @@ public class BottomSheetFragment extends DialogFragment {
                         ViewGroup.LayoutParams params1 = viewPager.getLayoutParams();
                         params1.height = screenHeightP / 3;
                         viewPager.requestLayout();
+                        submit.setVisibility(View.VISIBLE);
+                        logo.setVisibility(View.VISIBLE);
+                        logoText.setVisibility(View.VISIBLE);
+                        closeSurvey.setVisibility(View.GONE);
                         submit.setText("Next");
                     } else {
                         Log.i("viewPage", "height to max on question");
@@ -235,10 +247,15 @@ public class BottomSheetFragment extends DialogFragment {
                         ViewGroup.LayoutParams paramsQ = viewPager.getLayoutParams();
                         paramsQ.height = screenHeightP * 8/17;
                         viewPager.requestLayout();
+                        submit.setVisibility(View.VISIBLE);
+                        logo.setVisibility(View.VISIBLE);
+                        logoText.setVisibility(View.VISIBLE);
+                        closeSurvey.setVisibility(View.GONE);
                         submit.setText("Next");
                     }
                 } else if (currOrientation == Configuration.ORIENTATION_LANDSCAPE) {
                     if (currType.equals("intro")) {
+                        displayState = 0;
                         submit.setText("Start");
                     } else if (currType.equals("outro")) {
                         displayState = 1;
@@ -255,6 +272,10 @@ public class BottomSheetFragment extends DialogFragment {
                         ViewGroup.LayoutParams params1 = viewPager.getLayoutParams();
                         params1.height = screenHeightP * 5/9;
                         viewPager.requestLayout();
+                        submit.setVisibility(View.VISIBLE);
+                        logo.setVisibility(View.VISIBLE);
+                        logoText.setVisibility(View.VISIBLE);
+                        closeSurvey.setVisibility(View.GONE);
                         submit.setText("Next");
                     } else {
                         displayState = 3;
@@ -262,6 +283,10 @@ public class BottomSheetFragment extends DialogFragment {
                         ViewGroup.LayoutParams paramsQ = viewPager.getLayoutParams();
                         paramsQ.height = screenHeightP * 5/9;
                         viewPager.requestLayout();
+                        submit.setVisibility(View.VISIBLE);
+                        logo.setVisibility(View.VISIBLE);
+                        logoText.setVisibility(View.VISIBLE);
+                        closeSurvey.setVisibility(View.GONE);
                         submit.setText("Next");
                     }
                 }
@@ -282,17 +307,36 @@ public class BottomSheetFragment extends DialogFragment {
                 final BaseFragment currentFragment = (BaseFragment) adapter.getItem(currPosition);
                 Boolean currValidate = currentFragment.validate();
                 //getting current question.
-                if (currValidate && ViewConstant.needToChangeSection && currPosition == currQuestionPack.size() - 2) {
+                if (currValidate && ViewConstant.needToChangeSection && currPosition == currQuestionPack.size() - 1) {
                     ViewConstant.needToChangeSection = false;
                     currSectionId = ViewConstant.globalCurrSectionId;
+                    currSection = ViewConstant.sectionContainer.get(currSectionId);
 
                     if (currSectionId.equals("FINISH")){
-                        viewPager.setCurrentItem(currQuestionPack.size() - 1);
+                        getDialog().dismiss();
+                        act.finish();
                     } else {
-                        currQuestionPack = ViewConstant.sectionContainer.get(currSectionId).getQuestionPacks();
-                        adapter.setPagerItems(currQuestionPack, currPosition);
+                        if (ViewConstant.sectionContainer.containsKey(currSectionId)) {
+                            currQuestionPack = currSection.getQuestionPacks();
+                            adapter.setPagerItems(currQuestionPack);
+                            adapter.notifyDataSetChanged();
+                            viewPager.setCurrentItem(0);
+                        } else {
+                            viewPager.setCurrentItem(currQuestionPack.size() - 1);
+                        }
+                    }
+                } else if (currValidate && !ViewConstant.needToChangeSection && currPosition == currQuestionPack.size() - 1) {
+                    if (currSection.getNextSectionId() != null && currSection.getNextSectionId().length() != 0) {
+                        currSectionId = currSection.getNextSectionId();
+                        ViewConstant.globalCurrSectionId = currSectionId;
+                        currSection = ViewConstant.sectionContainer.get(currSectionId);
+                        currQuestionPack = currSection.getQuestionPacks();
+                        adapter.setPagerItems(currQuestionPack);
                         adapter.notifyDataSetChanged();
                         viewPager.setCurrentItem(0);
+                    } else {
+                        getDialog().dismiss();
+                        act.finish();
                     }
                 } else if (currValidate) {
                     int nextPosition = currPosition + 1;
@@ -315,26 +359,6 @@ public class BottomSheetFragment extends DialogFragment {
             setCancelable(true);
         }
     }
-
-    /*@Override
-    public void onViewCreated(final View contentView, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(contentView, savedInstanceState);
-        contentView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if (Build.VERSION.SDK_INT < 16) {
-                    contentView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                } else {
-                    contentView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                }
-                BottomSheetDialog dialog = (BottomSheetDialog) getDialog();
-                FrameLayout bottomSheet = (FrameLayout) dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
-                BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
-                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                behavior.setPeekHeight(0);
-            }
-        });
-    }*/
 
     public void hideKeyboard() {
         View view = getActivity().getCurrentFocus();

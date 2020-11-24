@@ -13,8 +13,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.json.JSONObject;
 
+import io.github.luizgrp.sectionedrecyclerviewadapter.Section;
+import io.github.luizgrp.sectionedrecyclerviewadapter.SectionParameters;
 import io.mtksdk.inappsurvey.R;
 import io.mtksdk.inappsurvey.ViewControllerManager;
 
@@ -31,7 +32,7 @@ import io.mtksdk.inappsurvey.converter.Question;
  * Created by kgy 2019. 9. 24.
  */
 
-public class SdkMultipleChoiceAdapter extends StatelessSection {
+public class SdkMultipleChoiceAdapter extends Section {
     private String questionText;
     private ArrayList<String> choices;
     private LinearLayout openEndEditTextContainer;
@@ -52,7 +53,10 @@ public class SdkMultipleChoiceAdapter extends StatelessSection {
 
 
     public SdkMultipleChoiceAdapter(Context context, Question question) {
-        super(R.layout.sdk_cell_question_header, R.layout.sdk_cell_question_multiple_choice);
+        super(SectionParameters.builder()
+                .itemResourceId(R.layout.sdk_cell_question_multiple_choice)
+                .headerResourceId(R.layout.sdk_cell_question_header)
+                .build());
         this.question = question;
         this.objId = question.getQuestionId();
         this.context = context;
@@ -62,7 +66,7 @@ public class SdkMultipleChoiceAdapter extends StatelessSection {
         this.checkImages = new HashMap<>();
         this.mainLayouts = new HashMap<>();
         this.selectedPosition = new ArrayList<>();
-        this.multipleSelection = question.getRule().optBoolean("allowMulipleSelection");
+        this.multipleSelection = (Boolean) question.getRule().get("allowMultipleSelection");
 
         //saved answer setting
 //        ArrayList<Object> saved = this.answerMap.get(objId);

@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import io.methinks.android.apptest.Global;
 import io.methinks.android.apptest.HttpManager;
 import io.methinks.android.apptest.Log;
@@ -43,6 +44,7 @@ public class QuestionPack {
         this.packId = surveyPack.optString("objectId");
         this.type = type;
         this.time = surveyPack.optInt("createdAt");
+        this.isRequired = surveyPack.optBoolean("isRequired");
 
         //fetch();
     }
@@ -135,7 +137,7 @@ public class QuestionPack {
                             Global.hoverPopup.isOpened = false;
 
                             Log.e("sendMessage isRequired : " + Global.eventQuestionPack.isRequired());
-                            new Handler(Looper.getMainLooper()).post(() -> SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), response, packId));
+                            new Handler(Looper.getMainLooper()).post(() -> SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), response.toString(), packId, isRequired));
                             callback.done();
                         }
                     }

@@ -407,6 +407,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                     if(response != null && error == null){
                         if(response.has("result") && response.getString("status").equals(Global.RESPONSE_OK)){
                             JSONObject pack = response.getJSONObject("result");
+                            Log.e("eventResponse: " + pack);
                             Global.eventQuestionPack = new QuestionPack(pack, QuestionPack.EVENT_TYPE);
                             if(!Global.isShowingReport && !Global.isShowingQuestion){
                                 Global.isShowingQuestion = true;

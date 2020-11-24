@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import io.mtksdk.inappsurvey.ViewConstant;
 import io.mtksdk.inappsurvey.converter.Question;
 import io.mtksdk.inappsurvey.fragment.BaseFragment;
 import io.mtksdk.inappsurvey.fragment.SdkCloseFragment;
@@ -59,6 +60,9 @@ public class ViewControllerAdapter extends FragmentStatePagerAdapter {
         if (fragments.containsKey(position)) {
             item = fragments.get(position);
         } else {
+            if (position == 0) {
+                ViewConstant.startingType = question.getQuestionType();
+            }
             if (question.getQuestionType().equals("intro")) {
                 item = SdkStartFragment.getInstance(question, answerMap);
             } else if (question.getQuestionType().equals("multipleChoice")) {
@@ -86,7 +90,7 @@ public class ViewControllerAdapter extends FragmentStatePagerAdapter {
         return "Page" + position;
     }
 
-    public void setPagerItems(ArrayList<Question> newQuestions, int currPosition) {
+    public void setPagerItems(ArrayList<Question> newQuestions) {
         if (fragments != null) {
             fragments.clear();
             questions = newQuestions;

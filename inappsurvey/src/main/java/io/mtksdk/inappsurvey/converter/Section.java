@@ -2,7 +2,8 @@ package io.mtksdk.inappsurvey.converter;
 
 import android.util.Log;
 
-import org.json.JSONArray;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,14 +22,29 @@ public class Section {
     private ArrayList<HashMap<String, ArrayList<Object>>> answerMap;
     private ArrayList<Question> questionPacks;
     private JSONArray sectionLayout;
+    private JSONObject currSecSection;
+    private String nextSectionId;
 
     //Constructor
-    public Section(String sectionId, JSONArray questions, JSONArray sectionLayout) {
+    public Section(String sectionId, JSONArray questions, JSONArray sectionLayout, JSONObject currSecSection) {
         this.sectionId = sectionId;
         this.questions = questions;
         this.answerMap = new ArrayList<>();
         this.questionPacks = new ArrayList<>();
         this.sectionLayout = sectionLayout;
+        this.currSecSection = currSecSection;
+        this.nextSectionId = "";
+        setNextSectionId();
+    }
+
+    public void setNextSectionId() {
+        if (currSecSection.containsKey("nextSectionId")) {
+            this.nextSectionId = (String) currSecSection.get("nextSectionId");
+        }
+    }
+
+    public String getNextSectionId() {
+        return this.nextSectionId;
     }
 
     public String getSectionId() {
@@ -48,30 +64,24 @@ public class Section {
     }
 
     public void createQuestionObject() {
-        if (getSectionId().equals(ViewConstant.firstSectionId)) {
-            Question intro = new Question("intro");
-            questionPacks.add(intro);
-        }
         JSONArray currQuestions = getQuestions();
         final HashMap<String, Integer> currSecLayout = getSectionLayout();
         Log.i("currSecLayout", currSecLayout.toString());
         ArrayList<Question> tempPacks = new ArrayList<>();
-        for (int i = 0; i < currQuestions.length(); i++) {
-            Question currQuestion = new Question(currQuestions.optJSONObject(i), sectionId);
+        for (int i = 0; i < currQuestions.size(); i++) {
+            Question currQuestion = new Question( (JSONObject) currQuestions.get(i), sectionId);
             tempPacks.add(currQuestion);
         }
 
         tempPacks = getSortedData(tempPacks, currSecLayout);
         questionPacks.addAll(tempPacks);
-
-        Question outro = new Question("outro");
-        questionPacks.add(outro);
     }
 
     public HashMap<String, Integer> getSectionLayout() {
         HashMap<String, Integer> output = new HashMap<>();
-        for (int i = 0; i < this.sectionLayout.length(); i++) {
-            String currQuestionId = sectionLayout.optJSONObject(i).optString("question");
+        for (int i = 0; i < this.sectionLayout.size(); i++) {
+            JSONObject currSectionLayout = (JSONObject) sectionLayout.get(i);
+            String currQuestionId = (String) currSectionLayout.get("question");
             output.put(currQuestionId, i + 1);
         }
 

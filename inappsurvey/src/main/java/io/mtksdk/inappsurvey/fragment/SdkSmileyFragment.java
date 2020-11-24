@@ -15,9 +15,9 @@ import android.widget.TextView;
 import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 
-import org.json.JSONArray;
+import org.json.simple.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,7 +71,7 @@ public class SdkSmileyFragment extends BaseFragment {
         tvLabel.setText(getQuestionText());
         LinearLayout original = view.findViewById(R.id.original);
 
-        if (question.getRule().has("scale") && question.getRule().optInt("scale") == 3) {
+        if (question.getRule().containsKey("scale") && (Long) question.getRule().get("scale") == 3) {
             original.setVisibility(View.GONE);
             LinearLayout three = view.findViewById(R.id.scale_three);
             three.setVisibility(View.VISIBLE);
@@ -317,12 +317,13 @@ public class SdkSmileyFragment extends BaseFragment {
         if (currSecSeq == null) {
             return;
         }
-        Iterator keys = currSecSeq.keys();
-        while(keys.hasNext()) {
-            String currKey = (String) keys.next();
-            JSONArray tempArr = currSecSeq.optJSONArray(currKey);
-            for (int i = 0; i < tempArr.length(); i++) {
-                sectionSecMap.put(tempArr.optInt(i), currKey);
+
+        for (Object key : currSecSeq.keySet()) {
+            String currKey = (String) key;
+            JSONArray tempArr = (JSONArray) currSecSeq.get(currKey);
+            for (int i = 0; i < tempArr.size(); i++) {
+                long tempL = (long) tempArr.get(i);
+                sectionSecMap.put((int) tempL, currKey);
             }
         }
     }

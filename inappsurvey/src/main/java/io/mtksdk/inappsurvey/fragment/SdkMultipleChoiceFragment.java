@@ -13,9 +13,9 @@ import io.mtksdk.inappsurvey.R;
 import io.mtksdk.inappsurvey.ViewConstant;
 import io.mtksdk.inappsurvey.adapter.SdkMultipleChoiceAdapter;
 
-import org.json.JSONArray;
+import org.json.simple.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -123,13 +123,13 @@ public class SdkMultipleChoiceFragment extends BaseFragment {
         if (currSecSeq == null) {
             return;
         }
-        Iterator keys = currSecSeq.keys();
-        while(keys.hasNext()) {
-            String currKey = (String)keys.next();
-            JSONArray tempArr = currSecSeq.optJSONArray(currKey);
-            for (int i = 0; i < tempArr.length(); i++) {
-                sectionSecSet.add(tempArr.optString(i));
-                sectionSecMap.put(tempArr.optString(i), currKey);
+
+        for (Object key : currSecSeq.keySet()) {
+            String currKey = (String) key;
+            JSONArray tempArr = (JSONArray) currSecSeq.get(currKey);
+            for (int i = 0; i < tempArr.size(); i++) {
+                sectionSecSet.add((String) tempArr.get(i));
+                sectionSecMap.put((String) tempArr.get(i), currKey);
             }
         }
     }

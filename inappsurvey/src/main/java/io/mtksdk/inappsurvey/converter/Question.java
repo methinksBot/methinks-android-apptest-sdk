@@ -1,7 +1,7 @@
 package io.mtksdk.inappsurvey.converter;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,9 +28,15 @@ public class Question implements Serializable {
 
     public Question(JSONObject question, String sectionId) {
         this.sectionId = sectionId;
-        this.questionId = question.optString("objectId");
-        this.text = question.optString("text");
-        this.questionType = question.optString("questionType");
+        if (question.containsKey("objectId")) { //required
+            this.questionId = (String) question.get("objectId");
+        }
+        if (question.containsKey("text")) { //required
+            this.text = (String) question.get("text");
+        }
+        if (question.containsKey("questionType")) { //required
+            this.questionType = (String) question.get("questionType");
+        }
         this.finalChoices = new ArrayList<>();
         this.answerMap = new HashMap<>();
         this.isShortForm = false;
@@ -38,33 +44,39 @@ public class Question implements Serializable {
         //range rule
         if (questionType.equals("smiley") || questionType.equals("likert") || questionType.equals("range")) {
             this.ruleName = "rangeRule";
-            if (question.has("sectionSequence")) {
-                this.sectionSec = question.optJSONObject("sectionSequence");
+            if (question.containsKey("sectionSequence")) {
+                this.sectionSec = (JSONObject) question.get("sectionSequence");
             }
         } else {
             this.ruleName = questionType + "Rule";
         }
 
-        this.rule = question.optJSONObject(ruleName);
+        if (question.containsKey(ruleName)) {
+            this.rule = (JSONObject) question.get(ruleName); //required
+        }
 
-        this.required = question.optBoolean("required");
+        if (question.containsKey("required")) {
+            this.required = (Boolean) question.get("required");
+        }
 
         //multipleChoice
         if (questionType.equals("multipleChoice")) {
-            if (question.has("sectionSequence")) {
-                this.sectionSec = question.optJSONObject("sectionSequence");
+            if (question.containsKey("sectionSequence")) {
+                this.sectionSec = (JSONObject) question.get("sectionSequence");
             }
-            this.choices = question.optJSONArray("choices");
-            for (int i = 0; i < choices.length(); i++) {
-                finalChoices.add(choices.optString(i));
-            }
-            if (this.rule.has("shuffleOrder") && this.rule.optBoolean("shuffleOrder")) {
-                Collections.shuffle(finalChoices);
+            if (question.containsKey("choices")) { //required for multiple choice
+                this.choices = (JSONArray) question.get("choices");
+                for (int i = 0; i < choices.size(); i++) {
+                    finalChoices.add((String) choices.get(i));
+                }
+                if (this.rule.containsKey("shuffleOrder") && (Boolean) this.rule.get("shuffleOrder")) {
+                    Collections.shuffle(finalChoices);
+                }
             }
         }
 
         //openEnd
-        if (questionType.equals("openEnd") && rule.optBoolean("isShortForm")) {
+        if (questionType.equals("openEnd") && (Boolean) rule.get("isShortForm")) {
             this.isShortForm = true;
         }
 

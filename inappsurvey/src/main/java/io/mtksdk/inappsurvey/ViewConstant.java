@@ -33,6 +33,7 @@ public class ViewConstant {
     public static Boolean needToChangeSection = false;
     public static String globalCurrSectionId = "";
     public static HashMap<String, Integer> sectionIdx = new HashMap<>();
+    public static String startingType = "";
     /*public static void surveyCompletion(String aKey, String devId, String packId, JSONObject answer) {
         try {
             nm.inAppSurveyCompletion(aKey, devId, packId, answer, new NetworkManager.CallbackInterface() {

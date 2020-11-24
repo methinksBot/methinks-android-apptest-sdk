@@ -2,6 +2,7 @@ package io.mtksdk.inappsurvey.fragment;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +12,14 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import io.mtksdk.inappsurvey.R;
+import io.mtksdk.inappsurvey.ViewConstant;
 import io.mtksdk.inappsurvey.converter.Question;
 import io.mtksdk.inappsurvey.custom.SdkSeekBar;
 import io.mtksdk.inappsurvey.custom.SdkSeekBarDotContainer;
 
-import org.json.JSONArray;
+import org.json.simple.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +42,9 @@ public class SdkScaleFragment extends BaseFragment {
     private String[] range;
     //    protected JSONObject question;
     private Question question;
+    private HashMap<Integer, String> sectionSecMap;
+    private Integer currAnswer;
+
 
 
     private boolean hasActing;
@@ -65,6 +70,10 @@ public class SdkScaleFragment extends BaseFragment {
 //            e.printStackTrace();
 //        }
         question = (Question) getArguments().getSerializable("questionClass");
+        sectionSecMap = new HashMap<>();
+        currAnswer = 0;
+        handleSectionSeq();
+
     }
 
     @Override
@@ -146,10 +155,24 @@ public class SdkScaleFragment extends BaseFragment {
 
     @Override
     public boolean validate() {
+        if (currAnswer != null) {
+            if (sectionSecMap.containsKey(currAnswer)) {
+                String nextSectionId = getSectionId(currAnswer);
+                if (question.getSectionId().equals(nextSectionId)) {
+                    return true;
+                } else {
+                    ViewConstant.needToChangeSection = true;
+                    ViewConstant.globalCurrSectionId = nextSectionId;
+                    return true;
+                }
+            }
+        }
+        Log.i("range", answerMap.toString());
         return true;
     }
 
     private void setAnswer(int progress){
+        currAnswer = progress;
         ArrayList<Object> value = new ArrayList<>();
         value.add(progress);
 //        answerMap.put(getSubItemId(), value);
@@ -170,16 +193,17 @@ public class SdkScaleFragment extends BaseFragment {
     }
 
     public String[] getRange() {
-        JSONArray labels = question.getRule().optJSONArray("labels");
-        String[] scaleRange = new String[labels.length()];
+        JSONArray labels = (JSONArray) question.getRule().get("labels");
+        String[] scaleRange = new String[labels.size()];
         for (int i = 0; i < scaleRange.length; i++) {
-            scaleRange[i] = labels.optString(i);
+            scaleRange[i] = (String) labels.get(i);
         }
         return scaleRange;
     }
 
     public int getScale() {
-        return question.getRule().optInt("scale");
+        long tempL = (long) question.getRule().get("scale");
+        return (int) tempL;
     }
 
     @Override
@@ -188,7 +212,29 @@ public class SdkScaleFragment extends BaseFragment {
     }
 
     public Boolean getIsZeroScale() {
-        return question.getRule().optBoolean("isZeroScale");
+        return (Boolean) question.getRule().get("isZeroScale");
     }
+
+    public void handleSectionSeq() {
+        JSONObject currSecSeq = question.getSetioncSec();
+        if (currSecSeq == null) {
+            return;
+        }
+
+        for (Object key : currSecSeq.keySet()) {
+            String currKey = (String) key;
+            JSONArray tempArr = (JSONArray) currSecSeq.get(currKey);
+            for (int i = 0; i < tempArr.size(); i++) {
+                long tempLong = (long) tempArr.get(i);
+                int convertedInt = (int) tempLong;
+                sectionSecMap.put(convertedInt, currKey);
+            }
+        }
+    }
+
+    public String getSectionId(Integer answer) {
+        return sectionSecMap.get(answer);
+    }
+
 }
 
