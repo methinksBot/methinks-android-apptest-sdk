@@ -413,6 +413,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                                 Global.isShowingQuestion = true;
                                 Global.eventQuestionPack.fetch(() -> {
                                     //ViewConstant.pack = Global.eventQuestionPack;
+                                    Global.isShowingQuestion = false;
                                 });
                             }
                         }
@@ -720,7 +721,10 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                             Global.isShowingQuestion = true;
                             QuestionPack pack = Global.packQueue.peek();
                             if(Global.eventQuestionPack != null){
-                                Global.eventQuestionPack.fetch(() -> {});
+                                Global.eventQuestionPack.fetch(() -> {
+                                    Global.isShowingQuestion = false;
+
+                                });
                                     //ViewConstant.pack = Global.eventQuestionPack;
 
                                     // It's going to be happened inside of fetch()
@@ -732,6 +736,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                                         SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), Global.eventQuestionPack.isRequired());
                                     });*/
                                 //});
+
                             }else if(pack.getType().equals(QuestionPack.SESSION_BASED_TYPE)){ // session based type
                                 if(pack.isFetched() && Global.loginResult.getInt("sessionCount") >= pack.getSession()){
                                     //ViewConstant.pack = pack;
@@ -744,7 +749,11 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                                         SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), pack.isRequired());
                                     });*/
 
-                                    pack.fetch(() -> {});
+                                    pack.fetch(() -> {
+                                        Global.isShowingQuestion = false;
+
+
+                                    });
 
                                 }
 
@@ -760,7 +769,10 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                                             SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), pack.isRequired());
                                         });*/
 
-                                        pack.fetch(() -> {});
+                                        pack.fetch(() -> {
+                                            Global.isShowingQuestion = false;
+
+                                        });
                                     }
                                 }
                             }

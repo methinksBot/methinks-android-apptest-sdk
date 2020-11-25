@@ -137,7 +137,9 @@ public class QuestionPack {
                             Global.hoverPopup.isOpened = false;
 
                             Log.e("sendMessage isRequired : " + Global.eventQuestionPack.isRequired());
-                            new Handler(Looper.getMainLooper()).post(() -> SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), response.toString(), packId, isRequired));
+
+                            new Handler(Looper.getMainLooper()).post(() -> SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), response.toString(),
+                                    packId, isRequired, Global.sProjectId, Global.sTestUserCode, Global.isDebugMode));
                             callback.done();
                         }
                     }

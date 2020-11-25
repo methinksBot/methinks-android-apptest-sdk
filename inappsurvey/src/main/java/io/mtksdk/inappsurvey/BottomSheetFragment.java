@@ -24,9 +24,11 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -38,6 +40,7 @@ import io.mtksdk.inappsurvey.converter.Section;
 import io.mtksdk.inappsurvey.custom.widget.MethinksTextView;
 import io.mtksdk.inappsurvey.fragment.BaseFragment;
 
+import static io.mtksdk.inappsurvey.ViewConstant.questions;
 import static io.mtksdk.inappsurvey.ViewConstant.startingType;
 
 /**
@@ -69,10 +72,10 @@ public class BottomSheetFragment extends DialogFragment {
 
     public BottomSheetFragment(Activity act, int height, int width, String firstSectionId) {
         this.act = act;
-        this.screenHeightP = height;
-        this.screenWidthP = width;
-        this.screenHeightL = width;
-        this.screenWidthL = height;
+        this.screenHeightP = width;
+        this.screenWidthP = height;
+        this.screenHeightL = height;
+        this.screenWidthL = width;
         this.currSectionId = firstSectionId;
         this.currSection = ViewConstant.sectionContainer.get(firstSectionId);
         this.currQuestionPack = currSection.getQuestionPacks();
@@ -313,8 +316,14 @@ public class BottomSheetFragment extends DialogFragment {
                     currSection = ViewConstant.sectionContainer.get(currSectionId);
 
                     if (currSectionId.equals("FINISH")){
-                        getDialog().dismiss();
-                        act.finish();
+//                        Log.e("RESULT", currQuestionPack + "");
+//                        try {
+//                            new NetworkManager().inAppAnswer(ViewConstant.packId, arrayConvertor(currQuestionPack));
+                            getDialog().dismiss();
+                            act.finish();
+//                        } catch (UnsupportedEncodingException e) {
+//                            e.printStackTrace();
+//                        }
                     } else {
                         if (ViewConstant.sectionContainer.containsKey(currSectionId)) {
                             currQuestionPack = currSection.getQuestionPacks();
@@ -335,8 +344,15 @@ public class BottomSheetFragment extends DialogFragment {
                         adapter.notifyDataSetChanged();
                         viewPager.setCurrentItem(0);
                     } else {
-                        getDialog().dismiss();
-                        act.finish();
+                        Log.e("RESULT", currQuestionPack + "");
+//                        try {
+//                            new NetworkManager().inAppAnswer(ViewConstant.packId, arrayConvertor(currQuestionPack));
+                            getDialog().dismiss();
+                            act.finish();
+//                        } catch (UnsupportedEncodingException e) {
+//                            e.printStackTrace();
+//                        }
+
                     }
                 } else if (currValidate) {
                     int nextPosition = currPosition + 1;

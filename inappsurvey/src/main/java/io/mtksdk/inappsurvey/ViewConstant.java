@@ -7,6 +7,7 @@ import android.util.Log;
 
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -34,6 +35,9 @@ public class ViewConstant {
     public static String globalCurrSectionId = "";
     public static HashMap<String, Integer> sectionIdx = new HashMap<>();
     public static String startingType = "";
+    public static String projectId = "";
+    public static String userCode = "";
+    public static boolean isDebug = false;
     /*public static void surveyCompletion(String aKey, String devId, String packId, JSONObject answer) {
         try {
             nm.inAppSurveyCompletion(aKey, devId, packId, answer, new NetworkManager.CallbackInterface() {
@@ -77,7 +81,9 @@ public class ViewConstant {
         JSONObject json = new JSONObject(finalAnswerMap);
         Log.i("finalAnswer", json.toString());
         setInAppAnswer(json);
-//        surveyCompletion(ViewConstant.apiKey, ViewConstant.deviceId, ViewConstant.packId, json);
+        //surveyCompletion(ViewConstant.apiKey, ViewConstant.deviceId, ViewConstant.packId, json);
+
+        new NetworkManager().inAppAnswer(ViewConstant.packId, json);
     }
 
     public static String getSurvIdView(String key, Context activity) {

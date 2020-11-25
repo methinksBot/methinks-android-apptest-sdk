@@ -8,6 +8,11 @@
     style="@style/bottomSheetStyleWrapper"
     app:layout_behavior="io.mtksdk.viewcontroller.CustomBottomSheetBehavior">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
     <LinearLayout
         android:background="@drawable/sdk_white_full_rounded_background"
         android:layout_width="match_parent"
@@ -89,4 +94,5 @@
         </LinearLayout>
     </LinearLayout>
 
+    </ScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

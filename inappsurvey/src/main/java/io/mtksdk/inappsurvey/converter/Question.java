@@ -1,5 +1,6 @@
 package io.mtksdk.inappsurvey.converter;
 
+import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -25,6 +26,7 @@ public class Question implements Serializable {
     private JSONObject sectionSec;
     private Boolean isShortForm;
     private HashMap<String, ArrayList<Object>> answerMap;
+    private org.json.JSONObject answerObject;
 
     public Question(JSONObject question, String sectionId) {
         this.sectionId = sectionId;
@@ -39,6 +41,7 @@ public class Question implements Serializable {
         }
         this.finalChoices = new ArrayList<>();
         this.answerMap = new HashMap<>();
+        this.answerObject = new org.json.JSONObject();
         this.isShortForm = false;
 
         //range rule
@@ -145,9 +148,18 @@ public class Question implements Serializable {
     public void setAnswerMap(ArrayList<Object> answers) {
         String objId = getQuestionId();
         this.answerMap.put(objId, answers);
+        try {
+            this.answerObject.put(objId, answers);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public HashMap<String, ArrayList<Object>> getAnswerMap() {
         return this.answerMap;
+    }
+
+    public org.json.JSONObject getAnswerJSON() {
+        return this.answerObject;
     }
 }

@@ -260,11 +260,24 @@ public class HttpManager {
         }
     }
 
-    public void inAppAnswer(String packId, JSONObject answer, Callback callback) {
-        if (packId == null)
+    public void inAppAnswer(String questionPackId, JSONArray answers, Callback callback) {
+        if (questionPackId == null)
             throw new NullPointerException("packId is required.");
-        else if (answer == null)
+        else if (answers == null)
             throw new NullPointerException("answer is required");
+
+        try {
+            String url = serverURL + "/inAppAnswer";
+            JSONObject params = new JSONObject();
+            params.put("questionPackId", questionPackId);
+            params.put("answers", answers);
+            String[]strings = new String[]{url, Global.HTTP_POST, params.toString()};
+
+            new HttpAsyncTask(callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, strings);
+
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
 
 
     }

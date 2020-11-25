@@ -25,10 +25,13 @@ public class SurveyAlertManager extends AppCompatActivity {
     protected static NetworkManager nm = new NetworkManager();
     protected static ViewControllerManager vcm = new ViewControllerManager();
 
-    public static void showDialog(final Context act, final String res, final String packId, boolean isRequired) {
+    public static void showDialog(final Context act, final String res, final String packId, boolean isRequired, final String projectId, final String userCode, boolean isDebug) {
         thirdUser = act;
         ViewConstant.packId = packId;
         ViewConstant.isRequired = isRequired;
+        ViewConstant.projectId = projectId;
+        ViewConstant.userCode = userCode;
+        ViewConstant.isDebug = isDebug;
 
         try {
             JSONParser parser = new JSONParser();

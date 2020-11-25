@@ -32,7 +32,7 @@
         <io.mtksdk.inappsurvey.custom.SdkQuestionViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="290dp" />
+            android:layout_height="250dp" />
 
         <LinearLayout
             android:id="@+id/popup_methinks_controller_container"
@@ -88,5 +88,4 @@
 
         </LinearLayout>
     </LinearLayout>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
