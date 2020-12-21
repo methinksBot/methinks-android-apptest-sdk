@@ -55,7 +55,7 @@ public class ViewControllerManager extends FragmentActivity {
         int height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
 
-        bottomSheetFragment = new BottomSheetFragment(ViewControllerManager.this, height, width, ViewConstant.firstSectionId);
+        bottomSheetFragment = new BottomSheetFragment(ViewControllerManager.this, width, height, ViewConstant.firstSectionId);
         bottomSheetFragment.setCancelable(false);
         bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
     }

@@ -334,7 +334,7 @@ public class HService extends Service {
             Global.isShowingReport = true;
             Global.lastReportTypeIsBug = false;
 
-            new ForumManager(context, Global.sProjectId, Global.sTestUserCode, true);
+            new ForumManager(context, Global.sProjectId, Global.sTestUserCode, Global.isDebugMode);
 
             Global.hover.setInvisible();
             Global.hoverPopup.setInvisible();

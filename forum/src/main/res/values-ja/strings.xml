@@ -52,11 +52,11 @@
 	<string name="patcher_text_start">開始</string>
 	<string name="patcher_text_close">閉じる</string>
 	<string name="patcher_text_next">次へ</string>
-	<string name="patcher_text_admin">Admin</string>
+	<string name="patcher_text_admin">管理者</string>
 	<string name="patcher_text_strongly_agree">強く\n同意します</string>
 	<string name="patcher_text_strongly_disagree">強く\n同意しない</string>
-	<string name="patcher_msg_successfully_submitted">Successfully submitted!</string>
-	<string name="patcher_msg_something_wrong">❗️Something is wrong, please try again.</string>
+	<string name="patcher_msg_successfully_submitted">正常に送信されました。</string>
+	<string name="patcher_msg_something_wrong">❗️️問題があります。もう一度実行してください。</string>
 	<string name="patcher_msg_suggestion_desc">Your suggestions help make a better app! Please be descriptive.</string>
 	<string name="patcher_msg_bug_report_desc">Please describe in detail what the bug or problem is about.</string>
 	<string name="patcher_msg_project_requirement_desc">Submitting the screenshot. Do you have any comment to add?</string>
@@ -64,10 +64,10 @@
 	<string name="patcher_msg_use_wifi_network">❗️Please connect your device to your Wi-Fi network to continue.</string>
 	<string name="patcher_msg_need_thinker_app">️Please download methinks app from App Store.</string>
 	<string name="patcher_cancel">キャンセル</string>
-	<string name="patcher_msg_apptest_is_running">App test is running now.</string>
-	<string name="patcher_text_apptest">App test</string>
-	<string name="patcher_msg_methinks_apptest_is_running">methinks app test is running now...</string>
-	<string name="patcher_confirm">Confirm</string>
+	<string name="patcher_msg_apptest_is_running">アプリ テスト は現在実行中です.</string>
+	<string name="patcher_text_apptest">アプリ テスト</string>
+	<string name="patcher_msg_methinks_apptest_is_running">methinks アプリ テスト は現在実行中です...</string>
+	<string name="patcher_confirm">承認</string>
 	<!--New-->
 	<string name="patcher_req_show_touch">You should enable show touches option for the app test</string>
 	<string name="patcher_show_touch_setup">Please select way of turn on the show touches.</string>
@@ -88,14 +88,14 @@
 	<string name="patcher_build_number_cont">Go to the installation page to update to the new version</string>
 
 	<!--Forum-->
-	<string name="forum_profile_created">New forum profile is created.</string>
-	<string name="forum_no_nickname">Please enter your nickname.</string>
-	<string name="forum_no_profile_icon">Please select profile icon.</string>
-	<string name="forum_post_create_title">Title</string>
-	<string name="forum_post_create_desc">Description</string>
-	<string name="forum_post_create_image">Add Images</string>
-	<string name="forum_no_title">Please enter title.</string>
-	<string name="forum_no_desc">Please enter description.</string>
-	<string name="forum_no_comment">Please enter comment.</string>
-	<string name="forum_deleted_comment">This comment is deleted.</string>
+	<string name="forum_profile_created">新しいプロフィールが作成されました。</string>
+	<string name="forum_no_nickname">ニックネームを入力してください.</string>
+	<string name="forum_no_profile_icon">プロファイルアイコンを選択してください.</string>
+	<string name="forum_post_create_title">役職</string>
+	<string name="forum_post_create_desc">説明</string>
+	<string name="forum_post_create_image">イメージの追加</string>
+	<string name="forum_no_title">タイトルを入力してください.</string>
+	<string name="forum_no_desc">説明を入力してください.</string>
+	<string name="forum_no_comment">コメントを入力してください.</string>
+	<string name="forum_deleted_comment">削除されたコメントです。</string>
 </resources>

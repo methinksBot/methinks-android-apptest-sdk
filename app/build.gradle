@@ -24,6 +24,12 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 
 dependencies {
     compileOnly 'androidx.coordinatorlayout:coordinatorlayout:1.0.0-rc01'
@@ -31,7 +37,7 @@ dependencies {
     compileOnly 'androidx.recyclerview:recyclerview:1.1.0'
     compileOnly 'androidx.appcompat:appcompat:1.1.0'
     compileOnly 'androidx.core:core:1.1.0'
-    compileOnly 'com.google.android.material:material:1.0.0-rc01'
+    compileOnly 'com.google.android.material:material:1.0.0-rc02'
     compileOnly('com.github.methinksBot:methinks-android-rtc-sdk:1.1.6') {
         transitive = true
     }
@@ -41,6 +47,8 @@ dependencies {
 //    implementation 'com.google.android.material:material:1.0.0'
     implementation project(':inappsurvey')
     implementation project(':forum')
+
+    implementation name: 'toysdk', ext: 'aar'
 }
 
 

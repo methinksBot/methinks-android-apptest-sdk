@@ -72,10 +72,10 @@ public class BottomSheetFragment extends DialogFragment {
 
     public BottomSheetFragment(Activity act, int height, int width, String firstSectionId) {
         this.act = act;
-        this.screenHeightP = width;
-        this.screenWidthP = height;
-        this.screenHeightL = height;
-        this.screenWidthL = width;
+        this.screenHeightP = height;
+        this.screenWidthP = width;
+        this.screenHeightL = width;
+        this.screenWidthL = height;
         this.currSectionId = firstSectionId;
         this.currSection = ViewConstant.sectionContainer.get(firstSectionId);
         this.currQuestionPack = currSection.getQuestionPacks();
@@ -87,6 +87,7 @@ public class BottomSheetFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.BottomSheetDialog);
         this.currOrientation = act.getResources().getConfiguration().orientation;
+        Log.e("[InApp]", "currOrientation: " + this.currOrientation + "/" + Configuration.ORIENTATION_LANDSCAPE);
     }
 
     private BottomSheetBehavior.BottomSheetCallback bottomSheetCallback = new BottomSheetBehavior.BottomSheetCallback() {
@@ -106,6 +107,8 @@ public class BottomSheetFragment extends DialogFragment {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+
+        Log.e("[InApp]", " conCongifurationChanged: "+ newConfig.orientation);
 
         ViewGroup.LayoutParams paramsConfig = viewPager.getLayoutParams();
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -180,6 +183,13 @@ public class BottomSheetFragment extends DialogFragment {
         ArrayList<Question> questionPacks = ViewConstant.sectionContainer.get(ViewConstant.firstSectionId).getQuestionPacks();
         adapter = new ViewControllerAdapter(getChildFragmentManager(), answerMap, questionPacks);
         viewPager.setAdapter(adapter);
+
+//        ViewGroup.LayoutParams paramsConfig = viewPager.getLayoutParams();
+//        ViewConstant.bottomSheetWidth = paramsConfig.width;
+//        Log.e("[InApp]", " width: " + paramsConfig.width);
+//        Log.e("[InApp]", " height: " + paramsConfig.height);
+//        Log.e("[InApp]", " mesuredWidth: " + paramsConfig.getMeasuredWidth());
+//        Log.e("[InApp]", " measuredHeight: " + viewPager.getMeasuredHeight());
 
         int startPosition = viewPager.getCurrentItem();
         BaseFragment startingFrag = (BaseFragment) adapter.getItem(startPosition);
@@ -399,7 +409,7 @@ public class BottomSheetFragment extends DialogFragment {
         ViewConstant.createAnswerForm();
         ViewConstant.hasSurveyed = true;
         Log.i("bottomSheet", "destroyed");
-        act.finish();
+        //act.finish();
 
     }
 }

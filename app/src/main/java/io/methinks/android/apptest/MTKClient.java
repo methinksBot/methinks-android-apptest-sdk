@@ -30,6 +30,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.nexon.tosm.japan.cbt.MainActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -92,7 +94,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
             Global.isUnity = false;
             if(context instanceof MTKRTCMainActivity){
                 Global.isUnity = true;
-                unityActivity = (MTKRTCMainActivity)context;
+                unityActivity = (MTKRTCMainActivity) context;
             }
         }
         Global.app = app;

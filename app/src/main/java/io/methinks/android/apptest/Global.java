@@ -53,10 +53,10 @@ public class Global {
     protected static final String ENV_DEV = "dev";
     protected static final String ENV_PROD = "prod";
 
-    protected static final String MESSAGE_RESPONSE = "response";
-    protected static final String MESSAGE_SCREEN_SHOT = "screenshot";
-    protected static final String MESSAGE_EVENT = "event";
-    protected static final String MESSAGE_RESET_SDK = "sdk_reset";
+    public static final String MESSAGE_RESPONSE = "response";
+    public static final String MESSAGE_SCREEN_SHOT = "screenshot";
+    public static final String MESSAGE_EVENT = "event";
+    public static final String MESSAGE_RESET_SDK = "sdk_reset";
 
     protected static final String HTTP_POST = "POST";
     protected static final String HTTP_GET = "GET";

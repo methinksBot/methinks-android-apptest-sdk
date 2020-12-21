@@ -11,6 +11,7 @@ import android.graphics.Typeface;
 import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 
 import io.mtksdk.inappsurvey.R;
@@ -128,7 +129,8 @@ public class SdkSeekBarDotContainer extends View {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
-        width = width - (int) convertDpToPixel(context, 60);
+        Log.e("[InApp]", " WIDTH/Sclae: " + displayMetrics.widthPixels + "/" + scale);
+        width = width * 3/5 - (int) convertDpToPixel(context, 60);
 
         int dotSize = (int) convertDpToPixel(context, 6);
         int barStart = (int) convertDpToPixel(context, 13);

@@ -38,6 +38,8 @@ public class ViewConstant {
     public static String projectId = "";
     public static String userCode = "";
     public static boolean isDebug = false;
+
+    public static int bottomSheetWidth = 0;
     /*public static void surveyCompletion(String aKey, String devId, String packId, JSONObject answer) {
         try {
             nm.inAppSurveyCompletion(aKey, devId, packId, answer, new NetworkManager.CallbackInterface() {

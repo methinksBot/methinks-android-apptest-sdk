@@ -51,13 +51,13 @@ public class ScreenshotContentObserver extends ContentObserver {
         super.onChange(selfChange, uri);
         Log.e("[Start] onChange : " + selfChange + " / uri : " + uri.toString());
 
-        if (uri.toString().startsWith(MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString())) {
+//        if (uri.toString().startsWith(MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString())) {
             try {
                 process(uri);
             } catch (Exception e) {
             }
-        } else {
-        }
+//        } else {
+//        }
     }
 
     public void register() {
