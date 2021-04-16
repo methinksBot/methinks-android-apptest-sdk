@@ -45,7 +45,7 @@ public class Global {
     protected static final String LOCAL_STORE_EXTENSION_NAME = "io.methinks.android.methinks_touchsupports";
 
     protected static final String JIN_PATCHER_SERVER_URL = "http://10.0.1.19:3000";
-    protected static final String DEV_PATCHER_SERVER_URL = "https://first-apptest-dev.nexon.com";
+    protected static final String DEV_PATCHER_SERVER_URL = "http://nexon-first-apptest-dev.ap-northeast-2.elasticbeanstalk.com";
     protected static final String PROD_PATCHER_SERVER_URL = "https://first-apptest.nexon.com";
     protected static final String DEV_METHINKS_SERVER_URL = "https://first-admin-dev.nexon.com";
     protected static final String PROD_METHINKS_SERVER_URL = "https://first-admin.nexon.com";
