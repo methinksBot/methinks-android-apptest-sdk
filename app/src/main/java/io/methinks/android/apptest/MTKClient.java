@@ -30,7 +30,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.nexon.tosm.japan.cbt.MainActivity;
+// If nexon is using third party library (like nexon toy)
+//import com.nexon.tosm.japan.cbt.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,8 +42,8 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.LinkedList;
 
-import io.mtksdk.inappsurvey.SurveyAlertManager;
-import io.mtksdk.inappsurvey.ViewConstant;
+//import io.mtksdk.inappsurvey.SurveyAlertManager;
+//import io.mtksdk.inappsurvey.ViewConstant;
 
 import static java.lang.Thread.sleep;
 

@@ -12,8 +12,8 @@ import org.json.JSONObject;
 import io.methinks.android.apptest.Global;
 import io.methinks.android.apptest.HttpManager;
 import io.methinks.android.apptest.Log;
-import io.mtksdk.inappsurvey.SurveyAlertManager;
-import io.mtksdk.inappsurvey.ViewConstant;
+//import io.mtksdk.inappsurvey.SurveyAlertManager;
+//import io.mtksdk.inappsurvey.ViewConstant;
 
 public class QuestionPack {
     public static final String SESSION_BASED_TYPE = "session";
@@ -137,10 +137,11 @@ public class QuestionPack {
                             Global.hoverPopup.isOpened = false;
 
                             Log.e("sendMessage isRequired : " + Global.eventQuestionPack.isRequired());
+                            Log.e("[inAppSection] " + result.toString());
 
-                            new Handler(Looper.getMainLooper()).post(() -> SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), response.toString(),
-                                    packId, isRequired, Global.sProjectId, Global.sTestUserCode, Global.isDebugMode));
-                            callback.done();
+//                            new Handler(Looper.getMainLooper()).post(() -> SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), response.toString(),
+//                                    packId, isRequired, Global.sProjectId, Global.sTestUserCode, Global.isDebugMode));
+//                            callback.done();
                         }
                     }
                 }
