@@ -32,7 +32,7 @@
             android:background="@android:color/transparent"
             android:src="@drawable/ic_close" />-->
 
-        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+        <io.methinks.sdk.common.custom.widget.MethinksTextView
             android:id="@+id/popup_methinks_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             android:textSize="18dp"
             app:fw="@string/font_weight_bold" />
 
-        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+        <io.methinks.sdk.common.custom.widget.MethinksTextView
             android:id="@+id/popup_methinks_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
             android:layout_height="48dp"
             android:orientation="horizontal">
 
-            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+            <io.methinks.sdk.common.custom.widget.MethinksTextView
                 android:id="@+id/popup_methinks_button1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

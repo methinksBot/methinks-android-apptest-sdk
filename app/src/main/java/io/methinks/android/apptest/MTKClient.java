@@ -18,7 +18,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.Looper;
 import android.os.Message;
 import android.provider.MediaStore;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -41,9 +40,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.LinkedList;
-
-//import io.mtksdk.inappsurvey.SurveyAlertManager;
-//import io.mtksdk.inappsurvey.ViewConstant;
 
 import static java.lang.Thread.sleep;
 

@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+        <io.methinks.sdk.common.custom.widget.MethinksTextView
             android:id="@+id/popup_methinks_title"
             app:fw="@string/font_weight_bold"
             android:textColor="@color/charcoal_grey"
@@ -33,7 +33,7 @@
             android:layout_marginEnd="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+        <io.methinks.sdk.common.custom.widget.MethinksTextView
             android:id="@+id/popup_methinks_message"
             android:textColor="@color/charcoal_grey"
             android:alpha="0.7"
@@ -59,14 +59,14 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+            <io.methinks.sdk.common.custom.widget.MethinksTextView
                 android:id="@+id/popup_methinks_input_1_title"
                 android:textColor="@color/charcoal_grey"
                 android:textSize="12dp"
                 android:layout_marginEnd="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <io.mtksdk.inappsurvey.custom.widget.MethinksEditText
+            <io.methinks.sdk.common.custom.widget.MethinksTextView
                 android:id="@+id/popup_methinks_input_1"
                 android:textColor="@color/charcoal_grey"
                 android:textSize="12dp"
@@ -83,14 +83,14 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+            <io.methinks.sdk.common.custom.widget.MethinksTextView
                 android:id="@+id/popup_methinks_input_2_title"
                 android:textColor="@color/charcoal_grey"
                 android:textSize="12dp"
                 android:layout_marginEnd="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <io.mtksdk.inappsurvey.custom.widget.MethinksEditText
+            <io.methinks.sdk.common.custom.widget.MethinksTextView
                 android:id="@+id/popup_methinks_input_2"
                 android:maxLines="1"
                 android:imeOptions="actionDone"
@@ -114,7 +114,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="48dp">
-            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+            <io.methinks.sdk.common.custom.widget.MethinksTextView
                 android:id="@+id/popup_methinks_button1"
                 app:fw="@string/font_weight_medium"
                 android:clickable="true"
@@ -135,7 +135,7 @@
                 android:background="@color/black"
                 android:layout_width="0.5dp"
                 android:layout_height="match_parent" />
-            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+            <io.methinks.sdk.common.custom.widget.MethinksTextView
                 android:id="@+id/popup_methinks_button2"
                 app:fw="@string/font_weight_medium"
                 android:clickable="true"

@@ -42,8 +42,10 @@ public class HoverPopup {
         eventRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        layoutManager = new LinearLayoutManager(Global.applicationTracker.getTopActivity());
-        eventRecyclerView.setLayoutManager(layoutManager);
+        if (Global.applicationTracker.getTopActivity() != null) {
+            layoutManager = new LinearLayoutManager(Global.applicationTracker.getTopActivity());
+            eventRecyclerView.setLayoutManager(layoutManager);
+        }
     }
 
     public void setVisible(){

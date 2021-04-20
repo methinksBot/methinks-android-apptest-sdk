@@ -72,4 +72,5 @@ public class MTKRTCMainActivity extends UnityPlayerActivity /* implements Lifecy
             }
         }
     };
+
 }

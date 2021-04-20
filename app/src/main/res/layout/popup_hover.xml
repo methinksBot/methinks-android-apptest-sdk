@@ -33,7 +33,7 @@
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+            <io.methinks.sdk.common.custom.widget.MethinksTextView
                 android:id="@+id/popup_hover_bug_report"
                 android:textColor="#007AFF"
                 app:fw="@string/font_weight_medium"
@@ -48,7 +48,7 @@
                 android:background="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp" />
-            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+            <io.methinks.sdk.common.custom.widget.MethinksTextView
                 android:id="@+id/popup_hover_suggestion"
                 android:textColor="#007AFF"
                 app:fw="@string/font_weight_medium"
@@ -64,7 +64,7 @@
                 android:background="@android:color/white"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp" />
-            <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+            <io.methinks.sdk.common.custom.widget.MethinksTextView
                 android:id="@+id/popup_hover_forum"
                 android:textColor="#007AFF"
                 app:fw="@string/font_weight_medium"
@@ -79,7 +79,7 @@
         </LinearLayout>
 
 
-        <io.mtksdk.inappsurvey.custom.widget.MethinksTextView
+        <io.methinks.sdk.common.custom.widget.MethinksTextView
             android:id="@+id/popup_hover_cancel"
             android:background="@drawable/popup_default_rounded_background"
             android:textColor="#007AFF"
