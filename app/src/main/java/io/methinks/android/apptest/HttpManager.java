@@ -18,7 +18,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class HttpManager {
     private static final String TAG = HttpManager.class.getSimpleName();
@@ -260,17 +262,20 @@ public class HttpManager {
         }
     }
 
-    public void inAppAnswer(String questionPackId, JSONArray answers, Callback callback) {
+    public void inAppAnswer(String questionPackId, String sectionId, JSONObject answers, Callback callback) {
         if (questionPackId == null)
             throw new NullPointerException("packId is required.");
         else if (answers == null)
             throw new NullPointerException("answer is required");
 
         try {
+            JSONObject answersInSection = new JSONObject();
+            answersInSection.put(sectionId, answers);
+
             String url = serverURL + "/inAppAnswer";
             JSONObject params = new JSONObject();
-            params.put("questionPackId", questionPackId);
-            params.put("answers", answers);
+            params.put("packId", questionPackId);
+            params.put("answers", answersInSection);
             String[]strings = new String[]{url, Global.HTTP_POST, params.toString()};
 
             new HttpAsyncTask(callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, strings);

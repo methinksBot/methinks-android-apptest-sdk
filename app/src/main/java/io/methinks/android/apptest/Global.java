@@ -49,6 +49,11 @@ public class Global {
     protected static final String DEV_METHINKS_SERVER_URL = "https://first-admin-dev.nexon.com";
     protected static final String PROD_METHINKS_SERVER_URL = "https://first-admin.nexon.com";
 
+    protected static final String SURVEY_SECTIONS = "survey";
+    protected static final String SURVEY_INIT_SECTION = "section";
+    protected static final String SURVEY_INIT_QUESTION = "question";
+    protected static final String SURVEY_INIT_PACK = "pack";
+
     protected static final String ENV_DEV = "dev";
     protected static final String ENV_PROD = "prod";
 
