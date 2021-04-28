@@ -30,7 +30,7 @@
                 android:layout_marginBottom="50dp"
                 android:text="@string/patcher_mobile_test_platform" />
 
-            <io.methinks.sdk.common.custom.widget.MethinksTextView
+            <io.methinks.sdk.common.custom.widget.MethinksEditText
                 android:id="@+id/testUserCode"
                 android:gravity="center"
                 android:inputType="textNoSuggestions|textVisiblePassword"

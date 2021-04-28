@@ -1,11 +1,14 @@
 package io.methinks.android.apptest;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import io.mtksdk.inappsurvey.SurveyAlertManager;
 
 
 public class QuestionPack {
@@ -53,10 +56,12 @@ public class QuestionPack {
                             Log.e("[inAppSection]" + result);
 
                             //sectionsParser(result);
-                            startSurveyActivity(result);
+                            //startSurveyActivity(result);
 
-
+                            new Handler(Looper.getMainLooper()).post(() -> SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), response.toString(),
+                                    packId, isRequired, Global.sProjectId, Global.sTestUserCode, Global.isDebugMode, Global.isDebugMode ? Global.DEV_PATCHER_SERVER_URL : Global.PROD_PATCHER_SERVER_URL));
                             callback.done();
+
                         }
                     }
                 }
@@ -66,7 +71,7 @@ public class QuestionPack {
         });
     }
 
-    public void startSurveyActivity(JSONObject result) {
+    /*public void startSurveyActivity(JSONObject result) {
         Log.e("[Current Top Activity]: " + Global.applicationTracker.getTopActivity() + "\n" + Global.applicationTracker.getFirstActivity());
 
         Intent sendIntent = new Intent(Global.applicationTracker.getTopActivity(), SurveyActivity.class);
@@ -76,7 +81,7 @@ public class QuestionPack {
         sendIntent.putExtra(Global.SURVEY_INIT_PACK, packId);
         // Start the activity
         Global.applicationTracker.getTopActivity().startActivity(sendIntent);
-    }
+    }*/
 
     public static String getSessionBasedType() {
         return SESSION_BASED_TYPE;

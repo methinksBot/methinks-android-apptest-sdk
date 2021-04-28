@@ -27,7 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-import io.methinks.sdk.sectionsurvey.builder.MtkSectionSurvey;
+/*import io.methinks.sdk.sectionsurvey.builder.MtkSectionSurvey;
 import io.methinks.sdk.sectionsurvey.model.Question;
 import io.methinks.sdk.sectionsurvey.model.Section;
 import io.methinks.sdk.sectionsurvey.model.SectionAsset;
@@ -36,11 +36,11 @@ import static io.methinks.sdk.sectionsurvey.ui.MtkSectionSurveyActivity.EXTRA_AN
 import static io.methinks.sdk.sectionsurvey.ui.MtkSectionSurveyActivity.EXTRA_ANSWER_MAP;
 import static io.methinks.sdk.sectionsurvey.ui.MtkSectionSurveyActivity.EXTRA_FILE_PATH_LIST;
 import static io.methinks.sdk.sectionsurvey.ui.MtkSectionSurveyActivity.EXTRA_NEXT_SECTION_ID;
-import static io.methinks.sdk.sectionsurvey.ui.MtkSectionSurveyActivity.REQ_CODE_SECTION_SURVEY;
+import static io.methinks.sdk.sectionsurvey.ui.MtkSectionSurveyActivity.REQ_CODE_SECTION_SURVEY;*/
 
 public class SurveyActivity extends AppCompatActivity {
 
-    private Section section = null;
+    /*private Section section = null;
     private ArrayList<Question> questionList = null;
     private List<SectionAsset> sectionAssets = null;
     private HashMap<String, ArrayList<Object>> answerMap = null;
@@ -136,7 +136,7 @@ public class SurveyActivity extends AppCompatActivity {
 
             sectionId = curSection.getString("objectId");
 
-            /** Section setup */
+            *//** Section setup *//*
             this.section = new Section(
                     curSection.getString("objectId"),
                     curSection.getString("title"),
@@ -147,7 +147,7 @@ public class SurveyActivity extends AppCompatActivity {
                     curSection.has("attachedImageUrl")? curSection.getString("attachedImageUrl") : null
             );
 
-            /** Questions setup */
+            *//** Questions setup *//*
             JSONArray questionsArray = sectionObj.getJSONArray("questions");
 
             for (int i=0; i<questionsArray.length(); i++) {
@@ -201,9 +201,9 @@ public class SurveyActivity extends AppCompatActivity {
                 ));
             }
 
-            /** Apptest is not using question features that using SectionAsset */
+            *//** Apptest is not using question features that using SectionAsset *//*
 
-            /** Build Section Survey with elements above */
+            *//** Build Section Survey with elements above *//*
             startSectionSurvey();
 
 
@@ -212,5 +212,5 @@ public class SurveyActivity extends AppCompatActivity {
         }
 
 
-    }
+    }*/
 }

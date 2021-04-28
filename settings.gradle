@@ -1,7 +1,7 @@
-include ':mtk-section-survey'
+include ':mtk-inappsurvey'
 include ':app', ':mtk-forum', ':mtk-common'
 
 project(':mtk-common').projectDir = new File(settingsDir, '../mtk-common')
 project(':mtk-forum').projectDir = new File(settingsDir, '../mtk-forum')
-project(':mtk-section-survey').projectDir = new File(settingsDir, '../mtk-section-survey')
+project(':mtk-inappsurvey').projectDir = new File(settingsDir, '../mtk-inappsurvey')
 //rootProject.name='MTKApptestSDK'

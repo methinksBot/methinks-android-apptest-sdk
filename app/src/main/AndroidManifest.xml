@@ -44,7 +44,7 @@
             android:name=".SurveyActivity"
             android:clearTaskOnLaunch="false"
             android:launchMode="singleTop"
-            android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen">
+            android:theme="@style/NoTitleBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
