@@ -45,11 +45,11 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         ImageView logoImageView = (ImageView)findViewById(R.id.logo_image);
-        if(Global.logoBitmap != null){
-            logoImageView.setImageBitmap(Global.logoBitmap);
-        }else{
-            logoImageView.setImageResource(R.drawable.img_logo_methinks);
-        }
+//        if(Global.logoBitmap != null){
+//            logoImageView.setImageBitmap(Global.logoBitmap);
+//        }else{
+//            logoImageView.setImageResource(R.drawable.img_logo_methinks);
+//        }
 
 
         EditText testUserCodeEditText = (EditText)findViewById(R.id.testUserCode);
