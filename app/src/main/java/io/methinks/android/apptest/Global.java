@@ -104,6 +104,7 @@ public class Global {
     protected static boolean lastReportTypeIsBug;
     protected static boolean completedPermission;
     protected static boolean blockEmulator = false;
+    protected static String platform;
 
 
     // For hover
