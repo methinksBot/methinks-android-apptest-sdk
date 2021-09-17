@@ -182,6 +182,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                             Global.hideHoverButton = result.getBoolean("hideHoverButton");
                             JSONObject getBuildNumber = new JSONObject(result.getString("minimumTestBuildNumber"));
                             Global.minimumTestBuildNumber = getBuildNumber.getInt("android");
+                            Global.platform = result.getString("platform");
 
                             String presetString = null;
                             try {
