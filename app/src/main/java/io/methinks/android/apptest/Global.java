@@ -46,8 +46,13 @@ public class Global {
 
     protected static final String DEV_PATCHER_SERVER_URL = "https://first-apptest-dev.nexon.com";
     protected static final String PROD_PATCHER_SERVER_URL = "https://first-apptest.nexon.com";
-    protected static final String DEV_METHINKS_SERVER_URL = "https://first-admin-dev.nexon.com";
-    protected static final String PROD_METHINKS_SERVER_URL = "https://first-admin.nexon.com";
+    protected static final String DEV_METHINKS_SERVER_URL = "https://first-dev.nexon.com";
+    protected static final String PROD_METHINKS_SERVER_URL = "https://first.nexon.com";
+
+//    protected static final String DEV_PATCHER_SERVER_URL = "https://apptest-dev.methinks.io";
+//    protected static final String PROD_PATCHER_SERVER_URL = "https://apptest.methinks.io";
+//    protected static final String DEV_METHINKS_SERVER_URL = "https://dev.methinks.io";
+//    protected static final String PROD_METHINKS_SERVER_URL = "https://www.methinks.io";
 
     protected static final String SURVEY_SECTIONS = "survey";
     protected static final String SURVEY_INIT_SECTION = "section";
@@ -104,6 +109,7 @@ public class Global {
     protected static boolean lastReportTypeIsBug;
     protected static boolean completedPermission;
     protected static boolean blockEmulator = false;
+    protected static String platform;
 
 
     // For hover

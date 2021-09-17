@@ -57,10 +57,18 @@ public class AnnouncementActivity extends AppCompatActivity {
             announceTitle.setText(statusResult.optString("announcement"));
             findViewById(R.id.announcement_announce_container).setOnClickListener(view -> {
                 String url;
-                if(Global.isDebugMode){
-                    url = "mtkdebug://announcement?project_id=" + Global.sProjectId;
-                }else{
-                    url = "methinks://announcement?project_id=" + Global.sProjectId;
+                if (Global.platform.equals("methinks")) {
+                    if (Global.isDebugMode) {
+                        url = "mtkdebug://announcement?project_id=" + Global.sProjectId;
+                    } else {
+                        url = "methinks://announcement?project_id=" + Global.sProjectId;
+                    }
+                } else {
+                    if (Global.isDebugMode) {
+                        url = "nexonfirst://announcement?project_id=" + Global.sProjectId;
+                    } else {
+                        url = "nexonfirst://announcement?project_id=" + Global.sProjectId;
+                    }
                 }
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 try{
@@ -77,10 +85,18 @@ public class AnnouncementActivity extends AppCompatActivity {
             surveyTitle.setText(statusResult.optString("survey"));
             findViewById(R.id.announcement_survey_container).setOnClickListener(view -> {
                 String url;
-                if(Global.isDebugMode){
-                    url = "mtkdebug://survey?project_id=" + Global.sProjectId;
-                }else{
-                    url = "methinks://survey?project_id=" + Global.sProjectId;
+                if (Global.platform.equals("methinks")) {
+                    if (Global.isDebugMode) {
+                        url = "mtkdebug://survey?project_id=" + Global.sProjectId;
+                    } else {
+                        url = "methinks://survey?project_id=" + Global.sProjectId;
+                    }
+                } else {
+                    if (Global.isDebugMode) {
+                        url = "nexonfirst://survey?project_id=" + Global.sProjectId;
+                    } else {
+                        url = "nexonfirst://survey?project_id=" + Global.sProjectId;
+                    }
                 }
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 try{
