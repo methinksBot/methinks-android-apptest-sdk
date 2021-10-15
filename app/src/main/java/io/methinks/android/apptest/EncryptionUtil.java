@@ -13,7 +13,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
 
 public class EncryptionUtil {
-    private static final String IV_STRING = "AEK07L5D07Y8A4E4";
+    private static final String IV_STRING = Global.isDebugMode ? Global.DECRYPTION_IV_DEV : Global.DECRYPTION_IV_PROD;
     private static final String charset = "UTF-8";
 
 

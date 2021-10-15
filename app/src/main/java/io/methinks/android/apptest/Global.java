@@ -43,6 +43,10 @@ public class Global {
     protected static final String LOCAL_STORE_SESSION_LOG_KEY = "session_log";
     protected static final String LOCAL_STORE_ANSWER_KEY = "answer";
     protected static final String LOCAL_STORE_EXTENSION_NAME = "io.methinks.android.methinks_touchsupports";
+    protected static final String DECRYPTION_IV_DEV = "FEK07TVD07Y8R4E4";
+    protected static final String DECRYPTION_IV_PROD = "TDK10TFD07CX1S9S";
+    protected static final String DECRYPTION_PASSWORD_DEV = "1290345168913641";
+    protected static final String DECRYPTION_PASSWORD_PROD = "2247328161943943";
 
     protected static final String DEV_PATCHER_SERVER_URL = "https://first-apptest-dev.nexon.com";
     protected static final String PROD_PATCHER_SERVER_URL = "https://first-apptest.nexon.com";

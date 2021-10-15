@@ -386,12 +386,13 @@ public class HttpManager {
 
                 String userCode = !TextUtils.isEmpty(Global.sTestUserCode) ? Global.sTestUserCode : "";
                 userCode += ("**" + (new Date().getTime()/1000));
-
+                String key = Global.isDebugMode ? Global.DECRYPTION_PASSWORD_DEV : Global.DECRYPTION_PASSWORD_PROD;
+                Log.e("KEYCHECK: " + userCode);
                 try {
                     URL obj = new URL(strings[0]);
                     HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
                     conn.setRequestProperty("project-name", Global.sProjectId);
-                    conn.setRequestProperty("user-code", EncryptionUtil.aesEncryptString(userCode, "1290345168913641").trim());
+                    conn.setRequestProperty("user-code", EncryptionUtil.aesEncryptString(userCode, key).trim());
                     conn.setReadTimeout(10000);
                     conn.setConnectTimeout(15000);
                     conn.setRequestMethod(strings[1]);
