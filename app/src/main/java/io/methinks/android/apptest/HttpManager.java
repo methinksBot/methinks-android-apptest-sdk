@@ -385,7 +385,7 @@ public class HttpManager {
                 Log.d("HTTP request params: " + params);
 
                 String userCode = !TextUtils.isEmpty(Global.sTestUserCode) ? Global.sTestUserCode : "";
-                userCode += ("**" + (new Date().getTime()));
+                userCode += ("**" + (new Date().getTime()/1000));
 
                 try {
                     URL obj = new URL(strings[0]);
