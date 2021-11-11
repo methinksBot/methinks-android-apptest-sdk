@@ -9,7 +9,7 @@
 
     <string name="patcher_tap_to_see_image">Tap to see image</string>
     <string name="patcher_tap_to_watch_video">Tap to watch video</string>
-    <string name="patcher_msg_enter_user_code">Enter user code from methinks app.</string>
+    <string name="patcher_msg_enter_user_code">Enter user code from %1$s app.</string>
     <string name="patcher_msg_methinks_user_code">Enter methinks user code.</string>
     <string name="patcher_error_msg_can_not_connect_server">Can\'t connect to methinks server. Please try again or contact methinks.</string>
     <string name="patcher_error_msg_invalid_user_code">Invalid user code. Enter your user code again.</string>

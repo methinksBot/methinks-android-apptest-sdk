@@ -98,7 +98,8 @@ public class HService extends Service {
 
         if (!Global.hideHoverButton) {
             prepareDraw();
-            context = Global.applicationTracker.getTopActivity().getApplicationContext();
+            if (Global.applicationTracker != null)
+                context = Global.applicationTracker.getTopActivity().getApplicationContext();
         }
     }
 
@@ -333,8 +334,10 @@ public class HService extends Service {
             // start forum activity from library.
             Global.isShowingReport = true;
             Global.lastReportTypeIsBug = false;
+            String serverUrl = null;
+            serverUrl = Global.isDebugMode ? Global.DEV_PATCHER_SERVER_URL : Global.PROD_PATCHER_SERVER_URL;
 
-            new ForumManager(context, Global.sProjectId, Global.sTestUserCode, Global.isDebugMode);
+            new ForumManager(context, Global.sProjectId, Global.sTestUserCode, Global.isDebugMode, serverUrl, Global.platform);
 
             Global.hover.setInvisible();
             Global.hoverPopup.setInvisible();

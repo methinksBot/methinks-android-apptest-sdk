@@ -5,7 +5,7 @@
 	tools:locale="ko">
 	<string name="patcher_tap_to_see_image">이미지 보기</string>
 	<string name="patcher_tap_to_watch_video">비디오 보기</string>
-	<string name="patcher_msg_enter_user_code">미띵스앱에서 발급한 사용자 코드를 입력하세요.</string>
+	<string name="patcher_msg_enter_user_code">%1$s앱에서 발급한 사용자 코드를 입력하세요.</string>
 	<string name="patcher_msg_methinks_user_code">사용자 코드를 입력하세요.</string>
 	<string name="patcher_error_msg_can_not_connect_server">미띵스 서버에 연결할 수 없습니다. 다시 시도하거나 미띵스 관리자에게 문의하세요.</string>
 	<string name="patcher_error_msg_invalid_user_code">사용자 코드가 유효하지 않습니다. 다시 입력하세요.</string>

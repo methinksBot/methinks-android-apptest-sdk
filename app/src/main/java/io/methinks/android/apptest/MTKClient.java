@@ -540,38 +540,47 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
     private void getClientLogo(){
         new HttpManager().getClientLogo((response, errorMsg) -> {
             Log.d("Received client logo.");
-
+            Log.e("RESPONSE: " + response);
             try{
                 if(response != null && errorMsg == null){
                     if(response.has("result") && response.getString("status").equals(Global.RESPONSE_OK)){
                         String savedLogoURL = LocalStore.getInstance().getLogoURL();
-                        String logoURL = response.getJSONObject("result").getString("url");
-                        if(savedLogoURL != null && savedLogoURL.equals(logoURL)){ // 이전에 캐싱한 로고 이미지와 같을 때
-                            String encodedImage = LocalStore.getInstance().getLogoImage();
-                            if(TextUtils.isEmpty(encodedImage)){
-                                new HttpManager().getImage(savedLogoURL, new HttpManager.ImageCallback() {
+                        //Log.e("getClientLogo result: " + response.getJSONObject("result"));
+                        JSONObject res = response.getJSONObject("result");
+                        Global.platform = res.getString("platform");
+                        String logoURL = res.has("url") ? res.getString("url") : null;
+                        if (logoURL == null) {
+                            LocalStore.getInstance().putLogoURL(null);
+                            LocalStore.getInstance().putLogoImage(null);
+                            login();
+                        } else {
+                            if (savedLogoURL != null && savedLogoURL.equals(logoURL)) { // 이전에 캐싱한 로고 이미지와 같을 때
+                                String encodedImage = LocalStore.getInstance().getLogoImage();
+                                if (TextUtils.isEmpty(encodedImage)) {
+                                    new HttpManager().getImage(savedLogoURL, new HttpManager.ImageCallback() {
+                                        @Override
+                                        public void done() {
+                                            login();
+                                        }
+                                    });
+                                } else {
+                                    byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+                                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                                    Global.logoBitmap = decodedByte;
+                                    login();
+                                }
+                            } else {  // 이전에 캐싱한 로고 이미지와 다를 때
+                                LocalStore.getInstance().putLogoURL(logoURL);
+                                LocalStore.getInstance().putLogoImage(null);
+                                new HttpManager().getImage(logoURL, new HttpManager.ImageCallback() {
                                     @Override
                                     public void done() {
                                         login();
                                     }
                                 });
-                            }else{
-                                byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
-                                Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                                Global.logoBitmap = decodedByte;
-                                login();
                             }
-                        }else{  // 이전에 캐싱한 로고 이미지와 다를 때
-                            LocalStore.getInstance().putLogoURL(logoURL);
-                            LocalStore.getInstance().putLogoImage(null);
-                            new HttpManager().getImage(logoURL, new HttpManager.ImageCallback() {
-                                @Override
-                                public void done() {
-                                    login();
-                                }
-                            });
+                            Global.sLogoURL = logoURL;
                         }
-                        Global.sLogoURL = logoURL;
                     }else{  // show methinks logo
                         LocalStore.getInstance().putLogoURL(null);
                         LocalStore.getInstance().putLogoImage(null);

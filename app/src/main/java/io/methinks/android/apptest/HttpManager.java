@@ -387,7 +387,7 @@ public class HttpManager {
                 String userCode = !TextUtils.isEmpty(Global.sTestUserCode) ? Global.sTestUserCode : "";
                 userCode += ("**" + (new Date().getTime()/1000));
                 String key = Global.isDebugMode ? Global.DECRYPTION_PASSWORD_DEV : Global.DECRYPTION_PASSWORD_PROD;
-                Log.e("KEYCHECK: " + userCode);
+
                 try {
                     URL obj = new URL(strings[0]);
                     HttpURLConnection conn = (HttpURLConnection) obj.openConnection();

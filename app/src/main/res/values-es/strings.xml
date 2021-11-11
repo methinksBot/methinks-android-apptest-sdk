@@ -5,7 +5,7 @@
 	tools:locale="es">
 	<string name="patcher_tap_to_see_image">Pulse para ver la imagen</string>
 	<string name="patcher_tap_to_watch_video">Pulse para ver el vídeo</string>
-	<string name="patcher_msg_enter_user_code">Introduzca el código de usuario de la aplicación de methinks</string>
+	<string name="patcher_msg_enter_user_code">Introduzca el código de usuario de la aplicación de %1$s</string>
 	<string name="patcher_msg_methinks_user_code">Introduzca el código de usario de methinks</string>
 	<string name="patcher_error_msg_can_not_connect_server">No se puede conectar al servidor de methinks. Inténtelo de nuevo o contacte a methinks.</string>
 	<string name="patcher_error_msg_invalid_user_code">Código de usuario inválido. Introduzca su código de usario de nuevo.</string>

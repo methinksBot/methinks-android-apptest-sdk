@@ -5,7 +5,7 @@
 	tools:locale="ja">
 	<string name="patcher_tap_to_see_image">イメージ表示</string>
 	<string name="patcher_tap_to_watch_video">ビデオ表示</string>
-	<string name="patcher_msg_enter_user_code">METHINKSアプリで発行した使用者コードを入力してください。</string>
+	<string name="patcher_msg_enter_user_code">%1$sアプリで発行した使用者コードを入力してください。</string>
 	<string name="patcher_msg_methinks_user_code">使用者コードを入力してください。</string>
 	<string name="patcher_error_msg_can_not_connect_server">METHINKSサーバーに接続できません。もう一度試みるか、METHINKS管理者にお問い合わせください。</string>
 	<string name="patcher_error_msg_invalid_user_code">使用者コードが有効ではありません。もう一度入力してください。</string>

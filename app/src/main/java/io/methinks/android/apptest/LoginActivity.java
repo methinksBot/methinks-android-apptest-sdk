@@ -30,6 +30,8 @@ import java.util.Date;
 import static io.methinks.android.apptest.Global.redirectToGuide;
 import static java.lang.Thread.sleep;
 
+import io.methinks.sdk.common.custom.widget.MethinksTextView;
+
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
 
@@ -45,11 +47,17 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         ImageView logoImageView = (ImageView)findViewById(R.id.logo_image);
+        MethinksTextView loginText = (MethinksTextView)findViewById(R.id.textView_explain);
 //        if(Global.logoBitmap != null){
 //            logoImageView.setImageBitmap(Global.logoBitmap);
 //        }else{
 //            logoImageView.setImageResource(R.drawable.img_logo_methinks);
 //        }
+
+        //String platform = Global.platform.equals("methinks") ? "methinks" : "nexonfirst";
+        String userCodeMessage = getString(R.string.patcher_msg_enter_user_code).replace("methinks", "Nexon First").replace("미띵스", "넥슨퍼스트");
+        loginText.setText(userCodeMessage);
+        Log.e(userCodeMessage);
 
 
         EditText testUserCodeEditText = (EditText)findViewById(R.id.testUserCode);
@@ -120,6 +128,8 @@ public class LoginActivity extends AppCompatActivity {
                                         e.printStackTrace();
                                     }
                                 }
+
+
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -151,6 +161,8 @@ public class LoginActivity extends AppCompatActivity {
                                 alertDialog.show();
 
                             }
+
+
 
 
                             Intent announcementIntent = new Intent(LoginActivity.this, AnnouncementActivity.class);

@@ -10,7 +10,7 @@
 
     <string name="patcher_tap_to_see_image">點選看圖片</string>
     <string name="patcher_tap_to_watch_video">點選看影片</string>
-    <string name="patcher_msg_enter_user_code">請輸入methinks所發送的使用者代碼</string>
+    <string name="patcher_msg_enter_user_code">請輸入%1$s所發送的使用者代碼</string>
     <string name="patcher_msg_methinks_user_code">請輸入使用者代碼</string>
     <string name="patcher_error_msg_can_not_connect_server">無法連接methinks伺服器。請再試一次或向methinks管理者詢問。</string>
     <string name="patcher_error_msg_invalid_user_code">使用者代碼無效。請再輸入一次。</string>
