@@ -337,6 +337,8 @@ public class HService extends Service {
             String serverUrl = null;
             serverUrl = Global.isDebugMode ? Global.DEV_PATCHER_SERVER_URL : Global.PROD_PATCHER_SERVER_URL;
 
+            if (Global.applicationTracker != null)
+                context = Global.applicationTracker.getTopActivity().getApplicationContext();
             new ForumManager(context, Global.sProjectId, Global.sTestUserCode, Global.isDebugMode, serverUrl, Global.platform);
 
             Global.hover.setInvisible();
