@@ -1,5 +1,7 @@
 package io.methinks.android.apptest;
 
+import static io.methinks.android.apptest.Global.platform;
+
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
@@ -55,11 +57,11 @@ public class QuestionPack {
                             Log.e("sendMessage isRequired : " + Global.eventQuestionPack.isRequired);
                             Log.e("[inAppSection]" + result);
 
-                            //sectionsParser(result);
-                            //startSurveyActivity(result);
+                            new Handler(Looper.getMainLooper()).post(() ->
+                                    SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), response.toString(),
+                                            packId, isRequired, Global.sProjectId, Global.sTestUserCode, Global.isDebugMode,
+                                            Global.isDebugMode ? Global.DEV_PATCHER_SERVER_URL : Global.PROD_PATCHER_SERVER_URL, platform));
 
-                            new Handler(Looper.getMainLooper()).post(() -> SurveyAlertManager.showDialog(Global.applicationTracker.getTopActivity(), response.toString(),
-                                    packId, isRequired, Global.sProjectId, Global.sTestUserCode, Global.isDebugMode, Global.isDebugMode ? Global.DEV_PATCHER_SERVER_URL : Global.PROD_PATCHER_SERVER_URL));
                             callback.done();
 
                         }
