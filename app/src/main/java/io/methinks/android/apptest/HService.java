@@ -273,9 +273,6 @@ public class HService extends Service {
             Global.hoverPopup.isOpened = false;
         });
 
-        Global.hoverPopup.eventRecyclerView.setOnClickListener(view -> {
-
-        });
 
         if (Global.isInternalTester) {
             Global.hoverPopup.bugReport.setOnLongClickListener(new View.OnLongClickListener() {
@@ -295,7 +292,6 @@ public class HService extends Service {
                                     }
 
                                     Global.hoverPopup.mAdapter = new EventAdapter(Global.eventArray);
-                                    Global.hoverPopup.eventRecyclerView.setAdapter(Global.hoverPopup.mAdapter);
                                     Log.e("현재 이벤트 리스트 :" + Global.eventArray.toString());
                                 }
                             }else{

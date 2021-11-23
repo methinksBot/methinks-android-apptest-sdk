@@ -85,5 +85,6 @@
 	<string name="patcher_block_emulator_desc">호스트가 해당 앱의 에뮬레이터 구동을 금지 하였습니다.</string>
 	<string name="patcher_user_already_logined">이미 다른 기기를 통해 세션에 참가중인 사용자입니다. </string>
 	<string name="patcher_build_number_cont">버전 업데이트를 위해 다운로드 페이지로 이동합니다.</string>
+	<string name="patcher_hover_header">부가 기능</string>
 
 </resources>

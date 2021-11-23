@@ -2,96 +2,130 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="bottom"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_gravity="bottom"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
         android:orientation="vertical"
-        android:background="@color/transparent"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
+            android:id="@+id/popup_hover_bug_report"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/popup_hover_shootevent"
-                android:textColor="#007AFF"
-                android:textSize="30dp"
-                android:gravity="center"
-                android:paddingTop="7dp"
-                android:paddingBottom="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="300dp" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:background="@drawable/popup_default_rounded_background"
-            android:layout_marginBottom="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <io.methinks.sdk.common.custom.widget.MethinksTextView
-                android:id="@+id/popup_hover_bug_report"
-                android:textColor="@color/white"
-                app:fw="@string/font_weight_medium"
-                android:textSize="20dp"
-                android:gravity="center"
-                android:text="@string/patcher_bug_report"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <View
-                android:background="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp" />
-            <io.methinks.sdk.common.custom.widget.MethinksTextView
-                android:id="@+id/popup_hover_suggestion"
-                android:textColor="@color/white"
-                app:fw="@string/font_weight_medium"
-                android:textSize="20dp"
-                android:gravity="center"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:text="@string/patcher_suggestion"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <View
-                android:background="@android:color/white"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp" />
-            <io.methinks.sdk.common.custom.widget.MethinksTextView
-                android:id="@+id/popup_hover_forum"
-                android:textColor="@color/white"
-                app:fw="@string/font_weight_medium"
-                android:textSize="20dp"
-                android:gravity="center"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:text="@string/patcher_forum"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-
-        <io.methinks.sdk.common.custom.widget.MethinksTextView
-            android:id="@+id/popup_hover_cancel"
-            android:background="@drawable/popup_white_rounded_background"
-            android:textColor="@color/primaryColor"
-            app:fw="@string/font_weight_medium"
-            android:textSize="20dp"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
             android:gravity="center"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:text="@string/patcher_cancel"
-            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_gravity="center"
+                android:tint="@color/slate_grey_two"
+                tools:ignore="UseAppTint"
+                android:src="@drawable/ic_baseline_bug_report_24"/>
+
+            <io.methinks.sdk.common.custom.widget.MethinksTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:text="@string/patcher_bug_report"
+                android:textColor="@color/slate_grey_two"
+                android:textSize="14dp"
+                android:layout_marginLeft="15dp"
+                app:fw="@string/font_weight_medium" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/popup_hover_suggestion"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_gravity="center"
+                android:tint="@color/slate_grey_two"
+                tools:ignore="UseAppTint"
+                android:src="@drawable/ic_baseline_suggestion_24"/>
+
+            <io.methinks.sdk.common.custom.widget.MethinksTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:text="@string/patcher_suggestion"
+                android:textColor="@color/slate_grey_two"
+                android:textSize="14dp"
+                android:layout_marginLeft="15dp"
+                app:fw="@string/font_weight_medium" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/popup_hover_forum"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_gravity="center"
+                android:tint="@color/slate_grey_two"
+                tools:ignore="UseAppTint"
+                android:src="@drawable/ic_baseline_forum_24"/>
+
+            <io.methinks.sdk.common.custom.widget.MethinksTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:text="@string/patcher_forum"
+                android:textColor="@color/slate_grey_two"
+                android:textSize="13dp"
+                android:layout_marginLeft="15dp"
+                app:fw="@string/font_weight_medium" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/popup_hover_cancel"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_close_24"
+                android:tint="@color/slate_grey_two"
+                tools:ignore="UseAppTint" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/primaryColor"/>
     </LinearLayout>
 </LinearLayout>
 

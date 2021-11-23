@@ -89,6 +89,7 @@
     <string name="patcher_block_emulator_desc">Researcher blocked using emulator with this app.</string>
     <string name="patcher_user_already_logined">You are already joined this session with another device. </string>
     <string name="patcher_build_number_cont">Go to the installation page to update to the new version</string>
+    <string name="patcher_hover_header">Additional Function</string>
 
     <!-- ################################################################## -->
     <!-- ##################### Default strings start ###################### -->

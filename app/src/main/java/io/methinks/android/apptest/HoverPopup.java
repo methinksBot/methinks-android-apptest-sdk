@@ -17,8 +17,7 @@ public class HoverPopup {
 
     private Context context;
     protected LinearLayout hoverPopup;
-    protected TextView bugReport, suggestion, forum, cancel;
-    protected RecyclerView eventRecyclerView;
+    protected LinearLayout bugReport, suggestion, forum, cancel;
     public RecyclerView.Adapter mAdapter;
     public RecyclerView.LayoutManager layoutManager;
     public boolean isOpened;
@@ -37,16 +36,8 @@ public class HoverPopup {
         suggestion = hoverPopup.findViewById(R.id.popup_hover_suggestion);
         forum = hoverPopup.findViewById(R.id.popup_hover_forum);
         cancel = hoverPopup.findViewById(R.id.popup_hover_cancel);
-        eventRecyclerView = hoverPopup.findViewById(R.id.popup_hover_shootevent);
 
-        eventRecyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
-        if (Global.applicationTracker != null)
-            if (Global.applicationTracker.getTopActivity() != null) {
-                layoutManager = new LinearLayoutManager(Global.applicationTracker.getTopActivity());
-                eventRecyclerView.setLayoutManager(layoutManager);
-            }
     }
 
     public void setVisible(){
@@ -55,7 +46,7 @@ public class HoverPopup {
     }
 
     public void setVisibleEvent() {
-        eventRecyclerView.setVisibility(View.VISIBLE);
+
     }
 
     public void setInvisible(){

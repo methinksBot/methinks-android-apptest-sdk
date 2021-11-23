@@ -10,8 +10,15 @@
         <entry key="../mtk-forum/src/main/res/layout/comment_item_view.xml" value="0.3958333333333333" />
         <entry key="../mtk-forum/src/main/res/layout/post_edit_dialog.xml" value="0.3098958333333333" />
         <entry key="../mtk-inappsurvey/src/main/res/layout/button_container_for_section.xml" value="0.2871376811594203" />
+        <entry key="app/src/main/res/drawable/cornflower_close_button.xml" value="0.509" />
+        <entry key="app/src/main/res/drawable/default_button_effect.xml" value="0.509" />
+        <entry key="app/src/main/res/drawable/ic_baseline_suggestion_24.xml" value="0.509" />
         <entry key="app/src/main/res/layout-land/activity_announcement.xml" value="0.375" />
         <entry key="app/src/main/res/layout-land/activity_login.xml" value="0.32708333333333334" />
+        <entry key="app/src/main/res/layout-land/popup_hover.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/header_hover_navigation.xml" value="0.5140625" />
+        <entry key="app/src/main/res/layout/popup_hover.xml" value="0.3432971014492754" />
+        <entry key="app/src/main/res/menu/hover_menu.xml" value="0.25" />
       </map>
     </option>
   </component>
