@@ -62,7 +62,7 @@
             android:layout_height="wrap_content">
             <LinearLayout
                 android:id="@+id/announcement_announce_container"
-                android:background="@android:color/white"
+                android:background="?android:attr/selectableItemBackground"
                 android:layout_marginBottom="10dp"
                 android:padding="20dp"
                 android:orientation="vertical"
@@ -114,7 +114,7 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/announcement_survey_container"
-                android:background="@android:color/white"
+                android:background="?android:attr/selectableItemBackground"
                 android:padding="20dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"

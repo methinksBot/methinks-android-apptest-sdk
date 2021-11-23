@@ -67,6 +67,7 @@
     <string name="patcher_msg_duplicated_connection_other_device">❗️應用程式關閉，因感應到其他裝置登入相同的帳戶。</string>
     <string name="patcher_msg_use_wifi_network">❗️為了順利完成測試，請連接WIFI後再進行。</string>
     <string name="patcher_msg_need_thinker_app">️請下載methinks以便進行</string>
+    <string name="patcher_msg_need_whitelabel_app">️Please download nexonfirst app from App Store.</string>
     <string name="patcher_cancel">取消</string>
     <string name="patcher_msg_apptest_is_running">應用程式測試進行中</string>
     <string name="patcher_text_apptest">應用程式測試</string>

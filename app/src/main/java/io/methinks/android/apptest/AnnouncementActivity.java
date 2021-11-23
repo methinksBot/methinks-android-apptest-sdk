@@ -48,6 +48,8 @@ public class AnnouncementActivity extends AppCompatActivity {
         String titleStr = String.format(getString(R.string.patcher_android_welcome_hi), Global.loginResult.optString("screenName"));
         title.setText(titleStr);
         String progressStr = getString(R.string.patcher_your_progress) + " <font color='#6586ff'>" + statusResult.optString("status") + "</font>";
+        Log.e(Global.loginResult.toString());
+        Log.e("statusResult: " + statusResult);
         progress.setText(Html.fromHtml(progressStr));
 
 
@@ -57,26 +59,37 @@ public class AnnouncementActivity extends AppCompatActivity {
             announceTitle.setText(statusResult.optString("announcement"));
             findViewById(R.id.announcement_announce_container).setOnClickListener(view -> {
                 String url;
+                Log.e("PLATFORM CHECK: " + Global.platform);
                 if (Global.platform.equals("methinks")) {
                     if (Global.isDebugMode) {
                         url = "mtkdebug://announcement?project_id=" + Global.sProjectId;
                     } else {
                         url = "methinks://announcement?project_id=" + Global.sProjectId;
                     }
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    try{
+                        startActivity(intent);
+                    }catch (ActivityNotFoundException e){
+                        e.printStackTrace();
+                        Toast.makeText(AnnouncementActivity.this, getString(R.string.patcher_msg_need_thinker_app), Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     if (Global.isDebugMode) {
-                        url = "nexonfirst://announcement?project_id=" + Global.sProjectId;
+                        url = "nexonfirst.app://announcement?project_id=" + Global.sProjectId;
                     } else {
-                        url = "nexonfirst://announcement?project_id=" + Global.sProjectId;
+                        url = "nexonfirst.app://announcement?project_id=" + Global.sProjectId;
+                    }
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    try{
+                        startActivity(intent);
+                    }catch (ActivityNotFoundException e){
+                        e.printStackTrace();
+                        Toast.makeText(AnnouncementActivity.this, getString(R.string.patcher_msg_need_whitelabel_app), Toast.LENGTH_SHORT).show();
                     }
                 }
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                try{
-                    startActivity(intent);
-                }catch (ActivityNotFoundException e){
-                    e.printStackTrace();
-                    Toast.makeText(AnnouncementActivity.this, getString(R.string.patcher_msg_need_thinker_app), Toast.LENGTH_SHORT).show();
-                }
+
             });
         }
         if(statusResult.optInt("surveyCount") > 0){

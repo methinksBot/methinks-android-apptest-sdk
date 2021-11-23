@@ -62,6 +62,7 @@
 	<string name="patcher_msg_duplicated_connection_other_device">다른 디바이스에서 같은 계정으로의 접속이 감지되어 앱을 종료합니다. </string>
 	<string name="patcher_msg_use_wifi_network">원활한 진행을 위해 WIFI 환경에서 진행해주세요.</string>
 	<string name="patcher_msg_need_thinker_app">진행을 위해 미띵스 앱 다운로드가 필요합니다.</string>
+	<string name="patcher_msg_need_whitelabel_app">️진행을 위해 넥슨 퍼스트 앱 다운로드가 필요합니다.</string>
 	<string name="patcher_cancel">취소</string>
 	<string name="patcher_msg_apptest_is_running">앱 테스트가 진행 중입니다.</string>
 	<string name="patcher_text_apptest">앱 테스트</string>

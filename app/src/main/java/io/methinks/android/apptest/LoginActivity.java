@@ -163,8 +163,6 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
 
-
-
                             Intent announcementIntent = new Intent(LoginActivity.this, AnnouncementActivity.class);
                             startActivity(announcementIntent);
                             finish();
@@ -193,6 +191,8 @@ public class LoginActivity extends AppCompatActivity {
                                     errorString = "This app is no longer available for testing.";
                                     break;
                                 default:
+                                    if (error.startsWith("invalidUserCode"))
+                                        errorString = "Invalid code.";
                                     break;
                             }
                             new ErrorDialogFragment(errorString).show(getSupportFragmentManager(), "login_error");
