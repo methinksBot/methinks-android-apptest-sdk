@@ -58,7 +58,15 @@ public class AnnouncementActivity extends AppCompatActivity {
             announceCount.setText(String.valueOf(statusResult.optInt("announcementCount")));
             announceTitle.setText(statusResult.optString("announcement"));
             findViewById(R.id.announcement_announce_container).setOnClickListener(view -> {
-                String url;
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Global.announcementDeepLink));
+                try{
+                    startActivity(intent);
+                }catch (ActivityNotFoundException e){
+                    e.printStackTrace();
+                    Toast.makeText(AnnouncementActivity.this, getString(R.string.patcher_msg_need_thinker_app), Toast.LENGTH_SHORT).show();
+                }
+
+                /*String url;
                 Log.e("PLATFORM CHECK: " + Global.platform);
                 if (Global.platform.equals("methinks")) {
                     if (Global.isDebugMode) {
@@ -88,7 +96,7 @@ public class AnnouncementActivity extends AppCompatActivity {
                         e.printStackTrace();
                         Toast.makeText(AnnouncementActivity.this, getString(R.string.patcher_msg_need_whitelabel_app), Toast.LENGTH_SHORT).show();
                     }
-                }
+                }*/
 
             });
         }
@@ -97,7 +105,10 @@ public class AnnouncementActivity extends AppCompatActivity {
             surveyCount.setText(String.valueOf(statusResult.optInt("surveyCount")));
             surveyTitle.setText(statusResult.optString("survey"));
             findViewById(R.id.announcement_survey_container).setOnClickListener(view -> {
-                String url;
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Global.taskDeepLink));
+//                startActivity(intent);
+
+               /* String url;
                 if (Global.platform.equals("methinks")) {
                     if (Global.isDebugMode) {
                         url = "mtkdebug://survey?project_id=" + Global.sProjectId;
@@ -111,7 +122,7 @@ public class AnnouncementActivity extends AppCompatActivity {
                         url = "nexonfirst://survey?project_id=" + Global.sProjectId;
                     }
                 }
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));*/
                 try{
                     startActivity(intent);
                 }catch (ActivityNotFoundException e){

@@ -114,7 +114,8 @@ public class Global {
     protected static boolean completedPermission;
     protected static boolean blockEmulator = false;
     protected static String platform;
-
+    protected static String announcementDeepLink;
+    protected static String taskDeepLink;
 
     // For hover
     protected static HService hService;
