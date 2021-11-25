@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                 JSONObject deviceInfo = DeviceInfo.getDeviceInfo(LoginActivity.this.getApplicationContext());
                 JSONObject lastSessionLog = LocalStore.getInstance().getSessionLog();
                 JSONObject lastAnswer = LocalStore.getInstance().getAnswer();
-
+                Log.e("Global.sTestUserCode: " + Global.sTestUserCode);
                 new HttpManager().login(deviceInfo, lastSessionLog, lastAnswer, (response, error) -> {
                     try{
                         if(response != null && response.has("status") && response.getString("status").equals(Global.RESPONSE_OK)){
@@ -93,7 +93,6 @@ public class LoginActivity extends AppCompatActivity {
                             Global.hideHoverButton = result.getBoolean("hideHoverButton");
                             JSONObject getBuildNumber = new JSONObject(result.getString("minimumTestBuildNumber"));
                             Global.minimumTestBuildNumber = getBuildNumber.getInt("android");
-                            Global.platform = result.getString("platform");
 
                             String presetString = null;
                             try {

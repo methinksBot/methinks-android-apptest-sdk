@@ -25,7 +25,6 @@
             android:theme="@style/NoTitleBarTheme" />
         <activity
             android:name=".ReportActivity"
-            android:screenOrientation="landscape"
             android:theme="@style/NoTitleBarTheme" />
 
         <activity

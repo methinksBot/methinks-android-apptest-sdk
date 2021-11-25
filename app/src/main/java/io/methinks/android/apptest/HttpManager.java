@@ -16,6 +16,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.InvalidAlgorithmParameterException;
@@ -29,6 +30,11 @@ import 	java.util.Date;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+
+import io.methinks.sdk.common.util.AesAsset;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 public class HttpManager {
     private static final String TAG = HttpManager.class.getSimpleName();
@@ -128,7 +134,7 @@ public class HttpManager {
 
         try{
             String url = serverURL + "/login";
-//            String url = "http://10.0.1.19:3000" + "/login";
+
             JSONObject params = new JSONObject();
             params.put("deviceInfo", deviceInfo);
             params.put("isPlayedByEmulator", Global.isPlayedByEmulator);
@@ -362,6 +368,34 @@ public class HttpManager {
             this.callback = callback;
         }
 
+        private String encryptUserCode(String userCode) {
+            try {
+                userCode += ("**" + (new Date().getTime() / 1000));
+                String iv = null;
+                String pw = null;
+
+                Log.e("Global.PLATFORM: " + Global.platform);
+                if (Global.platform != null) {
+                    if (Global.platform.equals("methinks")) {
+                        iv = new AesAsset().getIv("mtk", true);
+                        pw = new AesAsset().getKey("mtk", true);
+                    } else {
+                        iv = new AesAsset().getIv("nexon", true);
+                        pw = new AesAsset().getKey("nexon", true);
+                    }
+                } else {
+                    return userCode;
+                }
+
+
+                return io.methinks.sdk.common.util.EncryptionUtil.aesEncryptString(userCode, pw, iv).trim();
+
+            } catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException e) {
+                e.printStackTrace();
+                return userCode;
+            }
+        }
+
         /**
          *
          * @param strings
@@ -384,52 +418,46 @@ public class HttpManager {
                 JSONObject params = !TextUtils.isEmpty(strings[2]) ? new JSONObject(strings[2]) : new JSONObject();
                 Log.d("HTTP request params: " + params);
 
-                String userCode = !TextUtils.isEmpty(Global.sTestUserCode) ? Global.sTestUserCode : "";
-                userCode += ("**" + (new Date().getTime()/1000));
-                String key = Global.isDebugMode ? Global.DECRYPTION_PASSWORD_DEV : Global.DECRYPTION_PASSWORD_PROD;
+//                String userCode = !TextUtils.isEmpty(Global.sTestUserCode) ? Global.sTestUserCode : "";
 
-                try {
-                    URL obj = new URL(strings[0]);
-                    HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
-                    conn.setRequestProperty("project-name", Global.sProjectId);
-                    conn.setRequestProperty("user-code", EncryptionUtil.aesEncryptString(userCode, key).trim());
-                    conn.setReadTimeout(10000);
-                    conn.setConnectTimeout(15000);
-                    conn.setRequestMethod(strings[1]);
-                    conn.setDoInput(true);
-                    conn.setDoOutput(true);
-                    conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                URL obj = new URL(strings[0]);
+                HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+                conn.setRequestProperty("project-name", Global.sProjectId);
+                conn.setRequestProperty("user-code", encryptUserCode(Global.sTestUserCode));
+                conn.setReadTimeout(10000);
+                conn.setConnectTimeout(15000);
+                conn.setRequestMethod(strings[1]);
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+                conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 
-                    byte []outputBytes = params.toString().getBytes("UTF-8");
-                    OutputStream os = conn.getOutputStream();
-                    os.write(outputBytes);
-                    os.flush();
-                    os.close();
+                byte []outputBytes = params.toString().getBytes("UTF-8");
+                OutputStream os = conn.getOutputStream();
+                os.write(outputBytes);
+                os.flush();
+                os.close();
 
-                    String response;
-                    int code = conn.getResponseCode();
-                    if(code == 200){
-                        InputStream is = conn.getInputStream();
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        byte[] byteBuffer = new byte[1024];
-                        byte[] byteData;
-                        int length;
-                        while((length = is.read(byteBuffer, 0, byteBuffer.length)) != -1){
-                            baos.write(byteBuffer, 0, length);
-                        }
-                        byteData = baos.toByteArray();
-                        response = new String(byteData);
-                        JSONObject responseJSON = new JSONObject(response);
-                        Log.d("HTTP response: " + response);
-
-                        return responseJSON;
-                    }else{
-                        Log.e("HTTP response error code : " + code);
+                String response;
+                int code = conn.getResponseCode();
+                if(code == 200){
+                    InputStream is = conn.getInputStream();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    byte[] byteBuffer = new byte[1024];
+                    byte[] byteData;
+                    int length;
+                    while((length = is.read(byteBuffer, 0, byteBuffer.length)) != -1){
+                        baos.write(byteBuffer, 0, length);
                     }
+                    byteData = baos.toByteArray();
+                    response = new String(byteData);
+                    JSONObject responseJSON = new JSONObject(response);
+                    Log.d("HTTP response: " + response);
 
-                } catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException | InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException e) {
-                    e.printStackTrace();
+                    return responseJSON;
+                }else{
+                    Log.e("HTTP response error code : " + code);
                 }
+
             } catch (JSONException | IOException e) {
                 e.printStackTrace();
                 System.out.println(e);
