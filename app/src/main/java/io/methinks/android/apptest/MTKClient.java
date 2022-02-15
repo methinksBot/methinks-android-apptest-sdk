@@ -50,7 +50,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
     private static volatile MTKClient instance;
     private Application app;
     private Activity activity;
-    private MTKRTCMainActivity unityActivity;
+//    private MTKRTCMainActivity unityActivity;
     private Thread timerThread, stateThread;
 
     // about screen shot detecting
@@ -73,7 +73,7 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                 if(Global.isUnity){
                     Message msg = new Message();
                     msg.what = Global.MESSAGE_WHAT_SCREEN_SHOT;
-                    unityActivity.handler.sendMessage(msg);
+//                    unityActivity.handler.sendMessage(msg);
                 }
             }
         }
@@ -89,10 +89,10 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                 this.activity = (Activity)context;
             }
             Global.isUnity = false;
-            if(context instanceof MTKRTCMainActivity){
-                Global.isUnity = true;
-                unityActivity = (MTKRTCMainActivity) context;
-            }
+//            if(context instanceof MTKRTCMainActivity){
+//                Global.isUnity = true;
+//                unityActivity = (MTKRTCMainActivity) context;
+//            }
         }
         Global.app = app;
 //        setContentObserver();
@@ -342,9 +342,9 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                 //Global.isDebugModeFromInspector = presetProjectJSON.getBoolean("debug_mode");
             }
 
-            if(unityActivity != null && Global.isUnity){
-                Global.applicationTracker.addManually(unityActivity, this);
-            }
+//            if(unityActivity != null && Global.isUnity){
+//                Global.applicationTracker.addManually(unityActivity, this);
+//            }
 
             Log.d("SDK initiating is done.");
         }catch (JSONException e){
@@ -373,13 +373,13 @@ public class MTKClient implements ApplicationTracker.ActivityReadyCallback{
                 //Global.isDebugModeFromInspector = presetProjectJSON.getBoolean("debug_mode");
             }
 
-            if(unityActivity != null && Global.isUnity){
+            /*if(unityActivity != null && Global.isUnity){
                 Global.applicationTracker.addManually(unityActivity, this);
 //                Lifecycle.State lifecycle = unityActivity.getLifecycle().getCurrentState();
 //                if(lifecycle != Lifecycle.State.CREATED && lifecycle != Lifecycle.State.STARTED){
 //
 //                }
-            }
+            }*/
 
             Log.d("SDK initiating is done.");
         }catch (JSONException e){
